@@ -1,3 +1,56 @@
+/* Les trois familles, hebergees en local le 8 septembre 2026.
+   L'appel a fonts.googleapis.com bloquait le rendu et retombait sur
+   Arial des que la tablette etait hors ligne ou derriere un filtrage. */
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 400 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(polices/archivo-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 400 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(polices/archivo-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Archivo Narrow';
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+  src: url(polices/archivo-narrow-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Archivo Narrow';
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+  src: url(polices/archivo-narrow-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Chivo Mono';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(polices/chivo-mono-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Chivo Mono';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(polices/chivo-mono-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 /* ═══════════════════════════════════════════════════════════════════════
    KIT WEB — feuille unique de toutes les pages eleves.
    Elle est INLINEE dans chaque page par webseance.py : ne pas la lier.
@@ -6,20 +59,28 @@
    ═══════════════════════════════════════════════════════════════════════ */
 
 :root{
-  --fond:#e9e7e3;
-  --carte:#fbfaf9;
-  --carte2:#f2f0ec;
-  --encre:#191a1c;
-  --encre2:#5d5b57;
-  --trait:#c9c5bf;
-  --trait2:#dedbd6;
-  --froid:#2c6da6;      /* le cours, le socle */
-  --tiede:#b8801f;      /* pour aller plus loin */
-  --chaud:#ab432a;      /* ce que fait un bureau d'etudes */
-  --vert:#2f7a55;       /* les outils, les reponses justes */
-  --violet:#6b4a9c;     /* 5e couleur de serie, quand quatre ne suffisent pas */
-  --ombre:0 1px 2px rgba(25,26,28,.05),0 10px 26px rgba(25,26,28,.07);
-  --r:4px;
+  /* Le sol : chaussee claire, beton. */
+  --fond:#dcd9d2;
+  --carte:#efece4;
+  --carte2:#e4e0d7;
+  /* Encre de pictogramme. Aucun gris invente : le secondaire est teinte du sol. */
+  --encre:#14140f;
+  --encre2:#4a4a40;
+  --trait:#ada79b;
+  --trait2:#c9c4b9;
+  /* Classes de panneau. Les roles gardent leurs noms, les valeurs changent d'axe. */
+  --froid:#1b4e9b;      /* bleu d'indication : le cours, le socle */
+  --tiede:#6b3a00;      /* jalonnement : pour aller plus loin */
+  --chaud:#a50c24;      /* rouge d'interdiction : le piege, le danger */
+  --vert:#0a5e2e;       /* vert d'indication : les outils, les reponses justes */
+  --violet:#4a2e8c;     /* 5e couleur de serie */
+  /* Le jaune temporaire ne s'applique qu'aux faces de panneau, jamais aux
+     surfaces de saisie ni aux tableaux : la tache passe avant l'expression. */
+  --jaune:#f5c21b;
+  --jaune-sombre:#d9a800;
+  --sur-jaune:#14140f;
+  --ombre:0 1px 0 rgba(20,20,15,.22),0 6px 14px rgba(20,20,15,.10);
+  --r:2px;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
@@ -29,15 +90,18 @@
   }
 }
 :root[data-theme="dark"]{
-  --fond:#131315;--carte:#1c1d20;--carte2:#232427;--encre:#eceae6;--encre2:#a6a49f;
-  --trait:#4a4a4d;--trait2:#333437;--froid:#63a6dd;--tiede:#dfae4e;--chaud:#ef7a58;
-  --vert:#5cc08d;--violet:#b18ee0;--ombre:0 1px 2px rgba(0,0,0,.5),0 12px 32px rgba(0,0,0,.4);
+  /* Lecture de nuit : le panneau n'est plus peint, il retroreflechit. */
+  --fond:#0e0e0c;--carte:#17170f;--carte2:#1f1f17;--encre:#f1eee3;--encre2:#ada894;
+  --trait:#3a3930;--trait2:#2a2a22;--froid:#6fa8e6;--tiede:#e8b84a;--chaud:#f2795c;
+  --vert:#5fc98a;--violet:#b49ae8;
+  --jaune:#f5c21b;--jaune-sombre:#f5c21b;--sur-jaune:#14140f;
+  --ombre:0 1px 0 rgba(0,0,0,.6),0 8px 20px rgba(0,0,0,.5);
 }
 
 *{box-sizing:border-box}
 body{
   margin:0;background:var(--fond);color:var(--encre);
-  font-family:Newsreader,Georgia,"Times New Roman",serif;
+  font-family:Archivo,"Helvetica Neue",Arial,sans-serif;
   font-size:17.5px;line-height:1.6;-webkit-font-smoothing:antialiased;
 }
 .page{max-width:1060px;margin:0 auto;padding:0 20px 90px}
@@ -45,8 +109,8 @@ body{
 /* le texte courant tient dans une colonne lisible ; outils, figures et
    tableaux debordent volontairement */
 .page>p,.page>h2,.page>h3,.page>h4,.page>ul,.page>ol,.page>blockquote{max-width:660px}
-h1,h2,h3,h4,.gro{font-family:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif}
-.mono,code{font-family:"IBM Plex Mono",ui-monospace,monospace}
+h1,h2,h3,h4,.gro{font-family:Archivo,"Helvetica Neue",Arial,sans-serif}
+.mono,code{font-family:"Chivo Mono",ui-monospace,monospace}
 p{margin:0 0 13px}
 a{color:var(--froid)}
 
@@ -56,12 +120,12 @@ a{color:var(--froid)}
 header.tete{padding:34px 0 24px;border-bottom:2px solid var(--encre)}
 .titraille{display:flex;flex-direction:column;gap:11px}
 header.tete .num{
-  display:block;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+  display:block;font-family:Archivo,sans-serif;font-weight:800;
   font-size:clamp(52px,9vw,86px);line-height:.8;letter-spacing:-.05em;
   color:var(--froid);opacity:.22;margin:0 0 -6px;
 }
 .sur{
-  font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.18em;
+  font-family:"Chivo Mono",monospace;font-size:11.5px;letter-spacing:.18em;
   text-transform:uppercase;color:var(--encre2);margin:0;
 }
 h1{font-weight:800;font-size:clamp(30px,5.6vw,54px);line-height:1;letter-spacing:-.03em;
@@ -72,24 +136,24 @@ h1 span{display:block;color:var(--froid)}
 
 /* ce que la page contient — la meme information que sur les cartes de la frise */
 .contenu{
-  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;
+  font-family:"Chivo Mono",monospace;font-size:11.5px;letter-spacing:.12em;
   text-transform:uppercase;color:var(--encre2);margin:18px 0 0;
 }
 .k-savoirs{
-  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;
+  font-family:"Chivo Mono",monospace;font-size:11.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--encre2);margin:22px 0 8px;opacity:.75;
 }
 .savoirs{display:flex;flex-wrap:wrap;gap:7px;margin:0}
-.tag{font-family:"IBM Plex Mono",monospace;font-size:11.5px;padding:3px 9px;
+.tag{font-family:"Chivo Mono",monospace;font-size:11.5px;padding:3px 9px;
   border:1px solid var(--trait);border-radius:99px;color:var(--encre2)}
 .tag.n3{border-color:var(--chaud);color:var(--chaud);font-weight:600}
-.tag.n3::before{content:"● ";font-size:8px;vertical-align:middle}
+.tag.n3::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:6px;vertical-align:baseline}
 
 /* ─────────────────────────────────────────────── navigation */
 nav.somm{position:sticky;top:0;z-index:20;background:var(--fond);
   border-bottom:1px solid var(--trait);margin-bottom:6px}
 nav.somm .in{display:flex;gap:4px;overflow-x:auto;padding:9px 0}
-nav.somm a{font-family:"Bricolage Grotesque",sans-serif;font-size:13px;font-weight:600;
+nav.somm a{font-family:Archivo,sans-serif;font-size:13px;font-weight:600;
   color:var(--encre2);text-decoration:none;white-space:nowrap;padding:6px 11px;
   border-radius:var(--r)}
 nav.somm a:hover{background:var(--carte);color:var(--encre)}
@@ -108,12 +172,12 @@ h4{font-weight:600;font-size:16.5px;margin:18px 0 6px}
 .formule{background:var(--carte);border:1px solid var(--trait2);
   border-left:3px solid var(--froid);border-radius:0 var(--r) var(--r) 0;
   padding:14px 17px;margin:16px 0;box-shadow:var(--ombre);max-width:660px}
-.formule>p:first-child{font-family:"IBM Plex Mono",monospace;font-size:17px;
+.formule>p:first-child{font-family:"Chivo Mono",monospace;font-size:17px;
   font-weight:600;letter-spacing:-.01em;margin:0 0 9px;overflow-x:auto}
 .formule ul{list-style:none;padding:0;margin:0;display:grid;
   grid-template-columns:auto 1fr;gap:3px 12px;font-size:14.5px;color:var(--encre2)}
 .formule li{display:contents}
-.formule li strong:first-child{font-family:"IBM Plex Mono",monospace;color:var(--encre)}
+.formule li strong:first-child{font-family:"Chivo Mono",monospace;color:var(--encre)}
 .formule blockquote{margin:10px 0 0;padding:0;border:0;font-size:14.5px;color:var(--encre2)}
 .formule blockquote p{margin:0}
 
@@ -129,8 +193,8 @@ h4{font-weight:600;font-size:16.5px;margin:18px 0 6px}
   border-left:3px solid var(--chaud);border-radius:0 var(--r) var(--r) 0;
   font-size:16.5px;max-width:660px;box-shadow:var(--ombre)}
 .piege p:last-child{margin:0}
-.piege::before{content:"Le piège";display:block;font-family:"Bricolage Grotesque",sans-serif;
-  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+.piege::before{content:"Le piège";display:block;font-family:Archivo,sans-serif;
+  font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
   color:var(--chaud);margin-bottom:5px}
 
 /* ─────────────────────────────────────────────── etapes */
@@ -140,14 +204,14 @@ h4{font-weight:600;font-size:16.5px;margin:18px 0 6px}
   font-size:16.5px}
 .etapes li:last-child{border-bottom:0}
 .etapes li::before{counter-increment:e;content:counter(e);position:absolute;left:0;top:10px;
-  font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;
+  font-family:"Chivo Mono",monospace;font-size:11.5px;font-weight:600;
   width:23px;height:23px;line-height:22px;text-align:center;
   border:1px solid var(--trait);border-radius:50%;color:var(--encre2)}
 
 /* ─────────────────────────────────────────────── mission */
 .mission{margin:22px 0;padding:15px 18px;background:var(--carte2);
   border-radius:var(--r);font-size:16px;max-width:660px}
-.mission>p:first-child strong{font-family:"Bricolage Grotesque",sans-serif;font-size:12.5px;
+.mission>p:first-child strong{font-family:Archivo,sans-serif;font-size:12.5px;
   letter-spacing:.1em;text-transform:uppercase;color:var(--encre2)}
 .mission p:last-child{margin:0}
 
@@ -156,7 +220,7 @@ figure{margin:22px 0;max-width:760px}
 figure img{display:block;width:100%;height:auto;border-radius:var(--r);
   border:1px solid var(--trait2);background:#fff}
 figcaption{margin-top:8px;font-size:14px;color:var(--encre2);
-  font-family:"Bricolage Grotesque",sans-serif}
+  font-family:Archivo,sans-serif}
 figure.memo{max-width:420px}
 figure.schema{max-width:760px}
 figure.schema .dessin svg{display:block;width:100%;height:auto;
@@ -165,18 +229,18 @@ figure.schema .dessin svg{display:block;width:100%;height:auto;
 .leg-schema b{color:var(--encre);font-weight:600}
 figure.schema svg text,.outil svg text{paint-order:stroke;stroke:var(--carte);
   stroke-width:4px;stroke-linejoin:round}
-.s-nom{font-family:"Bricolage Grotesque",sans-serif;font-size:11.5px;
+.s-nom{font-family:Archivo,sans-serif;font-size:11.5px;
   fill:var(--encre2)}
-.s-pet{font-family:"IBM Plex Mono",monospace;font-size:11px;fill:var(--encre2)}
-.s-lab{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;
+.s-pet{font-family:"Chivo Mono",monospace;font-size:11.5px;fill:var(--encre2)}
+.s-lab{font-family:"Chivo Mono",monospace;font-size:13px;font-weight:600;
   fill:var(--encre)}
-.s-tit{font-family:"Bricolage Grotesque",sans-serif;font-size:10.5px;font-weight:700;
+.s-tit{font-family:Archivo,sans-serif;font-size:11.5px;font-weight:700;
   letter-spacing:.14em;fill:var(--trait)}
 figure.memo img{border:0;background:transparent}
 
 /* ─────────────────────────────────────────────── replis */
 .replis{margin:26px 0}
-.replis>.chapeau{font-family:"Bricolage Grotesque",sans-serif;font-size:12px;font-weight:700;
+.replis>.chapeau{font-family:Archivo,sans-serif;font-size:12px;font-weight:700;
   letter-spacing:.16em;text-transform:uppercase;color:var(--encre2);
   display:flex;align-items:center;gap:12px;margin-bottom:12px;max-width:660px}
 .replis>.chapeau::after{content:"";flex:1;height:1px;background:var(--trait)}
@@ -188,9 +252,9 @@ details.appro>summary::-webkit-details-marker{display:none}
 details.appro>summary:focus-visible{outline:2px solid var(--froid);outline-offset:-2px}
 .niv{flex:none;margin-top:4px;width:9px;height:9px;border-radius:50%;background:var(--tiede)}
 details.appro.be .niv{background:var(--chaud)}
-.titre-appro{flex:1;font-family:"Bricolage Grotesque",sans-serif;font-weight:600;
+.titre-appro{flex:1;font-family:Archivo,sans-serif;font-weight:600;
   font-size:16.5px;letter-spacing:-.01em}
-.etiq{flex:none;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;
+.etiq{flex:none;font-family:"Chivo Mono",monospace;font-size:11.5px;letter-spacing:.08em;
   text-transform:uppercase;color:var(--tiede);padding-top:4px}
 details.appro.be .etiq{color:var(--chaud)}
 .chev{flex:none;color:var(--encre2);transition:transform .18s;padding-top:1px}
@@ -205,7 +269,7 @@ details[open]>summary .chev{transform:rotate(90deg)}
 table{border-collapse:collapse;width:100%;font-size:15px;margin:14px 0}
 th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--trait2);
   vertical-align:top}
-th{font-family:"Bricolage Grotesque",sans-serif;font-size:11.5px;font-weight:700;
+th{font-family:Archivo,sans-serif;font-size:11.5px;font-weight:700;
   letter-spacing:.06em;text-transform:uppercase;color:var(--encre2);
   border-bottom:1.5px solid var(--trait)}
 tbody tr:last-child td{border-bottom:0}
@@ -215,51 +279,51 @@ tbody tr:last-child td{border-bottom:0}
 /* ─────────────────────────────────────────────── quiz */
 .quiz{margin:22px 0;max-width:660px;background:var(--carte);border:1px solid var(--trait2);
   border-radius:var(--r);padding:16px 18px;box-shadow:var(--ombre)}
-.quiz>.chapeau{font-family:"Bricolage Grotesque",sans-serif;font-size:11.5px;font-weight:700;
+.quiz>.chapeau{font-family:Archivo,sans-serif;font-size:11.5px;font-weight:700;
   letter-spacing:.12em;text-transform:uppercase;color:var(--vert);margin-bottom:12px}
 .qq{padding:11px 0;border-bottom:1px solid var(--trait2)}
 .qq:last-of-type{border-bottom:0}
 .qq p{margin:0 0 8px;font-size:16.5px}
 .qq .choix{display:flex;flex-wrap:wrap;gap:7px}
-.qq button{font-family:"IBM Plex Mono",monospace;font-size:14px;padding:5px 12px;
+.qq button{font-family:"Chivo Mono",monospace;font-size:14px;padding:5px 12px;
   border:1px solid var(--trait);border-radius:var(--r);background:transparent;
   color:var(--encre);cursor:pointer}
 .qq button:hover{background:var(--carte2)}
 .qq button.juste{background:var(--vert);border-color:var(--vert);color:#fff}
 .qq button.faux{background:var(--chaud);border-color:var(--chaud);color:#fff}
 .qq button:disabled{cursor:default;opacity:.75}
-.score{margin-top:14px;font-family:"IBM Plex Mono",monospace;font-size:14px;color:var(--encre2)}
+.score{margin-top:14px;font-family:"Chivo Mono",monospace;font-size:14px;color:var(--encre2)}
 
 /* ─────────────────────────────────────────────── outils */
 .outil{margin:28px 0;background:var(--carte);border:1px solid var(--trait);
   border-radius:var(--r);box-shadow:var(--ombre);overflow:hidden}
 .outil>.tete-outil{padding:15px 20px 13px;border-bottom:1px solid var(--trait2);
   background:var(--carte2)}
-.outil .k{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.16em;
+.outil .k{font-family:"Chivo Mono",monospace;font-size:11.5px;letter-spacing:.16em;
   text-transform:uppercase;color:var(--vert);margin:0 0 5px}
 .outil h4{margin:0;font-size:19px;font-weight:700}
 .outil .tete-outil p{margin:6px 0 0;font-size:15px;color:var(--encre2);max-width:64ch}
 .outil .dedans{padding:17px 20px 19px}
 .g2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
 @media (max-width:760px){.g2{grid-template-columns:1fr}}
-.chaine{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--vert);
+.chaine{font-family:"Chivo Mono",monospace;font-size:12px;color:var(--vert);
   margin:0 0 10px}
 
 .champ{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:baseline;
   padding:7px 0;border-bottom:1px solid var(--trait2)}
 .champ:last-child{border-bottom:0}
 .champ label{font-size:15px}
-.champ .v{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:600;
+.champ .v{font-family:"Chivo Mono",monospace;font-size:14px;font-weight:600;
   font-variant-numeric:tabular-nums;white-space:nowrap}
 .champ input[type=range]{grid-column:1/3;width:100%;margin:5px 0 0;accent-color:var(--froid)}
 .champ select{grid-column:1/3;width:100%;margin-top:5px}
-input[type=number],select{font-family:"IBM Plex Mono",monospace;font-size:14px;
+input[type=number],select{font-family:"Chivo Mono",monospace;font-size:14px;
   padding:5px 7px;border:1px solid var(--trait);border-radius:var(--r);
   background:var(--carte);color:var(--encre);max-width:100%}
 input[type=number]{width:84px;text-align:right}
 input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--froid);
   outline-offset:1px}
-.bt{font-family:"Bricolage Grotesque",sans-serif;font-size:13.5px;font-weight:600;
+.bt{font-family:Archivo,sans-serif;font-size:13.5px;font-weight:600;
   padding:6px 13px;border:1px solid var(--trait);border-radius:var(--r);
   background:transparent;color:var(--encre2);cursor:pointer}
 .bt:hover{background:var(--carte2);color:var(--encre)}
@@ -267,13 +331,13 @@ input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid 
 
 .lignec{display:grid;grid-template-columns:1fr 84px 74px 30px;gap:8px;align-items:center;
   padding:6px 0;border-bottom:1px solid var(--trait2)}
-.lignec .rr{font-family:"IBM Plex Mono",monospace;font-size:13.5px;text-align:right;
+.lignec .rr{font-family:"Chivo Mono",monospace;font-size:13.5px;text-align:right;
   font-variant-numeric:tabular-nums;color:var(--encre2)}
 .lignec .xx{border:0;background:transparent;color:var(--encre2);cursor:pointer;
   font-size:17px;line-height:1;padding:2px 5px;border-radius:var(--r)}
 .lignec .xx:hover{background:var(--carte2);color:var(--chaud)}
 .entete-c{display:grid;grid-template-columns:1fr 84px 74px 30px;gap:8px;
-  font-family:"Bricolage Grotesque",sans-serif;font-size:11px;font-weight:700;
+  font-family:Archivo,sans-serif;font-size:11.5px;font-weight:700;
   letter-spacing:.06em;text-transform:uppercase;color:var(--encre2);
   padding-bottom:6px;border-bottom:1.5px solid var(--trait)}
 .entete-c span:nth-child(2),.entete-c span:nth-child(3){text-align:right}
@@ -288,8 +352,8 @@ input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid 
 
 .res{margin-top:15px;padding:13px 16px;background:var(--carte2);border-radius:var(--r)}
 .res .gros{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;
-  font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
-.res .gros b{font-family:"Bricolage Grotesque",sans-serif;font-size:10.5px;font-weight:700;
+  font-family:"Chivo Mono",monospace;font-variant-numeric:tabular-nums}
+.res .gros b{font-family:Archivo,sans-serif;font-size:11.5px;font-weight:700;
   letter-spacing:.1em;text-transform:uppercase;color:var(--encre2);margin-right:7px}
 .res .gros span{font-size:19px;font-weight:600}
 .res p{margin:9px 0 0;font-size:14.5px;color:var(--encre2)}
@@ -297,7 +361,7 @@ input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid 
 .barre{display:grid;grid-template-columns:130px 1fr auto;gap:10px;align-items:center;
   font-size:14px}
 .barre .b{height:14px;border-radius:2px;background:var(--froid);min-width:2px}
-.barre .p{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--encre2);
+.barre .p{font-family:"Chivo Mono",monospace;font-size:13px;color:var(--encre2);
   font-variant-numeric:tabular-nums;white-space:nowrap}
 .barre .l{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media (max-width:520px){.barre{grid-template-columns:96px 1fr auto;font-size:13px}}
@@ -312,12 +376,12 @@ input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid 
   background:var(--carte);cursor:pointer;color:var(--encre2)}
 .case-sym:hover{border-color:var(--trait);background:var(--carte2)}
 .case-sym.on{border-color:var(--encre);background:var(--carte2);color:var(--encre)}
-.case-sym span{font-family:"Bricolage Grotesque",sans-serif;font-size:11.5px;
+.case-sym span{font-family:Archivo,sans-serif;font-size:11.5px;
   text-align:center;line-height:1.25}
 .sym{width:64px;height:44px;flex:none}
-.s-sym{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;
+.s-sym{font-family:"Chivo Mono",monospace;font-size:13px;font-weight:600;
   fill:var(--encre)}
-.s-rep{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;
+.s-rep{font-family:"Chivo Mono",monospace;font-size:12px;font-weight:600;
   fill:var(--encre)}
 @media (pointer:coarse){.case-sym{padding:13px 6px}}
 
@@ -387,7 +451,7 @@ input[type=range]::-moz-range-thumb{
 .exo{margin:24px 0;max-width:660px;background:var(--carte);
   border:1px solid var(--trait2);border-left:3px solid var(--vert);
   border-radius:var(--r);padding:17px 19px 19px;box-shadow:var(--ombre)}
-.exo>.k{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;
+.exo>.k{font-family:"Chivo Mono",monospace;font-size:11.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--vert);margin:0 0 6px;font-weight:600}
 .exo h4{margin:0 0 9px;font-size:17px;font-weight:700;letter-spacing:-.01em}
 .exo .enonce>*:last-child{margin-bottom:0}
@@ -395,16 +459,16 @@ input[type=range]::-moz-range-thumb{
 .exo.fait{border-left-color:var(--froid)}
 
 .exo .saisie{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:14px 0 0}
-.exo input[type=text]{font-family:"IBM Plex Mono",monospace;font-size:16px;
+.exo input[type=text]{font-family:"Chivo Mono",monospace;font-size:16px;
   color:var(--encre);background:var(--fond);border:1px solid var(--trait);
   border-radius:var(--r);padding:9px 12px;width:170px}
-.exo textarea{width:100%;font-family:Newsreader,Georgia,serif;font-size:16.5px;
+.exo textarea{width:100%;font-family:Archivo,"Helvetica Neue",Arial,sans-serif;font-size:16.5px;
   line-height:1.5;color:var(--encre);background:var(--fond);
   border:1px solid var(--trait);border-radius:var(--r);padding:11px 13px;resize:vertical}
 .exo input:focus,.exo textarea:focus{outline:2px solid var(--vert);outline-offset:1px;
   border-color:var(--vert)}
-.exo .unite{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--encre2)}
-.exo .btn{font-family:"Bricolage Grotesque",sans-serif;font-size:13.5px;font-weight:600;
+.exo .unite{font-family:"Chivo Mono",monospace;font-size:13px;color:var(--encre2)}
+.exo .btn{font-family:Archivo,sans-serif;font-size:13.5px;font-weight:600;
   cursor:pointer;color:var(--fond);background:var(--vert);border:1px solid var(--vert);
   border-radius:var(--r);padding:9px 16px}
 .exo .btn:hover{filter:brightness(1.08)}
@@ -421,7 +485,7 @@ input[type=range]::-moz-range-thumb{
 .exo .indice{margin:12px 0 0;padding:11px 14px;border-radius:var(--r);
   background:var(--carte2);border-left:2px solid var(--tiede);
   font-size:15.5px;color:var(--encre2)}
-.exo .indice::before{content:"Indice — ";font-family:"Bricolage Grotesque",sans-serif;
+.exo .indice::before{content:"Indice — ";font-family:Archivo,sans-serif;
   font-weight:700;color:var(--tiede)}
 
 /* les points a verifier disent QUOI relire dans sa reponse, pas quoi ecrire */
@@ -447,7 +511,7 @@ input[type=range]::-moz-range-thumb{
 @media print{
   .bandeau-prof{display:block;margin:0 0 14px;padding:6px 10px;
     border:2px solid #000;color:#000;background:#fff;font-weight:600;
-    font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
     text-align:center}}
 
 /* ══════════════════════════════════════════════════════ ecrans larges
@@ -485,7 +549,7 @@ input[type=range]::-moz-range-thumb{
   background:var(--trait2);overflow:hidden}
 .bilan-epreuve>i>b{display:block;height:100%;width:0;border-radius:4px;
   background:var(--vert);transition:width .3s ease}
-.bilan-epreuve .compte{font-family:"Bricolage Grotesque",sans-serif;
+.bilan-epreuve .compte{font-family:Archivo,sans-serif;
   font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--encre2);
   white-space:nowrap}
 @media (max-width:560px){
