@@ -15,7 +15,7 @@
    ne pardonne pas — d'ou le suffixe. */
 .barre-site{
   display:flex;align-items:center;gap:14px;flex-wrap:wrap;
-  padding:14px 0 0;font-family:Archivo,sans-serif;font-size:13px;
+  padding:14px 0 0;font-family:"Bricolage Grotesque",sans-serif;font-size:13px;
 }
 .barre-site .accueil{
   font-weight:700;color:var(--encre);text-decoration:none;
@@ -32,13 +32,13 @@
 .barre-site .lu[aria-pressed="true"]{
   border-color:var(--vert);color:var(--vert);background:color-mix(in srgb,var(--vert) 10%,transparent);
 }
-.barre-site .lu[aria-pressed="true"]::before{content:none}
+.barre-site .lu[aria-pressed="true"]::before{content:"✓ "}
 
 /* ─────────────────────────────────────────────── accueil : recherche */
 .chercher{margin:28px 0 0;max-width:660px}
 .page > .chercher{max-width:none}
 .chercher input{
-  width:100%;font-family:Archivo,sans-serif;font-size:16px;
+  width:100%;font-family:"Bricolage Grotesque",sans-serif;font-size:16px;
   color:var(--encre);background:var(--carte);border:1px solid var(--trait);
   border-radius:var(--r);padding:12px 14px;
 }
@@ -46,10 +46,10 @@
 .chercher input::placeholder{color:var(--encre2)}
 .resultats{margin:10px 0 0;padding:0;list-style:none}
 .resultats li{border-bottom:1px solid var(--trait2);padding:11px 0}
-.resultats a{font-family:Archivo,sans-serif;font-weight:600;
+.resultats a{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;
   font-size:15px;text-decoration:none;color:var(--encre)}
 .resultats a:hover{color:var(--froid)}
-.resultats .ou{font-family:"Chivo Mono",monospace;font-size:11.5px;
+.resultats .ou{font-family:"IBM Plex Mono",monospace;font-size:11px;
   letter-spacing:.1em;text-transform:uppercase;color:var(--encre2);display:block;margin-bottom:3px}
 .resultats .extrait{font-size:14.5px;color:var(--encre2);margin:4px 0 0}
 .resultats mark{background:color-mix(in srgb,var(--tiede) 32%,transparent);color:inherit;
@@ -71,7 +71,7 @@ body.en-recherche .compteur{display:none}
 /* ─────────────────────────────────────────────── accueil : raccourcis */
 .raccourcis{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0}
 .raccourcis a{
-  font-family:Archivo,sans-serif;font-size:14px;font-weight:600;
+  font-family:"Bricolage Grotesque",sans-serif;font-size:14px;font-weight:600;
   text-decoration:none;color:var(--encre);background:var(--carte);
   border:1px solid var(--trait);border-radius:var(--r);padding:10px 15px;
 }
@@ -81,7 +81,7 @@ body.en-recherche .compteur{display:none}
 /* ─────────────────────────────────────────────── la frise */
 .espace{margin:46px 0 0}
 .espace>h2{margin-bottom:4px}
-.espace>.compte{font-family:"Chivo Mono",monospace;font-size:11.5px;
+.espace>.compte{font-family:"IBM Plex Mono",monospace;font-size:11.5px;
   letter-spacing:.12em;text-transform:uppercase;color:var(--encre2);margin:0 0 18px}
 .sequence{margin:26px 0 0;border-top:1px solid var(--trait2);padding-top:16px}
 .sequence>h3{margin:0 0 3px;font-size:18px}
@@ -97,11 +97,11 @@ body.en-recherche .compteur{display:none}
 }
 .frise a:hover{border-color:var(--froid);transform:translateY(-1px)}
 .frise a{transition:border-color .12s,transform .12s}
-.frise .n{font-family:"Chivo Mono",monospace;font-size:11.5px;letter-spacing:.12em;
+.frise .n{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;
   text-transform:uppercase;color:var(--encre2);display:block;margin-bottom:5px}
-.frise .t{font-family:Archivo,sans-serif;font-weight:600;font-size:15px;
+.frise .t{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:15px;
   line-height:1.25;display:block;text-wrap:balance}
-.frise .meta{font-family:"Chivo Mono",monospace;font-size:11.5px;color:var(--encre2);
+.frise .meta{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--encre2);
   display:block;margin-top:7px}
 /* une seance dont la page reste a produire : elle est annoncee, pas cachee */
 .frise .vide{background:transparent;border-style:dashed;color:var(--encre2);box-shadow:none}
@@ -109,10 +109,10 @@ body.en-recherche .compteur{display:none}
 .frise .vide .meta{color:var(--tiede)}
 /* marque « lu » posee par site.js depuis le navigateur de l'eleve */
 .frise li.lu a{border-color:var(--vert)}
-.frise li.lu .n::after{content:none}
+.frise li.lu .n::after{content:" ✓";color:var(--vert);font-weight:700}
 
 .recap{
-  display:inline-block;margin:11px 0 0;font-family:Archivo,sans-serif;
+  display:inline-block;margin:11px 0 0;font-family:"Bricolage Grotesque",sans-serif;
   font-size:13.5px;font-weight:600;text-decoration:none;color:var(--froid);
   border:1px solid var(--froid);border-radius:99px;padding:6px 14px;
 }
@@ -131,10 +131,10 @@ body.en-recherche .compteur{display:none}
   color:var(--encre);box-shadow:var(--ombre);transition:border-color .12s,transform .12s;
 }
 .outils-grille a:hover{border-color:var(--vert);transform:translateY(-1px)}
-.outils-grille .t{font-family:Archivo,sans-serif;font-weight:700;
+.outils-grille .t{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;
   font-size:16px;display:block;line-height:1.25;text-wrap:balance}
 .outils-grille .i{font-size:14.5px;color:var(--encre2);margin:6px 0 0;display:block}
-.outils-grille .ou{font-family:"Chivo Mono",monospace;font-size:11.5px;
+.outils-grille .ou{font-family:"IBM Plex Mono",monospace;font-size:10.5px;
   letter-spacing:.1em;text-transform:uppercase;color:var(--vert);display:block;margin-top:9px}
 
 /* ─────────────────────────────────────────────── pied de site */
@@ -151,7 +151,7 @@ body.en-recherche .compteur{display:none}
    Un repertoire, pas une copie : chaque ligne renvoie a la seance qui porte
    l'exercice. */
 .filtres{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;margin:26px 0 0;
-  font-family:Archivo,sans-serif;font-size:13.5px;color:var(--encre2)}
+  font-family:"Bricolage Grotesque",sans-serif;font-size:13.5px;color:var(--encre2)}
 .filtres label{display:flex;align-items:center;gap:7px}
 .filtres select{font-family:inherit;font-size:13.5px;color:var(--encre);
   background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);
@@ -166,12 +166,12 @@ body.en-recherche .compteur{display:none}
    le filtre pose bien l'attribut, et la ligne reste a l'ecran. */
 .exo-ligne[hidden]{display:none}
 .exo-ligne a{flex:1;text-decoration:none;color:var(--encre);
-  font-family:Archivo,sans-serif;font-weight:600;font-size:15px}
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:15px}
 .exo-ligne a:hover{color:var(--froid)}
-.exo-ligne .ou{display:block;font-family:"Chivo Mono",monospace;font-size:11.5px;
+.exo-ligne .ou{display:block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
   letter-spacing:.1em;text-transform:uppercase;color:var(--encre2);
   font-weight:400;margin-bottom:3px}
-.exo-ligne .etat{font-family:"Chivo Mono",monospace;font-size:11.5px;
+.exo-ligne .etat{font-family:"IBM Plex Mono",monospace;font-size:10.5px;
   letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;
   padding:3px 9px;border-radius:99px;border:1px solid transparent}
 .exo-ligne .etat.juste{color:var(--vert);border-color:var(--vert)}
@@ -193,16 +193,16 @@ body.en-recherche .compteur{display:none}
 .partie{padding:12px 0;border-bottom:1px solid var(--trait2);
   display:grid;grid-template-columns:88px 1fr;gap:3px 14px;align-items:baseline}
 .partie[hidden]{display:none}
-.partie .n{grid-row:1/3;font-family:"Chivo Mono",monospace;font-size:11.5px;
+.partie .n{grid-row:1/3;font-family:"IBM Plex Mono",monospace;font-size:11px;
   letter-spacing:.1em;text-transform:uppercase;color:var(--encre2)}
-.partie .t{font-family:Archivo,sans-serif;font-weight:600;font-size:15.5px;
+.partie .t{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:15.5px;
   line-height:1.3;text-wrap:balance}
-.partie .meta{font-family:"Chivo Mono",monospace;font-size:11.5px;color:var(--encre2);
+.partie .meta{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--encre2);
   grid-column:2}
-.partie .sv{display:inline-block;font-family:"Chivo Mono",monospace;font-size:11.5px;
+.partie .sv{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
   color:var(--froid);border:1px solid var(--froid);border-radius:99px;
   padding:2px 8px;margin:6px 5px 0 0;grid-column:2}
-.partie .rep{display:inline-block;font-family:"Chivo Mono",monospace;font-size:11.5px;
+.partie .rep{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
   letter-spacing:.06em;text-transform:uppercase;color:var(--vert);
   border:1px solid var(--vert);border-radius:99px;padding:2px 8px;margin:6px 0 0}
 .session:has(.partie:not([hidden]))~.session{}
@@ -237,11 +237,11 @@ body.en-recherche .compteur{display:none}
 .chiffres li:last-child{border-right:0}
 .chiffres li:first-child{padding-left:0}
 .chiffres b{
-  display:block;font-family:Archivo,sans-serif;font-weight:800;
+  display:block;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
   font-size:clamp(26px,4vw,38px);line-height:1;letter-spacing:-.03em;color:var(--encre);
 }
 .chiffres span{
-  display:block;margin-top:5px;font-family:"Chivo Mono",monospace;font-size:11.5px;
+  display:block;margin-top:5px;font-family:"IBM Plex Mono",monospace;font-size:11px;
   letter-spacing:.14em;text-transform:uppercase;color:var(--encre2);
 }
 
@@ -275,18 +275,18 @@ body.en-recherche .compteur{display:none}
   stroke-linecap:round;stroke-linejoin:round;margin-bottom:14px;
 }
 .porte .n{
-  font-family:"Chivo Mono",monospace;font-size:11.5px;letter-spacing:.14em;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--teinte);font-weight:600;
 }
 .porte .t{
-  font-family:Archivo,sans-serif;font-weight:700;font-size:19px;
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:19px;
   line-height:1.15;letter-spacing:-.02em;margin-top:4px;text-wrap:balance;
 }
 .porte .d{font-size:14.5px;line-height:1.45;color:var(--encre2);margin-top:8px}
 
 /* ─────────────────────────────────────────────── reprendre la lecture */
 .reprendre{
-  margin:22px 0 0;font-family:Archivo,sans-serif;font-size:14px;
+  margin:22px 0 0;font-family:"Bricolage Grotesque",sans-serif;font-size:14px;
   color:var(--encre2);
 }
 .reprendre a{
@@ -308,7 +308,7 @@ body.en-recherche .compteur{display:none}
 .sequence[data-rang="5"]{--teinte:var(--encre2)}
 
 .sequence .rang{
-  font-family:"Chivo Mono",monospace;font-size:11.5px;letter-spacing:.14em;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--teinte);font-weight:600;margin:0 0 4px;
 }
 .sequence .rang span{color:var(--encre2);font-weight:400}
@@ -318,7 +318,7 @@ body.en-recherche .compteur{display:none}
 /* l'avancement de lecture, posé par site.js */
 .sequence .jauge{
   display:flex;align-items:center;gap:9px;margin:0 0 13px;
-  font-family:"Chivo Mono",monospace;font-size:11.5px;color:var(--encre2);
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--encre2);
 }
 .sequence .jauge i{
   flex:0 0 84px;height:4px;border-radius:2px;background:var(--trait2);overflow:hidden;
@@ -343,7 +343,7 @@ body.en-recherche .compteur{display:none}
 .fiches{margin:34px 0 0}
 .page > .fiches{max-width:none}
 .chapeau-f{
-  font-family:"Chivo Mono",monospace;font-size:11.5px;letter-spacing:.14em;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--encre2);margin:0 0 11px;
 }
 .grille-f{
@@ -351,17 +351,17 @@ body.en-recherche .compteur{display:none}
 }
 .grille-f a{
   display:block;padding:15px 17px;text-decoration:none;color:var(--encre);
-  background:var(--carte);border:1px solid var(--trait);
+  background:var(--carte);border:1px solid var(--trait);border-left:3px solid var(--tiede);
   border-radius:var(--r);box-shadow:var(--ombre);
   transition:transform .12s,border-color .12s;
 }
 .grille-f a:hover{transform:translateY(-1px);border-color:var(--tiede)}
 .grille-f .k{
-  display:block;font-family:"Chivo Mono",monospace;font-size:11.5px;
+  display:block;font-family:"IBM Plex Mono",monospace;font-size:10px;
   letter-spacing:.14em;text-transform:uppercase;color:var(--tiede);font-weight:600;
 }
 .grille-f .t{
-  display:block;font-family:Archivo,sans-serif;font-weight:700;
+  display:block;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;
   font-size:16.5px;line-height:1.2;margin-top:5px;text-wrap:balance;
 }
 .grille-f .d{
@@ -404,7 +404,7 @@ body.en-recherche .fiches{display:none}
 
 /* ─────────────────────────────────────────────── le fil de séquence */
 .barre-site .fil{
-  font-family:"Chivo Mono",monospace;font-size:11.5px;letter-spacing:.1em;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--teinte,var(--encre2));font-weight:600;
   padding-left:14px;border-left:1px solid var(--trait);
 }
@@ -423,7 +423,7 @@ nav.somm::after{
 .suite{margin:56px 0 0;padding-top:20px;border-top:1px solid var(--trait)}
 .page > .suite{max-width:none}
 .chapeau-s{
-  font-family:"Chivo Mono",monospace;font-size:11.5px;letter-spacing:.14em;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--encre2);margin:0 0 12px;
 }
 .pas-a-pas{display:grid;gap:11px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
@@ -435,16 +435,16 @@ nav.somm::after{
 .pas-a-pas a:hover{transform:translateY(-1px);border-color:var(--teinte,var(--froid))}
 .pas-a-pas .ap{text-align:right}
 .pas-a-pas .k{
-  display:block;font-family:"Chivo Mono",monospace;font-size:11.5px;
+  display:block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
   letter-spacing:.12em;text-transform:uppercase;color:var(--teinte,var(--froid));
   font-weight:600;
 }
 .pas-a-pas .t{
-  display:block;font-family:Archivo,sans-serif;font-weight:700;
+  display:block;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;
   font-size:16px;line-height:1.2;margin-top:5px;text-wrap:balance;
 }
 .vers-recap{
-  display:inline-block;margin:13px 0 0;font-family:Archivo,sans-serif;
+  display:inline-block;margin:13px 0 0;font-family:"Bricolage Grotesque",sans-serif;
   font-size:13.5px;font-weight:600;text-decoration:none;
   color:var(--teinte,var(--froid));border:1px solid var(--teinte,var(--froid));
   border-radius:99px;padding:7px 15px;
@@ -496,7 +496,7 @@ nav.somm::after{
 .theme-outils[data-rang="4"]{--teinte:var(--tiede)}
 .theme-outils[data-rang="5"]{--teinte:var(--encre2)}
 .theme-outils .rang{
-  font-family:"Chivo Mono",monospace;font-size:11.5px;letter-spacing:.14em;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--teinte);font-weight:600;margin:0 0 3px;
 }
 .theme-outils > h2{margin:0 0 3px;font-size:21px;letter-spacing:-.02em}
@@ -508,7 +508,7 @@ nav.somm::after{
 
 /* ─────────────────────────────────────────────── exercices, par savoir */
 .avancee{display:flex;align-items:center;gap:12px;margin:22px 0 0;
-  font-family:"Chivo Mono",monospace;font-size:11.5px;color:var(--encre2)}
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--encre2)}
 .avancee[hidden]{display:none}
 .avancee i{flex:0 0 140px;height:6px;border-radius:3px;background:var(--trait2);
   overflow:hidden}
@@ -520,7 +520,7 @@ nav.somm::after{
 .segments{display:flex;gap:0;border:1px solid var(--trait);border-radius:var(--r);
   overflow:hidden;background:var(--carte)}
 .seg{
-  font-family:Archivo,sans-serif;font-size:12.5px;font-weight:600;
+  font-family:"Bricolage Grotesque",sans-serif;font-size:12.5px;font-weight:600;
   cursor:pointer;padding:7px 13px;border:0;background:none;color:var(--encre2);
   border-right:1px solid var(--trait);
 }
@@ -538,7 +538,7 @@ nav.somm::after{
   font-size:17px;letter-spacing:-.01em;margin:0 0 4px;
 }
 .titre-savoir .code{
-  font-family:"Chivo Mono",monospace;font-size:12px;letter-spacing:.08em;
+  font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;
   color:var(--froid);border:1px solid var(--froid);border-radius:99px;
   padding:2px 9px;font-weight:600;flex:none;
 }
@@ -549,7 +549,7 @@ nav.somm::after{
   padding:11px 0;border-bottom:1px solid var(--trait2);
 }
 .exo-ligne .genre{
-  font-family:"Chivo Mono",monospace;font-size:11.5px;letter-spacing:.08em;
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;
   text-transform:uppercase;padding:3px 8px;border-radius:99px;white-space:nowrap;
   border:1px solid var(--trait);color:var(--encre2);
 }
@@ -558,7 +558,7 @@ nav.somm::after{
 .exo-ligne .genre.justification{color:var(--tiede);border-color:var(--tiede)}
 .exo-ligne a{
   text-decoration:none;color:var(--encre);
-  font-family:Archivo,sans-serif;font-weight:600;font-size:15.5px;
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:15.5px;
 }
 .exo-ligne a:hover{color:var(--froid)}
 
@@ -584,7 +584,7 @@ nav.somm::after{
 .suggestions b{font-weight:600}
 .suggestions mark{background:transparent;color:var(--froid);font-weight:600}
 .suggestions .lib{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.suggestions .ou{flex:none;font-family:"Chivo Mono",monospace;font-size:11.5px;
+.suggestions .ou{flex:none;font-family:"IBM Plex Mono",monospace;font-size:11px;
   color:var(--encre2);text-transform:uppercase;letter-spacing:.06em}
 
 /* ─────────────────────────────────────────────── séances tenues
@@ -595,9 +595,9 @@ nav.somm::after{
   background:color-mix(in srgb,var(--encre) 3%,transparent);
 }
 .frise .vide.a-venir .meta{color:var(--encre2)}
-.frise .vide.a-venir .n::after{content:none}
+.frise .vide.a-venir .n::after{content:" ○";opacity:.5}
 .recap.tenu{
-  display:inline-block;margin:11px 0 0;font-family:Archivo,sans-serif;
+  display:inline-block;margin:11px 0 0;font-family:"Bricolage Grotesque",sans-serif;
   font-size:13.5px;font-weight:600;color:var(--encre2);
   border:1px dashed var(--trait);border-radius:99px;padding:6px 14px;
 }
@@ -634,769 +634,3 @@ nav.somm::after{
 .mot > p,
 .mot > h2, .mot > h3, .mot > ul, .mot > ol, .mot > blockquote{max-width:660px}
 .mot > .enveloppe-tbl, .mot table{max-width:760px}
-
-/* ═══════════════════════════════════════════════════════════════════════
-   SIGNALISATION TEMPORAIRE — passe de validation, CSS seul.
-   Le HTML n'est pas touché : le type d'une page se lit sur son href, et
-   c'est ce qui rend la forme-panneau possible sans passer par site.py.
-   Bloc ajouté le 8 septembre 2026 ; à retirer d'un seul tenant pour revenir.
-   ═══════════════════════════════════════════════════════════════════════ */
-
-/* ─────────────────────────────────────────────── la chaussée
-   Une seule verticale traverse la page d'un bout à l'autre et cale tout ce
-   qui se lit. Elle remplace la grille libre où chaque bloc se recentrait. */
-.page{
-  position:relative;
-  background-image:repeating-linear-gradient(
-    to bottom,
-    var(--encre) 0 20px, transparent 20px 36px);
-  background-size:3px 100%;
-  background-position:2px 0;
-  background-repeat:no-repeat;
-  padding-left:26px;
-}
-@media (max-width:520px){ .page{padding-left:20px;background-position:0 0} }
-
-/* ─────────────────────────────────────────────── le panneau d'en-tête
-   Il porte la question à laquelle le site répond. Sa référence vit dans le
-   coin, comme sur une tôle — ce n'est plus un sur-titre flottant. */
-header.tete{
-  position:relative;
-  margin:18px 0 0;
-  padding:26px 24px 24px;
-  background:var(--jaune);
-  border:3px solid var(--encre);
-  border-radius:var(--r);
-}
-header.tete .sur{
-  position:absolute;top:8px;right:12px;
-  font-family:"Archivo Narrow",Archivo,sans-serif;font-weight:700;
-  font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--sur-jaune);opacity:.75;
-}
-header.tete h1{color:var(--sur-jaune);letter-spacing:-.02em}
-header.tete h1 span{color:var(--sur-jaune);font-weight:600}
-header.tete .accroche{
-  color:var(--sur-jaune);font-size:17px;line-height:1.45;max-width:62ch;
-  margin-top:16px;
-}
-header.tete .accroche strong{color:var(--sur-jaune);font-weight:700}
-
-:root[data-theme="dark"] header.tete{
-  background:var(--carte);border-color:var(--jaune);
-}
-:root[data-theme="dark"] header.tete h1,
-:root[data-theme="dark"] header.tete h1 span,
-:root[data-theme="dark"] header.tete .accroche,
-:root[data-theme="dark"] header.tete .accroche strong{color:var(--encre)}
-:root[data-theme="dark"] header.tete .sur{color:var(--jaune);opacity:1}
-
-/* ─────────────────────────────────────────────── la recherche
-   Action première du mode Operate : elle est dans le premier écran, à
-   pleine largeur, à hauteur de doigt ganté. */
-.chercher input{
-  min-height:54px;font-size:17px;font-weight:500;
-  background:var(--carte);color:var(--encre);
-  border:2px solid var(--encre);border-radius:var(--r);
-  padding:0 16px;
-}
-.chercher input::placeholder{color:var(--encre2);opacity:1}
-.chercher input:focus{
-  border-color:var(--chaud);
-  box-shadow:inset 0 0 0 2px var(--chaud);
-  outline:none;
-}
-
-/* ─────────────────────────────────────────────── le panneau de direction
-   La porte des exercices est une indication, pas une carte : fond bleu,
-   encre claire, une flèche. */
-nav.portes .porte{
-  background:var(--froid);border:3px solid var(--encre);border-radius:var(--r);
-  box-shadow:none;color:#fff;padding:18px 20px;
-}
-nav.portes .porte .n,
-nav.portes .porte .t,
-nav.portes .porte .d{color:#fff}
-nav.portes .porte .n{
-  font-family:"Archivo Narrow",Archivo,sans-serif;font-weight:700;
-  letter-spacing:.14em;text-transform:uppercase;opacity:.9;
-}
-nav.portes .porte .t{font-weight:800;font-size:22px}
-nav.portes .porte .d{opacity:.92}
-nav.portes .porte .ico{stroke:#fff;fill:none}
-nav.portes .porte::after{
-  content:"";position:absolute;right:18px;top:50%;
-  width:16px;height:16px;margin-top:-8px;
-  border-right:3px solid #fff;border-top:3px solid #fff;
-  transform:rotate(45deg);
-}
-nav.portes .porte{position:relative}
-:root[data-theme="dark"] nav.portes .porte{background:var(--carte);border-color:var(--froid)}
-:root[data-theme="dark"] nav.portes .porte .n,
-:root[data-theme="dark"] nav.portes .porte .t,
-:root[data-theme="dark"] nav.portes .porte .d{color:var(--encre)}
-:root[data-theme="dark"] nav.portes .porte .ico{stroke:var(--froid)}
-:root[data-theme="dark"] nav.portes .porte::after{border-color:var(--froid)}
-
-/* ─────────────────────────────────────────────── le balisage de section
-   Chaque famille s'annonce par une bande, comme une section de chantier. */
-.chapeau-f{
-  display:inline-block;
-  font-family:"Archivo Narrow",Archivo,sans-serif;font-weight:700;
-  font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--jaune);background:var(--encre);
-  padding:5px 11px;border-radius:var(--r);margin:0 0 14px;
-}
-.espace>h2{
-  font-weight:800;letter-spacing:-.02em;
-  padding-bottom:10px;border-bottom:3px solid var(--encre);
-}
-.fiches{margin-top:42px}
-
-/* ─────────────────────────────────────────────── les faces de panneau
-   La forme dit le type avant que le titre soit lu. Le type se lit sur
-   l'href : FICHE- prescrit une méthode, DEFI- annonce un problème long. */
-.grille-f{gap:14px}
-.grille-f a{
-  position:relative;
-  background:var(--jaune);color:var(--sur-jaune);
-  border:3px solid var(--encre);
-  border-radius:var(--r);
-  box-shadow:none;
-  padding:16px 52px 16px 18px;
-  transition:transform .16s ease-out,background-color .16s ease-out;
-}
-.grille-f a .k{
-  font-family:"Archivo Narrow",Archivo,sans-serif;font-weight:700;
-  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--sur-jaune);opacity:.8;
-}
-.grille-f a .t{
-  font-family:Archivo,sans-serif;font-weight:700;font-size:17.5px;
-  line-height:1.2;color:var(--sur-jaune);margin-top:4px;display:block;
-}
-.grille-f a .d{color:var(--sur-jaune);opacity:.82;font-size:14.5px;line-height:1.42}
-.grille-f a:hover{transform:translateY(-2px);background:var(--jaune-sombre)}
-.grille-f a:active{transform:translateY(1px)}
-
-/* le glyphe de panneau, en haut à droite de chaque face */
-.grille-f a::after{content:"";position:absolute;top:14px;right:14px}
-
-/* prescription — le disque cerclé de rouge */
-.grille-f a[href*="FICHE-"]::after{
-  width:26px;height:26px;border-radius:50%;
-  background:#fff;border:4px solid var(--chaud);
-}
-/* danger — le triangle */
-.grille-f a[href*="DEFI-"]::after{
-  width:0;height:0;border-left:15px solid transparent;
-  border-right:15px solid transparent;border-bottom:26px solid var(--chaud);
-}
-.grille-f a[href*="DEFI-"]{background:var(--carte);border-width:4px}
-.grille-f a[href*="DEFI-"]:hover{background:var(--carte2)}
-.grille-f a[href*="DEFI-"] .k,
-.grille-f a[href*="DEFI-"] .t,
-.grille-f a[href*="DEFI-"] .d{color:var(--encre)}
-
-/* un défi occupe deux colonnes : il n'a pas le même poids qu'une fiche,
-   et la grille de cartes identiques cesse d'être la structure de la page */
-@media (min-width:720px){
-  .grille-f a[href*="DEFI-"]{grid-column:1/-1}
-}
-
-:root[data-theme="dark"] .grille-f a{
-  background:var(--carte);border-color:var(--jaune);color:var(--encre);
-}
-:root[data-theme="dark"] .grille-f a .k,
-:root[data-theme="dark"] .grille-f a .t,
-:root[data-theme="dark"] .grille-f a .d{color:var(--encre)}
-:root[data-theme="dark"] .grille-f a:hover{background:var(--carte2)}
-:root[data-theme="dark"] .grille-f a[href*="FICHE-"]::after{background:var(--encre)}
-
-/* ─────────────────────────────────────────────── fin de prescription
-   « Marquer comme lu » n'est pas une case cochée : c'est la barre qui lève
-   la contrainte, comme le panneau B31 annule ce qui précédait. */
-.barre-site .lu{
-  border:2px solid var(--encre);color:var(--encre);
-  background:var(--carte);border-radius:99px;padding:7px 16px;
-  min-height:38px;
-}
-.barre-site .lu:hover{border-color:var(--encre);background:var(--carte2);color:var(--encre)}
-.barre-site .lu[aria-pressed="true"]{
-  position:relative;background:var(--carte);color:var(--encre2);
-  border-color:var(--encre);
-}
-.barre-site .lu[aria-pressed="true"]::before{content:none}
-.barre-site .lu[aria-pressed="true"]::after{
-  content:"";position:absolute;left:8%;right:8%;top:50%;height:2px;
-  background:var(--encre);transform:rotate(-14deg);
-}
-.barre-site .accueil{border-bottom-width:3px;border-bottom-color:var(--encre)}
-
-/* la même marque sur la frise */
-.frise li.lu .n::after{content:none}
-
-/* ─────────────────────────────────────────────── surfaces du navigateur
-   Ce qu'on ne dessine pas porte quand même le design. */
-::selection{background:var(--jaune);color:var(--sur-jaune)}
-:root[data-theme="dark"] ::selection{background:var(--jaune);color:#14140f}
-input,textarea{caret-color:var(--chaud)}
-:where(a,button,input,select,textarea,[tabindex]):focus-visible{
-  outline:3px solid var(--chaud);outline-offset:2px;border-radius:var(--r);
-}
-a{text-underline-offset:3px;text-decoration-thickness:2px}
-html{scrollbar-color:var(--encre) var(--fond);scrollbar-width:thin}
-table,.champ .v,.res,.compteur,.espace>.compte{font-variant-numeric:tabular-nums}
-
-/* ─────────────────────────────────────────────── mouvement
-   Un seul moment : la pression du panneau. Rien ne défile en continu,
-   rien ne suit le curseur — la tablette est partagée et souvent lente. */
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
-  .grille-f a:hover{transform:none}
-}
-
-/* ─────────────────────────────────────────────── correctifs de la 1re passe
-   Relevés à l'inspection du 8 septembre 2026, corrigés en un seul lot. */
-
-/* 1. Le petit texte du panneau était lisible (5,4:1) mais trop léger sur un
-   aplat saturé : il se lit par le poids, pas seulement par le contraste. */
-header.tete .contenu,
-header.tete .contenu *,
-header.tete .k-savoirs{
-  color:var(--sur-jaune);font-weight:600;opacity:1;
-}
-header.tete .k-savoirs{font-weight:700;letter-spacing:.16em}
-header.tete .savoirs .tag{
-  color:var(--sur-jaune);font-weight:600;
-  background:transparent;border:1.5px solid var(--sur-jaune);
-}
-:root[data-theme="dark"] header.tete .contenu,
-:root[data-theme="dark"] header.tete .contenu *,
-:root[data-theme="dark"] header.tete .k-savoirs,
-:root[data-theme="dark"] header.tete .savoirs .tag{color:var(--encre)}
-:root[data-theme="dark"] header.tete .savoirs .tag{border-color:var(--encre2)}
-
-/* 2. Le chevron du panneau de direction passait sous le titre. */
-nav.portes .porte{padding-right:60px}
-
-/* 3. Quatre colonnes à 1440 hachaient les titres en trois lignes. */
-.grille-f{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
-
-/* 4. Tablette et téléphone : la chaussée s'affine, et le champ de recherche
-   garde 16px — en dessous, iOS zoome à la mise au point. */
-@media (max-width:520px){
-  .page{background-size:2px 100%}
-  .chercher input{font-size:16px}
-}
-
-/* 5. La lecture de nuit n'était atteignable par personne : rien dans le site
-   ne pose jamais data-theme. On la branche sur la préférence de l'appareil,
-   sans empêcher un choix explicite de la reprendre. */
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --fond:#0e0e0c;--carte:#17170f;--carte2:#1f1f17;--encre:#f1eee3;--encre2:#ada894;
-    --trait:#3a3930;--trait2:#2a2a22;--froid:#6fa8e6;--tiede:#e8b84a;--chaud:#f2795c;
-    --vert:#5fc98a;--violet:#b49ae8;
-    --jaune:#f5c21b;--jaune-sombre:#f5c21b;--sur-jaune:#14140f;
-    --ombre:0 1px 0 rgba(0,0,0,.6),0 8px 20px rgba(0,0,0,.5);
-  }
-  :root:not([data-theme="light"]) header.tete{background:var(--carte);border-color:var(--jaune)}
-  :root:not([data-theme="light"]) header.tete h1,
-  :root:not([data-theme="light"]) header.tete h1 span,
-  :root:not([data-theme="light"]) header.tete .accroche,
-  :root:not([data-theme="light"]) header.tete .accroche strong,
-  :root:not([data-theme="light"]) header.tete .contenu,
-  :root:not([data-theme="light"]) header.tete .contenu *,
-  :root:not([data-theme="light"]) header.tete .k-savoirs,
-  :root:not([data-theme="light"]) header.tete .savoirs .tag{color:var(--encre)}
-  :root:not([data-theme="light"]) header.tete .sur{color:var(--jaune);opacity:1}
-  :root:not([data-theme="light"]) header.tete .savoirs .tag{border-color:var(--encre2)}
-  :root:not([data-theme="light"]) .grille-f a{
-    background:var(--carte);border-color:var(--jaune);color:var(--encre);
-  }
-  :root:not([data-theme="light"]) .grille-f a .k,
-  :root:not([data-theme="light"]) .grille-f a .t,
-  :root:not([data-theme="light"]) .grille-f a .d{color:var(--encre)}
-  :root:not([data-theme="light"]) .grille-f a:hover{background:var(--carte2)}
-  :root:not([data-theme="light"]) .grille-f a[href*="FICHE-"]::after{background:var(--encre)}
-  :root:not([data-theme="light"]) nav.portes .porte{background:var(--carte);border-color:var(--froid)}
-  :root:not([data-theme="light"]) nav.portes .porte .n,
-  :root:not([data-theme="light"]) nav.portes .porte .t,
-  :root:not([data-theme="light"]) nav.portes .porte .d{color:var(--encre)}
-  :root:not([data-theme="light"]) nav.portes .porte .ico{stroke:var(--froid)}
-  :root:not([data-theme="light"]) nav.portes .porte::after{border-color:var(--froid)}
-  :root:not([data-theme="light"]) ::selection{background:var(--jaune);color:#14140f}
-}
-
-/* ─────────────────────────────────────────────── second lot : détecteur
-   Relevé par `impeccable detect` le 8 septembre 2026. */
-
-/* 6. La bande de famille en lecture de nuit : « --encre » devient clair et le
-   jaune posé dessus tombait à 1,4:1 sur les sept familles. On inverse — la
-   bande rétroréfléchit, ce qui est de toute façon le geste du monde. */
-:root[data-theme="dark"] .chapeau-f{background:var(--jaune);color:#14140f}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) .chapeau-f{background:var(--jaune);color:#14140f}
-}
-
-/* 7. Les capitales sur 46 caractères coûtent cher à un lecteur fragile.
-   Le caractère étroit et l'interlettrage suffisent à tenir le rôle. */
-.chapeau-f{text-transform:none;letter-spacing:.06em;font-size:13px}
-
-/* 8. Le liseré de 3px en haut du panneau de direction : le panneau a déjà
-   sa bordure sur les quatre côtés. */
-nav.portes .porte::before{display:none}
-
-/* ═══════════════════════════════════════════════════════════════════════
-   PASSE QUIETER — 8 septembre 2026, sur retour utilisateur : « trop flashy ».
-   Le monde ne change pas. Ce qui change, c'est la SURFACE que la couleur
-   occupe : sur une route on ne voit jamais vingt-neuf panneaux à la fois.
-   Le jaune redevient une marque au lieu d'être un fond.
-   ═══════════════════════════════════════════════════════════════════════ */
-
-/* 1. Le jaune, patiné. Une tôle en service n'a pas la teinte du nuancier. */
-:root{ --jaune:#e9bc3b; --jaune-sombre:#d9a92c; }
-:root[data-theme="dark"]{ --jaune:#e9bc3b; --jaune-sombre:#e9bc3b; }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){ --jaune:#e9bc3b; --jaune-sombre:#e9bc3b; }
-}
-
-/* 2. Une seule couleur pleine par page. Le panneau de direction était le
-   second aplat saturé du premier écran : il redevient un panneau bordé,
-   posé sur la chaussée. Le bleu vit dans le filet et la flèche. */
-nav.portes .porte,
-:root[data-theme="dark"] nav.portes .porte{
-  background:transparent;border:2px solid var(--froid);
-}
-nav.portes .porte .n{color:var(--froid);opacity:1}
-nav.portes .porte .t,
-nav.portes .porte .d,
-:root[data-theme="dark"] nav.portes .porte .t,
-:root[data-theme="dark"] nav.portes .porte .d{color:var(--encre)}
-nav.portes .porte .d{opacity:.85}
-nav.portes .porte .ico{stroke:var(--froid)}
-nav.portes .porte::after{border-color:var(--froid)}
-nav.portes .porte:hover{background:var(--carte)}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) nav.portes .porte{background:transparent}
-  :root:not([data-theme="light"]) nav.portes .porte .t,
-  :root:not([data-theme="light"]) nav.portes .porte .d{color:var(--encre)}
-}
-
-/* 3. Les vingt-neuf fiches cessent d'être des aplats. Elles prennent le ton
-   de la chaussée et ne gardent du panneau que son bandeau haut et son
-   glyphe : la couleur marque au lieu d'inonder. */
-.grille-f a[href*="FICHE-"]{
-  background:var(--carte);
-  border:2px solid var(--encre);
-  padding-top:22px;
-}
-.grille-f a[href*="FICHE-"]::before{
-  content:"";position:absolute;top:0;left:0;right:0;height:7px;
-  background:var(--jaune);
-}
-.grille-f a[href*="FICHE-"] .k,
-.grille-f a[href*="FICHE-"] .t,
-.grille-f a[href*="FICHE-"] .d{color:var(--encre)}
-.grille-f a[href*="FICHE-"] .d{opacity:.78}
-.grille-f a[href*="FICHE-"]:hover{background:var(--carte2)}
-.grille-f a[href*="FICHE-"]::after{
-  top:18px;width:22px;height:22px;border-width:3px;
-}
-
-/* 4. Le défi garde l'aplat : c'est lui, l'annonce de danger, et il est rare.
-   Six faces jaunes au lieu de vingt-neuf, chacune sur deux colonnes. */
-.grille-f a[href*="DEFI-"],
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"]{
-  background:var(--jaune);border:3px solid var(--encre);
-}
-.grille-f a[href*="DEFI-"] .k,
-.grille-f a[href*="DEFI-"] .t,
-.grille-f a[href*="DEFI-"] .d,
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"] .k,
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"] .t,
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"] .d{color:var(--sur-jaune)}
-.grille-f a[href*="DEFI-"] .d{opacity:.82}
-.grille-f a[href*="DEFI-"]:hover{background:var(--jaune-sombre)}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) .grille-f a[href*="FICHE-"]{background:var(--carte)}
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"]{background:var(--jaune)}
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"] .k,
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"] .t,
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"] .d{color:var(--sur-jaune)}
-}
-
-/* 5. La chaussée s'efface : elle cale la page, elle ne la barre pas. */
-.page{
-  background-image:repeating-linear-gradient(
-    to bottom, var(--trait) 0 18px, transparent 18px 34px);
-  background-size:2px 100%;
-}
-
-/* 6. La bande de famille reste noire — le noir n'est pas ce qui criait —
-   mais elle cesse d'être un bloc : moins de chair, plus de mesure. */
-.chapeau-f{font-size:12px;padding:4px 9px;letter-spacing:.05em}
-
-/* 7. Moins de gras en concurrence. Un seul ancrage : le titre du panneau. */
-.grille-f a .t{font-weight:600;font-size:17px}
-nav.portes .porte .t{font-weight:700;font-size:20px}
-
-/* 8. Le mouvement : plus de soulèvement sur vingt-neuf éléments.
-   Le retour se fait sur le filet, pas sur la position. */
-.grille-f a{transition:background-color .18s cubic-bezier(.16,1,.3,1),
-                       border-color .18s cubic-bezier(.16,1,.3,1)}
-.grille-f a:hover{transform:none;border-color:var(--froid)}
-.grille-f a:active{transform:none}
-
-/* 9. Jamais de gris sur une couleur : sur le panneau jaune, le secondaire
-   est de l'encre transparente, pas un gris rapporte. */
-header.tete .accroche{opacity:.88}
-
-/* ═══════════════════════════════════════════════════════════════════════
-   REVUE DE FINITION — correctifs, 8 septembre 2026.
-   ═══════════════════════════════════════════════════════════════════════ */
-
-/* 7 bis. Une seule marque pour l'etat « lu », et elle est dessinee : le trait
-   barre, deja pose sur le bouton. Le « a venir » se marque par un contour
-   tirete, pas par un rond typographique. */
-.frise li.lu .n{position:relative}
-.frise li.lu .n::before{
-  content:"";position:absolute;left:-2px;right:-2px;top:50%;height:2px;
-  background:var(--encre);transform:rotate(-12deg);
-}
-.frise .vide.a-venir a,.frise .vide.a-venir{border-style:dashed}
-
-/* 5. La lecture de nuit ne doit pas inverser le monde : un panneau
-   retroreflechit, il ne s'eteint pas. La chaussee fonce, les faces gardent
-   leur bandeau et le defi garde son aplat. */
-:root[data-theme="dark"] header.tete,
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"]{
-  background:var(--jaune);border-color:var(--encre);
-}
-:root[data-theme="dark"] header.tete h1,
-:root[data-theme="dark"] header.tete h1 span,
-:root[data-theme="dark"] header.tete .accroche,
-:root[data-theme="dark"] header.tete .accroche strong,
-:root[data-theme="dark"] header.tete .contenu,
-:root[data-theme="dark"] header.tete .contenu *,
-:root[data-theme="dark"] header.tete .k-savoirs,
-:root[data-theme="dark"] header.tete .sur{color:var(--sur-jaune)}
-:root[data-theme="dark"] header.tete .savoirs .tag{
-  color:var(--sur-jaune);border-color:var(--sur-jaune);
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) header.tete,
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"]{
-    background:var(--jaune);border-color:var(--encre);
-  }
-  :root:not([data-theme="light"]) header.tete h1,
-  :root:not([data-theme="light"]) header.tete h1 span,
-  :root:not([data-theme="light"]) header.tete .accroche,
-  :root:not([data-theme="light"]) header.tete .accroche strong,
-  :root:not([data-theme="light"]) header.tete .contenu,
-  :root:not([data-theme="light"]) header.tete .contenu *,
-  :root:not([data-theme="light"]) header.tete .k-savoirs,
-  :root:not([data-theme="light"]) header.tete .sur{color:var(--sur-jaune)}
-  :root:not([data-theme="light"]) header.tete .savoirs .tag{
-    color:var(--sur-jaune);border-color:var(--sur-jaune);
-  }
-}
-
-/* 8. Les cinq filets lateraux colores restes dans kit.css. La feuille est
-   dans le perimetre de cette passe : « preexistant » ne l'en sort pas. */
-.formule,.cle,.piege,.exo,.exo .indice{border-left-width:1px}
-
-/* 6. Le type survit au clic. `site.py` pose deja la cle de la page sur le
-   conteneur : `data-page="conso/DEFI-03-..."`. La page d'un defi porte donc
-   l'aplat de danger, celle d'une fiche le bandeau de prescription — la meme
-   distinction que sur l'accueil, sans toucher au generateur. */
-.page[data-page*="/DEFI-"] header.tete{background:var(--jaune)}
-.page[data-page*="/FICHE-"] header.tete{
-  background:var(--carte);border-top:9px solid var(--jaune);
-}
-.page[data-page*="/FICHE-"] header.tete h1,
-.page[data-page*="/FICHE-"] header.tete h1 span,
-.page[data-page*="/FICHE-"] header.tete .accroche,
-.page[data-page*="/FICHE-"] header.tete .accroche strong,
-.page[data-page*="/FICHE-"] header.tete .contenu,
-.page[data-page*="/FICHE-"] header.tete .contenu *,
-.page[data-page*="/FICHE-"] header.tete .k-savoirs,
-.page[data-page*="/FICHE-"] header.tete .sur{color:var(--encre)}
-.page[data-page*="/FICHE-"] header.tete .savoirs .tag{
-  color:var(--encre);border-color:var(--encre2);
-}
-
-/* ═══════════════════════════════════════════════════════════════════════
-   LA SILHOUETTE DU DÉFI — la thèse tenait dans le CSS et restait inerte à
-   l'écran : un disque et un triangle ne se croisent jamais, chaque famille
-   ayant sa propre grille. La différence doit donc tenir VUE SEULE.
-   Le glyphe en coin ne suffisait pas ; le biseau de balisage, si — c'est la
-   façon dont ce monde dit « ceci n'est pas un passage ordinaire ».
-   ═══════════════════════════════════════════════════════════════════════ */
-
-.grille-f a[href*="DEFI-"]{
-  padding-left:88px;
-  border-width:4px;
-  min-height:106px;
-  display:flex;flex-direction:column;justify-content:center;
-}
-
-/* la bande hachurée, calée à gauche sur toute la hauteur du champ */
-.grille-f a[href*="DEFI-"]::before{
-  content:"";position:absolute;left:0;top:0;bottom:0;width:24px;
-  background:repeating-linear-gradient(
-    45deg, var(--encre) 0 9px, transparent 9px 18px);
-  border-right:2px solid var(--encre);
-}
-
-/* le triangle mène la face au lieu de l'annoter : il double de taille, passe
-   à gauche du titre et se pose sur l'aplat, jamais sur les hachures */
-.grille-f a[href*="DEFI-"]::after{
-  top:50%;left:40px;right:auto;
-  margin-top:-14px;
-  width:0;height:0;border-radius:0;background:none;
-  border-left:16px solid transparent;
-  border-right:16px solid transparent;
-  border-bottom:28px solid var(--chaud);
-}
-.grille-f a[href*="DEFI-"] .t{font-weight:700;font-size:19px}
-
-@media (max-width:520px){
-  .grille-f a[href*="DEFI-"]{padding-left:70px}
-  .grille-f a[href*="DEFI-"]::before{width:18px}
-  .grille-f a[href*="DEFI-"]::after{left:30px;
-    border-left-width:14px;border-right-width:14px;border-bottom-width:24px}
-}
-
-/* ─────────────────────────────────────────────── l'eyebrow des pages internes
-   Sur une fiche, « CAP · consolidation maths » répète mot pour mot le lien
-   d'accueil situé juste au-dessus. Un sur-titre qui n'apprend rien est un
-   eyebrow, et le plancher de qualité l'interdit sans appel. Sur l'accueil il
-   porte l'année, qui ne se lit nulle part ailleurs : il reste. */
-.page[data-page] header.tete .sur{display:none}
-
-/* ═══════════════════════════════════════════════════════════════════════
-   DERNIER LOT — relevé sur le rendu complet de la page, enfin capturé.
-   ═══════════════════════════════════════════════════════════════════════ */
-
-/* 1. La famille d'une seule fiche — « F — Rédiger » — s'étalait sur toute la
-   largeur : `auto-fit` fait fondre les pistes vides dans l'unique carte, si
-   bien que la fiche 29 avait le format d'un défi. `auto-fill` garde les
-   pistes, et un panneau seul reste un panneau. C'est le cas hostile annoncé
-   dans le brief ; il fallait le voir en rendu pour le voir tout court. */
-.grille-f{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
-
-/* 2. Six défis pleine largeur en aplat, c'était le mur de jaune qui revenait
-   par le bas. Une seule couleur pleine par page, et c'est le panneau
-   d'en-tête. Le défi garde donc sa silhouette — hachures, grand triangle,
-   filet lourd, pleine largeur — mais rend son fond à la chaussée : c'est le
-   balisage qui signale, pas le champ. */
-.grille-f a[href*="DEFI-"],
-.grille-f a[href*="DEFI-"]:hover,
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"]{
-  background:var(--carte);
-}
-.grille-f a[href*="DEFI-"]:hover{background:var(--carte2)}
-.grille-f a[href*="DEFI-"] .k,
-.grille-f a[href*="DEFI-"] .t,
-.grille-f a[href*="DEFI-"] .d,
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"] .k,
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"] .t,
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"] .d{color:var(--encre)}
-
-/* les hachures se lisent sur un fond jaune : la bande reste le seul endroit
-   où la couleur survit, et elle devient la marque du défi */
-.grille-f a[href*="DEFI-"]::before{
-  background:
-    repeating-linear-gradient(45deg, var(--encre) 0 9px, transparent 9px 18px),
-    var(--jaune);
-  width:30px;
-}
-@media (max-width:520px){
-  .grille-f a[href*="DEFI-"]::before{width:22px}
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"]{background:var(--carte)}
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"] .k,
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"] .t,
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"] .d{color:var(--encre)}
-}
-
-/* ════════════════════════════════════════════════════════════════════════
-   TRANCHE : LE JAUNE EST UNE PLAQUE, PAS UN FOND.
-   8 septembre 2026. Deux essais ont montre les deux bouts : en fond il fait
-   un mur, en filet de 7 px il disparait. La reponse n'etait ni l'aire ni la
-   teinte, c'etait la FORME. Le jaune devient une plaque de reference — le
-   panonceau accroche sous un panneau — assez dense pour se voir, assez
-   petite pour ne pas paver la page.
-
-   Deux exceptions, et elles sont de vrais panneaux : l'en-tete et les six
-   defis. Sur 39 pages, le jaune passe d'environ 70 % de l'accueil a 12 %.
-   ════════════════════════════════════════════════════════════════════════ */
-
-.grille-f a[href*="FICHE-"],
-.grille-f a[href*="FICHE-"]:hover,
-:root[data-theme="dark"] .grille-f a[href*="FICHE-"]{
-  background:var(--carte);border:2px solid var(--encre);padding-top:18px;
-}
-.grille-f a[href*="FICHE-"]:hover{background:var(--carte2)}
-.grille-f a[href*="FICHE-"] .t,
-.grille-f a[href*="FICHE-"] .d,
-:root[data-theme="dark"] .grille-f a[href*="FICHE-"] .t,
-:root[data-theme="dark"] .grille-f a[href*="FICHE-"] .d{color:var(--encre)}
-.grille-f a[href*="FICHE-"] .d{opacity:.78}
-.grille-f a[href*="FICHE-"]::before{content:none}
-
-/* la plaque de reference : le numero de fiche cesse d'etre une etiquette
-   grise et devient l'objet jaune de la face */
-.grille-f a[href*="FICHE-"] .k,
-:root[data-theme="dark"] .grille-f a[href*="FICHE-"] .k{
-  display:inline-block;
-  background:var(--jaune);color:var(--sur-jaune);
-  border:2px solid var(--encre);
-  padding:3px 9px 2px;margin:0 0 9px;
-  opacity:1;letter-spacing:.12em;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) .grille-f a[href*="FICHE-"]{background:var(--carte)}
-  :root:not([data-theme="light"]) .grille-f a[href*="FICHE-"] .t,
-  :root:not([data-theme="light"]) .grille-f a[href*="FICHE-"] .d{color:var(--encre)}
-  :root:not([data-theme="light"]) .grille-f a[href*="FICHE-"] .k{
-    background:var(--jaune);color:var(--sur-jaune);
-  }
-}
-
-/* le disque remonte au niveau de la plaque : les deux marques se lisent
-   ensemble, sur une seule ligne, au lieu de flotter chacune de son cote */
-.grille-f a[href*="FICHE-"]::after{top:19px;background:#fff;border-color:var(--chaud)}
-
-/* Les defis gardent l'aplat : six panneaux sur trente-cinq, c'est une
-   exception qui se voit — c'est meme tout ce qu'on leur demande. */
-.grille-f a[href*="DEFI-"],
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"]{
-  background:var(--jaune);border:4px solid var(--encre);
-}
-.grille-f a[href*="DEFI-"]:hover{background:var(--jaune-sombre)}
-.grille-f a[href*="DEFI-"] .k,
-.grille-f a[href*="DEFI-"] .t,
-.grille-f a[href*="DEFI-"] .d,
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"] .k,
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"] .t,
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"] .d{
-  color:var(--sur-jaune);background:transparent;border:0;padding:0;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"]{background:var(--jaune)}
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"] .k,
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"] .t,
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"] .d{color:var(--sur-jaune)}
-}
-
-/* ════════════════════════════════════════════════════════════════════════
-   LE DÉFI : LA PLAQUE ROUGE. Tranché le 8 septembre 2026.
-   Aucune forme dessinée. C'est la plaque qui change de registre — rouge
-   d'interdiction au lieu du jaune de chantier — et le rouge est déjà le
-   jeton de danger de ce monde : c'est lui qui cercle les vingt-neuf disques.
-   Reste la pleine largeur, qui n'est pas un effet mais la structure.
-   ════════════════════════════════════════════════════════════════════════ */
-
-.grille-f a[href*="DEFI-"],
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"]{
-  background:var(--carte);
-  border:3px solid var(--encre);
-  padding:18px 52px 18px 18px;
-  min-height:0;display:block;
-}
-.grille-f a[href*="DEFI-"]:hover{background:var(--carte2)}
-.grille-f a[href*="DEFI-"]::before,
-.grille-f a[href*="DEFI-"]::after{content:none}
-.grille-f a[href*="DEFI-"] .t,
-.grille-f a[href*="DEFI-"] .d,
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"] .t,
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"] .d{color:var(--encre)}
-.grille-f a[href*="DEFI-"] .t{font-weight:700;font-size:18px}
-.grille-f a[href*="DEFI-"] .d{opacity:.78}
-
-.grille-f a[href*="DEFI-"] .k{
-  display:inline-block;
-  background:var(--chaud);color:#fff;
-  border:2px solid var(--encre);
-  padding:3px 9px 2px;margin:0 0 9px;
-  letter-spacing:.12em;opacity:1;
-}
-/* de nuit, le rouge s'eclaircit : l'encre repasse devant le blanc */
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"] .k{
-  background:var(--chaud);color:var(--sur-jaune);
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"]{background:var(--carte)}
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"] .t,
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"] .d{color:var(--encre)}
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"] .k{
-    background:var(--chaud);color:var(--sur-jaune);
-  }
-}
-
-/* ════════════════════════════════════════════════════════════════════════
-   VERDICT DE VÉRIFICATION — correctifs, 8 septembre 2026.
-   ════════════════════════════════════════════════════════════════════════ */
-
-/* Gouttiere morte : les 52 px de droite reservaient la place du glyphe de
-   coin, qui n'existe plus depuis que le defi n'a plus aucune forme dessinee.
-   Chaque face pleine largeur perdait 34 px de mesure pour rien. */
-.grille-f a[href*="DEFI-"]{padding:18px 20px}
-
-/* De nuit, la plaque du defi perdait son filet et ses marges : la regle
-   sombre posait border:0;padding:0 et le lot suivant ne rendait que le fond
-   et l'encre. Latent aujourd'hui, mais `fed-prof` est deja promis a la
-   lecture de nuit permanente. */
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"] .k{
-  border:2px solid var(--encre);padding:3px 9px 2px;margin:0 0 9px;
-}
-
-/* Et le rouge de nuit n'etait plus rouge : --chaud vaut alors #f2795c, un
-   saumon. Or depuis que le defi n'a plus de forme, la couleur de sa plaque
-   est sa SEULE marque : elle ne peut pas quitter la famille du rouge. */
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"] .k{
-  background:#c81e3a;color:#fff;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"] .k{
-    background:#c81e3a;color:#fff;
-    border:2px solid var(--encre);padding:3px 9px 2px;margin:0 0 9px;
-  }
-}
-
-/* ════════════════════════════════════════════════════════════════════════
-   LE DÉFI RETROUVE UNE SILHOUETTE — le double filet.
-   Tranché le 8 septembre 2026 après le verdict : la plaque rouge seule ne
-   distinguait rien, le rouge étant déjà ambiant (les 29 fiches portent un
-   disque cerclé de rouge).
-
-   La réponse est un filet intérieur, pas un pictogramme : une face de
-   panneau réglementaire porte une seconde ligne en retrait de son bord.
-   Aucune couleur ajoutée, aucune forme dessinée, et ça se voit à bout de
-   bras — c'est une différence de CADRE, qui tient même vue seule.
-   ════════════════════════════════════════════════════════════════════════ */
-
-.grille-f a[href*="DEFI-"]{
-  padding:22px 24px;
-  box-shadow:inset 0 0 0 5px var(--carte),inset 0 0 0 7px var(--encre);
-}
-.grille-f a[href*="DEFI-"]:hover{
-  background:var(--carte2);
-  box-shadow:inset 0 0 0 5px var(--carte2),inset 0 0 0 7px var(--encre);
-}
-:root[data-theme="dark"] .grille-f a[href*="DEFI-"]{
-  box-shadow:inset 0 0 0 5px var(--carte),inset 0 0 0 7px var(--jaune);
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) .grille-f a[href*="DEFI-"]{
-    box-shadow:inset 0 0 0 5px var(--carte),inset 0 0 0 7px var(--jaune);
-  }
-}
-@media (max-width:520px){
-  .grille-f a[href*="DEFI-"]{padding:18px 20px;
-    box-shadow:inset 0 0 0 4px var(--carte),inset 0 0 0 6px var(--encre)}
-}
