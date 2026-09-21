@@ -1,4 +1,4 @@
-# Mathématiques et physique-chimie en CAP — Consolidation
+# Mathématiques et physique-chimie en CAP
 
 Site **produit automatiquement**. Ne rien modifier ici :
 toute modification est effacee a la prochaine publication.
