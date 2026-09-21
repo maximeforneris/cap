@@ -284,6 +284,14 @@ header.tete .accroche strong{color:var(--sur-jaune);font-weight:700}
 /* ─────────────────────────────────────────────── le panneau de direction
    La porte des exercices est une indication, pas une carte : fond bleu,
    encre claire, une flèche. */
+/* Quatre portes sur ce site : deux par deux. Le kit les range en auto-fit,
+   ce qui donne trois cartes puis une orpheline sur un écran large. */
+@supports selector(:has(*)){
+  nav.portes:has(> a:nth-child(4):last-child){grid-template-columns:repeat(2,minmax(0,1fr))}
+  @media (max-width:760px){
+    nav.portes:has(> a:nth-child(4):last-child){grid-template-columns:1fr}
+  }
+}
 nav.portes .porte{
   background:var(--froid);border:3px solid var(--encre);border-radius:var(--r);
   box-shadow:none;color:#fff;padding:18px 20px;
