@@ -485,6 +485,7 @@ function tDeH(h,r){return (h-2.501*r)/(1.006+0.00183*r);}          /* adiabatiqu
 });
 
 
+
 /* ═══════════════════════════════════════════════════ SCHEMAS
    Dessines ici, pas repris du polycopie : vectoriels, ils suivent le theme
    sombre, et « paroi-coupe » se redessine avec le composeur de paroi. */
@@ -10731,6 +10732,101 @@ SCHEMAS["led-et-sa-resistance"]=function(el){
     "une limite, on arrondit du côté qui protège</b> — ici vers le haut."));
 };
 
+
+/* ─────────── CAP · la puissance ne suffit pas ─────────── */
+SCHEMAS["energie-kwh"]=function(el){
+  var W=724,H=344,X0=200,X1=608,MAX=5000,k=(X1-X0)/MAX;
+  var svg=S("svg",{viewBox:"0 0 "+W+" "+H,role:"img",
+    "aria-label":"Energie consommee par jour : le seche-cheveux, pourtant puissant, consomme moins que la console"});
+  svg.appendChild(S("text",{x:20,y:26,"class":"s-tit"},
+    "CE QUE CHAQUE APPAREIL CONSOMME EN UNE JOURNÉE"));
+  var D=[{t:"radiateur",     p:"1 000 W",d:"5 h",    wh:5000},
+         {t:"console",       p:"200 W",  d:"3 h",    wh:600},
+         {t:"sèche-cheveux", p:"1 800 W",d:"10 min", wh:300},
+         {t:"lampe",         p:"9 W",    d:"4 h",    wh:36}];
+  D.forEach(function(L,i){
+    var y=62+i*56, fort=(L.t==="sèche-cheveux");
+    svg.appendChild(S("text",{x:X0-14,y:y+20,"text-anchor":"end","class":"s-lab",
+      fill:fort?V("chaud"):V("encre")},L.t));
+    svg.appendChild(S("text",{x:X0-14,y:y+36,"text-anchor":"end","class":"s-pet"},
+      L.p+" × "+L.d));
+    svg.appendChild(S("rect",{x:X0,y:y,width:Math.max(L.wh*k,3),height:30,rx:"4",
+      fill:V(fort?"chaud":"froid"),opacity:fort?".7":".45",
+      stroke:V(fort?"chaud":"froid"),"stroke-width":"1.5"}));
+    svg.appendChild(S("text",{x:W-16,y:y+21,"text-anchor":"end","class":"s-lab",
+      fill:fort?V("chaud"):V("encre2")},L.wh+" Wh"));
+  });
+  svg.appendChild(S("text",{x:20,y:H-34,"class":"s-nom",fill:V("chaud")},
+    "Le sèche-cheveux est deux cents fois plus puissant que la lampe"));
+  svg.appendChild(S("text",{x:20,y:H-14,"class":"s-nom",fill:V("chaud")},
+    "— et il consomme deux fois moins que la console."));
+  el.appendChild(svg);
+  (el.parentNode||el).appendChild(E("p",{"class":"leg-schema"},
+    "<b>Ce qui coûte, c'est la puissance MULTIPLIÉE par la durée.</b> Un appareil très "+
+    "puissant allumé dix minutes pèse moins qu'un petit appareil laissé branché toute "+
+    "la journée. <b>La plaque ne dit que la moitié de l'histoire</b> ; l'autre moitié "+
+    "est au poignet de celui qui l'allume."));
+};
+
+/* ─────────── CAP · deux offres qui se croisent ─────────── */
+SCHEMAS["offres-qui-se-croisent"]=function(el){
+  var W=724,H=356,X0=92,X1=580,Y0=266,Y1=58,KM=420,EM=130;
+  function fx(k){return X0+k/KM*(X1-X0);}
+  function fy(e){return Y0-e/EM*(Y0-Y1);}
+  var svg=S("svg",{viewBox:"0 0 "+W+" "+H,role:"img",
+    "aria-label":"Deux offres d'electricite : elles se croisent a 150 kilowattheures"});
+  svg.appendChild(S("text",{x:20,y:26,"class":"s-tit"},
+    "DEUX OFFRES : CELLE QUI GAGNE CHANGE EN COURS DE ROUTE"));
+  [0,50,100].forEach(function(e){
+    svg.appendChild(S("line",{x1:X0,y1:fy(e),x2:X1,y2:fy(e),stroke:V("trait2"),
+      "stroke-width":"1",opacity:".55"}));
+    svg.appendChild(S("text",{x:X0-10,y:fy(e)+4,"text-anchor":"end","class":"s-pet"},e+" €"));
+  });
+  [0,100,200,300,400].forEach(function(k){
+    svg.appendChild(S("text",{x:fx(k),y:Y0+20,"text-anchor":"middle","class":"s-pet"},k+""));
+  });
+  svg.appendChild(S("line",{x1:X0,y1:Y0,x2:X1,y2:Y0,stroke:V("encre"),"stroke-width":"2"}));
+  svg.appendChild(S("line",{x1:X0,y1:Y0,x2:X0,y2:Y1,stroke:V("encre"),"stroke-width":"2"}));
+  svg.appendChild(S("text",{x:(X0+X1)/2,y:Y0+62,"text-anchor":"middle","class":"s-nom"},
+    "consommation du mois (kWh)"));
+  /* A : 0,30 x    B : 12 + 0,22 x */
+  svg.appendChild(S("line",{x1:fx(0),y1:fy(0),x2:fx(420),y2:fy(126),stroke:V("froid"),
+    "stroke-width":"2.5"}));
+  svg.appendChild(S("line",{x1:fx(0),y1:fy(12),x2:fx(420),y2:fy(104.4),stroke:V("chaud"),
+    "stroke-width":"2.5"}));
+  svg.appendChild(S("circle",{cx:fx(0),cy:fy(0),r:"5",fill:V("froid")}));
+  svg.appendChild(S("circle",{cx:fx(0),cy:fy(12),r:"5",fill:V("chaud")}));
+  svg.appendChild(S("text",{x:fx(420)+8,y:fy(126)+4,"class":"s-lab",fill:V("froid")},"A"));
+  svg.appendChild(S("text",{x:fx(420)+8,y:fy(104.4)+4,"class":"s-lab",fill:V("chaud")},"B"));
+  svg.appendChild(S("text",{x:X0+12,y:fy(118),"class":"s-nom",fill:V("froid")},
+    "A : 0 € d'abonnement, 0,30 € le kWh"));
+  svg.appendChild(S("text",{x:X0+12,y:fy(108),"class":"s-nom",fill:V("chaud")},
+    "B : 12 € d'abonnement, 0,22 € le kWh"));
+  /* croisement a 150 kWh, 45 euros */
+  var XC=fx(150);
+  svg.appendChild(S("line",{x1:XC,y1:fy(45),x2:XC,y2:Y0,stroke:V("encre"),"stroke-width":"1.5",
+    "stroke-dasharray":"4 3"}));
+  svg.appendChild(S("circle",{cx:XC,cy:fy(45),r:"6",fill:"none",stroke:V("encre"),
+    "stroke-width":"2"}));
+  svg.appendChild(S("text",{x:XC+10,y:fy(45)-12,"class":"s-lab"},"150 kWh : 45 € des deux côtés"));
+  /* les trois logements */
+  [[80,"studio","froid"],[186,"coloc","chaud"],[400,"maison","chaud"]].forEach(function(p){
+    svg.appendChild(S("line",{x1:fx(p[0]),y1:Y0,x2:fx(p[0]),y2:Y0+7,stroke:V(p[2]),
+      "stroke-width":"2.5"}));
+    svg.appendChild(S("text",{x:fx(p[0]),y:Y0+34,"text-anchor":"middle","class":"s-pet",
+      fill:V(p[2])},p[1]));
+  });
+  svg.appendChild(S("text",{x:600,y:fy(74),"class":"s-nom"},"avant 150 :"));
+  svg.appendChild(S("text",{x:600,y:fy(74)+18,"class":"s-lab",fill:V("froid")},"A gagne"));
+  svg.appendChild(S("text",{x:600,y:fy(74)+44,"class":"s-nom"},"après 150 :"));
+  svg.appendChild(S("text",{x:600,y:fy(74)+62,"class":"s-lab",fill:V("chaud")},"B gagne"));
+  el.appendChild(svg);
+  (el.parentNode||el).appendChild(E("p",{"class":"leg-schema"},
+    "<b>Aucune des deux offres n'est « la moins chère ».</b> L'abonnement de B se paie "+
+    "même sans rien consommer, mais son kWh est moins cher : les deux droites se "+
+    "croisent à <b>150 kWh</b>. Le studio a raison de prendre A, la maison a raison de "+
+    "prendre B, et c'est le même tableau pour les deux."));
+};
 
 /* --------- dispersion d'une serie de releves ---------
    Ajoute le 3 septembre 2026, sequence 1 de maths-PC. C'est la statistique
