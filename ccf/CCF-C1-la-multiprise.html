@@ -1,0 +1,157 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta name="robots" content="noindex, nofollow">
+<title>CCF — séquence 1, la multiprise</title>
+<link rel="stylesheet" href="../assets/kit.css?v=bce44a4d">
+<link rel="stylesheet" href="../assets/site.css?v=bce44a4d">
+<link rel="stylesheet" href="../assets/signalisation.css?v=bce44a4d">
+<link rel="stylesheet" href="../assets/vivant.css?v=bce44a4d">
+<link rel="stylesheet" href="../assets/doc.css?v=bce44a4d">
+
+<div class="page" data-site="cap-conso" data-page="ccf/CCF-C1-la-multiprise">
+<div class="jauge-lecture" id="jauge-lecture"><i></i></div><div class="barre-site"><a class="accueil" href="../index.html">Mathématiques et physique-chimie en CAP</a><span class="fleches"><a class="fleche" href="CCF-A3-implantation.html" rel="prev" title="CCF — co-intervention 3, le local en L" aria-label="CCF — co-intervention 3, le local en L">&lsaquo;</a><a class="fleche" href="CCF-C2-la-guirlande.html" rel="next" title="CCF — séquence 2, la guirlande" aria-label="CCF — séquence 2, la guirlande">&rsaquo;</a></span><button type="button" class="lu" data-lu="ccf/CCF-C1-la-multiprise">Marquer comme lu</button></div>
+<header class="tete">
+  
+  <div class="titraille">
+    <p class="sur">CAP Électricien · 1re année</p>
+    <h1>Au format du CCF<span>la puissance et la limite</span></h1>
+  </div>
+  <p class="accroche">Un sujet entier, bâti comme celui de l'épreuve : une situation, une problématique, quatre parties cotées séparément, et des appels au professeur. Les nombres sont ceux de la séquence 1.</p>
+  <p class="contenu">2 exercices · 6 items d'entraînement</p>
+  <p class="k-savoirs">Savoirs travaillés</p><div class="savoirs"><span class="tag">CN Calculs numériques</span><span class="tag">AU Automatismes</span></div>
+</header>
+<aside class="prerequis"><p class="chapeau-p">Avant de commencer</p><ul><li><b><a href="../cointervention/J1.html">La puissance et la limite</a></b><span class="ou">Séance 1 · Le corps humain dans le circuit</span><span class="car">le sujet additionne des watts et les compare à ce que supporte un fil, sans le rappeler.</span></li><li><b><a href="../cointervention/J2.html">Ce qui se passe quand on dépasse</a></b><span class="ou">Séance 2 · Calculer le courant qui traverse</span><span class="car">la partie 4 demande de dire ce qui arriverait, dans l'ordre.</span></li></ul></aside>
+<nav class="somm"><div class="in"><a href="#ce-que-le-ccf-demande-et-comment-il-est-note">Ce que le CCF demande, et comment il est noté</a><a href="#partie-1-app-s-approprier">Partie 1 · APP — s’approprier</a><a href="#partie-2-ana-analyser">Partie 2 · ANA — analyser</a><a href="#partie-3-rea-realiser">Partie 3 · REA — réaliser</a><a href="#partie-4-val-valider">Partie 4 · VAL — valider</a><a href="#ce-qui-se-joue-vraiment">Ce qui se joue vraiment</a></div></nav>
+<h2 id="ce-que-le-ccf-demande-et-comment-il-est-note">Ce que le CCF demande, et comment il est noté</h2>
+<p><strong>Ce n’est pas un devoir sur table.</strong> Une seule situation, une <strong>problématique</strong>, et quatre parties qui se cotent <strong>séparément</strong> : rater l’une ne fait pas perdre les autres.</p>
+<div class="enveloppe-tbl"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>La partie</th>
+<th>Ce qu’on y fait</th>
+<th>Sur 10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>APP</strong> — s’approprier</td>
+<td>lire la situation, en extraire ce qui sert</td>
+<td><strong>2,5</strong></td>
+</tr>
+<tr>
+<td><strong>ANA</strong> — analyser</td>
+<td>proposer une méthode, un protocole</td>
+<td><strong>1,5</strong></td>
+</tr>
+<tr>
+<td><strong>REA</strong> — réaliser</td>
+<td>monter, mesurer, <strong>et calculer</strong></td>
+<td><strong>2</strong></td>
+</tr>
+<tr>
+<td><strong>VAL</strong> — valider</td>
+<td>interpréter, répondre à la problématique</td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td><strong>COM</strong> — communiquer</td>
+<td><strong>les appels au professeur</strong></td>
+<td><strong>3</strong></td>
+</tr>
+</tbody>
+</table></div>
+<div class="cle">
+<p><strong>Regardez la dernière ligne.</strong> La communication vaut <strong>trois points sur dix</strong> — plus que n’importe quelle partie écrite. Ces points ne se gagnent pas sur la copie : ils se gagnent en <strong>expliquant à voix haute</strong> ce qu’on fait.</p>
+</div>
+<div class="piege">
+<p><strong>Un bonus d’autonomie de +0,5 existe.</strong> Il va à celui qui ne fait pas confirmer chaque ligne. Demander de l’aide ne retire rien — mais ne rien demander rapporte un demi-point, et un demi-point sur dix, c’est une note de plus.</p>
+</div>
+<h1 id="le-sujet-la-rallonge-de-latelier">Le sujet — la rallonge de l’atelier</h1>
+<p><strong>Sur le chantier, une seule prise est disponible.</strong> L’équipe y branche une rallonge sur enrouleur, marquée <strong>10 A</strong>, sur un réseau à <strong>230 V</strong>.</p>
+<div class="enveloppe-tbl"><table>
+<thead>
+<tr>
+<th>L’appareil</th>
+<th>perceuse</th>
+<th>ponceuse</th>
+<th>chauffage d’appoint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Puissance</td>
+<td>900 W</td>
+<td>700 W</td>
+<td>2 000 W</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>Problématique</strong> : « <em>Peut-on brancher les trois sur la même rallonge ?</em> »</p>
+</blockquote>
+<h2 id="partie-1-app-s-approprier">Partie 1 · APP — s’approprier</h2>
+<p><strong>1)</strong> Relever la valeur marquée sur la rallonge, et dire ce qu’elle mesure.</p>
+<p><strong>2)</strong> Calculer la <strong>puissance maximale</strong> que la rallonge accepte, sous 230 V.</p>
+<p><strong>3)</strong> Citer un risque lié à une surintensité dans une rallonge enroulée.</p>
+<h2 id="partie-2-ana-analyser">Partie 2 · ANA — analyser</h2>
+<p><strong>4)</strong> Proposer une façon de vérifier, <strong>sans rien débrancher</strong>, que la rallonge n’est pas en surcharge.</p>
+<p><strong>5)</strong> Dire comment les trois appareils sont branchés les uns par rapport aux autres : en série ou en dérivation. Justifier.</p>
+<blockquote>
+<p><strong>APPEL 1</strong> — expliquer au professeur ce que vous allez mesurer, et pourquoi.</p>
+</blockquote>
+<h2 id="partie-3-rea-realiser">Partie 3 · REA — réaliser</h2>
+<p><strong>6)</strong> Calculer la puissance totale de la <strong>perceuse et de la ponceuse</strong> seules.</p>
+<p><strong>7)</strong> Calculer la puissance totale des <strong>trois</strong> appareils.</p>
+<p><strong>8)</strong> Pour chacun des deux cas, calculer l’<strong>intensité</strong> correspondante.</p>
+<blockquote>
+<p><strong>APPEL 2</strong> — montrer vos calculs au professeur avant de conclure.</p>
+</blockquote>
+<h2 id="partie-4-val-valider">Partie 4 · VAL — valider</h2>
+<p><strong>9)</strong> Dire lequel des deux cas dépasse la limite, et <strong>de combien de watts</strong>.</p>
+<p><strong>10)</strong> Répondre à la problématique par une phrase complète.</p>
+<section class="serie" id="CCF-C1-la-multiprise-s1" data-serie="CCF-C1-la-multiprise-s1" data-savoir="CN" data-a="IXgveGB4eHZ4LjU2eGBpdGp2eDN4YAEheCx4YGhpamp0aid2IXgseGBrbGpqdGondiF4LHhgaWxqanRqJ3YheCx4YGx0Y2wndiF4LHhga290bG8ndiF4LHhga2lqanRqJwcn"><p class="k">Série · CN</p><h4>Les calculs du sujet, un par un</h4><div class="enonce">
+
+</div><ol class="items larges"><li><span class="q">la puissance maximale de la rallonge, en watts</span></li><li><span class="q">la perceuse et la ponceuse ensemble, en watts</span></li><li><span class="q">les trois appareils ensemble, en watts</span></li><li><span class="q">l’intensité pour les deux premiers, en ampères</span></li><li><span class="q">l’intensité pour les trois, en ampères</span></li><li><span class="q">le dépassement, en watts</span></li></ol><div class="indice" hidden>Une puissance se retrouve avec P = U × I, et une intensité avec I = P ÷ U. Le dépassement se compte par rapport à la puissance maximale, pas par rapport à 230.</div></section>
+<section class="exo" id="CCF-C1-la-multiprise-e1" data-exo="CCF-C1-la-multiprise-e1" data-type="justification" data-savoir="CN" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · CN</p><h4>La phrase de conclusion</h4><div class="enonce">
+
+<p>Répondre à la problématique en une phrase, <strong>avec son chiffre</strong>.</p>
+</div><div class="indice" hidden>« Non » n’est pas une réponse à cette question. Le jury attend un nombre et la comparaison qui va avec.</div><ul class="verifier" hidden><li>J’ai dit que les trois ensemble ne passent pas</li><li>J’ai donné le dépassement, avec son unité</li><li>J’ai dit que la perceuse et la ponceuse seules, elles, passent</li></ul></section>
+<section class="exo" id="CCF-C1-la-multiprise-e2" data-exo="CCF-C1-la-multiprise-e2" data-type="justification" data-savoir="CN" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · CN</p><h4>Ce que vous diriez à l’APPEL 1</h4><div class="enonce">
+
+<p>Écrire, en deux phrases, ce que vous expliqueriez au professeur : <strong>quoi mesurer</strong>, et <strong>avec quel appareil</strong>.</p>
+</div><div class="indice" hidden>Trois points sur dix se jouent sur les appels. Une phrase préparée vaut mieux qu’un silence, même si elle est imparfaite.</div><ul class="verifier" hidden><li>J’ai nommé l’intensité comme la grandeur à mesurer</li><li>J’ai nommé la pince ampèremétrique ou l’ampèremètre</li><li>J’ai dit à quelle valeur je vais la comparer</li></ul></section>
+<h2 id="ce-qui-se-joue-vraiment">Ce qui se joue vraiment</h2>
+<div class="enveloppe-tbl"><table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr>
+<td><strong>Quatre parties, quatre colonnes</strong></td>
+<td>rater l’une ne fait pas perdre les autres</td>
+</tr>
+<tr>
+<td><strong>COM vaut 3 points</strong></td>
+<td>ils se gagnent à l’oral, pas sur la copie</td>
+</tr>
+<tr>
+<td><strong>La dernière question se rédige</strong></td>
+<td>un chiffre seul ne répond à aucune problématique</td>
+</tr>
+</tbody>
+</table></div>
+<nav class="suite"><p class="chapeau-s">La suite</p><div class="pas-a-pas"><a class="av" href="CCF-A3-implantation.html" rel="prev"><span class="k">&lsaquo; Précédent</span><span class="t">CCF — co-intervention 3, le local en L</span></a><a class="ap" href="CCF-C2-la-guirlande.html" rel="next"><span class="k">Suivant &rsaquo;</span><span class="t">CCF — séquence 2, la guirlande</span></a></div></nav>
+<p class="pied">Cette page entraîne au format de l'épreuve. Elle ne remplace pas les documents distribués et ne donne aucun corrigé.</p><p class="pied-site"><a class="mentions" href="../mentions-legales.html">Mentions légales</a></p>
+</div>
+<script src="../assets/kit.js?v=bce44a4d"></script>
+<script src="../assets/site.js?v=bce44a4d"></script>
+<script src="../assets/vivant.js?v=bce44a4d"></script>
+<script src="../assets/plan.js?v=bce44a4d"></script>
+<script src="../assets/doc.js?v=bce44a4d"></script>

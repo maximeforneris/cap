@@ -10374,6 +10374,228 @@ SCHEMAS["triangle-3-4-5"]=function(el){
 };
 
 
+
+/* ─────────── 2DE CIEL · le facteur huit entre bits et octets ─────────── */
+SCHEMAS["bits-ou-octets"]=function(el){
+  var W=724,H=348;
+  var svg=S("svg",{viewBox:"0 0 "+W+" "+H,role:"img",
+    "aria-label":"Huit gigaoctets sous un gigabit par seconde : le facteur huit et la duree reelle"});
+  svg.appendChild(S("text",{x:20,y:26,"class":"s-tit"},
+    "8 Go SOUS 1 Gbit/s : COMBIEN DE TEMPS, VRAIMENT ?"));
+  var defs=S("defs",{}),mk=S("marker",{id:"fl-bo",viewBox:"0 0 10 10",refX:"9",refY:"5",
+    markerWidth:"6",markerHeight:"6",orient:"auto-start-reverse"});
+  mk.appendChild(S("path",{d:"M 0 0 L 10 5 L 0 10 z",fill:V("trait")}));
+  defs.appendChild(mk); svg.appendChild(defs);
+  function voie(y,coul,marque,etapes,res,note){
+    svg.appendChild(S("rect",{x:34,y:y,width:560,height:58,rx:"8",fill:V("carte2"),
+      stroke:V(coul),"stroke-width":"2"}));
+    svg.appendChild(S("text",{x:50,y:y+36,"class":"s-lab",fill:V(coul),
+      style:"font-size:17px"},marque));
+    svg.appendChild(S("text",{x:86,y:y+24,"class":"s-lab"},etapes[0]));
+    svg.appendChild(S("text",{x:86,y:y+46,"class":"s-pet"},etapes[1]));
+    svg.appendChild(S("text",{x:578,y:y+36,"text-anchor":"end","class":"s-lab",fill:V(coul),
+      style:"font-size:18px"},res));
+    svg.appendChild(S("text",{x:610,y:y+36,"class":"s-nom",fill:V(coul)},note));
+  }
+  voie(52,"chaud","✗",["8 ÷ 1 = 8","on a divisé des Go par des Gbit"],"8 s","");
+  voie(144,"vert","✓",["8 Go = 64 Gbit, puis 64 ÷ 1","on a mis les deux dans la même unité"],
+       "64 s","");
+  svg.appendChild(S("path",{d:"M 300 140 L 300 114",fill:"none",stroke:V("trait"),
+    "stroke-width":"2.5","marker-end":"url(#fl-bo)"}));
+  svg.appendChild(S("text",{x:312,y:132,"class":"s-lab",fill:V("trait")},"× 8"));
+  svg.appendChild(S("line",{x1:34,y1:230,x2:690,y2:230,stroke:V("trait2"),"stroke-width":"1"}));
+  svg.appendChild(S("text",{x:34,y:262,"class":"s-lab"},"Le client, lui, a mis 3 minutes — 180 s."));
+  svg.appendChild(S("text",{x:34,y:290,"class":"s-pet"},
+    "64 Gbit ÷ 180 s = 0,36 Gbit/s, soit 355 Mbit/s réellement reçus"));
+  svg.appendChild(S("rect",{x:34,y:306,width:656,height:30,rx:"6",fill:V("chaud"),opacity:".18"}));
+  svg.appendChild(S("text",{x:46,y:326,"class":"s-lab",fill:V("chaud")},
+    "le débit annoncé n'est pas tenu — mais l'écart est de 3, pas de 8"));
+  el.appendChild(svg);
+  (el.parentNode||el).appendChild(E("p",{"class":"leg-schema"},
+    "<b>Un octet vaut huit bits</b>, et les deux unités se ressemblent trop pour qu'on "+
+    "s'en méfie. Tant que la taille et le débit ne sont pas dans la même unité, le "+
+    "quotient ne veut rien dire — et <b>il a toujours l'air plausible</b>."));
+};
+
+/* ─────────── 2DE CIEL · qui protege qui ─────────── */
+SCHEMAS["qui-protege-qui"]=function(el){
+  var W=724,H=300;
+  var svg=S("svg",{viewBox:"0 0 "+W+" "+H,role:"img",
+    "aria-label":"Quatre dispositifs ranges selon ce qu'ils protegent : le materiel ou les personnes"});
+  svg.appendChild(S("text",{x:20,y:26,"class":"s-tit"},
+    "QUATRE DISPOSITIFS, DEUX CHOSES À PROTÉGER"));
+  function colonne(x,coul,titre,items){
+    svg.appendChild(S("rect",{x:x,y:52,width:326,height:226,rx:"10",fill:V(coul),
+      opacity:".12"}));
+    svg.appendChild(S("rect",{x:x,y:52,width:326,height:226,rx:"10",fill:"none",
+      stroke:V(coul),"stroke-width":"2.5"}));
+    svg.appendChild(S("text",{x:x+163,y:80,"text-anchor":"middle","class":"s-lab",
+      fill:V(coul),style:"font-size:16px"},titre));
+    items.forEach(function(it,i){
+      var y=100+i*62;
+      svg.appendChild(S("rect",{x:x+16,y:y,width:294,height:52,rx:"6",fill:V("carte"),
+        stroke:V("trait2"),"stroke-width":"1"}));
+      svg.appendChild(S("text",{x:x+28,y:y+22,"class":"s-lab"},it[0]));
+      svg.appendChild(S("text",{x:x+28,y:y+41,"class":"s-pet"},it[1]));
+    });
+  }
+  colonne(22,"froid","IL PROTÈGE LE MATÉRIEL",[
+    ["le fusible","un courant trop fort — il se remplace"],
+    ["le disjoncteur","la même chose — il se réarme"]]);
+  colonne(376,"chaud","IL PROTÈGE LES PERSONNES",[
+    ["le disjoncteur différentiel","l'écart entre l'aller et le retour"],
+    ["la mise à la terre","rien : elle offre un chemin au courant"]]);
+  el.appendChild(svg);
+  (el.parentNode||el).appendChild(E("p",{"class":"leg-schema"},
+    "<b>Les deux colonnes ne sont pas interchangeables.</b> Un disjoncteur parfaitement "+
+    "calibré laisse passer sans broncher les 30 mA qui tuent : il ne les voit pas, "+
+    "parce qu'il ne compte que ce qui passe dans le fil. Et <b>la mise à la terre ne "+
+    "détecte rien</b> — elle donne au courant un chemin plus facile que vous."));
+};
+
+/* ─────────── 2DE CIEL · jusqu'ou va la TBTS ─────────── */
+SCHEMAS["tbts-les-seuils"]=function(el){
+  var W=724,H=290,X0=90,X1=660,MAX=130,k=(X1-X0)/MAX;
+  function px(v){return v*k;}
+  var svg=S("svg",{viewBox:"0 0 "+W+" "+H,role:"img",
+    "aria-label":"La TBTS s'arrete a 50 volts alternatifs et 120 volts continus"});
+  svg.appendChild(S("text",{x:20,y:26,"class":"s-tit"},
+    "JUSQU'OÙ VA LA TRÈS BASSE TENSION DE SÉCURITÉ"));
+  [{y:66,t:"ALTERNATIF",s:50,c:"chaud",note:1},
+   {y:150,t:"CONTINU",s:120,c:"froid",note:0}].forEach(function(L){
+    svg.appendChild(S("text",{x:X0-12,y:L.y+24,"text-anchor":"end","class":"s-lab"},L.t));
+    svg.appendChild(S("rect",{x:X0,y:L.y,width:px(L.s),height:34,rx:"4",fill:V(L.c),
+      opacity:".35",stroke:V(L.c),"stroke-width":"1.5"}));
+    svg.appendChild(S("rect",{x:X0+px(L.s),y:L.y,width:X1-X0-px(L.s),height:34,rx:"4",
+      fill:"none",stroke:V("trait2"),"stroke-width":"1.5","stroke-dasharray":"5 4"}));
+    svg.appendChild(S("text",{x:X0+px(L.s)-10,y:L.y+23,"text-anchor":"end","class":"s-lab",
+      fill:V(L.c)},L.s+" V"));
+    if(L.note)svg.appendChild(S("text",{x:X0+px(L.s)+12,y:L.y+23,"class":"s-nom"},
+      "au-delà, ce n'est plus de la TBTS"));
+  });
+  svg.appendChild(S("line",{x1:X0,y1:206,x2:X1,y2:206,stroke:V("encre"),"stroke-width":"2"}));
+  [[5,"5 V",-1],[12,"12 V",1],[48,"48 V",1]].forEach(function(p){
+    var x=X0+px(p[0]);
+    svg.appendChild(S("circle",{cx:x,cy:206,r:"5",fill:V("vert")}));
+    svg.appendChild(S("text",{x:x,y:p[2]<0?194:228,"text-anchor":"middle","class":"s-lab",
+      fill:V("vert")},p[1]));
+  });
+  svg.appendChild(S("text",{x:X0+px(60),y:228,"class":"s-nom"},
+    "le switch, les cartes, les capteurs — tous en continu, tous dans la zone"));
+  svg.appendChild(S("text",{x:X0,y:268,"class":"s-pet"},
+    "PoE : 625 mA sous 48 V — vingt fois le seuil du différentiel, et on le tient en main"));
+  el.appendChild(svg);
+  (el.parentNode||el).appendChild(E("p",{"class":"leg-schema"},
+    "<b>Le seuil n'est pas le même en alternatif et en continu</b>, et c'est le "+
+    "continu qui est le plus permissif. Mais rester sous le seuil ne veut pas dire "+
+    "qu'il ne passe rien : <b>ce qui compte est le courant qui traverserait le corps</b>, "+
+    "pas celui qui circule dans le câble."));
+};
+
+/* ─────────── 2DE CIEL · la tension se partage ─────────── */
+SCHEMAS["diviseur-de-tension"]=function(el){
+  var W=724,H=334;
+  var svg=S("svg",{viewBox:"0 0 "+W+" "+H,role:"img",
+    "aria-label":"Deux resistances en serie : la tension se partage proportionnellement"});
+  svg.appendChild(S("text",{x:20,y:26,"class":"s-tit"},
+    "DEUX RÉSISTANCES EN SÉRIE : QUI PREND QUOI"));
+  var L=70,R=330,T=86,Bo=238;
+  svg.appendChild(S("path",{d:"M "+L+" "+T+" H "+R+" V "+Bo+" H "+L+" Z",fill:"none",
+    stroke:V("encre"),"stroke-width":"2"}));
+  svg.appendChild(S("line",{x1:L,y1:(T+Bo)/2-18,x2:L,y2:(T+Bo)/2+18,stroke:V("encre"),
+    "stroke-width":"3"}));
+  svg.appendChild(S("line",{x1:L+9,y1:(T+Bo)/2-9,x2:L+9,y2:(T+Bo)/2+9,stroke:V("encre"),
+    "stroke-width":"3"}));
+  svg.appendChild(S("text",{x:L-12,y:(T+Bo)/2+5,"text-anchor":"end","class":"s-lab"},"5 V"));
+  function resistor(x,y,nom,val,coul){
+    svg.appendChild(S("rect",{x:x-30,y:y-13,width:60,height:26,fill:V("carte"),
+      stroke:V(coul),"stroke-width":"2.5"}));
+    svg.appendChild(S("text",{x:x,y:y-24,"text-anchor":"middle","class":"s-lab",
+      fill:V(coul)},nom));
+    svg.appendChild(S("text",{x:x,y:y+30,"text-anchor":"middle","class":"s-pet"},val));
+  }
+  resistor(180,T,"R1","300 Ω","froid");
+  resistor(280,Bo,"R2","200 Ω","chaud");
+  var XB=430,YB=96,HB=140;
+  svg.appendChild(S("text",{x:XB,y:YB-16,"class":"s-lab"},"la tension se partage"));
+  svg.appendChild(S("rect",{x:XB,y:YB,width:74,height:HB*0.6,fill:V("froid"),opacity:".45",
+    stroke:V("froid"),"stroke-width":"1.5"}));
+  svg.appendChild(S("rect",{x:XB,y:YB+HB*0.6,width:74,height:HB*0.4,fill:V("chaud"),
+    opacity:".45",stroke:V("chaud"),"stroke-width":"1.5"}));
+  svg.appendChild(S("text",{x:XB+86,y:YB+HB*0.3+6,"class":"s-lab",fill:V("froid")},
+    "U1 = 3 V   (60 %)"));
+  svg.appendChild(S("text",{x:XB+86,y:YB+HB*0.8+6,"class":"s-lab",fill:V("chaud")},
+    "U2 = 2 V   (40 %)"));
+  svg.appendChild(S("text",{x:XB,y:YB+HB+28,"class":"s-pet"},
+    "R1 = 60 % des 500 Ω, donc 60 % des 5 V"));
+  svg.appendChild(S("text",{x:XB,y:YB+HB+52,"class":"s-lab"},"E = U1 + U2"));
+  svg.appendChild(S("text",{x:XB,y:YB+HB+76,"class":"s-nom"},
+    "et le courant, lui, est le même dans les deux"));
+  el.appendChild(svg);
+  (el.parentNode||el).appendChild(E("p",{"class":"leg-schema"},
+    "<b>Sur une seule maille, le courant est le même partout</b> — c'est ce qui fait "+
+    "que la tension, elle, se répartit en proportion des résistances. Doubler R1 sans "+
+    "toucher à R2 ne change pas la somme : <b>ce que l'une prend en plus, l'autre le "+
+    "perd</b>."));
+};
+
+/* ─────────── 2DE CIEL · la resistance de la LED ─────────── */
+SCHEMAS["led-et-sa-resistance"]=function(el){
+  var W=724,H=320;
+  var svg=S("svg",{viewBox:"0 0 "+W+" "+H,role:"img",
+    "aria-label":"Choisir la resistance d'une LED : trois volts pour elle, vingt milliamperes au plus"});
+  svg.appendChild(S("text",{x:20,y:26,"class":"s-tit"},
+    "LA RÉSISTANCE QUI PROTÈGE LA LED"));
+  var L=64,R=330,T=88,Bo=226;
+  svg.appendChild(S("path",{d:"M "+L+" "+T+" H "+R+" V "+Bo+" H "+L+" Z",fill:"none",
+    stroke:V("encre"),"stroke-width":"2"}));
+  svg.appendChild(S("line",{x1:L,y1:(T+Bo)/2-18,x2:L,y2:(T+Bo)/2+18,stroke:V("encre"),
+    "stroke-width":"3"}));
+  svg.appendChild(S("line",{x1:L+9,y1:(T+Bo)/2-9,x2:L+9,y2:(T+Bo)/2+9,stroke:V("encre"),
+    "stroke-width":"3"}));
+  svg.appendChild(S("text",{x:L-10,y:(T+Bo)/2+5,"text-anchor":"end","class":"s-lab"},"5 V"));
+  svg.appendChild(S("rect",{x:150,y:T-13,width:60,height:26,fill:V("carte"),
+    stroke:V("froid"),"stroke-width":"2.5"}));
+  svg.appendChild(S("text",{x:180,y:T-24,"text-anchor":"middle","class":"s-lab",
+    fill:V("froid")},"R"));
+  svg.appendChild(S("text",{x:180,y:T+30,"text-anchor":"middle","class":"s-pet",
+    fill:V("froid")},"3 V"));
+  svg.appendChild(S("path",{d:"M 262 "+(T-13)+" L 262 "+(T+13)+" L 286 "+T+" Z",
+    fill:V("chaud"),stroke:V("chaud"),"stroke-width":"2"}));
+  svg.appendChild(S("line",{x1:286,y1:T-14,x2:286,y2:T+14,stroke:V("chaud"),"stroke-width":"2.5"}));
+  svg.appendChild(S("text",{x:274,y:T-24,"text-anchor":"middle","class":"s-lab",
+    fill:V("chaud")},"LED"));
+  svg.appendChild(S("text",{x:274,y:T+30,"text-anchor":"middle","class":"s-pet",
+    fill:V("chaud")},"2 V"));
+  svg.appendChild(S("text",{x:(L+R)/2,y:Bo+26,"text-anchor":"middle","class":"s-nom"},
+    "un seul chemin : 20 mA au plus, partout"));
+  var XC=400;
+  [["5 − 2 = 3 V","pour la résistance","encre"],
+   ["20 mA = 0,020 A","le maximum admis","encre"],
+   ["3 ÷ 0,020 = 150 Ω","la valeur calculée","chaud"]].forEach(function(t,i){
+    svg.appendChild(S("text",{x:XC,y:96+i*46,"class":"s-lab",
+      fill:V(t[2]),style:(t[2]==="chaud"?"font-size:17px":"")},t[0]));
+    svg.appendChild(S("text",{x:XC,y:114+i*46,"class":"s-pet"},t[1]));
+  });
+  var XE=XC,YE=254;
+  svg.appendChild(S("line",{x1:XE,y1:YE,x2:XE+240,y2:YE,stroke:V("encre"),"stroke-width":"2"}));
+  [[0,"120"],[110,"150"],[220,"180"]].forEach(function(p,i){
+    svg.appendChild(S("circle",{cx:XE+p[0],cy:YE,r:i===1?"6":"4",
+      fill:i===0?V("chaud"):V("vert")}));
+    svg.appendChild(S("text",{x:XE+p[0],y:YE+22,"text-anchor":"middle","class":"s-pet"},
+      p[1]+" Ω"));
+  });
+  svg.appendChild(S("text",{x:XE-10,y:YE+5,"text-anchor":"end","class":"s-nom",
+    fill:V("chaud")},"jamais"));
+  svg.appendChild(S("text",{x:XE+250,y:YE+5,"class":"s-nom",fill:V("vert")},"toujours"));
+  el.appendChild(svg);
+  (el.parentNode||el).appendChild(E("p",{"class":"leg-schema"},
+    "Le calcul donne un <b>maximum de courant</b>, donc un <b>minimum de résistance</b>. "+
+    "Descendre à 120 Ω ferait passer 25 mA et abîmerait la LED. <b>Quand un calcul donne "+
+    "une limite, on arrondit du côté qui protège</b> — ici vers le haut."));
+};
+
+
 /* --------- dispersion d'une serie de releves ---------
    Ajoute le 3 septembre 2026, sequence 1 de maths-PC. C'est la statistique
    descriptive du CCF de mathematiques, sur des donnees de chaufferie. */
