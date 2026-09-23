@@ -1,13 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta name="robots" content="noindex, nofollow">
 <title>Séance 6 — U, I et la résistance</title>
-<link rel="stylesheet" href="../assets/kit.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/site.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/signalisation.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/vivant.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/doc.css?v=b6f26f26">
+<link rel="stylesheet" href="../assets/kit.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/site.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/signalisation.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/vivant.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/doc.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/impression.css?v=e72ab573">
+<script src="../assets/kit.js?v=e72ab573-c7a319" defer></script>
+<script src="../assets/site.js?v=e72ab573" defer></script>
+<script src="../assets/vivant.js?v=e72ab573" defer></script>
+<script src="../assets/plan.js?v=e72ab573" defer></script>
+<script src="../assets/doc.js?v=e72ab573" defer></script>
 
 <div class="page" data-site="cap-conso" data-page="cours/J6">
 <div class="jauge-lecture" id="jauge-lecture"><i></i></div><div class="barre-site"><a class="accueil" href="../index.html">Mathématiques et physique-chimie en CAP</a><span class="fleches"><a class="fleche" href="J5.html" rel="prev" title="Séance 5 — tensions et intensités" aria-label="Séance 5 — tensions et intensités">&lsaquo;</a><a class="fleche" href="J7.html" rel="next" title="Séance 7 — la décision" aria-label="Séance 7 — la décision">&rsaquo;</a></span><button type="button" class="lu" data-lu="cours/J6">Marquer comme lu</button></div>
@@ -23,70 +31,125 @@
 </header>
 <aside class="prerequis"><p class="chapeau-p">Avant de commencer</p><ul><li><b><a href="J5.html">Mesurer une tension et une intensité</a></b><span class="ou">Séance 5 · Ce qui s'ajoute et ce qui se partage</span><span class="car">les cinq points de cette page sont des mesures, pas des nombres tombés du ciel.</span></li><li><b>Reconnaître un tableau de proportionnalité</b><span class="car">on cherche si on passe d'une ligne à l'autre en multipliant toujours par le même nombre.</span></li></ul></aside>
 <nav class="somm"><div class="in"><a href="#le-releve">Le relevé</a><a href="#lire-sur-le-graphique">Lire sur le graphique</a><a href="#le-nombre-qui-ne-bouge-pas">Le nombre qui ne bouge pas</a><a href="#ce-qui-reste-de-la-seance">Ce qui reste de la séance</a></div></nav>
-<h2 id="le-releve">Le relevé</h2>
-<p>Une résistance sur une alimentation réglable, la tension qui monte pas à pas :</p>
-<div class="enveloppe-tbl"><table>
-<thead>
-<tr>
-<th>U (V)</th>
-<th>0</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>I (mA)</td>
-<td>0</td>
-<td>50</td>
-<td>100</td>
-<td>150</td>
-<td>200</td>
-</tr>
-</tbody>
-</table></div>
-<div class="cle">
-<p><strong>Les points sont alignés et la droite passe par l’origine.</strong> C’est la signature de la proportionnalité : à zéro volt, zéro milliampère.</p>
-</div>
-<figure>
-<img src="img/J6/fig7-grille-ui.png" alt="La grille de tracé : U en abscisse, I en ordonnée." />
-<figcaption aria-hidden="true">La grille de tracé : U en abscisse, I en ordonnée.</figcaption>
-</figure>
-<h2 id="lire-sur-le-graphique">Lire sur le graphique</h2>
-<p>Une fois les cinq points placés, <strong>ils sont alignés et la droite passe par zéro</strong> : pas de tension, pas de courant. C’est la signature d’une situation proportionnelle, celle qu’on a travaillée sur les prix.</p>
-<figure class="schema"><div class="dessin" data-schema="caracteristique-resistance"></div><figcaption>Le relevé tracé, et la colonne U ÷ I posée à côté.</figcaption></figure>
-<section class="serie" id="J6-s1" data-serie="J6-s1" data-savoir="AA" data-a="IXgveGB4Nxt4dnguNTZ4YGt0anZ4M3hgASF4LHhga2hvdGondiF4LHhga21vdGondiF4LHhgaG90aicHJw=="><p class="k">Série · AA</p><h4>Série — lecture de la droite</h4><div class="enonce">
-
-</div><ol class="items"><li><span class="q">I pour 2,5 V</span></li><li><span class="q">I pour 3,5 V</span></li><li><span class="q">I pour 0,5 V</span></li></ol><div class="indice" hidden>On monte à la verticale depuis l’axe des volts jusqu’à la droite, puis on lit à l’horizontale. Entre deux points, on partage.</div></section>
-<section class="exo" id="J6-e1" data-exo="J6-e1" data-type="calcul" data-savoir="AA" data-a="IXgueGB4OTs2OS82eHZ4LHhga3RvdnguNTZ4YGp0anZ4L3hgeAx4Jw=="><p class="k">Exercice · AA</p><h4>Dans l’autre sens</h4><div class="enonce">
-
-<p>Sur la même droite, quelle tension correspond à un courant de <strong>75 mA</strong> ?</p>
-</div><div class="indice" hidden>On part cette fois de l’axe des milliampères, à l’horizontale, jusqu’à la droite, puis on redescend.</div></section>
-<h2 id="le-nombre-qui-ne-bouge-pas">Le nombre qui ne bouge pas</h2>
-<p>Le quotient <strong>U ÷ I</strong> se calcule ligne par ligne. Il donne à chaque fois la même valeur, et <strong>cette valeur est la résistance du composant</strong> — celle que l’ohmmètre affiche directement quand on le branche aux bornes.</p>
-<div class="piege">
-<p><strong>La division se fait en ampères, jamais en milliampères.</strong> 4 ÷ 200 ne donne rien d’utile ; 4 ÷ 0,2 donne les 20 Ω attendus. La conversion vient avant le calcul.</p>
-</div>
-<p>Les courants, écrits en ampères : 0,05 — 0,1 — 0,15 — 0,2.</p>
-<section class="exo" id="J6-e2" data-exo="J6-e2" data-type="calcul" data-savoir="CN" data-a="IXgueGB4OTs2OS82eHZ4LHhgaGp0anZ4LjU2eGBqdGp2eC94YHgGL2ppO2N4Jw=="><p class="k">Exercice · CN</p><h4>Le quotient U ÷ I</h4><div class="enonce">
-
-<p>Calculez U ÷ I sur la colonne de 2 V, avec l’intensité en ampères.</p>
-</div><div class="indice" hidden>2 divisé par 0,1. Le même calcul sur les autres colonnes donne le même nombre : c’est bien un coefficient.</div></section>
-<div class="piege">
-<p><strong>Diviser des volts par des milliampères.</strong> Le quotient ne vaut alors plus 20 mais 0,02 : la résistance se calcule <strong>en ampères</strong>, jamais en milliampères.</p>
-</div>
-<div class="cle">
-<p><strong>U ÷ I = R</strong>, la résistance, en ohms (Ω). C’est le coefficient du tableau de proportionnalité, et il ne dépend pas de la tension appliquée.</p>
-</div>
-<h2 id="ce-qui-reste-de-la-seance">Ce qui reste de la séance</h2>
-<p>Doubler la tension double le courant, <strong>tant que c’est une résistance</strong>. Le quotient, lui, ne bouge pas : c’est ce qui caractérise le composant.</p>
+<h2 id="le-releve">Le relevé</h2>
+
+<p>Une résistance sur une alimentation réglable, la tension qui monte pas à pas :</p>
+
+<div class="enveloppe-tbl"><table>
+
+<thead>
+
+<tr>
+
+<th>U (V)</th>
+
+<th>0</th>
+
+<th>1</th>
+
+<th>2</th>
+
+<th>3</th>
+
+<th>4</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>I (mA)</td>
+
+<td>0</td>
+
+<td>50</td>
+
+<td>100</td>
+
+<td>150</td>
+
+<td>200</td>
+
+</tr>
+
+</tbody>
+
+</table></div>
+
+<div class="cle">
+
+<p><strong>Les points sont alignés et la droite passe par l’origine.</strong> C’est la signature de la proportionnalité : à zéro volt, zéro milliampère.</p>
+
+</div>
+
+<figure>
+
+<img src="img/J6/fig7-grille-ui.png" alt="La grille de tracé : U en abscisse, I en ordonnée." />
+
+<figcaption aria-hidden="true">La grille de tracé : U en abscisse, I en ordonnée.</figcaption>
+
+</figure>
+
+<h2 id="lire-sur-le-graphique">Lire sur le graphique</h2>
+
+<p>Une fois les cinq points placés, <strong>ils sont alignés et la droite passe par zéro</strong> : pas de tension, pas de courant. C’est la signature d’une situation proportionnelle, celle qu’on a travaillée sur les prix.</p>
+
+<figure class="schema"><div class="dessin" data-schema="caracteristique-resistance"></div><figcaption>Le relevé tracé, et la colonne U ÷ I posée à côté.</figcaption></figure>
+
+<section class="serie" id="J6-s1" data-serie="J6-s1" data-savoir="AA" data-a="IXgveGB4Nxt4dnguNTZ4YGt0anZ4M3hgASF4LHhga2hvdGondiF4LHhga21vdGondiF4LHhgaG90aicHJw=="><p class="k">Série · AA</p><h4>Série — lecture de la droite</h4><div class="enonce">
+
+
+
+</div><ol class="items"><li><span class="q">I pour 2,5 V</span></li><li><span class="q">I pour 3,5 V</span></li><li><span class="q">I pour 0,5 V</span></li></ol><div class="indice" hidden>On monte à la verticale depuis l’axe des volts jusqu’à la droite, puis on lit à l’horizontale. Entre deux points, on partage.</div></section>
+
+<section class="exo" id="J6-e1" data-exo="J6-e1" data-type="calcul" data-savoir="AA" data-a="IXgueGB4OTs2OS82eHZ4LHhga3RvdnguNTZ4YGp0anZ4L3hgeAx4Jw=="><p class="k">Exercice · AA</p><h4>Dans l’autre sens</h4><div class="enonce">
+
+
+
+<p>Sur la même droite, quelle tension correspond à un courant de <strong>75 mA</strong> ?</p>
+
+</div><div class="indice" hidden>On part cette fois de l’axe des milliampères, à l’horizontale, jusqu’à la droite, puis on redescend.</div></section>
+
+<h2 id="le-nombre-qui-ne-bouge-pas">Le nombre qui ne bouge pas</h2>
+
+<p>Le quotient <strong>U ÷ I</strong> se calcule ligne par ligne. Il donne à chaque fois la même valeur, et <strong>cette valeur est la résistance du composant</strong> — celle que l’ohmmètre affiche directement quand on le branche aux bornes.</p>
+
+<div class="piege">
+
+<p><strong>La division se fait en ampères, jamais en milliampères.</strong> 4 ÷ 200 ne donne rien d’utile ; 4 ÷ 0,2 donne les 20 Ω attendus. La conversion vient avant le calcul.</p>
+
+</div>
+
+<p>Les courants, écrits en ampères : 0,05 — 0,1 — 0,15 — 0,2.</p>
+
+<section class="exo" id="J6-e2" data-exo="J6-e2" data-type="calcul" data-savoir="CN" data-a="IXgueGB4OTs2OS82eHZ4LHhgaGp0anZ4LjU2eGBqdGp2eC94YHgGL2ppO2N4Jw=="><p class="k">Exercice · CN</p><h4>Le quotient U ÷ I</h4><div class="enonce">
+
+
+
+<p>Calculez U ÷ I sur la colonne de 2 V, avec l’intensité en ampères.</p>
+
+</div><div class="indice" hidden>2 divisé par 0,1. Le même calcul sur les autres colonnes donne le même nombre : c’est bien un coefficient.</div></section>
+
+<div class="piege">
+
+<p><strong>Diviser des volts par des milliampères.</strong> Le quotient ne vaut alors plus 20 mais 0,02 : la résistance se calcule <strong>en ampères</strong>, jamais en milliampères.</p>
+
+</div>
+
+<div class="cle">
+
+<p><strong>U ÷ I = R</strong>, la résistance, en ohms (Ω). C’est le coefficient du tableau de proportionnalité, et il ne dépend pas de la tension appliquée.</p>
+
+</div>
+
+<h2 id="ce-qui-reste-de-la-seance">Ce qui reste de la séance</h2>
+
+<p>Doubler la tension double le courant, <strong>tant que c’est une résistance</strong>. Le quotient, lui, ne bouge pas : c’est ce qui caractérise le composant.</p>
+
 <nav class="suite"><p class="chapeau-s">La suite</p><div class="pas-a-pas"><a class="av" href="J5.html" rel="prev"><span class="k">&lsaquo; Précédent</span><span class="t">Séance 5 — tensions et intensités</span></a><a class="ap" href="J7.html" rel="next"><span class="k">Suivant &rsaquo;</span><span class="t">Séance 7 — la décision</span></a></div></nav>
 <p class="pied">Ce site rappelle la méthode. Aucun corrigé, rien n'est noté.</p><p class="pied-site"><a class="mentions" href="../mentions-legales.html">Mentions légales</a></p>
 </div>
-<script src="../assets/kit.js?v=b6f26f26"></script>
-<script src="../assets/site.js?v=b6f26f26"></script>
-<script src="../assets/vivant.js?v=b6f26f26"></script>
-<script src="../assets/plan.js?v=b6f26f26"></script>
-<script src="../assets/doc.js?v=b6f26f26"></script>
+

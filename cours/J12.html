@@ -1,13 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta name="robots" content="noindex, nofollow">
 <title>Séance 3 — la décision</title>
-<link rel="stylesheet" href="../assets/kit.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/site.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/signalisation.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/vivant.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/doc.css?v=b6f26f26">
+<link rel="stylesheet" href="../assets/kit.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/site.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/signalisation.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/vivant.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/doc.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/impression.css?v=e72ab573">
+<script src="../assets/kit.js?v=e72ab573-c7a319" defer></script>
+<script src="../assets/site.js?v=e72ab573" defer></script>
+<script src="../assets/vivant.js?v=e72ab573" defer></script>
+<script src="../assets/plan.js?v=e72ab573" defer></script>
+<script src="../assets/doc.js?v=e72ab573" defer></script>
 
 <div class="page" data-site="cap-conso" data-page="cours/J12">
 <div class="jauge-lecture" id="jauge-lecture"><i></i></div><div class="barre-site"><a class="accueil" href="../index.html">Mathématiques et physique-chimie en CAP</a><span class="fleches"><a class="fleche" href="J11.html" rel="prev" title="Séance 2 — les deux offres" aria-label="Séance 2 — les deux offres">&lsaquo;</a></span><button type="button" class="lu" data-lu="cours/J12">Marquer comme lu</button></div>
@@ -23,83 +31,151 @@
 </header>
 <aside class="prerequis"><p class="chapeau-p">Avant de commencer</p><ul><li><b><a href="J11.html">Les deux offres et leur croisement</a></b><span class="ou">Séance 11 · Combien ça coûte vraiment ?</span><span class="car">cette séance les applique à trois logements sans les redonner.</span></li><li><b><a href="J10.html">Le kilowattheure</a></b><span class="ou">Séance 10 · Combien ça coûte vraiment ?</span><span class="car">les trois consommations sont en kWh, et c'est par elles que tout passe.</span></li></ul></aside>
 <nav class="somm"><div class="in"><a href="#trois-logements-trois-consommations">Trois logements, trois consommations</a><a href="#les-six-factures">Les six factures</a><a href="#ce-qui-reste-de-l-annee">Ce qui reste de l’année</a><a href="#l-atelier-et-son-contrat">L’atelier et son contrat</a></div></nav>
-<h2 id="trois-logements-trois-consommations">Trois logements, trois consommations</h2>
-<div class="enveloppe-tbl"><table>
-<thead>
-<tr>
-<th>Le logement</th>
-<th>Sa consommation mensuelle</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>un studio, chauffé au gaz</td>
-<td><strong>80 kWh</strong></td>
-</tr>
-<tr>
-<td>la colocation</td>
-<td><strong>186 kWh</strong></td>
-</tr>
-<tr>
-<td>une maison tout électrique</td>
-<td><strong>400 kWh</strong></td>
-</tr>
-</tbody>
-</table></div>
-<p>Les deux offres n’ont pas changé : <strong>A</strong> sans abonnement à 0,30 € le kWh, <strong>B</strong> avec 12 € d’abonnement et 0,22 € le kWh.</p>
-<figure class="schema"><div class="dessin" data-schema="offres-qui-se-croisent"></div><figcaption>Les trois logements, placés sur les mêmes droites.</figcaption></figure>
-<p><strong>Les trois sont de part et d’autre du croisement</strong>, et c’est ce qui rend la question intéressante : le studio est bien en dessous des 150 kWh, la maison très au-dessus, et la colocation juste après.</p>
-<h2 id="les-six-factures">Les six factures</h2>
-<section class="serie" id="J12-s1" data-serie="J12-s1" data-savoir="CN" data-a="IXgveGB4Bi9oajs5eHZ4LjU2eGBodGp2eDN4YAEheCx4YGhudGondiF4LHhgaGN0bCd2IXgseGBvb3RiJ3YheCx4YG9odGNoJ3YheCx4YGtoanRqJ3YheCx4YGtqanRqJwcn"><p class="k">Série · CN</p><h4>Ce que chaque logement paierait</h4><div class="enonce">
-
-</div><ol class="items larges"><li><span class="q">le studio, 80 kWh, avec l’offre A</span></li><li><span class="q">le studio, 80 kWh, avec l’offre B</span></li><li><span class="q">la colocation, 186 kWh, avec l’offre A</span></li><li><span class="q">la colocation, 186 kWh, avec l’offre B</span></li><li><span class="q">la maison, 400 kWh, avec l’offre A</span></li><li><span class="q">la maison, 400 kWh, avec l’offre B</span></li></ol><div class="indice" hidden>Toujours la même mécanique : multiplication pour A, multiplication puis addition des 12 € pour B. Six calculs, deux formules.</div></section>
-<div class="cle">
-<p><strong>Le studio a raison de prendre A, la maison a raison de prendre B</strong>, et aucun des deux ne se trompe. La bonne offre dépend de ce qu’on consomme, pas de ce qui est écrit en gros sur la publicité.</p>
-</div>
-<section class="exo" id="J12-e1" data-exo="J12-e1" data-type="calcul" data-savoir="CN" data-a="IXgueGB4OTs2OS82eHZ4LHhgaG5qdGp2eC41NnhgaHRqdngveGB4Bi9oajs5eCc="><p class="k">Exercice · CN</p><h4>L’écart sur l’année, pour la maison</h4><div class="enonce">
-
-<p>La maison consomme 400 kWh par mois. Quel écart y a-t-il entre les deux offres <strong>sur une année entière</strong> ?</p>
-</div><div class="indice" hidden>D’abord l’écart d’un mois, ensuite la multiplication par douze. L’écart mensuel se lit dans la série ci-dessus.</div></section>
-<section class="exo" id="J12-e2" data-exo="J12-e2" data-type="justification" data-savoir="CN" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · CN</p><h4>Ce qu’on répond aux colocataires</h4><div class="enonce">
-
-<p>En deux phrases : quelle offre doit prendre la colocation, et pourquoi l’écart est-il si faible chez elle alors qu’il est énorme pour la maison ?</p>
-</div><div class="indice" hidden>Regardez les deux droites : elles se touchent à 150 kWh puis s’écartent. Plus on s’en éloigne, plus le choix compte.</div><ul class="verifier" hidden><li>J’ai dit que la colocation doit prendre l’offre B</li><li>J’ai dit que sa consommation est juste au-dessus des 150 kWh</li><li>J’ai dit que l’écart grandit à mesure qu’on s’éloigne du croisement</li></ul></section>
-<h2 id="ce-qui-reste-de-l-annee">Ce qui reste de l’année</h2>
-<p><strong>Une offre n’est pas moins chère « en général ».</strong> Elle l’est pour une certaine consommation, et le seul moyen de savoir laquelle prendre est de calculer les deux totaux pour <strong>sa propre</strong> consommation.</p>
-<h1 id="exercices-bilan-de-séquence">Exercices bilan de séquence</h1>
-<p><em>Un seul problème, qui reprend toute la séquence. On le fait d’un bout à l’autre, comme un vrai : il n’y a pas d’indication de méthode en cours de route. À la fin, on produit son fichier de réponses.</em></p>
-<h2 id="l-atelier-et-son-contrat">L’atelier et son contrat</h2>
-<p>L’atelier du lycée consomme <strong>250 kWh par mois</strong>. Le gestionnaire hésite entre les deux mêmes offres. Il veut aussi savoir ce que coûte le <strong>projecteur de chantier</strong> qu’on laisse allumé : <strong>500 W</strong>, <strong>6 heures</strong> par jour, <strong>20 jours</strong> par mois.</p>
-<blockquote>
-<p><strong>La question</strong> : « <em>Quelle offre prendre, et combien coûte le projecteur à lui seul ?</em> »</p>
-</blockquote>
-<p><strong>Lire la situation</strong></p>
-<p><strong>a)</strong> Relever la consommation de l’atelier, et les deux éléments de chaque offre.</p>
-<p><strong>b)</strong> Dire ce que mesure un kilowattheure.</p>
-<p><strong>Choisir la méthode</strong></p>
-<p><strong>c)</strong> Dire comment on calcule l’énergie consommée par un appareil dont on connaît la puissance et la durée.</p>
-<p><strong>d)</strong> Dire pourquoi on ne peut pas répondre « l’offre A, elle n’a pas d’abonnement » sans calculer.</p>
-<p><strong>Calculer</strong></p>
-<p><strong>e)</strong> Calculer l’énergie mensuelle du projecteur, en kilowattheures.</p>
-<p><strong>f)</strong> Calculer la facture de l’atelier avec l’offre A, puis avec l’offre B.</p>
-<p><strong>g)</strong> Calculer ce que coûte le projecteur à lui seul, avec l’offre retenue.</p>
-<p><strong>Conclure</strong></p>
-<p><strong>h)</strong> Répondre à la question par une phrase donnant <strong>les deux réponses</strong>.</p>
-<section class="serie" id="J12-s2" data-serie="J12-s2" data-savoir="CN" data-a="IXgveGB4eHZ4LjU2eGBodGp2eDN4YAEheCx4YGxqdGondiF4LHhgbW90aid2IXgseGBsbXRqJ3YheCx4YGJ0aid2IXgseGBraXRoJwcn"><p class="k">Série · CN</p><h4>Les cinq calculs du bilan</h4><div class="enonce">
-
-</div><ol class="items larges"><li><span class="q">l’énergie mensuelle du projecteur, en kilowattheures</span></li><li><span class="q">la facture de l’atelier avec l’offre A, en euros</span></li><li><span class="q">la facture de l’atelier avec l’offre B, en euros</span></li><li><span class="q">l’écart entre les deux offres, en euros</span></li><li><span class="q">ce que coûte le projecteur seul, avec l’offre retenue, en euros</span></li></ol><div class="indice" hidden>Le projecteur : puissance en kilowatts, multipliée par les heures, multipliée par les jours. Pour la part du projecteur, c’est son énergie multipliée par le prix du kWh de l’offre choisie — l’abonnement, lui, ne lui appartient pas.</div></section>
-<section class="exo" id="J12-e3" data-exo="J12-e3" data-type="justification" data-savoir="CN" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · CN</p><h4>La phrase de conclusion</h4><div class="enonce">
-
-<p>Répondre à la question en une phrase, <strong>avec les deux chiffres</strong>.</p>
-</div><div class="indice" hidden>Deux choses étaient demandées. Une réponse qui n’en traite qu’une perd la moitié des points.</div><ul class="verifier" hidden><li>J’ai dit que l’atelier doit prendre l’offre B</li><li>J’ai donné ce que coûte le projecteur, avec son unité</li><li>J’ai dit que l’abonnement ne se met pas sur le dos du projecteur</li></ul></section>
-<div class="remise">
-
-</div>
+<h2 id="trois-logements-trois-consommations">Trois logements, trois consommations</h2>
+
+<div class="enveloppe-tbl"><table>
+
+<thead>
+
+<tr>
+
+<th>Le logement</th>
+
+<th>Sa consommation mensuelle</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>un studio, chauffé au gaz</td>
+
+<td><strong>80 kWh</strong></td>
+
+</tr>
+
+<tr>
+
+<td>la colocation</td>
+
+<td><strong>186 kWh</strong></td>
+
+</tr>
+
+<tr>
+
+<td>une maison tout électrique</td>
+
+<td><strong>400 kWh</strong></td>
+
+</tr>
+
+</tbody>
+
+</table></div>
+
+<p>Les deux offres n’ont pas changé : <strong>A</strong> sans abonnement à 0,30 € le kWh, <strong>B</strong> avec 12 € d’abonnement et 0,22 € le kWh.</p>
+
+<figure class="schema"><div class="dessin" data-schema="offres-qui-se-croisent"></div><figcaption>Les trois logements, placés sur les mêmes droites.</figcaption></figure>
+
+<p><strong>Les trois sont de part et d’autre du croisement</strong>, et c’est ce qui rend la question intéressante : le studio est bien en dessous des 150 kWh, la maison très au-dessus, et la colocation juste après.</p>
+
+<h2 id="les-six-factures">Les six factures</h2>
+
+<section class="serie" id="J12-s1" data-serie="J12-s1" data-savoir="CN" data-a="IXgveGB4Bi9oajs5eHZ4LjU2eGBodGp2eDN4YAEheCx4YGhudGondiF4LHhgaGN0bCd2IXgseGBvb3RiJ3YheCx4YG9odGNoJ3YheCx4YGtoanRqJ3YheCx4YGtqanRqJwcn"><p class="k">Série · CN</p><h4>Ce que chaque logement paierait</h4><div class="enonce">
+
+
+
+</div><ol class="items larges"><li><span class="q">le studio, 80 kWh, avec l’offre A</span></li><li><span class="q">le studio, 80 kWh, avec l’offre B</span></li><li><span class="q">la colocation, 186 kWh, avec l’offre A</span></li><li><span class="q">la colocation, 186 kWh, avec l’offre B</span></li><li><span class="q">la maison, 400 kWh, avec l’offre A</span></li><li><span class="q">la maison, 400 kWh, avec l’offre B</span></li></ol><div class="indice" hidden>Toujours la même mécanique : multiplication pour A, multiplication puis addition des 12 € pour B. Six calculs, deux formules.</div></section>
+
+<div class="cle">
+
+<p><strong>Le studio a raison de prendre A, la maison a raison de prendre B</strong>, et aucun des deux ne se trompe. La bonne offre dépend de ce qu’on consomme, pas de ce qui est écrit en gros sur la publicité.</p>
+
+</div>
+
+<section class="exo" id="J12-e1" data-exo="J12-e1" data-type="calcul" data-savoir="CN" data-a="IXgueGB4OTs2OS82eHZ4LHhgaG5qdGp2eC41NnhgaHRqdngveGB4Bi9oajs5eCc="><p class="k">Exercice · CN</p><h4>L’écart sur l’année, pour la maison</h4><div class="enonce">
+
+
+
+<p>La maison consomme 400 kWh par mois. Quel écart y a-t-il entre les deux offres <strong>sur une année entière</strong> ?</p>
+
+</div><div class="indice" hidden>D’abord l’écart d’un mois, ensuite la multiplication par douze. L’écart mensuel se lit dans la série ci-dessus.</div></section>
+
+<section class="exo" id="J12-e2" data-exo="J12-e2" data-type="justification" data-savoir="CN" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · CN</p><h4>Ce qu’on répond aux colocataires</h4><div class="enonce">
+
+
+
+<p>En deux phrases : quelle offre doit prendre la colocation, et pourquoi l’écart est-il si faible chez elle alors qu’il est énorme pour la maison ?</p>
+
+</div><div class="indice" hidden>Regardez les deux droites : elles se touchent à 150 kWh puis s’écartent. Plus on s’en éloigne, plus le choix compte.</div><ul class="verifier" hidden><li>J’ai dit que la colocation doit prendre l’offre B</li><li>J’ai dit que sa consommation est juste au-dessus des 150 kWh</li><li>J’ai dit que l’écart grandit à mesure qu’on s’éloigne du croisement</li></ul></section>
+
+<h2 id="ce-qui-reste-de-l-annee">Ce qui reste de l’année</h2>
+
+<p><strong>Une offre n’est pas moins chère « en général ».</strong> Elle l’est pour une certaine consommation, et le seul moyen de savoir laquelle prendre est de calculer les deux totaux pour <strong>sa propre</strong> consommation.</p>
+
+<h1 id="exercices-bilan-de-séquence">Exercices bilan de séquence</h1>
+
+<p><em>Un seul problème, qui reprend toute la séquence. On le fait d’un bout à l’autre, comme un vrai : il n’y a pas d’indication de méthode en cours de route. À la fin, on produit son fichier de réponses.</em></p>
+
+<h2 id="l-atelier-et-son-contrat">L’atelier et son contrat</h2>
+
+<p>L’atelier du lycée consomme <strong>250 kWh par mois</strong>. Le gestionnaire hésite entre les deux mêmes offres. Il veut aussi savoir ce que coûte le <strong>projecteur de chantier</strong> qu’on laisse allumé : <strong>500 W</strong>, <strong>6 heures</strong> par jour, <strong>20 jours</strong> par mois.</p>
+
+<blockquote>
+
+<p><strong>La question</strong> : « <em>Quelle offre prendre, et combien coûte le projecteur à lui seul ?</em> »</p>
+
+</blockquote>
+
+<p><strong>Lire la situation</strong></p>
+
+<p><strong>a)</strong> Relever la consommation de l’atelier, et les deux éléments de chaque offre.</p>
+
+<p><strong>b)</strong> Dire ce que mesure un kilowattheure.</p>
+
+<p><strong>Choisir la méthode</strong></p>
+
+<p><strong>c)</strong> Dire comment on calcule l’énergie consommée par un appareil dont on connaît la puissance et la durée.</p>
+
+<p><strong>d)</strong> Dire pourquoi on ne peut pas répondre « l’offre A, elle n’a pas d’abonnement » sans calculer.</p>
+
+<p><strong>Calculer</strong></p>
+
+<p><strong>e)</strong> Calculer l’énergie mensuelle du projecteur, en kilowattheures.</p>
+
+<p><strong>f)</strong> Calculer la facture de l’atelier avec l’offre A, puis avec l’offre B.</p>
+
+<p><strong>g)</strong> Calculer ce que coûte le projecteur à lui seul, avec l’offre retenue.</p>
+
+<p><strong>Conclure</strong></p>
+
+<p><strong>h)</strong> Répondre à la question par une phrase donnant <strong>les deux réponses</strong>.</p>
+
+<section class="serie" id="J12-s2" data-serie="J12-s2" data-savoir="CN" data-a="IXgveGB4eHZ4LjU2eGBodGp2eDN4YAEheCx4YGxqdGondiF4LHhgbW90aid2IXgseGBsbXRqJ3YheCx4YGJ0aid2IXgseGBraXRoJwcn"><p class="k">Série · CN</p><h4>Les cinq calculs du bilan</h4><div class="enonce">
+
+
+
+</div><ol class="items larges"><li><span class="q">l’énergie mensuelle du projecteur, en kilowattheures</span></li><li><span class="q">la facture de l’atelier avec l’offre A, en euros</span></li><li><span class="q">la facture de l’atelier avec l’offre B, en euros</span></li><li><span class="q">l’écart entre les deux offres, en euros</span></li><li><span class="q">ce que coûte le projecteur seul, avec l’offre retenue, en euros</span></li></ol><div class="indice" hidden>Le projecteur : puissance en kilowatts, multipliée par les heures, multipliée par les jours. Pour la part du projecteur, c’est son énergie multipliée par le prix du kWh de l’offre choisie — l’abonnement, lui, ne lui appartient pas.</div></section>
+
+<section class="exo" id="J12-e3" data-exo="J12-e3" data-type="justification" data-savoir="CN" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · CN</p><h4>La phrase de conclusion</h4><div class="enonce">
+
+
+
+<p>Répondre à la question en une phrase, <strong>avec les deux chiffres</strong>.</p>
+
+</div><div class="indice" hidden>Deux choses étaient demandées. Une réponse qui n’en traite qu’une perd la moitié des points.</div><ul class="verifier" hidden><li>J’ai dit que l’atelier doit prendre l’offre B</li><li>J’ai donné ce que coûte le projecteur, avec son unité</li><li>J’ai dit que l’abonnement ne se met pas sur le dos du projecteur</li></ul></section>
+
+<div class="remise">
+
+
+
+</div>
+
 <nav class="suite"><p class="chapeau-s">La suite</p><div class="pas-a-pas"><a class="av" href="J11.html" rel="prev"><span class="k">&lsaquo; Précédent</span><span class="t">Séance 2 — les deux offres</span></a></div></nav>
 <p class="pied">Ce site rappelle la méthode. Aucun corrigé, rien n'est noté.</p><p class="pied-site"><a class="mentions" href="../mentions-legales.html">Mentions légales</a></p>
 </div>
-<script src="../assets/kit.js?v=b6f26f26"></script>
-<script src="../assets/site.js?v=b6f26f26"></script>
-<script src="../assets/vivant.js?v=b6f26f26"></script>
-<script src="../assets/plan.js?v=b6f26f26"></script>
-<script src="../assets/doc.js?v=b6f26f26"></script>
+

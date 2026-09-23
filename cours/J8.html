@@ -1,13 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta name="robots" content="noindex, nofollow">
 <title>Séance 8 — périmètre et aire</title>
-<link rel="stylesheet" href="../assets/kit.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/site.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/signalisation.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/vivant.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/doc.css?v=b6f26f26">
+<link rel="stylesheet" href="../assets/kit.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/site.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/signalisation.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/vivant.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/doc.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/impression.css?v=e72ab573">
+<script src="../assets/kit.js?v=e72ab573-c7a319" defer></script>
+<script src="../assets/site.js?v=e72ab573" defer></script>
+<script src="../assets/vivant.js?v=e72ab573" defer></script>
+<script src="../assets/plan.js?v=e72ab573" defer></script>
+<script src="../assets/doc.js?v=e72ab573" defer></script>
 
 <div class="page" data-site="cap-conso" data-page="cours/J8">
 <div class="jauge-lecture" id="jauge-lecture"><i></i></div><div class="barre-site"><a class="accueil" href="../index.html">Mathématiques et physique-chimie en CAP</a><span class="fleches"><a class="fleche" href="J7.html" rel="prev" title="Séance 7 — la décision" aria-label="Séance 7 — la décision">&lsaquo;</a><a class="fleche" href="J9.html" rel="next" title="Séance 9 — la décision" aria-label="Séance 9 — la décision">&rsaquo;</a></span><button type="button" class="lu" data-lu="cours/J8">Marquer comme lu</button></div>
@@ -23,53 +31,91 @@
 </header>
 <aside class="prerequis"><p class="chapeau-p">Avant de commencer</p><ul><li><b>Multiplier deux décimaux</b><span class="car">4,20 × 3,50 se pose comme 420 × 350, la virgule se replace à la fin.</span></li><li><b>Lire une cote sur un plan</b><span class="car">les dimensions sont écrites sur le dessin, il n'y a rien à mesurer à la règle.</span></li></ul></aside>
 <nav class="somm"><div class="in"><a href="#la-chambre">La chambre</a><a href="#les-meubles">Les meubles</a><a href="#perimetres-et-aires-pour-s-entrainer">Périmètres et aires, pour s’entraîner</a><a href="#ce-qui-reste-de-la-seance">Ce qui reste de la séance</a></div></nav>
-<h2 id="la-chambre">La chambre</h2>
-<figure>
-<img src="img/J8/fig8-plan-chambre.png" alt="Le plan coté de la chambre, meubles compris." />
-<figcaption aria-hidden="true">Le plan coté de la chambre, meubles compris.</figcaption>
-</figure>
-<p>La chambre mesure <strong>4,20 m sur 3,50 m</strong>.</p>
-<p>Deux questions se posent sur la même pièce, et <strong>elles n’ont pas la même réponse</strong>. Faire le tour, c’est le <strong>périmètre</strong>, et il se compte en mètres. Couvrir le sol, c’est l’<strong>aire</strong>, et elle se compte en mètres carrés.</p>
-<figure class="schema"><div class="dessin" data-schema="perimetre-ou-aire"></div><figcaption>La même pièce, le tour à gauche, la surface à droite.</figcaption></figure>
-<div class="cle">
-<p><strong>C’est l’unité de la réponse qui dit lequel calculer.</strong> Une plinthe s’achète au mètre, un sol au mètre carré : écrire l’unité avant de calculer évite de se tromper d’opération.</p>
-</div>
-<div class="cle">
-<p><strong>Deux calculs, deux unités.</strong> Le périmètre fait le tour et se compte en mètres ; l’aire couvre le sol et se compte en mètres carrés.</p>
-</div>
-<section class="exo" id="J8-e1" data-exo="J8-e1" data-type="calcul" data-savoir="GE" data-a="IXgueGB4OTs2OS82eHZ4LHhga290bnZ4LjU2eGBqdGp2eC94YHg3eCc="><p class="k">Exercice · GE</p><h4>Le tour de la pièce</h4><div class="enonce">
-
-<p>Calculez le périmètre de la chambre.</p>
-</div><div class="indice" hidden>Quatre côtés, deux longueurs et deux largeurs. On additionne, ou on double la somme des deux dimensions.</div></section>
-<section class="exo" id="J8-e2" data-exo="J8-e2" data-type="calcul" data-savoir="GE" data-a="IXgueGB4OTs2OS82eHZ4LHhga250bHZ4LjU2eGBqdGp2eC94YHg3eCc="><p class="k">Exercice · GE</p><h4>Les plinthes à commander</h4><div class="enonce">
-
-<p>On pose des plinthes tout autour, sauf devant la porte, large de 0,80 m. Quelle longueur faut-il commander ?</p>
-</div><div class="indice" hidden>On part du périmètre et on retire ce qui ne reçoit pas de plinthe. Aucune formule pour ça : il faut y penser.</div></section>
-<h2 id="les-meubles">Les meubles</h2>
-<section class="serie" id="J8-s1" data-serie="J8-s1" data-savoir="GE" data-a="IXgveGB4NwYvamo4aHh2eC41Nnhga3RqdngzeGABIXgseGBodGxsJ3YheCx4YGp0bWgndiF4LHhganRsJwcn"><p class="k">Série · GE</p><h4>Série — l’aire de chaque meuble</h4><div class="enonce">
-
-</div><ol class="items"><li><span class="q">le lit, 1,40 m × 1,90 m</span></li><li><span class="q">le bureau, 1,20 m × 0,60 m</span></li><li><span class="q">l’armoire, 1,00 m × 0,60 m</span></li></ol><div class="indice" hidden>Longueur fois largeur à chaque fois. Deux décimales au résultat quand les deux facteurs en ont une.</div></section>
-<section class="exo" id="J8-e3" data-exo="J8-e3" data-type="calcul" data-savoir="CN" data-a="IXgueGB4OTs2OS82eHZ4LHhga2p0bWh2eC41NnhganRqdngveGB4NwYvamo4aHgn"><p class="k">Exercice · CN</p><h4>Ce qui reste de libre</h4><div class="enonce">
-
-<p>Quelle aire reste-t-il au sol une fois les trois meubles posés ?</p>
-</div><div class="indice" hidden>Deux étapes : le total des trois meubles, puis la soustraction avec l’aire de la chambre.</div></section>
-<div class="piege">
-<p><strong>Répondre en mètres à une question d’aire.</strong> Un sol se compte en mètres carrés ; une plinthe, un tour de pièce, un câble se comptent en mètres.</p>
-</div>
-<h2 id="perimetres-et-aires-pour-s-entrainer">Périmètres et aires, pour s’entraîner</h2>
-<section class="serie" id="J8-s2" data-serie="J8-s2" data-savoir="GE" data-a="IXgveGB4N3h2eC41Nnhga3RqdngzeGABIXgseGBrbHRqJ3YheCx4YGtsdGondiF4LHhga210aid2IXgseGBranRqJwcn"><p class="k">Série · GE</p><h4>Série — le périmètre de ces rectangles</h4><div class="enonce">
-
-</div><ol class="items"><li><span class="q">5 m × 3 m</span></li><li><span class="q">4 m × 4 m</span></li><li><span class="q">6 m × 2,50 m</span></li><li><span class="q">3,20 m × 1,80 m</span></li></ol><div class="indice" hidden>On additionne les quatre côtés. Deux rectangles différents peuvent avoir le même périmètre.</div></section>
-<section class="serie" id="J8-s3" data-serie="J8-s3" data-savoir="GE" data-a="IXgveGB4NwYvamo4aHh2eC41Nnhga3RqdngzeGABIXgseGBrb3RqJ3YheCx4YGtsdGondiF4LHhga290aid2IXgseGBvdG1sJwcn"><p class="k">Série · GE</p><h4>Série — l’aire des mêmes rectangles</h4><div class="enonce">
-
-</div><ol class="items"><li><span class="q">5 m × 3 m</span></li><li><span class="q">4 m × 4 m</span></li><li><span class="q">6 m × 2,50 m</span></li><li><span class="q">3,20 m × 1,80 m</span></li></ol><div class="indice" hidden>Longueur fois largeur. Comparez avec la série précédente : même périmètre ne veut pas dire même aire.</div></section>
-<h2 id="ce-qui-reste-de-la-seance">Ce qui reste de la séance</h2>
-<p>Devant une question de place, on commence par <strong>écrire l’unité de la réponse attendue</strong>. Elle dit s’il faut faire le tour ou couvrir la surface.</p>
+<h2 id="la-chambre">La chambre</h2>
+
+<figure>
+
+<img src="img/J8/fig8-plan-chambre.png" alt="Le plan coté de la chambre, meubles compris." />
+
+<figcaption aria-hidden="true">Le plan coté de la chambre, meubles compris.</figcaption>
+
+</figure>
+
+<p>La chambre mesure <strong>4,20 m sur 3,50 m</strong>.</p>
+
+<p>Deux questions se posent sur la même pièce, et <strong>elles n’ont pas la même réponse</strong>. Faire le tour, c’est le <strong>périmètre</strong>, et il se compte en mètres. Couvrir le sol, c’est l’<strong>aire</strong>, et elle se compte en mètres carrés.</p>
+
+<figure class="schema"><div class="dessin" data-schema="perimetre-ou-aire"></div><figcaption>La même pièce, le tour à gauche, la surface à droite.</figcaption></figure>
+
+<div class="cle">
+
+<p><strong>C’est l’unité de la réponse qui dit lequel calculer.</strong> Une plinthe s’achète au mètre, un sol au mètre carré : écrire l’unité avant de calculer évite de se tromper d’opération.</p>
+
+</div>
+
+<div class="cle">
+
+<p><strong>Deux calculs, deux unités.</strong> Le périmètre fait le tour et se compte en mètres ; l’aire couvre le sol et se compte en mètres carrés.</p>
+
+</div>
+
+<section class="exo" id="J8-e1" data-exo="J8-e1" data-type="calcul" data-savoir="GE" data-a="IXgueGB4OTs2OS82eHZ4LHhga290bnZ4LjU2eGBqdGp2eC94YHg3eCc="><p class="k">Exercice · GE</p><h4>Le tour de la pièce</h4><div class="enonce">
+
+
+
+<p>Calculez le périmètre de la chambre.</p>
+
+</div><div class="indice" hidden>Quatre côtés, deux longueurs et deux largeurs. On additionne, ou on double la somme des deux dimensions.</div></section>
+
+<section class="exo" id="J8-e2" data-exo="J8-e2" data-type="calcul" data-savoir="GE" data-a="IXgueGB4OTs2OS82eHZ4LHhga250bHZ4LjU2eGBqdGp2eC94YHg3eCc="><p class="k">Exercice · GE</p><h4>Les plinthes à commander</h4><div class="enonce">
+
+
+
+<p>On pose des plinthes tout autour, sauf devant la porte, large de 0,80 m. Quelle longueur faut-il commander ?</p>
+
+</div><div class="indice" hidden>On part du périmètre et on retire ce qui ne reçoit pas de plinthe. Aucune formule pour ça : il faut y penser.</div></section>
+
+<h2 id="les-meubles">Les meubles</h2>
+
+<section class="serie" id="J8-s1" data-serie="J8-s1" data-savoir="GE" data-a="IXgveGB4NwYvamo4aHh2eC41Nnhga3RqdngzeGABIXgseGBodGxsJ3YheCx4YGp0bWgndiF4LHhganRsJwcn"><p class="k">Série · GE</p><h4>Série — l’aire de chaque meuble</h4><div class="enonce">
+
+
+
+</div><ol class="items"><li><span class="q">le lit, 1,40 m × 1,90 m</span></li><li><span class="q">le bureau, 1,20 m × 0,60 m</span></li><li><span class="q">l’armoire, 1,00 m × 0,60 m</span></li></ol><div class="indice" hidden>Longueur fois largeur à chaque fois. Deux décimales au résultat quand les deux facteurs en ont une.</div></section>
+
+<section class="exo" id="J8-e3" data-exo="J8-e3" data-type="calcul" data-savoir="CN" data-a="IXgueGB4OTs2OS82eHZ4LHhga2p0bWh2eC41NnhganRqdngveGB4NwYvamo4aHgn"><p class="k">Exercice · CN</p><h4>Ce qui reste de libre</h4><div class="enonce">
+
+
+
+<p>Quelle aire reste-t-il au sol une fois les trois meubles posés ?</p>
+
+</div><div class="indice" hidden>Deux étapes : le total des trois meubles, puis la soustraction avec l’aire de la chambre.</div></section>
+
+<div class="piege">
+
+<p><strong>Répondre en mètres à une question d’aire.</strong> Un sol se compte en mètres carrés ; une plinthe, un tour de pièce, un câble se comptent en mètres.</p>
+
+</div>
+
+<h2 id="perimetres-et-aires-pour-s-entrainer">Périmètres et aires, pour s’entraîner</h2>
+
+<section class="serie" id="J8-s2" data-serie="J8-s2" data-savoir="GE" data-a="IXgveGB4N3h2eC41Nnhga3RqdngzeGABIXgseGBrbHRqJ3YheCx4YGtsdGondiF4LHhga210aid2IXgseGBranRqJwcn"><p class="k">Série · GE</p><h4>Série — le périmètre de ces rectangles</h4><div class="enonce">
+
+
+
+</div><ol class="items"><li><span class="q">5 m × 3 m</span></li><li><span class="q">4 m × 4 m</span></li><li><span class="q">6 m × 2,50 m</span></li><li><span class="q">3,20 m × 1,80 m</span></li></ol><div class="indice" hidden>On additionne les quatre côtés. Deux rectangles différents peuvent avoir le même périmètre.</div></section>
+
+<section class="serie" id="J8-s3" data-serie="J8-s3" data-savoir="GE" data-a="IXgveGB4NwYvamo4aHh2eC41Nnhga3RqdngzeGABIXgseGBrb3RqJ3YheCx4YGtsdGondiF4LHhga290aid2IXgseGBvdG1sJwcn"><p class="k">Série · GE</p><h4>Série — l’aire des mêmes rectangles</h4><div class="enonce">
+
+
+
+</div><ol class="items"><li><span class="q">5 m × 3 m</span></li><li><span class="q">4 m × 4 m</span></li><li><span class="q">6 m × 2,50 m</span></li><li><span class="q">3,20 m × 1,80 m</span></li></ol><div class="indice" hidden>Longueur fois largeur. Comparez avec la série précédente : même périmètre ne veut pas dire même aire.</div></section>
+
+<h2 id="ce-qui-reste-de-la-seance">Ce qui reste de la séance</h2>
+
+<p>Devant une question de place, on commence par <strong>écrire l’unité de la réponse attendue</strong>. Elle dit s’il faut faire le tour ou couvrir la surface.</p>
+
 <nav class="suite"><p class="chapeau-s">La suite</p><div class="pas-a-pas"><a class="av" href="J7.html" rel="prev"><span class="k">&lsaquo; Précédent</span><span class="t">Séance 7 — la décision</span></a><a class="ap" href="J9.html" rel="next"><span class="k">Suivant &rsaquo;</span><span class="t">Séance 9 — la décision</span></a></div></nav>
 <p class="pied">Ce site rappelle la méthode. Aucun corrigé, rien n'est noté.</p><p class="pied-site"><a class="mentions" href="../mentions-legales.html">Mentions légales</a></p>
 </div>
-<script src="../assets/kit.js?v=b6f26f26"></script>
-<script src="../assets/site.js?v=b6f26f26"></script>
-<script src="../assets/vivant.js?v=b6f26f26"></script>
-<script src="../assets/plan.js?v=b6f26f26"></script>
-<script src="../assets/doc.js?v=b6f26f26"></script>
+

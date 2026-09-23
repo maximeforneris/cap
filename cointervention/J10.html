@@ -1,13 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta name="robots" content="noindex, nofollow">
 <title>Créneau 10 — le plan à l'écran</title>
-<link rel="stylesheet" href="../assets/kit.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/site.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/signalisation.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/vivant.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/doc.css?v=b6f26f26">
+<link rel="stylesheet" href="../assets/kit.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/site.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/signalisation.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/vivant.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/doc.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/impression.css?v=e72ab573">
+<script src="../assets/kit.js?v=e72ab573-c7a319" defer></script>
+<script src="../assets/site.js?v=e72ab573" defer></script>
+<script src="../assets/vivant.js?v=e72ab573" defer></script>
+<script src="../assets/plan.js?v=e72ab573" defer></script>
+<script src="../assets/doc.js?v=e72ab573" defer></script>
 
 <div class="page" data-site="cap-conso" data-page="cointervention/J10">
 <div class="jauge-lecture" id="jauge-lecture"><i></i></div><div class="barre-site"><a class="accueil" href="../index.html">Mathématiques et physique-chimie en CAP</a><span class="fleches"><a class="fleche" href="J9.html" rel="prev" title="Créneau 9 — le local à vélos" aria-label="Créneau 9 — le local à vélos">&lsaquo;</a></span><button type="button" class="lu" data-lu="cointervention/J10">Marquer comme lu</button></div>
@@ -23,110 +31,205 @@
 </header>
 <aside class="prerequis"><p class="chapeau-p">Avant de commencer</p><ul><li><b><a href="J9.html">L'aire et le périmètre du local</a></b><span class="ou">Séance 9 · Ça rentre ou pas ?</span><span class="car">les valeurs affichées à l'écran se comparent à celles calculées à la main.</span></li><li><b>Lire des coordonnées</b><span class="car">un point s'écrit avec son abscisse puis son ordonnée, dans cet ordre.</span></li></ul></aside>
 <nav class="somm"><div class="in"><a href="#la-saisie">La saisie</a><a href="#ce-que-le-logiciel-affiche">Ce que le logiciel affiche</a><a href="#l-angle-droit-sans-equerre">L’angle droit sans équerre</a><a href="#ce-qui-reste-du-creneau">Ce qui reste du créneau</a><a href="#le-local-technique-en-l">Le local technique en L</a></div></nav>
-<h2 id="la-saisie">La saisie</h2>
-<figure>
-<img src="img/J10/fig4-geogebra.png" alt="Le local construit par le logiciel, avec sa fenêtre Algèbre." />
-<figcaption aria-hidden="true">Le local construit par le logiciel, avec sa fenêtre Algèbre.</figcaption>
-</figure>
-<p>La ligne à taper, exactement :</p>
-<p><code>Polygone((0,0),(6,0),(6,2.5),(4,2.5),(4,4),(0,4))</code></p>
-<p>puis, sur la ligne suivante, <code>Périmètre(poly1)</code>.</p>
-<div class="piege">
-<p><strong>Le point et la virgule n’ont pas le même rôle.</strong> Les décimales s’écrivent avec un <strong>point</strong> — <code>2.5</code> —, et la virgule sépare les deux coordonnées d’un point — <code>(6, 2.5)</code>. Une virgule décimale, et le logiciel comprend un point de plus.</p>
-</div>
-<h2 id="ce-que-le-logiciel-affiche">Ce que le logiciel affiche</h2>
-<section class="exo" id="J10-e1" data-exo="J10-e1" data-type="calcul" data-savoir="GE" data-a="IXgueGB4OTs2OS82eHZ4LHhgaGt0anZ4LjU2eGBqdGp2eC94YHg3Bi9qajhoeCc="><p class="k">Exercice · GE</p><h4>L’aire à l’écran</h4><div class="enonce">
-
-<p>Quelle valeur GeoGebra affiche-t-il pour <code>poly1</code> ?</p>
-</div><div class="indice" hidden>La même que celle calculée à la main au créneau précédent. Si les deux diffèrent, c’est la saisie qui est fautive.</div></section>
-<section class="exo" id="J10-e2" data-exo="J10-e2" data-type="calcul" data-savoir="GE" data-a="IXgueGB4OTs2OS82eHZ4LHhgaGp0anZ4LjU2eGBqdGp2eC94YHg3eCc="><p class="k">Exercice · GE</p><h4>Le périmètre à l’écran</h4><div class="enonce">
-
-<p>Et pour <code>Périmètre(poly1)</code> ?</p>
-</div><div class="indice" hidden>Là encore, le même nombre qu’au créneau 9. L’ordinateur ne trouve rien de plus : il va plus vite.</div></section>
-<div class="cle">
-<p><strong>Ce que le logiciel apporte n’est pas le résultat, c’est le mouvement.</strong> On attrape un sommet, on le déplace : la forme change, l’aire affichée change, et le nombre de côtés, lui, ne change pas.</p>
-</div>
-<h2 id="l-angle-droit-sans-equerre">L’angle droit sans équerre</h2>
-<p>Sur un chantier, un angle droit se trace au mètre ruban avec trois longueurs : <strong>3, 4 et 5</strong>.</p>
-<p>C’est le théorème de Pythagore pris à l’envers : <strong>si les trois longueurs vérifient 3² + 4² = 5², alors l’angle est droit</strong>. On ne calcule rien sur le chantier, on mesure.</p>
-<figure class="schema"><div class="dessin" data-schema="triangle-3-4-5"></div><figcaption>Pythagore pris à l’envers, sur un chantier.</figcaption></figure>
-<section class="exo" id="J10-e3" data-exo="J10-e3" data-type="calcul" data-savoir="GE" data-a="IXgueGB4OTs2OS82eHZ4LHhgb3RqdnguNTZ4YGp0anZ4L3hgeDd4Jw=="><p class="k">Exercice · GE</p><h4>Le troisième côté</h4><div class="enonce">
-
-<p>Dans <code>Polygone((0,0),(4,0),(0,3))</code>, quelle longueur le logiciel donne-t-il au troisième côté ?</p>
-</div><div class="indice" hidden>Les deux côtés de l’angle droit mesurent 3 et 4. Pythagore donne le troisième, et c’est un nombre entier.</div></section>
-<section class="exo" id="J10-e4" data-exo="J10-e4" data-type="calcul" data-savoir="GE" data-a="IXgueGB4OTs2OS82eHZ4LHhgY2p0anZ4LjU2eGBqdGp2eC94YHgGL2pqOGp4Jw=="><p class="k">Exercice · GE</p><h4>L’angle mesuré</h4><div class="enonce">
-
-<p>Quel angle l’outil affiche-t-il au coin formé par les côtés de 3 m et 4 m ?</p>
-</div><div class="indice" hidden>C’est ce que le triangle 3-4-5 garantit, et c’est pour ça que les maçons s’en servent depuis toujours.</div></section>
-<h2 id="ce-qui-reste-du-creneau">Ce qui reste du créneau</h2>
-<p>Le triangle <strong>3-4-5</strong> se trace avec un mètre ruban et rien d’autre. Sur un chantier, il remplace l’équerre — et il ne se dérègle pas.</p>
-<h1 id="exercices-bilan-de-séquence">Exercices bilan de séquence</h1>
-<p><em>Un seul problème, qui reprend toute la séquence. On le fait d’un bout à l’autre, comme un vrai : il n’y a pas d’indication de méthode en cours de route. À la fin, on produit son fichier de réponses.</em></p>
-<h2 id="le-local-technique-en-l">Le local technique en L</h2>
-<p>Un local technique doit recevoir un sol technique. Il n’est pas rectangulaire : il porte un décrochement. Ses cotes, relevées sur place :</p>
-<table style="width:100%;">
-<colgroup>
-<col style="width: 14%" />
-<col style="width: 14%" />
-<col style="width: 14%" />
-<col style="width: 14%" />
-<col style="width: 14%" />
-<col style="width: 14%" />
-<col style="width: 14%" />
-</colgroup>
-<thead>
-<tr>
-<th>Le côté</th>
-<th>mur du fond</th>
-<th>retour droit</th>
-<th>décrochement</th>
-<th>décrochement</th>
-<th>mur du haut</th>
-<th>mur de gauche</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Longueur</td>
-<td>5,00 m</td>
-<td>2,00 m</td>
-<td>2,00 m</td>
-<td>1,50 m</td>
-<td>3,00 m</td>
-<td>3,50 m</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>La question</strong> : « <em>Quelle surface commander, et le mur de gauche est-il bien d’équerre ?</em> »</p>
-</blockquote>
-<p><strong>Lire la situation</strong></p>
-<p><strong>a)</strong> Dire pourquoi la formule L × l ne s’applique pas telle quelle à ce local.</p>
-<p><strong>b)</strong> Citer l’outil qui permet de vérifier un angle droit <strong>sans équerre</strong>.</p>
-<p><strong>Choisir la méthode</strong></p>
-<p><strong>c)</strong> Proposer une façon de calculer la surface d’un local en L.</p>
-<p><strong>d)</strong> Dire quelles trois longueurs il faut mesurer pour vérifier un angle droit au mètre ruban.</p>
-<p><strong>Calculer</strong></p>
-<p><strong>e)</strong> Découper le local en deux rectangles et calculer <strong>l’aire de chacun</strong>, puis l’aire totale.</p>
-<p><strong>f)</strong> Calculer le <strong>périmètre</strong> en additionnant les six côtés.</p>
-<p><strong>g)</strong> Vérifier, par le calcul, que 3, 4 et 5 forment bien un triangle rectangle.</p>
-<p><strong>Conclure</strong></p>
-<p><strong>h)</strong> Dire pourquoi le trait de découpe n’a aucune existence sur le chantier, puis répondre à la question.</p>
-<section class="serie" id="J10-s1" data-serie="J10-s1" data-savoir="GEOM" data-a="IXgveGB4eHZ4LjU2eGBodGp2eDN4YAEheCx4YGtqdGondiF4LHhgbnRvJ3YheCx4YGtudG8ndiF4LHhga210aid2IXgseGBob3RqJwcn"><p class="k">Série · GEOM</p><h4>Les cinq calculs du bilan</h4><div class="enonce">
-
-</div><ol class="items larges"><li><span class="q">l’aire du grand rectangle, en mètres carrés</span></li><li><span class="q">l’aire du petit rectangle, en mètres carrés</span></li><li><span class="q">l’aire totale du local, en mètres carrés</span></li><li><span class="q">le périmètre du local, en mètres</span></li><li><span class="q">la somme 3² + 4², sans unité</span></li></ol><div class="indice" hidden>Le grand rectangle fait 5 m sur 2 m, le petit 3 m sur 1,5 m. Le périmètre s’obtient en additionnant les six côtés donnés, sans en oublier.</div></section>
-<section class="exo" id="J10-e5" data-exo="J10-e5" data-type="justification" data-savoir="GEOM" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · GEOM</p><h4>Pourquoi le trait peut être placé ailleurs</h4><div class="enonce">
-
-<p>Expliquer en deux phrases pourquoi on peut découper ce local autrement et trouver la même aire.</p>
-</div><div class="indice" hidden>Le local est ce qu’il est. Ce qui change, c’est la façon dont on s’y prend pour le mesurer.</div><ul class="verifier" hidden><li>J’ai dit que le trait est une aide au calcul</li><li>J’ai dit qu’il n’existe pas sur le chantier</li><li>J’ai dit que la surface du local ne change pas</li></ul></section>
-<div class="remise">
-
-</div>
+<h2 id="la-saisie">La saisie</h2>
+
+<figure>
+
+<img src="img/J10/fig4-geogebra.png" alt="Le local construit par le logiciel, avec sa fenêtre Algèbre." />
+
+<figcaption aria-hidden="true">Le local construit par le logiciel, avec sa fenêtre Algèbre.</figcaption>
+
+</figure>
+
+<p>La ligne à taper, exactement :</p>
+
+<p><code>Polygone((0,0),(6,0),(6,2.5),(4,2.5),(4,4),(0,4))</code></p>
+
+<p>puis, sur la ligne suivante, <code>Périmètre(poly1)</code>.</p>
+
+<div class="piege">
+
+<p><strong>Le point et la virgule n’ont pas le même rôle.</strong> Les décimales s’écrivent avec un <strong>point</strong> — <code>2.5</code> —, et la virgule sépare les deux coordonnées d’un point — <code>(6, 2.5)</code>. Une virgule décimale, et le logiciel comprend un point de plus.</p>
+
+</div>
+
+<h2 id="ce-que-le-logiciel-affiche">Ce que le logiciel affiche</h2>
+
+<section class="exo" id="J10-e1" data-exo="J10-e1" data-type="calcul" data-savoir="GE" data-a="IXgueGB4OTs2OS82eHZ4LHhgaGt0anZ4LjU2eGBqdGp2eC94YHg3Bi9qajhoeCc="><p class="k">Exercice · GE</p><h4>L’aire à l’écran</h4><div class="enonce">
+
+
+
+<p>Quelle valeur GeoGebra affiche-t-il pour <code>poly1</code> ?</p>
+
+</div><div class="indice" hidden>La même que celle calculée à la main au créneau précédent. Si les deux diffèrent, c’est la saisie qui est fautive.</div></section>
+
+<section class="exo" id="J10-e2" data-exo="J10-e2" data-type="calcul" data-savoir="GE" data-a="IXgueGB4OTs2OS82eHZ4LHhgaGp0anZ4LjU2eGBqdGp2eC94YHg3eCc="><p class="k">Exercice · GE</p><h4>Le périmètre à l’écran</h4><div class="enonce">
+
+
+
+<p>Et pour <code>Périmètre(poly1)</code> ?</p>
+
+</div><div class="indice" hidden>Là encore, le même nombre qu’au créneau 9. L’ordinateur ne trouve rien de plus : il va plus vite.</div></section>
+
+<div class="cle">
+
+<p><strong>Ce que le logiciel apporte n’est pas le résultat, c’est le mouvement.</strong> On attrape un sommet, on le déplace : la forme change, l’aire affichée change, et le nombre de côtés, lui, ne change pas.</p>
+
+</div>
+
+<h2 id="l-angle-droit-sans-equerre">L’angle droit sans équerre</h2>
+
+<p>Sur un chantier, un angle droit se trace au mètre ruban avec trois longueurs : <strong>3, 4 et 5</strong>.</p>
+
+<p>C’est le théorème de Pythagore pris à l’envers : <strong>si les trois longueurs vérifient 3² + 4² = 5², alors l’angle est droit</strong>. On ne calcule rien sur le chantier, on mesure.</p>
+
+<figure class="schema"><div class="dessin" data-schema="triangle-3-4-5"></div><figcaption>Pythagore pris à l’envers, sur un chantier.</figcaption></figure>
+
+<section class="exo" id="J10-e3" data-exo="J10-e3" data-type="calcul" data-savoir="GE" data-a="IXgueGB4OTs2OS82eHZ4LHhgb3RqdnguNTZ4YGp0anZ4L3hgeDd4Jw=="><p class="k">Exercice · GE</p><h4>Le troisième côté</h4><div class="enonce">
+
+
+
+<p>Dans <code>Polygone((0,0),(4,0),(0,3))</code>, quelle longueur le logiciel donne-t-il au troisième côté ?</p>
+
+</div><div class="indice" hidden>Les deux côtés de l’angle droit mesurent 3 et 4. Pythagore donne le troisième, et c’est un nombre entier.</div></section>
+
+<section class="exo" id="J10-e4" data-exo="J10-e4" data-type="calcul" data-savoir="GE" data-a="IXgueGB4OTs2OS82eHZ4LHhgY2p0anZ4LjU2eGBqdGp2eC94YHgGL2pqOGp4Jw=="><p class="k">Exercice · GE</p><h4>L’angle mesuré</h4><div class="enonce">
+
+
+
+<p>Quel angle l’outil affiche-t-il au coin formé par les côtés de 3 m et 4 m ?</p>
+
+</div><div class="indice" hidden>C’est ce que le triangle 3-4-5 garantit, et c’est pour ça que les maçons s’en servent depuis toujours.</div></section>
+
+<h2 id="ce-qui-reste-du-creneau">Ce qui reste du créneau</h2>
+
+<p>Le triangle <strong>3-4-5</strong> se trace avec un mètre ruban et rien d’autre. Sur un chantier, il remplace l’équerre — et il ne se dérègle pas.</p>
+
+<h1 id="exercices-bilan-de-séquence">Exercices bilan de séquence</h1>
+
+<p><em>Un seul problème, qui reprend toute la séquence. On le fait d’un bout à l’autre, comme un vrai : il n’y a pas d’indication de méthode en cours de route. À la fin, on produit son fichier de réponses.</em></p>
+
+<h2 id="le-local-technique-en-l">Le local technique en L</h2>
+
+<p>Un local technique doit recevoir un sol technique. Il n’est pas rectangulaire : il porte un décrochement. Ses cotes, relevées sur place :</p>
+
+<table style="width:100%;">
+
+<colgroup>
+
+<col style="width: 14%" />
+
+<col style="width: 14%" />
+
+<col style="width: 14%" />
+
+<col style="width: 14%" />
+
+<col style="width: 14%" />
+
+<col style="width: 14%" />
+
+<col style="width: 14%" />
+
+</colgroup>
+
+<thead>
+
+<tr>
+
+<th>Le côté</th>
+
+<th>mur du fond</th>
+
+<th>retour droit</th>
+
+<th>décrochement</th>
+
+<th>décrochement</th>
+
+<th>mur du haut</th>
+
+<th>mur de gauche</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Longueur</td>
+
+<td>5,00 m</td>
+
+<td>2,00 m</td>
+
+<td>2,00 m</td>
+
+<td>1,50 m</td>
+
+<td>3,00 m</td>
+
+<td>3,50 m</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<blockquote>
+
+<p><strong>La question</strong> : « <em>Quelle surface commander, et le mur de gauche est-il bien d’équerre ?</em> »</p>
+
+</blockquote>
+
+<p><strong>Lire la situation</strong></p>
+
+<p><strong>a)</strong> Dire pourquoi la formule L × l ne s’applique pas telle quelle à ce local.</p>
+
+<p><strong>b)</strong> Citer l’outil qui permet de vérifier un angle droit <strong>sans équerre</strong>.</p>
+
+<p><strong>Choisir la méthode</strong></p>
+
+<p><strong>c)</strong> Proposer une façon de calculer la surface d’un local en L.</p>
+
+<p><strong>d)</strong> Dire quelles trois longueurs il faut mesurer pour vérifier un angle droit au mètre ruban.</p>
+
+<p><strong>Calculer</strong></p>
+
+<p><strong>e)</strong> Découper le local en deux rectangles et calculer <strong>l’aire de chacun</strong>, puis l’aire totale.</p>
+
+<p><strong>f)</strong> Calculer le <strong>périmètre</strong> en additionnant les six côtés.</p>
+
+<p><strong>g)</strong> Vérifier, par le calcul, que 3, 4 et 5 forment bien un triangle rectangle.</p>
+
+<p><strong>Conclure</strong></p>
+
+<p><strong>h)</strong> Dire pourquoi le trait de découpe n’a aucune existence sur le chantier, puis répondre à la question.</p>
+
+<section class="serie" id="J10-s1" data-serie="J10-s1" data-savoir="GEOM" data-a="IXgveGB4eHZ4LjU2eGBodGp2eDN4YAEheCx4YGtqdGondiF4LHhgbnRvJ3YheCx4YGtudG8ndiF4LHhga210aid2IXgseGBob3RqJwcn"><p class="k">Série · GEOM</p><h4>Les cinq calculs du bilan</h4><div class="enonce">
+
+
+
+</div><ol class="items larges"><li><span class="q">l’aire du grand rectangle, en mètres carrés</span></li><li><span class="q">l’aire du petit rectangle, en mètres carrés</span></li><li><span class="q">l’aire totale du local, en mètres carrés</span></li><li><span class="q">le périmètre du local, en mètres</span></li><li><span class="q">la somme 3² + 4², sans unité</span></li></ol><div class="indice" hidden>Le grand rectangle fait 5 m sur 2 m, le petit 3 m sur 1,5 m. Le périmètre s’obtient en additionnant les six côtés donnés, sans en oublier.</div></section>
+
+<section class="exo" id="J10-e5" data-exo="J10-e5" data-type="justification" data-savoir="GEOM" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · GEOM</p><h4>Pourquoi le trait peut être placé ailleurs</h4><div class="enonce">
+
+
+
+<p>Expliquer en deux phrases pourquoi on peut découper ce local autrement et trouver la même aire.</p>
+
+</div><div class="indice" hidden>Le local est ce qu’il est. Ce qui change, c’est la façon dont on s’y prend pour le mesurer.</div><ul class="verifier" hidden><li>J’ai dit que le trait est une aide au calcul</li><li>J’ai dit qu’il n’existe pas sur le chantier</li><li>J’ai dit que la surface du local ne change pas</li></ul></section>
+
+<div class="remise">
+
+
+
+</div>
+
 <nav class="suite"><p class="chapeau-s">La suite</p><div class="pas-a-pas"><a class="av" href="J9.html" rel="prev"><span class="k">&lsaquo; Précédent</span><span class="t">Créneau 9 — le local à vélos</span></a></div></nav>
 <p class="pied">Ce site rappelle la méthode. Aucun corrigé, rien n'est noté.</p><p class="pied-site"><a class="mentions" href="../mentions-legales.html">Mentions légales</a></p>
 </div>
-<script src="../assets/kit.js?v=b6f26f26"></script>
-<script src="../assets/site.js?v=b6f26f26"></script>
-<script src="../assets/vivant.js?v=b6f26f26"></script>
-<script src="../assets/plan.js?v=b6f26f26"></script>
-<script src="../assets/doc.js?v=b6f26f26"></script>
+

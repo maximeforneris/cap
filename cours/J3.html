@@ -1,13 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta name="robots" content="noindex, nofollow">
 <title>Séance 3 — la décision</title>
-<link rel="stylesheet" href="../assets/kit.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/site.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/signalisation.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/vivant.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/doc.css?v=b6f26f26">
+<link rel="stylesheet" href="../assets/kit.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/site.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/signalisation.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/vivant.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/doc.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/impression.css?v=e72ab573">
+<script src="../assets/kit.js?v=e72ab573-c7a319" defer></script>
+<script src="../assets/site.js?v=e72ab573" defer></script>
+<script src="../assets/vivant.js?v=e72ab573" defer></script>
+<script src="../assets/plan.js?v=e72ab573" defer></script>
+<script src="../assets/doc.js?v=e72ab573" defer></script>
 
 <div class="page" data-site="cap-conso" data-page="cours/J3">
 <div class="jauge-lecture" id="jauge-lecture"><i></i></div><div class="barre-site"><a class="accueil" href="../index.html">Mathématiques et physique-chimie en CAP</a><span class="fleches"><a class="fleche" href="J2.html" rel="prev" title="Séance 2 — quand ça dépasse" aria-label="Séance 2 — quand ça dépasse">&lsaquo;</a><a class="fleche" href="J4.html" rel="next" title="Séance 4 — série ou dérivation" aria-label="Séance 4 — série ou dérivation">&rsaquo;</a></span><button type="button" class="lu" data-lu="cours/J3">Marquer comme lu</button></div>
@@ -23,132 +31,249 @@
 </header>
 <aside class="prerequis"><p class="chapeau-p">Avant de commencer</p><ul><li><b><a href="J1.html">Additionner des puissances et les comparer à une limite</a></b><span class="ou">Séance 1 · Je peux tout brancher là-dessus ?</span><span class="car">c'est tout le calcul de la décision.</span></li><li><b><a href="J2.html">Ce qui se passe quand on dépasse</a></b><span class="ou">Séance 2 · Et si ça dépasse ?</span><span class="car">sans ça, la décision n'a pas de raison d'être.</span></li></ul></aside>
 <nav class="somm"><div class="in"><a href="#la-chambre-de-lea">La chambre de Léa</a><a href="#avec-le-radiateur-allume">Avec le radiateur allumé</a><a href="#ce-qui-reste-de-l-annee">Ce qui reste de l’année</a><a href="#la-rallonge-de-l-atelier">La rallonge de l’atelier</a></div></nav>
-<h2 id="la-chambre-de-lea">La chambre de Léa</h2>
-<p>Une seule prise, une multiprise dessus, et sept appareils qu’elle voudrait brancher.</p>
-<div class="enveloppe-tbl"><table>
-<colgroup>
-<col style="width: 12%" />
-<col style="width: 12%" />
-<col style="width: 12%" />
-<col style="width: 12%" />
-<col style="width: 12%" />
-<col style="width: 12%" />
-<col style="width: 12%" />
-<col style="width: 12%" />
-</colgroup>
-<thead>
-<tr>
-<th>L’appareil</th>
-<th>lampe</th>
-<th>chargeur</th>
-<th>enceinte</th>
-<th>console</th>
-<th>radiateur</th>
-<th>sèche-cheveux</th>
-<th>bouilloire</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Puissance</td>
-<td>9 W</td>
-<td>10 W</td>
-<td>30 W</td>
-<td>200 W</td>
-<td>1 000 W</td>
-<td>1 800 W</td>
-<td>2 200 W</td>
-</tr>
-<tr>
-<td>Par jour</td>
-<td>4 h</td>
-<td>2 h</td>
-<td>2 h</td>
-<td>3 h</td>
-<td>5 h</td>
-<td>10 min</td>
-<td>5 min</td>
-</tr>
-</tbody>
-</table></div>
-<div class="cle">
-<p><strong>Les deux appareils les plus gourmands sont ceux qu’elle utilise le moins longtemps.</strong> Ce n’est pas une coïncidence : ce sont ceux qui chauffent.</p>
-</div>
-<h2 id="avec-le-radiateur-allume">Avec le radiateur allumé</h2>
-<p>Le radiateur tourne tout l’hiver, 1 000 W. <strong>Il n’est jamais débranché</strong>, donc il faut le compter d’abord et raisonner sur ce qui reste.</p>
-<p>3 680 moins 1 000 : <strong>il reste 2 680 W</strong>. C’est cette nouvelle limite, plus basse, qu’il faut comparer à tout ce qu’on voudrait brancher en plus.</p>
-<figure class="schema"><div class="dessin" data-schema="radiateur-et-le-reste"></div><figcaption>Ce qui rentre encore dans les 2 680 W restants, et ce qui n’y rentre plus.</figcaption></figure>
-<p>Ce qui peut s’ajouter, et ce qui ne peut pas :</p>
-<section class="serie" id="J3-s1" data-serie="J3-s1" data-savoir="CN" data-a="IXgveGB4DXh2eC41Nnhga3RqdngzeGABIXgseGBrampjdGondiF4LHhga2hqanRqJ3YheCx4YGhiamp0aid2IXgseGBpaGpqdGondiF4LHhgb2pqanRqJwcn"><p class="k">Série · CN</p><h4>Série — le total avec le radiateur</h4><div class="enonce">
-
-</div><ol class="items larges"><li><span class="q">radiateur et lampe</span></li><li><span class="q">radiateur et console</span></li><li><span class="q">radiateur et sèche-cheveux</span></li><li><span class="q">radiateur et bouilloire</span></li><li><span class="q">radiateur, sèche-cheveux et bouilloire</span></li></ol><div class="indice" hidden>Chaque ligne repart du radiateur, 1 000 W, et ajoute. Comparez ensuite chaque total à 3 680 W.</div></section>
-<section class="exo" id="J3-e1" data-exo="J3-e1" data-type="calcul" data-savoir="CN" data-a="IXgueGB4OTs2OS82eHZ4LHhgb2huY3RqdnguNTZ4YGp0anZ4L3hgeA14Jw=="><p class="k">Exercice · CN</p><h4>Tout en même temps</h4><div class="enonce">
-
-<p>Léa branche les sept appareils ensemble. Quel est le total ?</p>
-</div><div class="indice" hidden>Les sept puissances du tableau, additionnées. Commencez par les trois grosses, les petites ensuite.</div></section>
-<section class="exo" id="J3-e2" data-exo="J3-e2" data-type="calcul" data-savoir="CN" data-a="IXgueGB4OTs2OS82eHZ4LHhga29sY3RqdnguNTZ4YGp0anZ4L3hgeA14Jw=="><p class="k">Exercice · CN</p><h4>De combien elle dépasse</h4><div class="enonce">
-
-<p>De combien de watts ce total dépasse-t-il ce que la multiprise accepte ?</p>
-</div><div class="indice" hidden>Une soustraction entre le total et la limite. Le résultat doit être plus petit que le total.</div></section>
-<section class="exo" id="J3-e3" data-exo="J3-e3" data-type="justification" data-savoir="CN" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · CN</p><h4>La réponse de la séquence</h4><div class="enonce">
-
-<p><em>Je peux tout brancher là-dessus ?</em> Répondez en deux phrases : la réponse, et ce qu’il faut faire à la place.</p>
-</div><div class="indice" hidden>Reprenez les deux totaux que vous venez de calculer. Le second dit exactement ce qu’il faut retirer.</div><ul class="verifier" hidden><li>J’ai répondu non, et j’ai donné un nombre.</li><li>J’ai dit lesquels des appareils posent problème.</li><li>J’ai dit qu’on ne les fait pas marcher en même temps.</li></ul></section>
-<h2 id="ce-qui-reste-de-l-annee">Ce qui reste de l’année</h2>
-<p><strong>Deux appareils qui chauffent en même temps, c’est déjà trop.</strong> La lampe, la console et l’enceinte ensemble ne posent aucun problème : ce ne sont pas elles qu’il faut surveiller.</p>
-<h1 id="exercices-bilan-de-séquence">Exercices bilan de séquence</h1>
-<p><em>Un seul problème, qui reprend toute la séquence 1. On le fait d’un bout à l’autre, comme un vrai : il n’y a pas d’indication de méthode en cours de route.</em></p>
-<h2 id="la-rallonge-de-l-atelier">La rallonge de l’atelier</h2>
-<p>Sur le chantier, une seule prise est disponible. L’équipe y branche une rallonge sur enrouleur, marquée <strong>10 A</strong>, sur un réseau à <strong>230 V</strong>.</p>
-<div class="enveloppe-tbl"><table>
-<thead>
-<tr>
-<th>L’appareil</th>
-<th>perceuse</th>
-<th>ponceuse</th>
-<th>chauffage d’appoint</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Puissance</td>
-<td>900 W</td>
-<td>700 W</td>
-<td>2 000 W</td>
-</tr>
-</tbody>
-</table></div>
-<blockquote>
-<p><strong>La question</strong> : « <em>Peut-on brancher les trois sur la même rallonge ?</em> »</p>
-</blockquote>
-<p><strong>Lire la situation</strong></p>
-<p><strong>a)</strong> Relever la valeur marquée sur la rallonge, et dire ce qu’elle mesure.</p>
-<p><strong>b)</strong> Calculer la <strong>puissance maximale</strong> que la rallonge accepte, sous 230 V.</p>
-<p><strong>c)</strong> Citer un risque lié à une surintensité dans une rallonge enroulée.</p>
-<p><strong>Choisir la méthode</strong></p>
-<p><strong>d)</strong> Dire comment les trois appareils sont branchés les uns par rapport aux autres : en série ou en dérivation.</p>
-<p><strong>e)</strong> Proposer une façon de vérifier, <strong>sans rien débrancher</strong>, que la rallonge n’est pas en surcharge.</p>
-<p><strong>Calculer</strong></p>
-<p><strong>f)</strong> Calculer la puissance totale de la <strong>perceuse et de la ponceuse</strong> seules, puis celle des <strong>trois</strong> appareils.</p>
-<p><strong>g)</strong> Pour chacun des deux cas, calculer l’<strong>intensité</strong> correspondante.</p>
-<p><strong>Conclure</strong></p>
-<p><strong>h)</strong> Dire lequel des deux cas dépasse la limite, et <strong>de combien de watts</strong>.</p>
-<p><strong>i)</strong> Répondre à la question par une phrase complète.</p>
-<section class="serie" id="J3-s2" data-serie="J3-s2" data-savoir="CN" data-a="IXgveGB4eHZ4LjU2eGBpdGp2eDN4YAEheCx4YGhpamp0aid2IXgseGBrbGpqdGondiF4LHhgaWxqanRqJ3YheCx4YGx0Y2wndiF4LHhga290bG8ndiF4LHhga2lqanRqJwcn"><p class="k">Série · CN</p><h4>Les six calculs du bilan</h4><div class="enonce">
-
-</div><ol class="items larges"><li><span class="q">la puissance maximale de la rallonge, en watts</span></li><li><span class="q">la perceuse et la ponceuse ensemble, en watts</span></li><li><span class="q">les trois appareils ensemble, en watts</span></li><li><span class="q">l’intensité pour les deux premiers, en ampères</span></li><li><span class="q">l’intensité pour les trois, en ampères</span></li><li><span class="q">le dépassement, en watts</span></li></ol><div class="indice" hidden>Une puissance se retrouve avec P = U × I, et une intensité avec I = P ÷ U. Le dépassement se compte par rapport à la puissance maximale, pas par rapport à 230.</div></section>
-<section class="exo" id="J3-e4" data-exo="J3-e4" data-type="justification" data-savoir="CN" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · CN</p><h4>La phrase de conclusion</h4><div class="enonce">
-
-<p>Répondre à la question en une phrase, <strong>avec son chiffre</strong>.</p>
-</div><div class="indice" hidden>« Non » ne répond pas à cette question. Il faut un nombre et la comparaison qui va avec.</div><ul class="verifier" hidden><li>J’ai dit que les trois ensemble ne passent pas</li><li>J’ai donné le dépassement, avec son unité</li><li>J’ai dit que la perceuse et la ponceuse seules, elles, passent</li></ul></section>
-<div class="remise">
-
-</div>
+<h2 id="la-chambre-de-lea">La chambre de Léa</h2>
+
+<p>Une seule prise, une multiprise dessus, et sept appareils qu’elle voudrait brancher.</p>
+
+<div class="enveloppe-tbl"><table>
+
+<colgroup>
+
+<col style="width: 12%" />
+
+<col style="width: 12%" />
+
+<col style="width: 12%" />
+
+<col style="width: 12%" />
+
+<col style="width: 12%" />
+
+<col style="width: 12%" />
+
+<col style="width: 12%" />
+
+<col style="width: 12%" />
+
+</colgroup>
+
+<thead>
+
+<tr>
+
+<th>L’appareil</th>
+
+<th>lampe</th>
+
+<th>chargeur</th>
+
+<th>enceinte</th>
+
+<th>console</th>
+
+<th>radiateur</th>
+
+<th>sèche-cheveux</th>
+
+<th>bouilloire</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Puissance</td>
+
+<td>9 W</td>
+
+<td>10 W</td>
+
+<td>30 W</td>
+
+<td>200 W</td>
+
+<td>1 000 W</td>
+
+<td>1 800 W</td>
+
+<td>2 200 W</td>
+
+</tr>
+
+<tr>
+
+<td>Par jour</td>
+
+<td>4 h</td>
+
+<td>2 h</td>
+
+<td>2 h</td>
+
+<td>3 h</td>
+
+<td>5 h</td>
+
+<td>10 min</td>
+
+<td>5 min</td>
+
+</tr>
+
+</tbody>
+
+</table></div>
+
+<div class="cle">
+
+<p><strong>Les deux appareils les plus gourmands sont ceux qu’elle utilise le moins longtemps.</strong> Ce n’est pas une coïncidence : ce sont ceux qui chauffent.</p>
+
+</div>
+
+<h2 id="avec-le-radiateur-allume">Avec le radiateur allumé</h2>
+
+<p>Le radiateur tourne tout l’hiver, 1 000 W. <strong>Il n’est jamais débranché</strong>, donc il faut le compter d’abord et raisonner sur ce qui reste.</p>
+
+<p>3 680 moins 1 000 : <strong>il reste 2 680 W</strong>. C’est cette nouvelle limite, plus basse, qu’il faut comparer à tout ce qu’on voudrait brancher en plus.</p>
+
+<figure class="schema"><div class="dessin" data-schema="radiateur-et-le-reste"></div><figcaption>Ce qui rentre encore dans les 2 680 W restants, et ce qui n’y rentre plus.</figcaption></figure>
+
+<p>Ce qui peut s’ajouter, et ce qui ne peut pas :</p>
+
+<section class="serie" id="J3-s1" data-serie="J3-s1" data-savoir="CN" data-a="IXgveGB4DXh2eC41Nnhga3RqdngzeGABIXgseGBrampjdGondiF4LHhga2hqanRqJ3YheCx4YGhiamp0aid2IXgseGBpaGpqdGondiF4LHhgb2pqanRqJwcn"><p class="k">Série · CN</p><h4>Série — le total avec le radiateur</h4><div class="enonce">
+
+
+
+</div><ol class="items larges"><li><span class="q">radiateur et lampe</span></li><li><span class="q">radiateur et console</span></li><li><span class="q">radiateur et sèche-cheveux</span></li><li><span class="q">radiateur et bouilloire</span></li><li><span class="q">radiateur, sèche-cheveux et bouilloire</span></li></ol><div class="indice" hidden>Chaque ligne repart du radiateur, 1 000 W, et ajoute. Comparez ensuite chaque total à 3 680 W.</div></section>
+
+<section class="exo" id="J3-e1" data-exo="J3-e1" data-type="calcul" data-savoir="CN" data-a="IXgueGB4OTs2OS82eHZ4LHhgb2huY3RqdnguNTZ4YGp0anZ4L3hgeA14Jw=="><p class="k">Exercice · CN</p><h4>Tout en même temps</h4><div class="enonce">
+
+
+
+<p>Léa branche les sept appareils ensemble. Quel est le total ?</p>
+
+</div><div class="indice" hidden>Les sept puissances du tableau, additionnées. Commencez par les trois grosses, les petites ensuite.</div></section>
+
+<section class="exo" id="J3-e2" data-exo="J3-e2" data-type="calcul" data-savoir="CN" data-a="IXgueGB4OTs2OS82eHZ4LHhga29sY3RqdnguNTZ4YGp0anZ4L3hgeA14Jw=="><p class="k">Exercice · CN</p><h4>De combien elle dépasse</h4><div class="enonce">
+
+
+
+<p>De combien de watts ce total dépasse-t-il ce que la multiprise accepte ?</p>
+
+</div><div class="indice" hidden>Une soustraction entre le total et la limite. Le résultat doit être plus petit que le total.</div></section>
+
+<section class="exo" id="J3-e3" data-exo="J3-e3" data-type="justification" data-savoir="CN" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · CN</p><h4>La réponse de la séquence</h4><div class="enonce">
+
+
+
+<p><em>Je peux tout brancher là-dessus ?</em> Répondez en deux phrases : la réponse, et ce qu’il faut faire à la place.</p>
+
+</div><div class="indice" hidden>Reprenez les deux totaux que vous venez de calculer. Le second dit exactement ce qu’il faut retirer.</div><ul class="verifier" hidden><li>J’ai répondu non, et j’ai donné un nombre.</li><li>J’ai dit lesquels des appareils posent problème.</li><li>J’ai dit qu’on ne les fait pas marcher en même temps.</li></ul></section>
+
+<h2 id="ce-qui-reste-de-l-annee">Ce qui reste de l’année</h2>
+
+<p><strong>Deux appareils qui chauffent en même temps, c’est déjà trop.</strong> La lampe, la console et l’enceinte ensemble ne posent aucun problème : ce ne sont pas elles qu’il faut surveiller.</p>
+
+<h1 id="exercices-bilan-de-séquence">Exercices bilan de séquence</h1>
+
+<p><em>Un seul problème, qui reprend toute la séquence 1. On le fait d’un bout à l’autre, comme un vrai : il n’y a pas d’indication de méthode en cours de route.</em></p>
+
+<h2 id="la-rallonge-de-l-atelier">La rallonge de l’atelier</h2>
+
+<p>Sur le chantier, une seule prise est disponible. L’équipe y branche une rallonge sur enrouleur, marquée <strong>10 A</strong>, sur un réseau à <strong>230 V</strong>.</p>
+
+<div class="enveloppe-tbl"><table>
+
+<thead>
+
+<tr>
+
+<th>L’appareil</th>
+
+<th>perceuse</th>
+
+<th>ponceuse</th>
+
+<th>chauffage d’appoint</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Puissance</td>
+
+<td>900 W</td>
+
+<td>700 W</td>
+
+<td>2 000 W</td>
+
+</tr>
+
+</tbody>
+
+</table></div>
+
+<blockquote>
+
+<p><strong>La question</strong> : « <em>Peut-on brancher les trois sur la même rallonge ?</em> »</p>
+
+</blockquote>
+
+<p><strong>Lire la situation</strong></p>
+
+<p><strong>a)</strong> Relever la valeur marquée sur la rallonge, et dire ce qu’elle mesure.</p>
+
+<p><strong>b)</strong> Calculer la <strong>puissance maximale</strong> que la rallonge accepte, sous 230 V.</p>
+
+<p><strong>c)</strong> Citer un risque lié à une surintensité dans une rallonge enroulée.</p>
+
+<p><strong>Choisir la méthode</strong></p>
+
+<p><strong>d)</strong> Dire comment les trois appareils sont branchés les uns par rapport aux autres : en série ou en dérivation.</p>
+
+<p><strong>e)</strong> Proposer une façon de vérifier, <strong>sans rien débrancher</strong>, que la rallonge n’est pas en surcharge.</p>
+
+<p><strong>Calculer</strong></p>
+
+<p><strong>f)</strong> Calculer la puissance totale de la <strong>perceuse et de la ponceuse</strong> seules, puis celle des <strong>trois</strong> appareils.</p>
+
+<p><strong>g)</strong> Pour chacun des deux cas, calculer l’<strong>intensité</strong> correspondante.</p>
+
+<p><strong>Conclure</strong></p>
+
+<p><strong>h)</strong> Dire lequel des deux cas dépasse la limite, et <strong>de combien de watts</strong>.</p>
+
+<p><strong>i)</strong> Répondre à la question par une phrase complète.</p>
+
+<section class="serie" id="J3-s2" data-serie="J3-s2" data-savoir="CN" data-a="IXgveGB4eHZ4LjU2eGBpdGp2eDN4YAEheCx4YGhpamp0aid2IXgseGBrbGpqdGondiF4LHhgaWxqanRqJ3YheCx4YGx0Y2wndiF4LHhga290bG8ndiF4LHhga2lqanRqJwcn"><p class="k">Série · CN</p><h4>Les six calculs du bilan</h4><div class="enonce">
+
+
+
+</div><ol class="items larges"><li><span class="q">la puissance maximale de la rallonge, en watts</span></li><li><span class="q">la perceuse et la ponceuse ensemble, en watts</span></li><li><span class="q">les trois appareils ensemble, en watts</span></li><li><span class="q">l’intensité pour les deux premiers, en ampères</span></li><li><span class="q">l’intensité pour les trois, en ampères</span></li><li><span class="q">le dépassement, en watts</span></li></ol><div class="indice" hidden>Une puissance se retrouve avec P = U × I, et une intensité avec I = P ÷ U. Le dépassement se compte par rapport à la puissance maximale, pas par rapport à 230.</div></section>
+
+<section class="exo" id="J3-e4" data-exo="J3-e4" data-type="justification" data-savoir="CN" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · CN</p><h4>La phrase de conclusion</h4><div class="enonce">
+
+
+
+<p>Répondre à la question en une phrase, <strong>avec son chiffre</strong>.</p>
+
+</div><div class="indice" hidden>« Non » ne répond pas à cette question. Il faut un nombre et la comparaison qui va avec.</div><ul class="verifier" hidden><li>J’ai dit que les trois ensemble ne passent pas</li><li>J’ai donné le dépassement, avec son unité</li><li>J’ai dit que la perceuse et la ponceuse seules, elles, passent</li></ul></section>
+
+<div class="remise">
+
+
+
+</div>
+
 <nav class="suite"><p class="chapeau-s">La suite</p><div class="pas-a-pas"><a class="av" href="J2.html" rel="prev"><span class="k">&lsaquo; Précédent</span><span class="t">Séance 2 — quand ça dépasse</span></a><a class="ap" href="J4.html" rel="next"><span class="k">Suivant &rsaquo;</span><span class="t">Séance 4 — série ou dérivation</span></a></div></nav>
 <p class="pied">Ce site rappelle la méthode. Aucun corrigé, rien n'est noté.</p><p class="pied-site"><a class="mentions" href="../mentions-legales.html">Mentions légales</a></p>
 </div>
-<script src="../assets/kit.js?v=b6f26f26"></script>
-<script src="../assets/site.js?v=b6f26f26"></script>
-<script src="../assets/vivant.js?v=b6f26f26"></script>
-<script src="../assets/plan.js?v=b6f26f26"></script>
-<script src="../assets/doc.js?v=b6f26f26"></script>
+

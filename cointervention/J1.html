@@ -1,13 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta name="robots" content="noindex, nofollow">
 <title>Créneau 1 — le corps dans le circuit</title>
-<link rel="stylesheet" href="../assets/kit.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/site.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/signalisation.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/vivant.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/doc.css?v=b6f26f26">
+<link rel="stylesheet" href="../assets/kit.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/site.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/signalisation.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/vivant.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/doc.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/impression.css?v=e72ab573">
+<script src="../assets/kit.js?v=e72ab573-c7a319" defer></script>
+<script src="../assets/site.js?v=e72ab573" defer></script>
+<script src="../assets/vivant.js?v=e72ab573" defer></script>
+<script src="../assets/plan.js?v=e72ab573" defer></script>
+<script src="../assets/doc.js?v=e72ab573" defer></script>
 
 <div class="page" data-site="cap-conso" data-page="cointervention/J1">
 <div class="jauge-lecture" id="jauge-lecture"><i></i></div><div class="barre-site"><a class="accueil" href="../index.html">Mathématiques et physique-chimie en CAP</a><span class="fleches"><a class="fleche" href="J2.html" rel="next" title="Créneau 2 — la loi d'Ohm" aria-label="Créneau 2 — la loi d'Ohm">&rsaquo;</a></span><button type="button" class="lu" data-lu="cointervention/J1">Marquer comme lu</button></div>
@@ -23,45 +31,75 @@
 </header>
 <aside class="prerequis"><p class="chapeau-p">Avant de commencer</p><ul><li><b>Lire une valeur avec son unité</b><span class="car">le multimètre affiche 30 sur deux calibres différents, et ce n'est pas la même chose.</span></li><li><b>Multiplier et diviser par 1 000</b><span class="car">entre le milliampère et l'ampère, il n'y a que ce facteur.</span></li></ul></aside>
 <nav class="somm"><div class="in"><a href="#ce-qu-on-a-vu-en-atelier">Ce qu’on a vu en atelier</a><a href="#le-calibre-change-tout">Le calibre change tout</a><a href="#sur-le-tableau">Sur le tableau</a><a href="#le-geste-professionnel">Le geste professionnel</a></div></nav>
-<h2 id="ce-qu-on-a-vu-en-atelier">Ce qu’on a vu en atelier</h2>
-<p>Un apprenti touche la phase, le différentiel déclenche, il s’en sort. Ce qui traverse le corps est <strong>le courant</strong>, pas la tension.</p>
-<p>La gravité se lit sur une courbe : elle dépend de l’intensité <strong>et</strong> du temps.</p>
-<div class="cle">
-<p><strong>30 mA, c’est le seuil du différentiel.</strong> Au-delà, le courant ne lâche plus la main et le cœur s’affole. C’est la valeur inscrite sur l’appareil du tableau.</p>
-</div>
-<figure>
-<img src="img/J1/fig1-courbe-securite.png" alt="La courbe de sécurité : l’intensité en abscisse, le temps en ordonnée." />
-<figcaption aria-hidden="true">La courbe de sécurité : l’intensité en abscisse, le temps en ordonnée.</figcaption>
-</figure>
-<p>Entre le courant qu’on sent à peine et celui qui arrête le cœur, <strong>il n’y a pas un grand écart en nombre d’ampères</strong> — mais un facteur cent. C’est ce qui rend l’échelle trompeuse : tout se joue dans les tout petits nombres.</p>
-<figure class="schema"><div class="dessin" data-schema="seuils-courant"></div><figcaption>Ce que fait le courant, de 0,5 mA à 1 A.</figcaption></figure>
-<h2 id="le-calibre-change-tout">Le calibre change tout</h2>
-<div class="piege">
-<p><strong>Le multimètre affiche un nombre, pas une unité.</strong> Sur le calibre 200 mA, 30 veut dire 30 milliampères ; sur le calibre 10 A, 30 voudrait dire 30 ampères, soit mille fois plus. On lit le calibre avant de noter la valeur.</p>
-</div>
-<section class="serie" id="J1-s1" data-serie="J1-s1" data-savoir="AU" data-a="IXgveGB4G3h2eC41Nnhga3RqdngzeGABIXgseGBqdGpqam8ndiF4LHhganRqayd2IXgseGBqdGppJ3YheCx4YGp0aSd2IXgseGBqdG8ndiF4LHhgb3RqJwcn"><p class="k">Série · AU</p><h4>Série — des milliampères vers les ampères</h4><div class="enonce">
-
-</div><ol class="items"><li><span class="q">0,5 mA</span></li><li><span class="q">10 mA</span></li><li><span class="q">30 mA</span></li><li><span class="q">300 mA</span></li><li><span class="q">500 mA</span></li><li><span class="q">5 000 mA</span></li></ol><div class="indice" hidden>Milli veut dire millième : on divise par 1 000, la virgule recule de trois rangs.</div></section>
-<h2 id="sur-le-tableau">Sur le tableau</h2>
-<section class="exo" id="J1-e1" data-exo="J1-e1" data-type="calcul" data-savoir="CN" data-a="IXgueGB4OTs2OS82eHZ4LHhganRqaXZ4LjU2eGBqdGp2eC94YHgbeCc="><p class="k">Exercice · CN</p><h4>Le différentiel en ampères</h4><div class="enonce">
-
-<p>Le différentiel porte l’indication <strong>30 mA</strong>. Combien cela fait-il en ampères ?</p>
-</div><div class="indice" hidden>Division par 1 000. Le nombre en ampères est forcément plus petit que celui en milliampères.</div></section>
-<section class="exo" id="J1-e2" data-exo="J1-e2" data-type="lecture" data-savoir="CN" data-a="IXgueGB4Nj85Li8oP3h2eDt4YAF4Nj96OTUvKDs0Lnh2eDk1Lyg7NC54dng2Bi9oamtjMzQuPzQpMy4GL2pqP2N4dngzNC4/NCkzLj94dng2P3o5NS8oOzQuegYvamo/YzY/OS4oMysvP3gHJw=="><p class="k">Exercice · CN</p><h4>Ce qui traverse le corps</h4><div class="enonce">
-
-<p>Des trois grandeurs vues en classe — la tension, le courant, la puissance —, laquelle traverse le corps et décide de la gravité ?</p>
-</div><div class="indice" hidden>C’est la grandeur que le différentiel surveille, et celle qui est en abscisse de la courbe de sécurité.</div></section>
-<section class="exo" id="J1-e3" data-exo="J1-e3" data-type="justification" data-savoir="CN" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · CN</p><h4>Pourquoi le différentiel a sauvé l’apprenti</h4><div class="enonce">
-
-<p>En deux phrases : que fait le différentiel, et pourquoi le disjoncteur, lui, n’aurait pas suffi ?</p>
-</div><div class="indice" hidden>Comparez les deux valeurs relevées sur le tableau : l’une est en milliampères, l’autre en ampères. Elles ne protègent pas la même chose.</div><ul class="verifier" hidden><li>J’ai dit que le différentiel coupe sur une fuite de courant.</li><li>J’ai cité le seuil de 30 mA.</li><li>J’ai dit que le disjoncteur protège l’installation, pas la personne.</li></ul></section>
-<h2 id="le-geste-professionnel">Le geste professionnel</h2>
-<p>Avant d’intervenir : <strong>consigner</strong>, vérifier l’absence de tension, et travailler hors tension. Le différentiel est un filet, pas une méthode de travail.</p>
+<h2 id="ce-qu-on-a-vu-en-atelier">Ce qu’on a vu en atelier</h2>
+
+<p>Un apprenti touche la phase, le différentiel déclenche, il s’en sort. Ce qui traverse le corps est <strong>le courant</strong>, pas la tension.</p>
+
+<p>La gravité se lit sur une courbe : elle dépend de l’intensité <strong>et</strong> du temps.</p>
+
+<div class="cle">
+
+<p><strong>30 mA, c’est le seuil du différentiel.</strong> Au-delà, le courant ne lâche plus la main et le cœur s’affole. C’est la valeur inscrite sur l’appareil du tableau.</p>
+
+</div>
+
+<figure>
+
+<img src="img/J1/fig1-courbe-securite.png" alt="La courbe de sécurité : l’intensité en abscisse, le temps en ordonnée." />
+
+<figcaption aria-hidden="true">La courbe de sécurité : l’intensité en abscisse, le temps en ordonnée.</figcaption>
+
+</figure>
+
+<p>Entre le courant qu’on sent à peine et celui qui arrête le cœur, <strong>il n’y a pas un grand écart en nombre d’ampères</strong> — mais un facteur cent. C’est ce qui rend l’échelle trompeuse : tout se joue dans les tout petits nombres.</p>
+
+<figure class="schema"><div class="dessin" data-schema="seuils-courant"></div><figcaption>Ce que fait le courant, de 0,5 mA à 1 A.</figcaption></figure>
+
+<h2 id="le-calibre-change-tout">Le calibre change tout</h2>
+
+<div class="piege">
+
+<p><strong>Le multimètre affiche un nombre, pas une unité.</strong> Sur le calibre 200 mA, 30 veut dire 30 milliampères ; sur le calibre 10 A, 30 voudrait dire 30 ampères, soit mille fois plus. On lit le calibre avant de noter la valeur.</p>
+
+</div>
+
+<section class="serie" id="J1-s1" data-serie="J1-s1" data-savoir="AU" data-a="IXgveGB4G3h2eC41Nnhga3RqdngzeGABIXgseGBqdGpqam8ndiF4LHhganRqayd2IXgseGBqdGppJ3YheCx4YGp0aSd2IXgseGBqdG8ndiF4LHhgb3RqJwcn"><p class="k">Série · AU</p><h4>Série — des milliampères vers les ampères</h4><div class="enonce">
+
+
+
+</div><ol class="items"><li><span class="q">0,5 mA</span></li><li><span class="q">10 mA</span></li><li><span class="q">30 mA</span></li><li><span class="q">300 mA</span></li><li><span class="q">500 mA</span></li><li><span class="q">5 000 mA</span></li></ol><div class="indice" hidden>Milli veut dire millième : on divise par 1 000, la virgule recule de trois rangs.</div></section>
+
+<h2 id="sur-le-tableau">Sur le tableau</h2>
+
+<section class="exo" id="J1-e1" data-exo="J1-e1" data-type="calcul" data-savoir="CN" data-a="IXgueGB4OTs2OS82eHZ4LHhganRqaXZ4LjU2eGBqdGp2eC94YHgbeCc="><p class="k">Exercice · CN</p><h4>Le différentiel en ampères</h4><div class="enonce">
+
+
+
+<p>Le différentiel porte l’indication <strong>30 mA</strong>. Combien cela fait-il en ampères ?</p>
+
+</div><div class="indice" hidden>Division par 1 000. Le nombre en ampères est forcément plus petit que celui en milliampères.</div></section>
+
+<section class="exo" id="J1-e2" data-exo="J1-e2" data-type="lecture" data-savoir="CN" data-a="IXgueGB4Nj85Li8oP3h2eDt4YAF4Nj96OTUvKDs0Lnh2eDk1Lyg7NC54dng2Bi9oamtjMzQuPzQpMy4GL2pqP2N4dngzNC4/NCkzLj94dng2P3o5NS8oOzQuegYvamo/YzY/OS4oMysvP3gHJw=="><p class="k">Exercice · CN</p><h4>Ce qui traverse le corps</h4><div class="enonce">
+
+
+
+<p>Des trois grandeurs vues en classe — la tension, le courant, la puissance —, laquelle traverse le corps et décide de la gravité ?</p>
+
+</div><div class="indice" hidden>C’est la grandeur que le différentiel surveille, et celle qui est en abscisse de la courbe de sécurité.</div></section>
+
+<section class="exo" id="J1-e3" data-exo="J1-e3" data-type="justification" data-savoir="CN" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · CN</p><h4>Pourquoi le différentiel a sauvé l’apprenti</h4><div class="enonce">
+
+
+
+<p>En deux phrases : que fait le différentiel, et pourquoi le disjoncteur, lui, n’aurait pas suffi ?</p>
+
+</div><div class="indice" hidden>Comparez les deux valeurs relevées sur le tableau : l’une est en milliampères, l’autre en ampères. Elles ne protègent pas la même chose.</div><ul class="verifier" hidden><li>J’ai dit que le différentiel coupe sur une fuite de courant.</li><li>J’ai cité le seuil de 30 mA.</li><li>J’ai dit que le disjoncteur protège l’installation, pas la personne.</li></ul></section>
+
+<h2 id="le-geste-professionnel">Le geste professionnel</h2>
+
+<p>Avant d’intervenir : <strong>consigner</strong>, vérifier l’absence de tension, et travailler hors tension. Le différentiel est un filet, pas une méthode de travail.</p>
+
 <nav class="suite"><p class="chapeau-s">La suite</p><div class="pas-a-pas"><a class="ap" href="J2.html" rel="next"><span class="k">Suivant &rsaquo;</span><span class="t">Créneau 2 — la loi d'Ohm</span></a></div></nav>
 <p class="pied">Ce site rappelle la méthode. Aucun corrigé, rien n'est noté.</p><p class="pied-site"><a class="mentions" href="../mentions-legales.html">Mentions légales</a></p>
 </div>
-<script src="../assets/kit.js?v=b6f26f26"></script>
-<script src="../assets/site.js?v=b6f26f26"></script>
-<script src="../assets/vivant.js?v=b6f26f26"></script>
-<script src="../assets/plan.js?v=b6f26f26"></script>
-<script src="../assets/doc.js?v=b6f26f26"></script>
+

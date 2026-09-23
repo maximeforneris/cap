@@ -1,13 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta name="robots" content="noindex, nofollow">
 <title>Séance 4 — série ou dérivation</title>
-<link rel="stylesheet" href="../assets/kit.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/site.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/signalisation.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/vivant.css?v=b6f26f26">
-<link rel="stylesheet" href="../assets/doc.css?v=b6f26f26">
+<link rel="stylesheet" href="../assets/kit.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/site.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/signalisation.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/vivant.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/doc.css?v=e72ab573">
+<link rel="stylesheet" href="../assets/impression.css?v=e72ab573">
+<script src="../assets/kit.js?v=e72ab573-c7a319" defer></script>
+<script src="../assets/site.js?v=e72ab573" defer></script>
+<script src="../assets/vivant.js?v=e72ab573" defer></script>
+<script src="../assets/plan.js?v=e72ab573" defer></script>
+<script src="../assets/doc.js?v=e72ab573" defer></script>
 
 <div class="page" data-site="cap-conso" data-page="cours/J4">
 <div class="jauge-lecture" id="jauge-lecture"><i></i></div><div class="barre-site"><a class="accueil" href="../index.html">Mathématiques et physique-chimie en CAP</a><span class="fleches"><a class="fleche" href="J3.html" rel="prev" title="Séance 3 — la décision" aria-label="Séance 3 — la décision">&lsaquo;</a><a class="fleche" href="J5.html" rel="next" title="Séance 5 — tensions et intensités" aria-label="Séance 5 — tensions et intensités">&rsaquo;</a></span><button type="button" class="lu" data-lu="cours/J4">Marquer comme lu</button></div>
@@ -23,45 +31,75 @@
 </header>
 <aside class="prerequis"><p class="chapeau-p">Avant de commencer</p><ul><li><b>Reconnaître une boucle fermée sur un dessin</b><span class="car">un circuit est un chemin qui revient à son point de départ, sinon rien ne passe.</span></li><li><b>Le vocabulaire de la prise et de l'ampoule</b><span class="car">on parle de branches, de fils et de bornes, pas de fils rouges et bleus.</span></li></ul></aside>
 <nav class="somm"><div class="in"><a href="#ce-qu-on-a-vu">Ce qu’on a vu</a><a href="#serie-ou-derivation">Série ou dérivation</a><a href="#les-symboles">Les symboles</a><a href="#ce-qui-reste-de-la-seance">Ce qui reste de la séance</a></div></nav>
-<h2 id="ce-qu-on-a-vu">Ce qu’on a vu</h2>
-<p>Deux guirlandes, deux montages. <strong>En série</strong>, un seul chemin pour le courant ; <strong>en dérivation</strong>, autant de chemins que de branches.</p>
-<figure>
-<img src="img/J4/fig5-serie-derivation.png" alt="Les deux montages : une seule boucle, ou plusieurs branches." />
-<figcaption aria-hidden="true">Les deux montages : une seule boucle, ou plusieurs branches.</figcaption>
-</figure>
-<div class="cle">
-<p><strong>Une ampoule grille.</strong> En série, tout s’éteint — le chemin est coupé. En dérivation, les autres restent allumées : leur chemin à elles est intact.</p>
-</div>
-<h2 id="serie-ou-derivation">Série ou dérivation</h2>
-<p><strong>Une seule question tranche : combien de chemins le courant peut-il prendre ?</strong> En série il n’y en a qu’un, donc tout le monde dépend de tout le monde. En dérivation chaque branche a le sien, et ce qui arrive à l’une ne regarde pas les autres.</p>
-<figure class="schema"><div class="dessin" data-schema="serie-ou-derivation"></div><figcaption>La même ampoule grillée, dans les deux montages.</figcaption></figure>
-<div class="cle">
-<p><strong>Une installation de logement est toujours en dérivation.</strong> Si elle était en série, changer une ampoule éteindrait la maison entière — et chaque appareil recevrait une part de tension au lieu des 230 V dont il a besoin.</p>
-</div>
-<section class="exo" id="J4-e1" data-exo="J4-e1" data-type="lecture" data-savoir="AU" data-a="IXgueGB4Nj85Li8oP3h2eDt4YAF4PgYvamo/YygzLDsuMzU0eHZ4PzR6PgYvamo/YygzLDsuMzU0eHZ4Njt6PgYvamo/YygzLDsuMzU0eHZ4Pj8oMyw7LjM1NHgHJw=="><p class="k">Exercice · AU</p><h4>La guirlande qui résiste à une panne</h4><div class="enonce">
-
-<p>Vous achetez une guirlande. Laquelle tient encore quand une ampoule grille : celle en série, ou celle en dérivation ?</p>
-</div><div class="indice" hidden>Celle où chaque ampoule a son propre chemin. Coupez-en un, les autres ne sont pas sur ce chemin-là.</div></section>
-<section class="exo" id="J4-e2" data-exo="J4-e2" data-type="lecture" data-savoir="AU" data-a="IXgueGB4Nj85Li8oP3h2eDt4YAF4PgYvamo/YygzLDsuMzU0eHZ4PzR6PgYvamo/YygzLDsuMzU0eHZ4Njt6PgYvamo/YygzLDsuMzU0eHZ4Pj8oMyw7LjM1NHgHJw=="><p class="k">Exercice · AU</p><h4>Les prises de l’appartement</h4><div class="enonce">
-
-<p>Les prises d’un appartement sont toutes montées de la même façon. Série ou dérivation ?</p>
-</div><div class="indice" hidden>Débranchez la télé : la lampe du salon s’éteint-elle ? La réponse dit le montage.</div></section>
-<div class="piege">
-<p><strong>« En série » ne veut pas dire « l’un après l’autre dans la pièce ».</strong> Ce qui compte est le nombre de chemins, pas la place des appareils : deux prises côte à côte peuvent être sur deux branches.</p>
-</div>
-<section class="exo" id="J4-e3" data-exo="J4-e3" data-type="justification" data-savoir="AU" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · AU</p><h4>Pourquoi l’appartement n’est pas en série</h4><div class="enonce">
-
-<p>En une phrase : qu’est-ce qui se passerait dans un appartement câblé en série ?</p>
-</div><div class="indice" hidden>Transposez la guirlande en série à l’échelle d’un logement : une ampoule grillée, et le reste ?</div><ul class="verifier" hidden><li>J’ai dit qu’un seul appareil éteint couperait tout.</li><li>J’ai parlé du chemin unique du courant.</li><li>J’ai dit que chaque prise doit marcher seule.</li></ul></section>
-<h2 id="les-symboles">Les symboles</h2>
-<p>Quatre symboles suffisent pour tout schématiser cette année : <strong>la pile</strong> — deux traits, un long et un court —, <strong>la lampe</strong> — un rond avec une croix —, <strong>l’interrupteur</strong> — un trait qui se lève — et <strong>le fil</strong>, un trait droit.</p>
-<h2 id="ce-qui-reste-de-la-seance">Ce qui reste de la séance</h2>
-<p>Devant un circuit, une seule question : <strong>combien de chemins ?</strong> La réponse décide de tout le reste.</p>
+<h2 id="ce-qu-on-a-vu">Ce qu’on a vu</h2>
+
+<p>Deux guirlandes, deux montages. <strong>En série</strong>, un seul chemin pour le courant ; <strong>en dérivation</strong>, autant de chemins que de branches.</p>
+
+<figure>
+
+<img src="img/J4/fig5-serie-derivation.png" alt="Les deux montages : une seule boucle, ou plusieurs branches." />
+
+<figcaption aria-hidden="true">Les deux montages : une seule boucle, ou plusieurs branches.</figcaption>
+
+</figure>
+
+<div class="cle">
+
+<p><strong>Une ampoule grille.</strong> En série, tout s’éteint — le chemin est coupé. En dérivation, les autres restent allumées : leur chemin à elles est intact.</p>
+
+</div>
+
+<h2 id="serie-ou-derivation">Série ou dérivation</h2>
+
+<p><strong>Une seule question tranche : combien de chemins le courant peut-il prendre ?</strong> En série il n’y en a qu’un, donc tout le monde dépend de tout le monde. En dérivation chaque branche a le sien, et ce qui arrive à l’une ne regarde pas les autres.</p>
+
+<figure class="schema"><div class="dessin" data-schema="serie-ou-derivation"></div><figcaption>La même ampoule grillée, dans les deux montages.</figcaption></figure>
+
+<div class="cle">
+
+<p><strong>Une installation de logement est toujours en dérivation.</strong> Si elle était en série, changer une ampoule éteindrait la maison entière — et chaque appareil recevrait une part de tension au lieu des 230 V dont il a besoin.</p>
+
+</div>
+
+<section class="exo" id="J4-e1" data-exo="J4-e1" data-type="lecture" data-savoir="AU" data-a="IXgueGB4Nj85Li8oP3h2eDt4YAF4PgYvamo/YygzLDsuMzU0eHZ4PzR6PgYvamo/YygzLDsuMzU0eHZ4Njt6PgYvamo/YygzLDsuMzU0eHZ4Pj8oMyw7LjM1NHgHJw=="><p class="k">Exercice · AU</p><h4>La guirlande qui résiste à une panne</h4><div class="enonce">
+
+
+
+<p>Vous achetez une guirlande. Laquelle tient encore quand une ampoule grille : celle en série, ou celle en dérivation ?</p>
+
+</div><div class="indice" hidden>Celle où chaque ampoule a son propre chemin. Coupez-en un, les autres ne sont pas sur ce chemin-là.</div></section>
+
+<section class="exo" id="J4-e2" data-exo="J4-e2" data-type="lecture" data-savoir="AU" data-a="IXgueGB4Nj85Li8oP3h2eDt4YAF4PgYvamo/YygzLDsuMzU0eHZ4PzR6PgYvamo/YygzLDsuMzU0eHZ4Njt6PgYvamo/YygzLDsuMzU0eHZ4Pj8oMyw7LjM1NHgHJw=="><p class="k">Exercice · AU</p><h4>Les prises de l’appartement</h4><div class="enonce">
+
+
+
+<p>Les prises d’un appartement sont toutes montées de la même façon. Série ou dérivation ?</p>
+
+</div><div class="indice" hidden>Débranchez la télé : la lampe du salon s’éteint-elle ? La réponse dit le montage.</div></section>
+
+<div class="piege">
+
+<p><strong>« En série » ne veut pas dire « l’un après l’autre dans la pièce ».</strong> Ce qui compte est le nombre de chemins, pas la place des appareils : deux prises côte à côte peuvent être sur deux branches.</p>
+
+</div>
+
+<section class="exo" id="J4-e3" data-exo="J4-e3" data-type="justification" data-savoir="AU" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · AU</p><h4>Pourquoi l’appartement n’est pas en série</h4><div class="enonce">
+
+
+
+<p>En une phrase : qu’est-ce qui se passerait dans un appartement câblé en série ?</p>
+
+</div><div class="indice" hidden>Transposez la guirlande en série à l’échelle d’un logement : une ampoule grillée, et le reste ?</div><ul class="verifier" hidden><li>J’ai dit qu’un seul appareil éteint couperait tout.</li><li>J’ai parlé du chemin unique du courant.</li><li>J’ai dit que chaque prise doit marcher seule.</li></ul></section>
+
+<h2 id="les-symboles">Les symboles</h2>
+
+<p>Quatre symboles suffisent pour tout schématiser cette année : <strong>la pile</strong> — deux traits, un long et un court —, <strong>la lampe</strong> — un rond avec une croix —, <strong>l’interrupteur</strong> — un trait qui se lève — et <strong>le fil</strong>, un trait droit.</p>
+
+<h2 id="ce-qui-reste-de-la-seance">Ce qui reste de la séance</h2>
+
+<p>Devant un circuit, une seule question : <strong>combien de chemins ?</strong> La réponse décide de tout le reste.</p>
+
 <nav class="suite"><p class="chapeau-s">La suite</p><div class="pas-a-pas"><a class="av" href="J3.html" rel="prev"><span class="k">&lsaquo; Précédent</span><span class="t">Séance 3 — la décision</span></a><a class="ap" href="J5.html" rel="next"><span class="k">Suivant &rsaquo;</span><span class="t">Séance 5 — tensions et intensités</span></a></div></nav>
 <p class="pied">Ce site rappelle la méthode. Aucun corrigé, rien n'est noté.</p><p class="pied-site"><a class="mentions" href="../mentions-legales.html">Mentions légales</a></p>
 </div>
-<script src="../assets/kit.js?v=b6f26f26"></script>
-<script src="../assets/site.js?v=b6f26f26"></script>
-<script src="../assets/vivant.js?v=b6f26f26"></script>
-<script src="../assets/plan.js?v=b6f26f26"></script>
-<script src="../assets/doc.js?v=b6f26f26"></script>
+
