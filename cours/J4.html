@@ -4,75 +4,140 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta name="robots" content="noindex, nofollow">
-<title>Séance 4 — série ou dérivation</title>
-<link rel="stylesheet" href="../assets/kit.css?v=a5997817">
-<link rel="stylesheet" href="../assets/site.css?v=a5997817">
-<link rel="stylesheet" href="../assets/signalisation.css?v=a5997817">
-<link rel="stylesheet" href="../assets/vivant.css?v=a5997817">
-<link rel="stylesheet" href="../assets/doc.css?v=a5997817">
-<link rel="stylesheet" href="../assets/calculette.css?v=a5997817">
-<link rel="stylesheet" href="../assets/formulaire.css?v=a5997817">
-<link rel="stylesheet" href="../assets/impression.css?v=a5997817">
-<script src="../assets/kit.js?v=a5997817-b95721" defer></script>
-<script src="../assets/site.js?v=a5997817" defer></script>
-<script src="../assets/vivant.js?v=a5997817" defer></script>
-<script src="../assets/plan.js?v=a5997817" defer></script>
-<script src="../assets/doc.js?v=a5997817" defer></script>
-<script src="../assets/nombres.js?v=a5997817" defer></script>
-<script src="../assets/calculette.js?v=a5997817" defer></script>
-<script src="../assets/formulaire.js?v=a5997817" defer></script>
-<script src="../assets/formulaire-donnees.js?v=a5997817" defer></script>
-<script src="../assets/outils-page.js?v=a5997817" defer></script>
+<title>Séance 1 — la concentration massique</title>
+<link rel="stylesheet" href="../assets/kit.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/site.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/signalisation.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/vivant.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/doc.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/calculette.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/formulaire.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/impression.css?v=d30585d0">
+<script src="../assets/kit.js?v=d30585d0-1537e3" defer></script>
+<script src="../assets/site.js?v=d30585d0" defer></script>
+<script src="../assets/vivant.js?v=d30585d0" defer></script>
+<script src="../assets/plan.js?v=d30585d0" defer></script>
+<script src="../assets/doc.js?v=d30585d0" defer></script>
+<script src="../assets/nombres.js?v=d30585d0" defer></script>
+<script src="../assets/calculette.js?v=d30585d0" defer></script>
+<script src="../assets/formulaire.js?v=d30585d0" defer></script>
+<script src="../assets/formulaire-donnees.js?v=d30585d0" defer></script>
+<script src="../assets/outils-page.js?v=d30585d0" defer></script>
 
 <div class="page" data-site="cap-conso" data-page="cours/J4">
-<div class="jauge-lecture" id="jauge-lecture"><i></i></div><div class="barre-site"><a class="accueil" href="../index.html">Mathématiques et physique-chimie en CAP</a><span class="fleches"><a class="fleche" href="J3.html" rel="prev" title="Séance 3 — la décision" aria-label="Séance 3 — la décision">&lsaquo;</a><a class="fleche" href="J5.html" rel="next" title="Séance 5 — tensions et intensités" aria-label="Séance 5 — tensions et intensités">&rsaquo;</a></span><button type="button" class="lu" data-lu="cours/J4">Marquer comme lu</button></div>
+<div class="jauge-lecture" id="jauge-lecture"><i></i></div><div class="barre-site"><a class="accueil" href="../index.html">Mathématiques et physique-chimie en CAP</a><button type="button" class="lu" data-lu="cours/J4">Marquer comme lu</button></div>
 <header class="tete">
   <span class="num" aria-hidden="true">4</span>
   <div class="titraille">
     <p class="sur">CAP Électricien · 1re année</p>
-    <h1>Pourquoi la guirlande<span>ne s'allume plus ?</span></h1>
+    <h1>La citronnade<span>est-elle trop sucrée ?</span></h1>
   </div>
-  <p class="accroche">Un seul chemin, ou plusieurs. Toute la différence tient là, et elle se voit le jour où une ampoule grille.</p>
-  <p class="contenu">3 exercices · 2 figures</p>
-  <p class="k-savoirs">Savoirs travaillés</p><div class="savoirs"><span class="tag">CN Calculs numériques</span><span class="tag">AU Automatismes</span></div>
+  <p class="accroche">240 g de sucre dans 2 L de citronnade, c'est 120 g dans chaque litre. Ce nombre, la concentration, compare toutes les boissons, du verre à la carafe.</p>
+  <p class="contenu">5 questions · 5 exercices · 18 items d'entraînement · 4 figures</p>
+  <p class="k-savoirs">Savoirs travaillés</p><div class="savoirs"><span class="tag">AA Algèbre et analyse</span><span class="tag">CN Calculs numériques</span><span class="tag">AU Automatismes</span></div>
 </header>
-<aside class="prerequis"><p class="chapeau-p">Avant de commencer</p><ul><li><b>Reconnaître une boucle fermée sur un dessin</b><span class="car">un circuit est un chemin qui revient à son point de départ, sinon rien ne passe.</span></li><li><b>Le vocabulaire de la prise et de l'ampoule</b><span class="car">on parle de branches, de fils et de bornes, pas de fils rouges et bleus.</span></li></ul></aside>
-<nav class="somm"><div class="in"><a href="#ce-qu-on-a-vu">Ce qu’on a vu</a><a href="#serie-ou-derivation">Série ou dérivation</a><a href="#les-symboles">Les symboles</a><a href="#ce-qui-reste-de-la-seance">Ce qui reste de la séance</a></div></nav>
-<h2 id="ce-qu-on-a-vu">Ce qu’on a vu</h2>
-<p>Deux guirlandes, deux montages. <strong>En série</strong>, un seul chemin pour le courant ; <strong>en dérivation</strong>, autant de chemins que de branches.</p>
+<aside class="prerequis"><p class="chapeau-p">Avant de commencer</p><ul><li><b><a href="../conso/FICHE-15-tableau-proportionnalite.html">Le tableau de proportionnalité</a></b><span class="ou">Fiche 15 — tableau de proportionnalité</span><span class="car">le sucre et le volume de la citronnade sont proportionnels, et le coefficient du tableau est la concentration.</span></li><li><b><a href="../conso/FICHE-12-volumes.html">Passer des centilitres et des millilitres aux litres</a></b><span class="ou">Fiche 12 — volumes</span><span class="car">une concentration se calcule avec un volume en litres.</span></li></ul></aside>
+<nav class="somm"><div class="in"><a href="#la-question">La question</a><a href="#la-recette">La recette</a><a href="#la-boisson-la-plus-sucree">La boisson la plus sucrée</a><a href="#preparer-une-solution-sur-la-tablette">Préparer une solution, sur la tablette</a><a href="#je-m-entraine">Je m’entraîne</a><a href="#pour-ceux-qui-ont-fini">Pour ceux qui ont fini</a><a href="#ce-qui-reste-de-la-seance">Ce qui reste de la séance</a></div></nav>
+<h2 id="la-question">La question</h2>
 <figure>
-<img src="img/J4/fig5-serie-derivation.png" alt="Les deux montages : une seule boucle, ou plusieurs branches." />
-<figcaption aria-hidden="true">Les deux montages : une seule boucle, ou plusieurs branches.</figcaption>
+<img src="img/J4/ill-food-truck.png" alt="Le food-truck d’Inès et Yanis, et sa citronnade maison sur le comptoir." />
+<figcaption aria-hidden="true">Le food-truck d’Inès et Yanis, et sa citronnade maison sur le comptoir.</figcaption>
 </figure>
-<div class="cle">
-<p><strong>Une ampoule grille.</strong> En série, tout s’éteint — le chemin est coupé. En dérivation, les autres restent allumées : leur chemin à elles est intact.</p>
-</div>
-<h2 id="serie-ou-derivation">Série ou dérivation</h2>
-<p><strong>Une seule question tranche : combien de chemins le courant peut-il prendre ?</strong> En série il n’y en a qu’un, donc tout le monde dépend de tout le monde. En dérivation chaque branche a le sien, et ce qui arrive à l’une ne regarde pas les autres.</p>
-<figure class="schema"><div class="dessin" data-schema="serie-ou-derivation"></div><figcaption>La même ampoule grillée, dans les deux montages.</figcaption></figure>
-<div class="cle">
-<p><strong>Une installation de logement est toujours en dérivation.</strong> Si elle était en série, changer une ampoule éteindrait la maison entière — et chaque appareil recevrait une part de tension au lieu des 230 V dont il a besoin.</p>
-</div>
-<section class="exo" id="J4-e1" data-exo="J4-e1" data-type="lecture" data-savoir="AU" data-a="IXgueGB4Nj85Li8oP3h2eDt4YAF4PgYvamo/YygzLDsuMzU0eHZ4PzR6PgYvamo/YygzLDsuMzU0eHZ4Njt6PgYvamo/YygzLDsuMzU0eHZ4Pj8oMyw7LjM1NHgHJw=="><p class="k">Exercice · AU</p><h4>La guirlande qui résiste à une panne</h4><div class="enonce">
+<p><strong>La citronnade est-elle trop sucrée ?</strong> Combien de morceaux de sucre dans un verre, à ton avis ? Écris ta réponse avant de commencer : on la relira à la fin de la séquence.</p>
+<h2 id="la-recette">La recette</h2>
+<figure>
+<img src="img/J4/ill-recette.png" alt="La fiche recette : 240 g de sucre pour 2 L de citronnade. À côté, un morceau de sucre de 5 g et un verre de 25 cL." />
+<figcaption aria-hidden="true">La fiche recette : 240 g de sucre pour 2 L de citronnade. À côté, un morceau de sucre de 5 g et un verre de 25 cL.</figcaption>
+</figure>
+<p>Deux fois plus de citronnade, deux fois plus de sucre : le sucre et le volume sont <strong>proportionnels</strong>. On cherche d’abord le sucre d’un litre, puis on multiplie par le volume voulu.</p>
+<section class="serie" id="J4-s1" data-serie="J4-s1" data-savoir="AA" data-a="IXgveGB4PXh2eC41Nnhga3RqdngzeGABIXgseGBraGp0aid2IXgseGBuYmp0aid2IXgseGBsanRqJ3YheCx4YGlqdGonByc="><p class="k">Série · AA</p><h4>Le sucre de la citronnade</h4><div class="enonce">
 
-<p>Vous achetez une guirlande. Laquelle tient encore quand une ampoule grille : celle en série, ou celle en dérivation ?</p>
-</div><div class="indice" hidden>Celle où chaque ampoule a son propre chemin. Coupez-en un, les autres ne sont pas sur ce chemin-là.</div></section>
-<section class="exo" id="J4-e2" data-exo="J4-e2" data-type="lecture" data-savoir="AU" data-a="IXgueGB4Nj85Li8oP3h2eDt4YAF4PgYvamo/YygzLDsuMzU0eHZ4PzR6PgYvamo/YygzLDsuMzU0eHZ4Njt6PgYvamo/YygzLDsuMzU0eHZ4Pj8oMyw7LjM1NHgHJw=="><p class="k">Exercice · AU</p><h4>Les prises de l’appartement</h4><div class="enonce">
+</div><ol class="items"><li><span class="q">1 L</span></li><li><span class="q">4 L</span></li><li><span class="q">0,5 L</span></li><li><span class="q">0,25 L</span></li></ol><div class="indice" hidden>Le sucre d’un litre d’abord : 240 g pour 2 L, on divise par 2. Ensuite, on multiplie ce nombre par le volume.</div></section>
+<section class="exo" id="J4-e1" data-exo="J4-e1" data-type="calcul" data-savoir="CN" data-a="IXgueGB4OTs2OS82eHZ4LHhgbHRqdnguNTZ4YGp0anZ4L3hgeHgn"><p class="k">Exercice · CN</p><h4>Les morceaux d’un verre</h4><div class="enonce">
 
-<p>Les prises d’un appartement sont toutes montées de la même façon. Série ou dérivation ?</p>
-</div><div class="indice" hidden>Débranchez la télé : la lampe du salon s’éteint-elle ? La réponse dit le montage.</div></section>
+<p>Un verre fait 25 cL, soit 0,25 L, et un morceau de sucre pèse 5 g. Combien de morceaux de sucre dans un verre de citronnade ?</p>
+</div><div class="indice" hidden>Le sucre d’un verre de 0,25 L se lit dans la série juste au-dessus. Puis : combien de fois 5 g dans cette masse ?</div></section>
+<div class="formule">
+<p><strong>concentration massique = masse ÷ volume</strong></p>
+<ul>
+<li><strong>la masse</strong><span>du soluté, ici le sucre — en grammes (g)</span></li>
+<li><strong>le volume</strong><span>de la solution, ici la citronnade — en litres (L)</span></li>
+<li><strong>la concentration</strong><span>en grammes par litre (g/L)</span></li>
+</ul>
+<blockquote>
+<p>240 g de sucre dans 2 L : 240 ÷ 2 = 120 g/L.</p>
+</blockquote>
+</div>
 <div class="piege">
-<p><strong>« En série » ne veut pas dire « l’un après l’autre dans la pièce ».</strong> Ce qui compte est le nombre de chemins, pas la place des appareils : deux prises côte à côte peuvent être sur deux branches.</p>
+<p><strong>Croire que la carafe est plus sucrée que le verre.</strong> Elle contient plus de sucre, mais aussi plus de citronnade : c’est la même boisson, 120 g dans chaque litre, au verre comme à la carafe.</p>
 </div>
-<section class="exo" id="J4-e3" data-exo="J4-e3" data-type="justification" data-savoir="AU" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · AU</p><h4>Pourquoi l’appartement n’est pas en série</h4><div class="enonce">
+<h2 id="la-boisson-la-plus-sucree">La boisson la plus sucrée</h2>
+<figure>
+<img src="img/J4/ill-boissons.png" alt="Cinq boissons et leur étiquette : la citronnade, 2 L et 240 g de sucre ; le soda, 25 cL et 27 g ; le jus d’orange, 1 L et 90 g ; le thé glacé, 50 cL et 20 g ; l’eau aromatisée, 50 cL et 15 g." />
+<figcaption aria-hidden="true">Cinq boissons et leur étiquette : la citronnade, 2 L et 240 g de sucre ; le soda, 25 cL et 27 g ; le jus d’orange, 1 L et 90 g ; le thé glacé, 50 cL et 20 g ; l’eau aromatisée, 50 cL et 15 g.</figcaption>
+</figure>
+<p>Pour comparer deux boissons, on ne compare pas leur sucre : une carafe en a toujours plus qu’un verre. <strong>On compare leur concentration</strong>, le sucre d’un litre.</p>
+<section class="serie" id="J4-s2" data-serie="J4-s2" data-savoir="AA" data-a="IXgveGB4PXUWeHZ4LjU2eGBrdGp2eDN4YAEheCx4YGtqYnRqJ3YheCx4YGNqdGondiF4LHhgbmp0aid2IXgseGBpanRqJwcn"><p class="k">Série · AA</p><h4>La concentration de chaque boisson</h4><div class="enonce">
 
-<p>En une phrase : qu’est-ce qui se passerait dans un appartement câblé en série ?</p>
-</div><div class="indice" hidden>Transposez la guirlande en série à l’échelle d’un logement : une ampoule grillée, et le reste ?</div><ul class="verifier" hidden><li>J’ai dit qu’un seul appareil éteint couperait tout.</li><li>J’ai parlé du chemin unique du courant.</li><li>J’ai dit que chaque prise doit marcher seule.</li></ul></section>
-<h2 id="les-symboles">Les symboles</h2>
-<p>Quatre symboles suffisent pour tout schématiser cette année : <strong>la pile</strong> — deux traits, un long et un court —, <strong>la lampe</strong> — un rond avec une croix —, <strong>l’interrupteur</strong> — un trait qui se lève — et <strong>le fil</strong>, un trait droit.</p>
+</div><ol class="items"><li><span class="q">le soda</span></li><li><span class="q">le jus d’orange</span></li><li><span class="q">le thé glacé</span></li><li><span class="q">l’eau aromatisée</span></li></ol><div class="indice" hidden>Le volume en litres d’abord : 25 cL = 0,25 L, 50 cL = 0,5 L. Puis le sucre divisé par ce volume.</div></section>
+<div class="quiz">
+<ul>
+<li>La boisson la plus sucrée des cinq est : <strong>la citronnade</strong> | le soda | le jus d’orange</li>
+<li>Comparée au soda, la citronnade maison est : <strong>plus sucrée</strong> | moins sucrée</li>
+</ul>
+</div>
+<h2 id="preparer-une-solution-sur-la-tablette">Préparer une solution, sur la tablette</h2>
+<figure>
+<img src="img/J4/ill-dissolution.png" alt="La paillasse : le flacon de sulfate de cuivre, la balance et sa coupelle, la fiole jaugée de 100 mL et son entonnoir, la pissette." />
+<figcaption aria-hidden="true">La paillasse : le flacon de sulfate de cuivre, la balance et sa coupelle, la fiole jaugée de 100 mL et son entonnoir, la pissette.</figcaption>
+</figure>
+<p>Dans l’atelier de physique-chimie, on prépare une solution bleue de sulfate de cuivre. Le solide disparaît dans l’eau, mais <strong>il est toujours là</strong> : on dit qu’il est <strong>dissous</strong>.</p>
+<div class="etapes">
+<ol type="1">
+<li>Faire la tare, la coupelle posée sur la balance.</li>
+<li>Peser 2,50 g de sulfate de cuivre dans la coupelle.</li>
+<li>Verser le solide dans la fiole jaugée, par l’entonnoir.</li>
+<li>Remplir d’eau aux trois quarts, boucher, retourner jusqu’à ce que tout soit dissous.</li>
+<li>Compléter avec la pissette jusqu’au trait de jauge, puis retourner encore.</li>
+</ol>
+</div>
+<div class="cle">
+<p><strong>Soluté, solvant, solution.</strong> Le solide dissous est le <strong>soluté</strong>, l’eau est le <strong>solvant</strong>, le mélange obtenu est la <strong>solution</strong>.</p>
+</div>
+<section class="exo" id="J4-e2" data-exo="J4-e2" data-type="calcul" data-savoir="AA" data-a="IXgueGB4OTs2OS82eHZ4LHhgaG90anZ4LjU2eGBrdGp2eC94YHg9dRZ4Jw=="><p class="k">Exercice · AA</p><h4>La concentration préparée</h4><div class="enonce">
+
+<p>On a dissous <strong>2,50 g</strong> de sulfate de cuivre dans une fiole jaugée de <strong>100 mL</strong>. Quelle est la concentration de la solution, en g/L ?</p>
+</div><div class="indice" hidden>Le volume en litres d’abord : 100 mL, c’est un dixième de litre. Puis la masse divisée par ce volume.</div></section>
+<h2 id="je-m-entraine">Je m’entraîne</h2>
+<section class="serie" id="J4-s3" data-serie="J4-s3" data-savoir="CN" data-a="IXgveGB4Fnh2eC41Nnhga3RqdngzeGABIXgseGBqdGhvJ3YheCx4YGp0aG8ndiF4LHhganRpaSd2IXgseGBrdG8ndiF4LHhganRtbycHJw=="><p class="k">Série · CN</p><h4>Série 1 — convertir en litres</h4><div class="enonce">
+
+</div><ol class="items"><li><span class="q">25 cL</span></li><li><span class="q">250 mL</span></li><li><span class="q">33 cL</span></li><li><span class="q">1 500 mL</span></li><li><span class="q">75 cL</span></li></ol><div class="indice" hidden>1 L = 100 cL = 1 000 mL. Des centilitres, on divise par 100 ; des millilitres, par 1 000.</div></section>
+<section class="serie" id="J4-s4" data-serie="J4-s4" data-savoir="AA" data-a="IXgveGB4PXUWeHZ4LjU2eGBrdGp2eDN4YAEheCx4YGlqdGondiF4LHhgaGp0aid2IXgseGBraGp0aid2IXgseGBpanRqJ3YheCx4YGtqanRqJwcn"><p class="k">Série · AA</p><h4>Série 2 — la concentration</h4><div class="enonce">
+
+</div><ol class="items"><li><span class="q">60 g dans 2 L</span></li><li><span class="q">10 g dans 0,5 L</span></li><li><span class="q">30 g dans 0,25 L</span></li><li><span class="q">90 g dans 3 L</span></li><li><span class="q">50 g dans 500 mL</span></li></ol><div class="indice" hidden>La masse divisée par le volume en litres. Diviser par 0,5, c’est multiplier par 2 ; diviser par 0,25, c’est multiplier par 4.</div></section>
+<div class="quiz">
+<ul>
+<li>La concentration se calcule par : <strong>masse ÷ volume</strong> | volume ÷ masse</li>
+<li>Le volume doit être en : centilitres | <strong>litres</strong></li>
+<li>Un verre et une carafe de la même citronnade ont : <strong>la même concentration</strong> | des concentrations différentes</li>
+</ul>
+</div>
+<h2 id="pour-ceux-qui-ont-fini">Pour ceux qui ont fini</h2>
+<section class="exo" id="J4-e3" data-exo="J4-e3" data-type="calcul" data-savoir="AA" data-a="IXgueGB4OTs2OS82eHZ4LHhgY2xqdGp2eC41NnhganRqdngveGB4PXgn"><p class="k">Exercice · AA</p><h4>La fontaine</h4><div class="enonce">
+
+<p>La fontaine du food-truck contient <strong>8 L</strong> de citronnade à <strong>120 g/L</strong>. Combien de grammes de sucre contient-elle ?</p>
+</div><div class="indice" hidden>Cette fois on multiplie : la concentration par le volume en litres.</div></section>
+<section class="exo" id="J4-e4" data-exo="J4-e4" data-type="calcul" data-savoir="AA" data-a="IXgueGB4OTs2OS82eHZ4LHhgb250anZ4LjU2eGBqdGp2eC94YHg9eCc="><p class="k">Exercice · AA</p><h4>La grande canette</h4><div class="enonce">
+
+<p>Une canette de <strong>50 cL</strong> du même soda, à <strong>108 g/L</strong>. Combien de grammes de sucre contient-elle ?</p>
+</div><div class="indice" hidden>50 cL en litres d’abord, puis la concentration multipliée par ce volume.</div></section>
+<section class="exo" id="J4-e5" data-exo="J4-e5" data-type="calcul" data-savoir="AA" data-a="IXgueGB4OTs2OS82eHZ4LHhgYnRpdnguNTZ4YGt0anZ4L3hgeBZ4Jw=="><p class="k">Exercice · AA</p><h4>Le paquet de sucre</h4><div class="enonce">
+
+<p>Avec <strong>1 kg</strong> de sucre, combien de litres de citronnade à <strong>120 g/L</strong> peut-on préparer ? Arrondir au dixième.</p>
+</div><div class="indice" hidden>1 kg = 1 000 g. Chaque litre en prend 120 g : combien de fois 120 g dans 1 000 g ?</div></section>
 <h2 id="ce-qui-reste-de-la-seance">Ce qui reste de la séance</h2>
-<p>Devant un circuit, une seule question : <strong>combien de chemins ?</strong> La réponse décide de tout le reste.</p>
-<nav class="suite"><p class="chapeau-s">La suite</p><div class="pas-a-pas"><a class="av" href="J3.html" rel="prev"><span class="k">&lsaquo; Précédent</span><span class="t">Séance 3 — la décision</span></a><a class="ap" href="J5.html" rel="next"><span class="k">Suivant &rsaquo;</span><span class="t">Séance 5 — tensions et intensités</span></a></div></nav>
+<p><strong>Une masse de sucre seule ne dit rien</strong> : 30 g, c’est beaucoup dans un verre et peu dans une fontaine. <strong>La concentration ramène tout à un litre</strong>, et c’est elle qui compare les boissons.</p>
+
 <p class="pied">Ce site rappelle la méthode. Aucun corrigé, rien n'est noté.</p><p class="pied-site"><a class="mentions" href="../mentions-legales.html">Mentions légales</a></p>
 </div>
 

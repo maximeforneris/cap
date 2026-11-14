@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Combien ça coûte vraiment ?</title>
-<meta name="description" content="Énergie = puissance × durée, et cela se voit : un rectangle haut et fin pour le sèche-cheveux, un long rectangle bas pour le radiateur, seize fois plus grand. Puis le mois en euros, et deux offres qui se rejoignent à 150 kWh : il n&#x27;y a pas de meilleure offre.">
+<title>Est-ce que ça rentre ?</title>
+<meta name="description" content="Le tour de la chambre se compte en mètres, son sol en mètres carrés. Une aire ne suffit pas à dire si un tapis rentre. Les carreaux des deux petits carrés remplissent juste celui de la diagonale : 100 cm d&#x27;écran. Et le 55 pouces dépasse du meuble de 1,8 cm.">
 <meta name="etiquette" content="Simulation · Format court">
 <meta name="stockage" content="sim-travail-v1 : l’avancement d’une simulation, réponses comprises, 30 jours au plus">
 <style>
@@ -285,6 +285,11 @@ details.modele ul{margin:8px 0 0;padding-left:1.2em;color:var(--encre2);font-siz
 .pc-badge-appel{font:inherit;font-weight:700;font-size:.85rem;min-height:40px;padding:6px 12px;border-radius:999px;cursor:pointer;
   border:2px solid var(--tiede);background:var(--carte);color:var(--encre);animation:pc-pulse 1.6s ease-in-out infinite}
 @keyframes pc-pulse{50%{box-shadow:0 0 0 5px var(--accent-doux)}}
+/* LA VIGILANCE (commun.js) : les sorties de la page en evaluation notee, lisibles du professeur qui passe */
+.pc-vigil{display:inline-flex;align-items:center;font-weight:700;font-size:.85rem;min-height:32px;padding:4px 10px;border-radius:999px;
+  border:2px solid var(--faux);color:var(--faux);background:var(--carte)}
+.pc-vigil[hidden]{display:none}
+.pc-vigil-retour{border-left-color:var(--faux);background:var(--faux-doux)}
 .pc-methode{margin:6px 0 0;font-size:.92rem;color:var(--encre2);border-left:3px solid var(--trait);padding-left:8px}
 .pc-aide-btn{color:var(--encre2)}
 .pc-aide-btn.pc-confirme{color:var(--accent);border-color:var(--accent);font-weight:700}
@@ -306,6 +311,26 @@ details.modele ul{margin:8px 0 0;padding-left:1.2em;color:var(--encre2);font-siz
 /* une colonne bornee ne grandit pas a la taille de son contenu : ce qui est large defile dans son cadre */
 .pc-avec-paillasse > *,.pc-paillasse,.pc-paillasse > *{min-width:0}
 .pc-paillasse .releve-zone{grid-template-columns:minmax(0,1fr)}
+/* LA TABLETTE COUCHEE (4 novembre 2026 : « ils sont tous sur tablettes mode paysage ») : a 1 024 px la scene
+   n'avait que 530 px, perdus entre deux cartes emboitees et une colonne de questions de 343 px. Les marges se
+   resserrent, la colonne des questions s'arrete a 320 px. « Agrandir la scene » donne a la scene toute la
+   largeur et passe les questions dessous (commun.js, AGRANDIR LA SCENE). */
+@media (min-width:821px) and (max-width:1400px){
+  .page{padding-left:10px;padding-right:10px}
+  .pc-ecran > .plan:not(.pc-sans-scene){grid-template-columns:minmax(0,1fr) minmax(270px,320px)}
+  .pc-scene{padding:10px}
+  .pc-paillasse > .carte,.pc-paillasse .plan > .carte{padding:10px}
+}
+.pc-agrandir{float:right;margin:0 0 8px 10px;min-height:38px;padding:6px 12px;font-size:.88rem}
+/* la consigne coule a cote du bouton, la scene passe dessous : a cote, avec son overflow, elle perdait 150 px */
+.pc-scene > :not(.pc-agrandir):not(.consigne){clear:both}
+.pc-agrandir[aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}
+.pc-agrandir-barre{display:flex;justify-content:flex-end;margin:0 0 8px}
+.pc-agrandir-barre .pc-agrandir{float:none;margin:0}
+.plan.pc-grand{grid-template-columns:minmax(0,1fr)!important}
+.pc-ecran > .plan.pc-grand > .pc-scene{position:static!important;max-height:none!important;overflow:visible}
+@media (max-width:820px){.pc-agrandir,.pc-agrandir-barre{display:none}}
+@media print{.pc-agrandir,.pc-agrandir-barre{display:none}}
 .pc-paillasse .releve-zone > div,.pc-paillasse table.releve{overflow-x:auto}
 /* les documents d'un sujet : fiches, consignes, annexe */
 .pc-docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
@@ -619,7 +644,7 @@ html.court-dans-page .court-ecran svg { max-height: none; }
 </style>
 <script>
 window.SIM_MODE = "td";
-window.SIM_PAGE = "cap-s4-facture";
+window.SIM_PAGE = "cap-s3-chambre";
 /* Entrainement · les nombres a la francaise, dans les deux sens.
    Ecrire : virgule decimale, espace fine insecable entre les milliers, ecriture
    scientifique au-dela de dix millions ou en deca d'un millieme.
@@ -1857,6 +1882,60 @@ var Sim = (function () {
   var NOTE_COPIE = window.SIM_MODE === "note";
   var COTES = { NA: "non acquis", ECA: "en cours d'acquisition", A: "acquis" };
   var INDICES_NOTE = 3;           // les indices d'une evaluation notee, pour toute la copie
+  /* LA VIGILANCE (14 novembre 2026, « un systeme anti triche pour eviter que les eleves ne changent de page ou que
+     cela soit signale dans le doc bilan ») : en evaluation notee seulement, de « Commencer l'evaluation » au rendu.
+     EVITER, autant qu'une page le peut : le plein ecran au depart (la barre des onglets disparait ; un bouton
+     « Plein ecran » le remet), et l'ecran garde allume (Wake Lock), pour qu'une tablette qui s'eteint pendant que
+     l'eleve reflechit ne passe pas pour une sortie. SIGNALER : chaque sortie est notee, heure et duree, et ecrite
+     dans la copie chiffree, ligne « Vigilance » ; trois sortes : la page cachee (autre onglet, autre application,
+     ecran eteint : visibilitychange), la page qui perd la main plus de 3 s alors qu'elle reste a l'ecran (autre
+     fenetre, ecran partage : blur), la page fermee ou rechargee (constatee a la reprise, depuis la derniere
+     sauvegarde). Une copie en cours effacee (« Repartir de zero ») ou rendue puis remplacee laisse une trace, gardee
+     avec le travail, que la copie suivante du meme jour ecrit (ligne « Effacees »). La tete du parcours compte les
+     sorties, et un bandeau le dit a l'eleve a son retour : la regle est annoncee a l'accueil. NOTER-LES-BILANS
+     l'affiche et l'exporte ; il ne retire aucun point, c'est au professeur de juger. Ce que la page ne voit pas :
+     un deuxieme appareil, une fenetre privee ou un autre navigateur ouverts a cote, le stockage efface a la main. */
+  var SEUIL_FENETRE = 3000;
+  function pleinPossible() { var d = document.documentElement; return !!(d.requestFullscreen || d.webkitRequestFullscreen); }
+  function enPlein() { return !!(document.fullscreenElement || document.webkitFullscreenElement); }
+  function pleinEcran() {
+    var d = document.documentElement;
+    try {
+      var p = d.requestFullscreen ? d.requestFullscreen({ navigationUI: "hide" }) : d.webkitRequestFullscreen ? d.webkitRequestFullscreen() : null;
+      if (p && p.catch) p.catch(function () { /* refuse (pas de geste, navigateur) : l'evaluation continue sans */ });
+    } catch (e) { /* idem */ }
+  }
+  function quitterPleinEcran() {
+    try {
+      if (!enPlein()) return;
+      var p = document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen ? document.webkitExitFullscreen() : null;
+      if (p && p.catch) p.catch(function () {});
+    } catch (e) { /* rien */ }
+  }
+  var verrou = null, verrouVoulu = false;
+  function verrouEcran() {
+    verrouVoulu = true;
+    if (verrou || !navigator.wakeLock || document.visibilityState !== "visible") return;
+    try {
+      navigator.wakeLock.request("screen").then(function (v) {
+        verrou = v;
+        v.addEventListener("release", function () { verrou = null; });
+        if (!verrouVoulu) libererEcran();
+      }, function () { /* refuse : l'ecran s'eteindra comme d'habitude */ });
+    } catch (e) { /* idem */ }
+  }
+  function libererEcran() { verrouVoulu = false; if (verrou) { try { verrou.release(); } catch (e) { /* deja libere */ } verrou = null; } }
+  function duree(ms) {
+    if (ms < 1000) return "moins d'1 s";
+    var s = Math.round(ms / 1000);
+    if (s < 60) return s + " s";
+    var m = Math.floor(s / 60); s %= 60;
+    if (m < 60) return m + " min" + (s ? " " + deux(s) + " s" : "");
+    return Math.floor(m / 60) + " h " + deux(m % 60) + " min";
+  }
+  var SORTES = { masquee: "page cachée (autre onglet, autre application ou écran éteint)",
+    fenetre: "page à l'écran mais sans la main (autre fenêtre, écran partagé)",
+    fermee: "page fermée ou rechargée" };
   /* LA COPIE CHIFFREE (21 octobre 2026, « de preference un doc chiffre, que je dechiffrerai avec ton aide ») :
      en evaluation notee, le fichier rendu est chiffre pour le professeur. Une cle AES-256-GCM tiree pour la copie
      chiffre le texte ; la cle publique RSA-OAEP (SHA-256) ci-dessous chiffre cette cle. Seule la cle privee, HORS
@@ -1929,6 +2008,7 @@ var Sim = (function () {
     var MOT_FIN_COURT = NOTE ? (epreuve ? "Copie" : "Livrable") : "Bilan";
     var P = $(parent);
 
+    var grand = false, boutonsGrand = [];               // « Agrandir la scene », plus bas
     /* ---- deux facons d'utiliser la page : la simulation libre, ou le parcours ---- */
     var libre = o.libre ? $(o.libre) : null, barreModes = null, bLibre = null, bParcours = null;
     if (libre) {
@@ -1943,9 +2023,42 @@ var Sim = (function () {
       if (NOTE) barreModes.hidden = true;
       bLibre.addEventListener("click", function () { mode(false); });
       bParcours.addEventListener("click", function () { mode(true); });
+      /* le mode libre a aussi son « Agrandir la scene » : une barre au-dessus de CHAQUE grille a scene (une
+         par onglet, par experience ou par protocole), hors des cartes, qui partent dans la paillasse du
+         parcours sans l'emporter. Toutes les barres agissent ensemble. */
+      [].filter.call(libre.querySelectorAll(".plan"), function (x) {
+        return x.firstElementChild && x.firstElementChild.querySelector("svg") && !x.parentNode.closest(".plan");
+      }).forEach(function (x) {
+        x.parentNode.insertBefore(el("div", { classe: "pc-agrandir-barre" }, [boutonAgrandir()]), x);
+      });
     }
     P.appendChild(racine);
     if (!libre) document.body.classList.add("pc-visible");
+    /* AGRANDIR LA SCENE (4 novembre 2026 : « ils sont tous sur tablettes mode paysage » ; a 1 024 px, la
+       scene n'avait que 530 px et ses textes tombaient a 6 ou 8 px). Un bouton par partie, et un au-dessus de
+       la simulation libre : la scene prend toute la largeur, les questions passent dessous. Le choix vaut pour
+       toute la page jusqu'a ce qu'on le defasse ; il n'est pas garde. */
+    function boutonAgrandir() {
+      var b = el("button", { type: "button", classe: "bouton pc-agrandir", "aria-pressed": grand ? "true" : "false",
+        title: "La scène prend toute la largeur ; les questions passent dessous", texte: grand ? "Réduire la scène" : "Agrandir la scène" });
+      b.addEventListener("click", function () {
+        agrandir(!grand);
+        var cible = b.closest(".pc-scene") || b.parentNode;
+        if (grand && cible && cible.scrollIntoView) cible.scrollIntoView({ block: "start" });
+      });
+      boutonsGrand.push(b);
+      return b;
+    }
+    function agrandir(oui) {
+      grand = !!oui;
+      [].forEach.call(document.querySelectorAll(".pc-ecran > .plan, .pc-agrandir-barre + .plan"), function (x) {
+        x.classList.toggle("pc-grand", grand);
+      });
+      boutonsGrand.forEach(function (b) {
+        b.textContent = grand ? "Réduire la scène" : "Agrandir la scène";
+        b.setAttribute("aria-pressed", grand ? "true" : "false");
+      });
+    }
     function mode(p) {
       if (!libre) return;
       bLibre.setAttribute("aria-pressed", p ? "false" : "true");
@@ -2001,7 +2114,9 @@ var Sim = (function () {
     var niv = el("span", { classe: "pc-niveau" });
     var badge = el("button", { type: "button", classe: "pc-badge-appel", hidden: "hidden" });
     badge.addEventListener("click", function () { ouvrirProf(null); });
-    info.appendChild(badge); info.appendChild(niv); info.appendChild(score); info.appendChild(temps);
+    /* LA VIGILANCE, en evaluation notee : le compte des sorties de la page, visible du professeur qui passe */
+    var vigilBadge = el("span", { classe: "pc-vigil", hidden: "hidden" });
+    info.appendChild(badge); info.appendChild(vigilBadge); info.appendChild(niv); info.appendChild(score); info.appendChild(temps);
     /* le dossier : les documents de la partie 1, a relire depuis n'importe quelle partie, dans un panneau a gauche ;
        la calculatrice peut rester ouverte a droite en meme temps */
     var dossierFn = o.dossier === true ? o.phases[0].scene : (typeof o.dossier === "function" ? o.dossier : null), bDos = null, panDos = null;
@@ -2031,6 +2146,12 @@ var Sim = (function () {
       bCalc.addEventListener("click", function () { var c = calculatrice(); if (c) bCalc.setAttribute("aria-pressed", c.basculer() ? "true" : "false"); });
       info.appendChild(bCalc);
     }
+    var bPlein = null;                                     // revenir en plein ecran, en evaluation notee, la ou le navigateur le permet
+    if (NOTE_COPIE && pleinPossible()) {
+      bPlein = el("button", { type: "button", classe: "pc-calc pc-plein", hidden: "hidden", texte: "Plein écran" });
+      bPlein.addEventListener("click", function () { pleinEcran(); });
+      info.appendChild(bPlein);
+    }
     tete.appendChild(chemin); tete.appendChild(info);
     racine.appendChild(tete);
     /* la hauteur reelle de la tete, que la colonne de la scene garde au-dessus d'elle (elle passe sur deux lignes en tablette etroite) */
@@ -2047,7 +2168,8 @@ var Sim = (function () {
     /* le mode, dit a l'accueil : en TD, des indications et rien a rendre ; en note, ni verdict ni aide, et un fichier */
     var bandeauMode = el("p", { classe: "pc-bandeau-mode", html: NOTE
       ? "<b>Évaluation notée.</b> La page ne dit ni juste ni faux. <b>Trois indices</b> pour toute l'évaluation : « Voir l'indice » montre la méthode d'une question, jamais la valeur" + (ccf ? ", et fait perdre le bonus d'autonomie" : "") + ". « Enregistrer » garde votre réponse, " +
-        "que vous pouvez changer jusqu'à rendre votre copie. Rendre la copie produit le fichier pour le professeur et verrouille tout."
+        "que vous pouvez changer jusqu'à rendre votre copie. Rendre la copie produit le fichier pour le professeur et verrouille tout. " +
+        "<b>Restez sur cette page</b> : changer d'onglet, d'application ou de fenêtre, fermer ou recharger la page s'écrit dans votre copie, avec l'heure et la durée."
       : "<b>TD, non noté.</b> La page dit juste ou pas encore et donne la méthode quand ça coince. À la fin, un bilan à l'écran : " +
         "rien à rendre. L'évaluation notée se fait dans l'espace d'évaluation, avec la clé que donne le professeur, et d'autres valeurs." });
     if (niveaux.length > 1) {
@@ -2070,6 +2192,7 @@ var Sim = (function () {
       etat.debut = Date.now();
       niv.textContent = etat.niveau;
       document.body.classList.add("pc-en-cours");
+      if (NOTE) { pleinEcran(); verrouEcran(); majVigil(false); }
       ouvrir(0);
     });
     if (epreuve) {
@@ -2185,6 +2308,7 @@ var Sim = (function () {
       // une carte vide a gauche et ses questions serrees a droite : elles prennent la largeur.
       // Releve par l'utilisateur le 15 octobre 2026.
       if (!zone.firstChild) { zone.hidden = true; plan.classList.add("pc-sans-scene"); }
+      else { zone.insertBefore(boutonAgrandir(), zone.firstChild); plan.classList.toggle("pc-grand", grand); }
       var qs = questionsDe(i);
       etat.colonnes[i] = colQ;
       etat.fiches[i] = qs.map(function (q, j) { return q.type === "appel" ? poserAppel(colQ, q, i) : poserQuestion(colQ, q, i, j); });
@@ -2861,6 +2985,7 @@ var Sim = (function () {
         });
         recap.appendChild(t);
         if (ccf) recap.appendChild(el("p", { classe: "pc-autonomie", html: "<b>Autonomie</b> : " + autonomie().texte + "." }));
+        recap.appendChild(el("p", { classe: "pc-autonomie", html: "<b>Vigilance</b> : " + (vigil.s.length ? nSorties(vigil.s.length) + ", " + duree(horsPage()) + " hors de la page en tout" : "aucune sortie de la page") + "." }));
         recap.appendChild(el("p", { classe: "pc-score-final", html: minutes() + " min" }));
         return;
       }
@@ -2911,7 +3036,9 @@ var Sim = (function () {
     /* rendre la copie (mode note) : rejuger ce qui attendait une mesure, et tout verrouiller */
     function rendre() {
       if (!NOTE || etat.rendu) return;
+      fermerSortie();
       etat.rendu = true;
+      quitterPleinEcran(); libererEcran(); majVigil(false);
       etat.fiches.forEach(function (fs) { (fs || []).forEach(function (f) { if (f.verrouiller) f.verrouiller(); }); });
       majIndices();
       majChemin(); majTete();
@@ -2928,6 +3055,7 @@ var Sim = (function () {
           : "Bilan      : " + totalEtoiles() + " étoiles sur " + 3 * nOblig + ", en " + minutes() + " min" +
           (etoilesPlus() ? ", et " + etoilesPlus() + " de plus en partie facultative" : "")];
       if (NOTE) out.push("Indices    : " + etat.aides + " sur " + INDICES_NOTE);
+      if (NOTE) out.push.apply(out, lignesVigil(d));
       if (ccf) out.push("Autonomie  : " + autonomie().texte);
       if (u41) out.push("Grille     : BTS FED · U41", "Aides      : " + autonomie().texte);
       out.push(new Array(64).join("="), "");
@@ -2998,6 +3126,7 @@ var Sim = (function () {
       Object.keys(donnees).forEach(function (k) { if (pur(donnees[k])) d[k] = donnees[k]; });
       return { graine: GRAINE, niveau: etat.niveau, ecoule: Date.now() - etat.debut, courante: etat.courante, ouverte: etat.ouverte,
         aides: etat.aides, rendu: !!etat.rendu, exporte: etat.exporte, ident: etat.ident, donnees: d,
+        vigil: NOTE ? vigil : undefined, abandons: NOTE && abandons.length ? abandons : undefined,
         fiches: o.phases.map(function (ph, i) { return etat.fiches[i] ? etat.fiches[i].map(function (f) { return f.garde(); }) : null; }) };
     }
     function garder() {
@@ -3006,8 +3135,74 @@ var Sim = (function () {
     }
     function garderBientot() { if (!minuteur && etat.debut && !enReprise) minuteur = setTimeout(garder, 400); }
     ["click", "input", "change"].forEach(function (t) { racine.addEventListener(t, garderBientot, true); });
-    document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") garder(); });
     window.addEventListener("pagehide", garder);
+
+    /* ---- LA VIGILANCE (en-tete de ce fichier) : les sorties de la page, d'une evaluation commencee a son rendu ---- */
+    var vigil = { s: [], o: null };                        // s : les sorties closes {t, de, d} ; o : celle en cours {t, de}
+    var abandons = NOTE && travailLu && travailLu.abandons ? travailLu.abandons : [];
+    var chargeA = Date.now(), banVigil = null;
+    function surveille() { return NOTE && !!etat.debut && !etat.rendu && !enReprise; }
+    function ouvrirSortie(t) {
+      if (!surveille()) return;
+      if (vigil.o) { if (t === "masquee") vigil.o.t = "masquee"; return; }
+      vigil.o = { t: t, de: Date.now() };
+    }
+    function fermerSortie() {
+      var o = vigil.o; if (!o) return;
+      vigil.o = null;
+      var d = Date.now() - o.de;
+      if (o.t === "fenetre" && d < SEUIL_FENETRE) return;   // un clic dans la barre d'adresse, une notification : rien
+      vigil.s.push({ t: o.t, de: o.de, d: d });
+      majVigil(true); garderBientot();
+    }
+    function horsPage() { return vigil.s.reduce(function (a, x) { return a + x.d; }, 0); }
+    function nSorties(n) { return n + " sortie" + (n > 1 ? "s" : "") + " de la page"; }
+    /* la tete compte les sorties ; au retour, un bandeau le dit a l'eleve */
+    function majVigil(retour) {
+      var n = vigil.s.length;
+      vigilBadge.hidden = !NOTE || !n;
+      vigilBadge.textContent = "⚠ " + nSorties(n);
+      if (bPlein) bPlein.hidden = !surveille() || enPlein();
+      if (!retour || !n) return;
+      if (banVigil && banVigil.parentNode) banVigil.parentNode.removeChild(banVigil);
+      var der = vigil.s[n - 1], compris = el("button", { type: "button", classe: "bouton", texte: "Compris" });
+      banVigil = el("div", { classe: "pc-repris pc-vigil-retour", role: "alert" }, [
+        el("span", { html: "<b>Vous avez quitté la page</b> (" + (der.t === "fermee" ? "fermée ou rechargée, " : "") + duree(der.d) + "). " +
+          "C'est écrit dans votre copie, avec l'heure et la durée : " + nSorties(n) + " en tout." }), compris]);
+      compris.addEventListener("click", function () { if (banVigil.parentNode) banVigil.parentNode.removeChild(banVigil); });
+      tete.parentNode.insertBefore(banVigil, tete.nextSibling);
+    }
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "hidden") { ouvrirSortie("masquee"); garder(); return; }
+      if (document.hasFocus()) fermerSortie();
+      if (surveille()) verrouEcran();                      // le navigateur rend le verrou de l'ecran quand la page se cache
+    });
+    window.addEventListener("blur", function () {
+      if (document.visibilityState === "hidden") return;
+      var a = document.activeElement;
+      if (a && a.tagName === "IFRAME") return;             // un clic dans un cadre de la page n'est pas une sortie
+      ouvrirSortie("fenetre");
+    });
+    window.addEventListener("focus", fermerSortie);
+    ["pointerdown", "keydown"].forEach(function (t) {     // l'eleve agit dans la page : il est revenu, meme sans « focus »
+      document.addEventListener(t, function () { if (vigil.o && document.visibilityState === "visible") fermerSortie(); }, true);
+    });
+    ["fullscreenchange", "webkitfullscreenchange"].forEach(function (t) { document.addEventListener(t, function () { majVigil(false); }); });
+    /* les lignes de la copie : la vigilance, et les copies effacees sur cet appareil le meme jour */
+    function lignesVigil(d) {
+      var out = [], n = vigil.s.length, marge = "             ";
+      out.push("Vigilance  : " + (n ? nSorties(n) + ", " + duree(horsPage()) + " hors de la page en tout" : "aucune sortie de la page"));
+      vigil.s.forEach(function (x) { out.push(marge + heure(new Date(x.de)) + ", " + duree(x.d) + " : " + SORTES[x.t]); });
+      var jour = d.toDateString(), ab = abandons.filter(function (a) { return new Date(a.efface).toDateString() === jour; });
+      if (ab.length) {
+        out.push("Effacées   : " + ab.length + " copie" + (ab.length > 1 ? "s" : "") + " effacée" + (ab.length > 1 ? "s" : "") + " sur cet appareil le même jour, avant celle-ci");
+        ab.forEach(function (a) {
+          out.push(marge + "à " + heure(new Date(a.efface)) + ", une copie " + (a.rendu ? "rendue vers " + heure(new Date(a.dernier)) : "en cours, non rendue") +
+            " (" + (a.id ? "identifiant " + a.id + ", " : "sans identifiant, ") + a.n + " réponse" + (a.n > 1 ? "s" : "") + ", " + nSorties(a.s) + ")");
+        });
+      }
+      return out;
+    }
 
     /* reprendre : les parties deja ouvertes, dans l'ordre, comme l'eleve les a ouvertes ; puis leurs reponses */
     function reprendre(t) {
@@ -3015,6 +3210,12 @@ var Sim = (function () {
       etat.niveau = t.niveau; niv.textContent = t.niveau || "";
       etat.debut = Date.now() - (t.ecoule || 0); etat.aides = t.aides || 0;
       etat.ident = t.ident || ""; etat.exporte = !!t.exporte;
+      /* la vigilance revient avec la copie ; une copie en cours qu'on retrouve a ete fermee ou rechargee : c'est une
+         sortie, depuis le moment ou la page s'est cachee, ou a defaut depuis la derniere sauvegarde */
+      if (NOTE) {
+        vigil.s = (t.vigil && t.vigil.s) || []; vigil.o = null;
+        if (!t.rendu) { var de = t.vigil && t.vigil.o ? t.vigil.o.de : t.quand; vigil.s.push({ t: "fermee", de: de, d: Math.max(0, chargeA - de) }); }
+      }
       /* d.cfg, le tirage d'une page, revient AVANT les scenes : il ne se refait pas. Le reste revient APRES : d.regle et
          d.prepare gardent le reglage unique d'une scene (32 pages), et, restaures trop tot, ils l'auraient empeche. */
       var gardees = t.donnees || {};
@@ -3031,14 +3232,16 @@ var Sim = (function () {
       if (t.rendu) { etat.rendu = true; etat.fiches.forEach(function (fs) { (fs || []).forEach(function (f) { if (f.verrouiller) f.verrouiller(); }); }); }
       etat.fiches.forEach(function (fs, i) { if (fs) majPhase(i); });
       etat.ouverte = t.ouverte;
-      if (NOTE) majIndices();
+      if (NOTE) { majIndices(); if (!t.rendu) verrouEcran(); }
       majAppels();
       montrer(t.courante < 0 ? 0 : t.courante);
+      majVigil(false);
       enReprise = false;
       if (t.courante < nPh) {
         var compris = el("button", { type: "button", classe: "bouton", texte: "Compris" });
         var dit = el("div", { classe: "pc-repris", role: "status" }, [
-          el("span", { html: "<b>Votre travail est revenu</b> : les réponses, le temps, le même sujet. La simulation, elle, repart de zéro : si une question attend une mesure, refaites-la." }), compris]);
+          el("span", { html: "<b>Votre travail est revenu</b> : les réponses, le temps, le même sujet. La simulation, elle, repart de zéro : si une question attend une mesure, refaites-la." +
+            (NOTE ? " La page a été fermée ou rechargée : c'est écrit dans votre copie, avec l'heure et la durée." : "") }), compris]);
         compris.addEventListener("click", function () { dit.parentNode.removeChild(dit); });
         tete.parentNode.insertBefore(dit, tete.nextSibling);
       }
@@ -3062,11 +3265,18 @@ var Sim = (function () {
             ", " + ou + ", " + depuis + "." + id }),
         el("div", { classe: "rangee" }, [bReprendre, bZero])]);
       function fermerCarte() { carteReprise.parentNode.removeChild(carteReprise); carteReprise = null; }
-      bReprendre.addEventListener("click", function () { fermerCarte(); reprendre(t); });
+      bReprendre.addEventListener("click", function () { if (NOTE && !t.rendu) pleinEcran(); fermerCarte(); reprendre(t); });
       /* effacer le travail d'un eleve se confirme : c'est justement la fausse manipulation qu'on veut eviter */
       bZero.addEventListener("click", function () {
         if (!bZero.classList.contains("pc-confirme")) { bZero.classList.add("pc-confirme"); bZero.textContent = "Confirmer : tout effacer"; return; }
-        oublierTravail(); fermerCarte();
+        /* en evaluation notee, la copie effacee laisse une trace, que la copie suivante du meme jour ecrit (LA VIGILANCE) */
+        if (NOTE) {
+          var jour = new Date().toDateString();
+          abandons = abandons.filter(function (a) { return new Date(a.efface).toDateString() === jour; }).slice(-9);
+          abandons.push({ efface: Date.now(), dernier: t.quand, rendu: !!t.rendu, n: n, s: ((t.vigil && t.vigil.s) || []).length, id: t.ident || "" });
+          if (!ecrireTravail({ abandons: abandons })) oublierTravail();
+        } else oublierTravail();
+        fermerCarte();
       });
       accueil.insertBefore(carteReprise, accueil.firstChild);
     }
@@ -3079,6 +3289,7 @@ var Sim = (function () {
     if (libre) mode(NOTE || !!carteReprise || /^#(ccf|u41|parcours)$/.test(location.hash));
     /* la porte d'essai : etat interne et fichier, pour les controles */
     return window.__parcours = { etat: etat, donnees: donnees, ouvrir: ouvrir, fabriquer: fabriquer, rendre: rendre, note: NOTE, garder: garder, fiches: function () { return etat.fiches; },
+      vigilance: function () { return { sorties: vigil.s, ouverte: vigil.o, abandons: abandons }; },
       appels: appels, mode: mode, dossier: function () { if (dossierFn) basculerDossier(); return panDos; }, coter: function (f, x) { f.cote = x; f.heureCote = new Date(); f.note = x === "A"; f.afficher(); majPhase(f.phase); majAppels(); garder(); },
       choisirNiveau: function (n) { etat.niveau = n; niv.textContent = n; }, demarrer: function (n) {
         if (libre) mode(true);
@@ -3754,17 +3965,21 @@ var Sim = (function () {
 <body>
 <div class="page">
 <header class="tete">
-<div class="surtitre">Format court · CAP Électricien 1re année, séquence 4 · la facture</div>
-<h1>Combien ça coûte vraiment ?</h1>
-<p class="chapeau">Énergie = puissance × durée, et cela se voit : un rectangle haut et fin pour le sèche-cheveux, un long rectangle bas pour le radiateur, seize fois plus grand. Puis le mois en euros, et deux offres qui se rejoignent à 150 kWh : il n'y a pas de meilleure offre.</p>
+<div class="surtitre">Format court · CAP Électricien 1re année, séquence 3 · la chambre</div>
+<h1>Est-ce que ça rentre ?</h1>
+<p class="chapeau">Le tour de la chambre se compte en mètres, son sol en mètres carrés. Une aire ne suffit pas à dire si un tapis rentre. Les carreaux des deux petits carrés remplissent juste celui de la diagonale : 100 cm d'écran. Et le 55 pouces dépasse du meuble de 1,8 cm.</p>
 </header>
 <style>
-/* LA FACTURE · format court, CAP séquence 4 (28 octobre 2026). Ce qui suit n'appartient qu'à cette scène :
-   l'aire puissance × durée, et les deux offres, l'une en couleur chaude, l'autre en couleur froide. */
-.court svg .aire { fill: var(--c-accent); fill-opacity: .55; stroke: var(--c-encre); stroke-width: 1.2; }
-.court[data-style="neon"] svg .aire { fill: rgba(242,193,78,.22); stroke: var(--c-accent); }
-.court svg .pt-a { fill: var(--c-chaud); stroke: var(--c-encre); stroke-width: 1; }
-.court svg .pt-b { fill: var(--c-froid); stroke: var(--c-encre); stroke-width: 1; }
+/* LA CHAMBRE · format court, CAP séquence 3 (28 octobre 2026). Ce qui suit n'appartient qu'à cette scène :
+   la plinthe posée le long des murs, les carreaux des deux petits carrés (leur couleur suit le Néon par les
+   variables), le tapis. */
+.court svg .plinthe { fill: none; stroke: var(--c-phase); stroke-width: 6; stroke-linecap: butt; }
+.court svg .car-a { fill: var(--c-chaud); fill-opacity: .45; stroke: var(--c-encre); stroke-width: .6; }
+.court svg .car-b { fill: var(--c-froid); fill-opacity: .5; stroke: var(--c-encre); stroke-width: .6; }
+.court svg .car-vide { fill: none; stroke: var(--c-encre); stroke-width: .5; stroke-opacity: .35; }
+.court svg .tapis { fill: var(--c-accent); stroke: var(--c-encre); stroke-width: 1.4; }
+.court[data-style="schema"] svg .tapis { fill: #f3e2b0; }
+.court[data-style="neon"] svg .tapis { fill: rgba(242,193,78,.25); stroke: var(--c-accent); }
 </style>
 
 <div id="court"></div>
@@ -3773,380 +3988,397 @@ var Sim = (function () {
 (function () {
   "use strict";
   var fr = Sim.fr;
-  /* Les nombres du polycopié (S4, J10 à J12) : énergie (kWh) = puissance (kW) × durée (h), formule DONNÉE (le kWh
-     n'est pas au programme de physique du CAP : c'est un travail de mathématiques) ; le sèche-cheveux, 1 800 W =
-     1,8 kW, 10 min = 0,167 h, 0,3 kWh ; le radiateur, 1 kW, 5 h, 5 kWh ; 0,25 € le kWh, 1,25 € et 0,075 € par
-     jour, 37,50 € et 2,25 € par mois ; l'offre A à 0,30 € le kWh, l'offre B à 12 € + 0,22 € le kWh, le tableau
-     0 / 50 / 100 / 150 / 200, 150 kWh et 45 € ; le studio (80 kWh), la colocation (186), la maison (400). */
-  var APP = {
-    seche: { nom: "sèche-cheveux", P: 1.8, D: 1 / 6, vitesse: (1 / 6) / 2.5, ligne: "sèche-cheveux : 1 800 W = 1,8 kW, 10 min par jour", y: 236 },
-    radiateur: { nom: "radiateur", P: 1, D: 5, vitesse: 5 / 6, ligne: "radiateur : 1 000 W = 1 kW, 5 h par jour", y: 372 }
+  /* Les nombres du polycopié (S3, J8 et J9) : la chambre de 4,20 m sur 3,50 m, la porte de 0,80 m, 15,40 m de
+     tour et 14,60 m de plinthe, 14,70 m² ; le lit 1,40 × 1,90, le bureau 1,20 × 0,60, l'armoire 1,00 × 0,60,
+     3,98 m² de meubles et 10,72 m² de libre ; le tapis de 2 m sur 1,50 m, et celui de 10 m sur 0,30 m de la
+     fiche PROF ; l'écran de 80 cm sur 60 cm, 6 400 + 3 600 = 10 000, 100 cm ; 2,54 cm le pouce, 39 pouces,
+     le 55 pouces : 139,7 cm, largeur 0,8 × 139,7 = 111,8 cm sur un meuble de 110 cm, 1,8 cm de trop. */
+  var K = 68, X0 = 33, Y0 = 146, X1 = X0 + 4.2 * K, Y1 = Y0 + 3.5 * K;
+  var PORTE = [X0 + 0.15 * K, X0 + 0.95 * K];
+  var MURS = { haut: 4.2, droite: 3.5, bas: 4.2, gauche: 3.5 };
+  var MEUBLES = {
+    lit: { nom: "lit", x: 2.65, y: 0.05, l: 1.40, h: 1.90 },
+    bureau: { nom: "bureau", x: 0.15, y: 0.15, l: 1.20, h: 0.60 },
+    armoire: { nom: "armoire", x: 0.15, y: 0.95, l: 1.00, h: 0.60 }
   };
-  var PRIX = 0.25, JOURS = 30, GX = 86, KX = 52, KY = 45;
-  var COLS = [0, 50, 100, 150, 200];
-  var LOGE = { studio: { nom: "studio", k: 80, x: 14 }, coloc: { nom: "colocation", k: 186, x: 128 }, maison: { nom: "maison", k: 400, x: 242 } };
-  var ORDRE_L = ["studio", "coloc", "maison"];
+  var ORDRE_M = ["lit", "bureau", "armoire"];
+  /* la télé : 1,1 unité par cm ; A en bas à gauche de l'écran, l'angle droit en bas à droite */
+  var E = 1.1, A = [118, 300], DR = [118 + 80 * E, 300], HT = [118 + 80 * E, 300 - 60 * E];
+  var MAT = [0.8, -0.6, -0.6, -0.8, A[0], A[1]];           // le repère du grand carré : le long de la diagonale, puis vers l'extérieur
+  var CM = 2.6, MX = 37, MY = 400;                          // le meuble : 2,6 unités par cm, 110 cm
   var R = {};
 
-  function prixA(k) { return 0.30 * k; }
-  function prixB(k) { return 12 + 0.22 * k; }
-  function gx(k) { return 70 + 0.62 * k; }
-  function gy(e) { return 380 - 2 * e; }
-  function euros(x) { return fr(x, 2) + " €"; }
-  function energieJour(n) { return APP[n].P * APP[n].D; }
+  function m(x) { return X0 + x * K; }
+  function n(y) { return Y0 + y * K; }
+  function pt(s, t) { return [MAT[0] * s + MAT[2] * t + MAT[4], MAT[1] * s + MAT[3] * t + MAT[5]]; }
+  function poly(ps) { return ps.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" "); }
   function base(S) {
-    S.fait = { seche: false, radiateur: false }; S.marche = ""; S.t = { seche: 0, radiateur: 0 }; S.kwh = 0; S.disque = 0;
-    S.jours = 0; S.calLance = false; S.x = 0; S.logements = []; S.dernier = "";
+    S.murs = []; S.porte = false; S.sol = 0; S.solLance = false;
+    S.meubles = []; S.tapis = "";
+    S.bas = false; S.cote = false; S.diag = false; S.remplir = 0; S.racine = false;
+    S.tele = ""; S.vu40 = false; S.vu55 = false; S.loupe = false;
   }
+  function tour(S) { var t = 0; S.murs.forEach(function (w) { t += MURS[w]; }); return t; }
+  function aireMeubles(S) { var a = 0; S.meubles.forEach(function (k) { a += MEUBLES[k].l * MEUBLES[k].h; }); return a; }
 
   /* ───────── la scène, dessinée une fois ───────── */
   function dessiner(C) {
     var g = C.g, t = C.t, svg = C.svg, fond = g(C.racine);
-    /* le compteur, son afficheur et son disque */
-    var zc = C.touche(g(fond), "compteur", "Le compteur");
-    svg("rect", { x: 12, y: 8, width: 138, height: 92, rx: 6, "class": "obj" }, zc);
-    t(zc, 81, 22, "compteur", "etiq", { "text-anchor": "middle" });
-    svg("rect", { x: 22, y: 28, width: 118, height: 26, rx: 3, "class": "lcd" }, zc);
-    R.lcd = t(zc, 134, 47, "0,00 kWh", "val mono", { "text-anchor": "end", "font-size": 14, "data-r": "kwh" });
-    svg("ellipse", { cx: 81, cy: 78, rx: 52, ry: 9, "class": "obj2" }, zc);
-    R.marque = svg("rect", { x: 0, y: 0, width: 8, height: 5, rx: 1, "class": "rouge" }, zc);
-    svg("rect", { x: 10, y: 6, width: 142, height: 96, "class": "zone" }, zc);
-    /* étape 1 : l'horloge ; étape 2 : le calendrier ; étapes 1 et 2 : la formule */
-    R.horloge = g(fond);
-    svg("circle", { cx: 205, cy: 46, r: 30, "class": "obj" }, R.horloge);
-    for (var i = 0; i < 12; i++) { var a = i * Math.PI / 6; svg("path", { d: "M " + (205 + 25 * Math.sin(a)).toFixed(1) + " " + (46 - 25 * Math.cos(a)).toFixed(1) + " L " + (205 + 29 * Math.sin(a)).toFixed(1) + " " + (46 - 29 * Math.cos(a)).toFixed(1), "class": "ligne", "stroke-width": 1.2 }, R.horloge); }
-    R.aigH = svg("path", { d: "", "class": "ligne", "stroke-width": 3.5 }, R.horloge);
-    R.aigM = svg("path", { d: "", "class": "trait-accent" }, R.horloge);
-    svg("circle", { cx: 205, cy: 46, r: 2.5, "class": "obj2" }, R.horloge);
-    R.duree = t(R.horloge, 205, 93, "0 h 00", "etiq", { "text-anchor": "middle", "data-r": "duree" });
-    R.calendrier = g(fond, { "class": "cache" });
-    var zk = C.touche(g(R.calendrier), "calendrier", "Le calendrier : faire passer un mois");
-    svg("rect", { x: 172, y: 12, width: 66, height: 80, rx: 4, "class": "obj" }, zk);
-    svg("rect", { x: 172, y: 12, width: 66, height: 18, rx: 4, "class": "rouge" }, zk);
-    t(zk, 205, 46, "jour", "petit", { "text-anchor": "middle" });
-    R.jour = t(zk, 205, 80, "1", "titre-svg", { "text-anchor": "middle", "font-size": 26, "data-r": "jour" });
-    svg("rect", { x: 166, y: 8, width: 78, height: 90, "class": "zone" }, zk);
-    R.formule = g(fond);
-    svg("rect", { x: 250, y: 8, width: 98, height: 92, rx: 6, "class": "obj" }, R.formule);
-    t(R.formule, 299, 22, "la formule, donnée", "petit", { "text-anchor": "middle" });
-    t(R.formule, 299, 44, "énergie (kWh)", "etiq", { "text-anchor": "middle" });
-    t(R.formule, 299, 66, "= puissance (kW)", "etiq", { "text-anchor": "middle" });
-    t(R.formule, 299, 88, "× durée (h)", "etiq", { "text-anchor": "middle" });
+    /* le tableau des calculs, en haut */
+    svg("rect", { x: 12, y: 8, width: 336, height: 92, rx: 6, "class": "obj" }, fond);
+    R.lignes = [0, 1, 2].map(function (i) { return t(fond, 24, 33 + i * 26, "", "val mono", { "font-size": 12.5, "data-r": "l" + (i + 1) }); });
 
-    /* étapes 1 et 2 : les deux appareils, en deux rangées */
-    R.rangees = g(fond);
-    R.app = {};
-    Object.keys(APP).forEach(function (n) {
-      var a = APP[n], y = a.y, o = {};
-      t(R.rangees, 14, y - 104, a.ligne, "etiq");
-      var z = C.touche(g(R.rangees), n, "Allumer : " + a.nom);
-      o.dessin = g(z); appareil(C, n, o.dessin, 44, y - 30);
-      svg("rect", { x: 12, y: y - 92, width: 64, height: 100, "class": "zone" }, z);
-      /* l'aire puissance × durée */
-      o.graphe = g(R.rangees);
-      svg("path", { d: "M " + GX + " " + (y - 94) + " V " + y + " H 350", "class": "graphe-axe" }, o.graphe);
-      [1, 2].forEach(function (p) {
-        svg("path", { d: "M " + (GX - 3) + " " + (y - p * KY) + " H " + GX, "class": "graphe-axe" }, o.graphe);
-        t(o.graphe, GX - 5, y - p * KY + 3, p === 2 ? "2 kW" : "1", "petit", { "text-anchor": "end" });
-      });
-      for (var h = 1; h <= 5; h++) svg("path", { d: "M " + (GX + h * KX) + " " + y + " v 3", "class": "graphe-axe" }, o.graphe);
-      o.aire = svg("rect", { x: GX, y: y - a.P * KY, width: 0, height: a.P * KY, "class": "aire" }, o.graphe);
-      o.resultat = t(o.graphe, n === "seche" ? GX + 16 : GX + 130, n === "seche" ? y - 44 : y - 18, "", "etiq", { "text-anchor": n === "seche" ? "start" : "middle", "data-r": "e-" + n });
-      /* étape 2 : les euros du mois */
-      o.euros = g(R.rangees, { "class": "cache" });
-      o.parJour = t(o.euros, GX, y - 74, "par jour : " + fr(energieJour(n), n === "seche" ? 1 : 0) + " kWh × 0,25 € = " + fr(energieJour(n) * PRIX, n === "seche" ? 3 : 2) + " €", "etiq");
-      svg("rect", { x: GX, y: y - 58, width: 260, height: 20, rx: 3, "class": "obj2" }, o.euros);
-      o.barre = svg("rect", { x: GX, y: y - 58, width: 0, height: 20, rx: 3, "class": "aire" }, o.euros);
-      o.mois = t(o.euros, GX, y - 20, "", "val mono", { "font-size": 14, "data-r": "m-" + n });
-      R.app[n] = o;
-    });
-    R.axeH = g(R.rangees);
-    for (var hh = 0; hh <= 5; hh++) t(R.axeH, GX + hh * KX, APP.radiateur.y + 13, hh + " h", "petit", { "text-anchor": "middle" });
-    t(R.axeH, 350, APP.radiateur.y + 25, "durée (h)", "petit", { "text-anchor": "end" });
-    R.bilan1 = t(R.rangees, 180, 420, "", "etiq", { "text-anchor": "middle", "data-r": "bilan" });
-    R.bilan2 = t(R.rangees, 180, 442, "", "etiq", { "text-anchor": "middle" });
-
-    /* étapes 3 et 4 : les deux offres */
-    R.offres = g(fond, { "class": "cache" });
-    [["A", 160, "abonnement : 0 €", "0,30 € le kWh", "trait-chaud"], ["B", 256, "abonnement : 12 €", "0,22 € le kWh", "trait-froid"]].forEach(function (o) {
-      svg("rect", { x: o[1], y: 8, width: 92, height: 92, rx: 6, "class": "obj" }, R.offres);
-      t(R.offres, o[1] + 46, 32, "offre " + o[0], "titre-svg", { "text-anchor": "middle", "font-size": 15 });
-      svg("path", { d: "M " + (o[1] + 22) + " 42 H " + (o[1] + 70), "class": o[4] }, R.offres);
-      t(R.offres, o[1] + 46, 64, o[2], "petit", { "text-anchor": "middle" });
-      t(R.offres, o[1] + 46, 84, o[3], "etiq", { "text-anchor": "middle" });
-    });
-    /* le graphique des deux factures */
-    svg("path", { d: "M 70 128 V 380 H 334", "class": "graphe-axe" }, R.offres);
-    [0, 100, 200, 300, 400].forEach(function (k) {
-      svg("path", { d: "M " + gx(k) + " 380 v 4", "class": "graphe-axe" }, R.offres);
-      t(R.offres, gx(k), 394, String(k), "petit", { "text-anchor": "middle" });
-    });
-    t(R.offres, 334, 372, "kWh", "petit", { "text-anchor": "end" });
-    [50, 100].forEach(function (e) {
-      svg("path", { d: "M 66 " + gy(e) + " H 70", "class": "graphe-axe" }, R.offres);
-      t(R.offres, 63, gy(e) + 3, e + " €", "petit", { "text-anchor": "end" });
-    });
-    t(R.offres, 63, 383, "0", "petit", { "text-anchor": "end" });
-    R.ligneA = svg("path", { d: "", "class": "trait-chaud" }, R.offres);
-    R.ligneB = svg("path", { d: "", "class": "trait-froid" }, R.offres);
-    R.ptsA = COLS.map(function (k) { return svg("circle", { cx: gx(k), cy: gy(prixA(k)), r: 4, "class": "pt-a cache" }, R.offres); });
-    R.ptsB = COLS.map(function (k) { return svg("circle", { cx: gx(k), cy: gy(prixB(k)), r: 4, "class": "pt-b cache" }, R.offres); });
-    R.labA = t(R.offres, 0, 0, "A", "titre-svg", { "font-size": 13 });
-    R.labB = t(R.offres, 0, 0, "B", "titre-svg", { "font-size": 13 });
-    R.croix = g(R.offres, { "class": "cache" });
-    svg("path", { d: "M " + gx(150) + " " + gy(45) + " V 380", "class": "graphe-repere" }, R.croix);
-    svg("circle", { cx: gx(150), cy: gy(45), r: 7, "class": "ligne", "stroke-width": 2 }, R.croix);
-    t(R.croix, gx(150) - 12, gy(45) - 30, "150 kWh : 45 €", "etiq", { "text-anchor": "end" });
-    R.repere = g(R.offres, { "class": "cache" });
-    R.repereL = svg("path", { d: "", "class": "graphe-repere" }, R.repere);
-    R.repA = svg("circle", { cx: 0, cy: 0, r: 4.5, "class": "pt-a" }, R.repere);
-    R.repB = svg("circle", { cx: 0, cy: 0, r: 4.5, "class": "pt-b" }, R.repere);
-    /* étape 3 : le tableau et l'équation */
-    R.tableau = g(R.offres);
-    t(R.tableau, 22, 420, "kWh", "etiq");
-    t(R.tableau, 22, 444, "A (€)", "etiq", { style: "fill: var(--c-chaud)" });
-    t(R.tableau, 22, 468, "B (€)", "etiq", { style: "fill: var(--c-froid)" });
-    svg("path", { d: "M 20 426 H 340 M 82 406 V 474", "class": "graphe-axe" }, R.tableau);
-    R.cases = COLS.map(function (k, i) {
-      var x = 110 + i * 54;
-      return [t(R.tableau, x, 420, String(k), "val mono", { "text-anchor": "middle", "font-size": 12 }),
-        t(R.tableau, x, 444, "", "val mono", { "text-anchor": "middle", "font-size": 12, "data-r": "a" + k }),
-        t(R.tableau, x, 468, "", "val mono", { "text-anchor": "middle", "font-size": 12, "data-r": "b" + k })];
-    });
-    R.equation = g(R.tableau, { "class": "cache" });
-    t(R.equation, 180, 500, "0,30 x = 0,22 x + 12", "val mono", { "text-anchor": "middle", "font-size": 13 });
-    t(R.equation, 180, 522, "0,08 x = 12, donc x = 12 ÷ 0,08 = 150", "val mono", { "text-anchor": "middle", "font-size": 12 });
-    /* étape 4 : les trois logements */
-    R.loges = g(R.offres, { "class": "cache" });
-    R.cartes = {};
-    ORDRE_L.forEach(function (k) {
-      var L = LOGE[k], z = C.touche(g(R.loges), k, "Le logement : " + L.nom), o = {};
-      o.cadre = svg("rect", { x: L.x, y: 408, width: 104, height: 120, rx: 6, "class": "obj" }, z);
-      maison(C, z, L.x + 52, 448, k);
-      t(z, L.x + 52, 472, L.nom, "etiq", { "text-anchor": "middle" });
-      t(z, L.x + 52, 486, L.k + " kWh", "petit", { "text-anchor": "middle" });
-      o.a = t(z, L.x + 52, 504, "", "petit", { "text-anchor": "middle", style: "fill: var(--c-chaud)", "font-weight": 700 });
-      o.b = t(z, L.x + 52, 518, "", "petit", { "text-anchor": "middle", style: "fill: var(--c-froid)", "font-weight": 700, "data-r": "c-" + k });
-      R.cartes[k] = o;
-    });
-  }
-  function maison(C, p, x, y, k) {
-    var w = k === "studio" ? 26 : k === "coloc" ? 38 : 50;
-    C.svg("path", { d: "M " + (x - w / 2) + " " + y + " V " + (y - 16) + " L " + x + " " + (y - 30) + " L " + (x + w / 2) + " " + (y - 16) + " V " + y + " Z", "class": "obj2" }, p);
-    C.svg("rect", { x: x - 4, y: y - 10, width: 8, height: 10, "class": "obj" }, p);
-  }
-  function appareil(C, n, p, x, y) {
-    var svg = C.svg;
-    if (n === "seche") {
-      svg("path", { d: "M " + (x - 6) + " " + (y + 6) + " L " + (x - 9) + " " + (y + 34) + " H " + (x + 1) + " L " + (x + 4) + " " + (y + 6) + " Z", "class": "obj2" }, p);
-      svg("circle", { cx: x - 2, cy: y, r: 12, "class": "obj" }, p);
-      svg("rect", { x: x + 8, y: y - 6, width: 13, height: 12, rx: 2, "class": "obj" }, p);
-      R.souffle = svg("path", { d: "M " + (x + 24) + " " + (y - 4) + " h 6 M " + (x + 24) + " " + (y + 4) + " h 6", "class": "trait-chaud cache" }, p);
-    } else {
-      svg("rect", { x: x - 20, y: y - 22, width: 40, height: 50, rx: 4, "class": "obj" }, p);
-      R.ailettes = [];
-      for (var i = 0; i < 5; i++) R.ailettes.push(svg("path", { d: "M " + (x - 13 + i * 6.5) + " " + (y - 15) + " V " + (y + 21), "class": "ligne", "stroke-width": 1.4 }, p));
-      svg("path", { d: "M " + (x - 14) + " " + (y + 28) + " v 7 M " + (x + 14) + " " + (y + 28) + " v 7", "class": "ligne", "stroke-width": 3 }, p);
+    /* ── la chambre (étapes 1 et 2) ── */
+    R.chambre = g(fond);
+    svg("path", { d: "M " + X0 + " 132 H " + X1, "class": "ligne", "stroke-width": 1 }, R.chambre);
+    svg("path", { d: "M " + X0 + " 128 v 8 M " + X1 + " 128 v 8", "class": "ligne", "stroke-width": 1 }, R.chambre);
+    t(R.chambre, (X0 + X1) / 2, 126, "4,20 m", "etiq", { "text-anchor": "middle" });
+    t(R.chambre, 20, (Y0 + Y1) / 2, "3,50 m", "etiq", { "text-anchor": "middle", transform: "rotate(-90 20 " + (Y0 + Y1) / 2 + ")" });
+    R.sol = svg("rect", { x: X0, y: Y0, width: X1 - X0, height: Y1 - Y0, "class": "obj" }, R.chambre);
+    /* les carreaux d'un mètre carré : 5 colonnes, 4 rangées, ceux du bord coupés */
+    R.carreaux = [];
+    for (var r = 0; r < 4; r++) for (var c = 0; c < 5; c++) {
+      var w = Math.min(1, 4.2 - c) * K, h = Math.min(1, 3.5 - r) * K;
+      R.carreaux.push(svg("rect", { x: m(c), y: n(r), width: w, height: h, "class": "eau cache" }, R.chambre));
     }
+    R.unM2 = t(R.chambre, m(0.5), n(0.5) + 4, "1 m²", "etiq cache", { "text-anchor": "middle" });
+    /* la porte et son battant */
+    R.battant = g(R.chambre);
+    svg("path", { d: "M " + PORTE[1] + " " + Y1 + " V " + (Y1 - 0.8 * K), "class": "ligne", "stroke-width": 2 }, R.battant);
+    svg("path", { d: "M " + PORTE[1] + " " + (Y1 - 0.8 * K) + " A " + 0.8 * K + " " + 0.8 * K + " 0 0 0 " + PORTE[0] + " " + Y1, "class": "ligne tirets", "stroke-width": 1 }, R.battant);
+    t(R.chambre, (PORTE[0] + PORTE[1]) / 2, Y1 + 14, "porte 0,80 m", "petit", { "text-anchor": "middle" });
+    /* les meubles : leur place en pointillés, puis posés */
+    R.meubles = {};
+    ORDRE_M.forEach(function (k) {
+      var M = MEUBLES[k], o = {};
+      o.trace = svg("rect", { x: m(M.x), y: n(M.y), width: M.l * K, height: M.h * K, "class": "ligne tirets", "stroke-width": 1.2 }, R.chambre);
+      o.pose = svg("rect", { x: m(M.x), y: n(M.y), width: M.l * K, height: M.h * K, rx: 3, "class": "obj2 cache" }, R.chambre);
+      o.nom = t(R.chambre, m(M.x + M.l / 2), n(M.y + M.h / 2) - (M.h > 1 ? 6 : 1), M.nom, "etiq", { "text-anchor": "middle" });
+      o.aire = t(R.chambre, m(M.x + M.l / 2), n(M.y + M.h / 2) + (M.h > 1 ? 10 : 11), fr(M.l, 2) + " × " + fr(M.h, 2), "petit", { "text-anchor": "middle" });
+      R.meubles[k] = o;
+    });
+    /* les tapis */
+    R.tapis = svg("rect", { x: m(1.05), y: n(1.98), width: 2 * K, height: 1.5 * K, rx: 2, "class": "tapis cache" }, R.chambre);
+    R.tapisTxt = t(R.chambre, m(2.05), n(2.73) + 4, "tapis : 3 m²", "etiq cache", { "text-anchor": "middle" });
+    R.couloir = g(C.racine, { "class": "cache" });
+    svg("rect", { x: m(1.05), y: n(2.1), width: 360 - m(1.05) + 4, height: 0.3 * K, "class": "tapis" }, R.couloir);
+    svg("path", { d: "M " + m(1.05) + " " + (n(2.4) + 10) + " H 352", "class": "ligne", "stroke-width": 1 }, R.couloir);
+    svg("path", { d: "M 352 " + (n(2.4) + 6) + " l 6 4 l -6 4", "class": "ligne", "stroke-width": 1 }, R.couloir);
+    t(R.couloir, m(1.6), n(2.25) + 4, "couloir : 10 m sur 0,30 m", "petit");
+    t(R.couloir, 244, n(2.4) + 22, "10 m, la chambre en fait 4,20…", "etiq", { "text-anchor": "middle" });
+    /* les murs, puis les plinthes */
+    svg("path", { d: "M " + PORTE[0] + " " + Y1 + " H " + X0 + " V " + Y0 + " H " + X1 + " V " + Y1 + " H " + PORTE[1], "class": "ligne", "stroke-width": 5 }, R.chambre);
+    var off = 6;
+    R.plinthes = {
+      haut: svg("path", { d: "M " + (X0 + off) + " " + (Y0 + off) + " H " + (X1 - off), "class": "plinthe cache" }, R.chambre),
+      droite: svg("path", { d: "M " + (X1 - off) + " " + (Y0 + off) + " V " + (Y1 - off), "class": "plinthe cache" }, R.chambre),
+      bas: svg("path", { d: "M " + (X1 - off) + " " + (Y1 - off) + " H " + PORTE[1], "class": "plinthe cache" }, R.chambre),
+      gauche: svg("path", { d: "M " + (X0 + off) + " " + (Y1 - off) + " V " + (Y0 + off), "class": "plinthe cache" }, R.chambre)
+    };
+    R.plintheP = svg("path", { d: "M " + PORTE[1] + " " + (Y1 - off) + " H " + (X0 + off), "class": "plinthe cache" }, R.chambre);
+    /* la légende, sous la chambre */
+    R.legende = g(R.chambre);
+    svg("path", { d: "M 40 430 H 70", "class": "plinthe" }, R.legende);
+    t(R.legende, 80, 434, "la plinthe fait le tour : des mètres (m)", "etiq");
+    svg("rect", { x: 40, y: 446, width: 30, height: 18, "class": "eau" }, R.legende);
+    t(R.legende, 80, 459, "le sol se couvre : des mètres carrés (m²)", "etiq");
+    /* les tapis à poser, roulés dans leur carton */
+    R.cartons = g(R.chambre);
+    [["tapis", 24, "le tapis", "2 m sur 1,50 m"], ["couloir", 188, "le tapis de couloir", "10 m sur 0,30 m"]].forEach(function (c) {
+      var z = C.touche(g(R.cartons), c[0], "Poser " + c[2]);
+      svg("rect", { x: c[1], y: 472, width: 148, height: 56, rx: 6, "class": "obj" }, z);
+      svg("rect", { x: c[1] + 12, y: 486, width: 34, height: 28, rx: 3, "class": "tapis" }, z);
+      svg("ellipse", { cx: c[1] + 46, cy: 500, rx: 5, ry: 14, "class": "tapis" }, z);
+      t(z, c[1] + 58, 496, c[2], "etiq");
+      t(z, c[1] + 58, 512, c[3], "petit");
+    });
+    /* les zones des murs, de la porte, du sol (étape 1), puis des meubles (étape 2) */
+    R.zones1 = g(R.chambre);
+    [["haut", 56, Y0 - 22, X1 - 56 - 22, 44], ["bas", 108, Y1 - 22, X1 - 108 - 22, 44], ["gauche", X0 - 22, Y0 + 23, 44, Y1 - Y0 - 91], ["droite", X1 - 22, Y0 + 23, 44, Y1 - Y0 - 46]].forEach(function (z) {
+      svg("rect", { x: z[1], y: z[2], width: z[3], height: z[4], "class": "zone" }, C.touche(g(R.zones1), "mur-" + z[0], "Poser la plinthe le long du mur : " + z[0]));
+    });
+    svg("rect", { x: X0 + 3, y: Y1 - 66, width: PORTE[1] - X0 + 6, height: 64, "class": "zone" }, C.touche(g(R.zones1), "porte", "La porte"));
+    svg("rect", { x: 110, y: Y0 + 26, width: X1 - 110 - 26, height: Y1 - Y0 - 52, "class": "zone" }, C.touche(g(R.zones1), "sol", "Couvrir le sol"));
+    R.zones2 = g(R.chambre);
+    ORDRE_M.forEach(function (k) {
+      var M = MEUBLES[k];
+      svg("rect", { x: m(M.x) - 2, y: n(M.y) - 2, width: M.l * K + 4, height: M.h * K + 4, "class": "zone" }, C.touche(g(R.zones2), k, "Poser : " + M.nom));
+    });
+
+    /* ── la télé et ses trois carrés (étape 3) ── */
+    R.tv = g(fond, { "class": "cache" });
+    R.ecran = g(R.tv);
+    svg("rect", { x: A[0] - 6, y: HT[1] - 6, width: 80 * E + 12, height: 60 * E + 12, rx: 4, "class": "obj" }, R.ecran);
+    svg("rect", { x: A[0], y: HT[1], width: 80 * E, height: 60 * E, "class": "obj2" }, R.ecran);
+    /* le carré du bas : 8 × 8 carreaux de 10 cm ; celui du côté : 6 × 6 */
+    R.carBas = g(R.tv, { "class": "cache" }); R.cBas = [];
+    for (var i = 0; i < 64; i++) R.cBas.push(svg("rect", { x: A[0] + (i % 8) * 11, y: A[1] + Math.floor(i / 8) * 11, width: 11, height: 11, "class": "car-a" }, R.carBas));
+    t(R.carBas, A[0] + 44, A[1] + 40, "80 × 80", "etiq", { "text-anchor": "middle" });
+    t(R.carBas, A[0] + 44, A[1] + 54, "= 6 400", "etiq", { "text-anchor": "middle" });
+    R.carCote = g(R.tv, { "class": "cache" }); R.cCote = [];
+    for (var j = 0; j < 36; j++) R.cCote.push(svg("rect", { x: DR[0] + (j % 6) * 11, y: HT[1] + Math.floor(j / 6) * 11, width: 11, height: 11, "class": "car-b" }, R.carCote));
+    t(R.carCote, DR[0] + 33, HT[1] + 30, "60 × 60", "etiq", { "text-anchor": "middle" });
+    t(R.carCote, DR[0] + 33, HT[1] + 44, "= 3 600", "etiq", { "text-anchor": "middle" });
+    /* le grand carré, sur la diagonale : 10 × 10 carreaux, dans le repère de la diagonale */
+    R.carGrand = g(R.tv, { "class": "cache" });
+    var gg = g(R.carGrand, { transform: "matrix(" + MAT.join(" ") + ")" });
+    R.cGrand = [];
+    for (var k = 0; k < 100; k++) R.cGrand.push(svg("rect", { x: (k % 10) * 11, y: Math.floor(k / 10) * 11, width: 11, height: 11, "class": "car-vide" }, gg));
+    svg("rect", { x: 0, y: 0, width: 110, height: 110, "class": "ligne", "stroke-width": 1.6 }, gg);
+    R.grandTxt = t(R.carGrand, pt(55, 55)[0], pt(55, 55)[1] + 5, "", "titre-svg", { "text-anchor": "middle", "font-size": 15, "data-r": "grand" });
+    /* la diagonale de l'écran, et les cotes */
+    R.diag = svg("path", { d: "M " + A[0] + " " + A[1] + " L " + HT[0] + " " + HT[1], "class": "trait-accent tirets" }, R.tv);
+    t(R.tv, 190, A[1] - 5, "80 cm", "petit", { "text-anchor": "middle" });
+    t(R.tv, DR[0] - 3, HT[1] + 22, "60 cm", "petit", { "text-anchor": "end" });
+    R.diagTxt = t(R.tv, 165, 281, "?", "titre-svg", { "text-anchor": "middle", "font-size": 13, transform: "rotate(-36.87 165 281)", style: "fill: var(--c-accent2)", "data-r": "diag" });
+    t(R.tv, 180, 420, "un carreau : 10 cm sur 10 cm", "petit", { "text-anchor": "middle" });
+    R.zones3 = g(R.tv);
+    svg("rect", { x: 160, y: A[1] - 10, width: 46, height: 40, "class": "zone" }, C.touche(g(R.zones3), "bas", "Le bas de l'écran"));
+    svg("rect", { x: 190, y: HT[1], width: 44, height: 56, "class": "zone" }, C.touche(g(R.zones3), "cote", "Le côté de l'écran"));
+    svg("polygon", { points: poly([pt(14, -12), pt(60, -12), pt(60, 26), pt(14, 26)]), "class": "zone" }, C.touche(g(R.zones3), "diagonale", "La diagonale de l'écran"));
+    svg("polygon", { points: poly([pt(0, 30), pt(110, 30), pt(110, 110), pt(0, 110)]), "class": "zone" }, C.touche(g(R.zones3), "grand", "Le grand carré"));
+
+    /* ── le meuble et les deux télés (étape 4) ── */
+    R.salon = g(fond, { "class": "cache" });
+    R.t40 = g(R.salon, { "class": "cache" }); R.t55 = g(R.salon, { "class": "cache" });
+    [[R.t40, 80, 60, MX + 15 * CM, "100 cm"], [R.t55, 111.8, 83.85, MX, "139,7 cm"]].forEach(function (v) {
+      var w = v[1] * CM, h = v[2] * CM, x = v[3], y = MY - h;
+      svg("rect", { x: x, y: y, width: w, height: h, rx: 4, "class": "obj" }, v[0]);
+      svg("rect", { x: x + 7, y: y + 7, width: w - 14, height: h - 14, rx: 2, "class": "obj2" }, v[0]);
+      svg("path", { d: "M " + (x + 7) + " " + (y + h - 7) + " L " + (x + w - 7) + " " + (y + 7), "class": "trait-accent tirets" }, v[0]);
+      t(v[0], x + w / 2, y + h / 2 - 6, v[4], "etiq", { "text-anchor": "middle" });
+      t(v[0], x + w / 2, y + h - 16, "largeur : " + fr(v[1], 1) + " cm", "etiq", { "text-anchor": "middle" });
+    });
+    svg("rect", { x: MX, y: MY, width: 110 * CM, height: 54, rx: 3, "class": "obj2" }, R.salon);
+    svg("path", { d: "M " + (MX + 10) + " 454 v 10 M " + (MX + 110 * CM - 10) + " 454 v 10", "class": "ligne", "stroke-width": 4 }, R.salon);
+    t(R.salon, 180, 432, "le meuble : 110 cm", "etiq", { "text-anchor": "middle" });
+    /* la loupe sur le bord droit */
+    R.loupe = g(R.salon, { "class": "cache" });
+    svg("path", { d: "M 310 179 L " + (MX + 110 * CM) + " " + (MY - 4), "class": "ligne", "stroke-width": 1 }, R.loupe);
+    var clip = svg("clipPath", { id: "cap-s3-loupe" }, R.loupe);
+    svg("circle", { cx: 300, cy: 141, r: 39 }, clip);
+    svg("circle", { cx: 300, cy: 141, r: 40, "class": "obj" }, R.loupe);
+    var dedans = g(R.loupe, { "clip-path": "url(#cap-s3-loupe)" });
+    svg("rect", { x: 250, y: 92, width: 43, height: 48, "class": "obj" }, dedans);
+    svg("rect", { x: 250, y: 140, width: 28, height: 50, "class": "obj2" }, dedans);
+    svg("path", { d: "M 278 140 V 170 M 293 140 V 170", "class": "trait-accent tirets", "stroke-width": 1.2 }, dedans);
+    svg("path", { d: "M 279 164 H 292", "class": "trait-accent" }, dedans);
+    t(dedans, 296, 167, "1,8 cm", "petit", { "font-weight": 700, style: "fill: var(--c-accent2)" });
+    t(dedans, 278, 122, "télé", "petit", { "text-anchor": "middle" });
+    svg("circle", { cx: 300, cy: 141, r: 40, "class": "ligne", "stroke-width": 3 }, R.loupe);
+    R.cartons4 = g(R.salon);
+    [["tele40", 30, "« 40 pouces »"], ["tele55", 190, "« 55 pouces »"]].forEach(function (c) {
+      var z = C.touche(g(R.cartons4), c[0], "Poser la télé " + c[2]);
+      svg("rect", { x: c[1], y: 474, width: 140, height: 54, rx: 4, "class": "obj" }, z);
+      svg("path", { d: "M " + (c[1] + 10) + " 482 l 12 0 M " + (c[1] + 118) + " 482 l 12 0", "class": "ligne", "stroke-width": 1.2 }, z);
+      t(z, c[1] + 70, 498, "carton", "petit", { "text-anchor": "middle" });
+      t(z, c[1] + 70, 516, c[2], "titre-svg", { "text-anchor": "middle", "font-size": 13 });
+    });
+    svg("rect", { x: 300, y: 378, width: 46, height: 44, "class": "zone" }, C.touche(g(R.salon), "bord", "Le bord droit du meuble"));
   }
 
   /* ───────── chaque image ───────── */
   function pas(dt, S, C) {
-    if (S.marche) {
-      var a = APP[S.marche], avant = S.t[S.marche];
-      S.t[S.marche] = Math.min(a.D, avant + dt * a.vitesse);
-      S.kwh += a.P * (S.t[S.marche] - avant);
-      S.disque += dt * a.P * 5;
-      if (S.t[S.marche] >= a.D - 1e-9) {
-        S.fait[S.marche] = true;
-        C.pop(S.marche === "seche" ? 150 : 220, S.marche === "seche" ? 196 : 320, S.marche === "seche" ? "0,3 kWh" : "5 kWh !", "ding");
-        S.marche = "";
-      }
+    if (S.solLance && S.sol < 1) { S.sol = Math.min(1, S.sol + dt / 1.4); if (S.sol >= 1) C.pop(176, 260, "14,70 m² !", "ding"); }
+    if (S.diag && S.remplir < 100) { S.remplir = Math.min(100, S.remplir + dt * 40); if (S.remplir >= 100) C.pop(110, 160, "PILE !", "ding"); }
+  }
+  function lignes(S) {
+    var e = S.etape;
+    if (e <= 1) {
+      var ws = S.murs.map(function (w) { return fr(MURS[w], 2); });
+      return [ws.length ? "tour : " + ws.join(" + ") + (ws.length > 1 ? " = " + fr(tour(S), 2) : "") + " m" : "",
+        S.porte ? "plinthe : 15,40 − 0,80 = 14,60 m" : "",
+        S.sol >= 1 ? "sol : 4,20 × 3,50 = 14,70 m²" : ""];
     }
-    if (S.calLance && S.jours < JOURS) {
-      S.jours = Math.min(JOURS, S.jours + dt * 10); S.disque += dt * 4;
-      if (S.jours >= JOURS) C.pop(250, 300, "37,50 € !", "bip");
+    if (e === 2) {
+      var as = S.meubles.map(function (k) { return fr(MEUBLES[k].l * MEUBLES[k].h, 2); }), am = aireMeubles(S);
+      return [as.length ? "meubles : " + as.join(" + ") + (as.length > 1 ? " = " + fr(am, 2) : "") + " m²" : "meubles : 0 m²",
+        "libre : 14,70 − " + fr(am, 2) + " = " + fr(14.7 - am, 2) + " m²",
+        S.tapis === "salon" ? "tapis : 2 × 1,50 = 3 m², et il reste 10,72" : S.tapis === "couloir" ? "couloir : 10 × 0,30 = 3 m² aussi" : ""];
     }
+    if (e === 3) return [S.bas ? "80² = 80 × 80 = 6 400" : "", S.cote ? "60² = 60 × 60 = 3 600" : "",
+      S.racine ? "6 400 + 3 600 = 10 000 ; √10 000 = 100" : S.remplir >= 100 ? "6 400 + 3 600 = 10 000" : ""];
+    return [S.vu40 ? "1 pouce = 2,54 cm ; 100 ÷ 2,54 ≈ 39 pouces" : "", S.vu55 ? "55 pouces : 55 × 2,54 = 139,7 cm" : "",
+      S.vu55 ? "largeur : 0,8 × 139,7 = 111,8 cm > 110" : ""];
   }
   function afficher(dt, S) {
-    var e = S.etape, fin = R.fin, h, txt;
-    /* le compteur */
-    if (e <= 1) txt = fr(S.kwh, 2) + " kWh";
-    else if (e === 2) txt = fr(S.jours * (energieJour("seche") + energieJour("radiateur")), 1) + " kWh";
-    else if (e === 3) txt = S.x + " kWh";
-    else txt = S.dernier ? LOGE[S.dernier].k + " kWh" : "— kWh";
-    if (R.lcd.textContent !== fin(txt)) R.lcd.textContent = fin(txt);
-    R.marque.setAttribute("x", (81 + 46 * Math.sin(S.disque) - 4).toFixed(1));
-    R.marque.setAttribute("y", (78 + 6 * Math.cos(S.disque) - 2.5).toFixed(1));
-    R.marque.setAttribute("class", Math.cos(S.disque) > -0.3 ? "rouge" : "cache");
-    /* l'horloge, le calendrier, la formule, les offres */
-    R.horloge.setAttribute("class", e <= 1 ? "" : "cache");
-    R.calendrier.setAttribute("class", e === 2 ? "" : "cache");
-    R.formule.setAttribute("class", e <= 2 ? "" : "cache");
-    R.rangees.setAttribute("class", e <= 2 ? "" : "cache");
-    R.offres.setAttribute("class", e >= 3 ? "" : "cache");
-    h = S.marche ? S.t[S.marche] : S.fait.radiateur ? 5 : S.fait.seche ? 1 / 6 : 0;
-    R.aigM.setAttribute("d", "M 205 46 L " + (205 + 24 * Math.sin(h * 2 * Math.PI)).toFixed(1) + " " + (46 - 24 * Math.cos(h * 2 * Math.PI)).toFixed(1));
-    R.aigH.setAttribute("d", "M 205 46 L " + (205 + 15 * Math.sin(h * Math.PI / 6)).toFixed(1) + " " + (46 - 15 * Math.cos(h * Math.PI / 6)).toFixed(1));
-    var mn = Math.round(h * 60);
-    txt = Math.floor(mn / 60) + " h " + ("0" + mn % 60).slice(-2);
-    if (R.duree.textContent !== fin(txt)) R.duree.textContent = fin(txt);
-    R.jour.textContent = String(Math.max(1, Math.floor(S.jours + 1e-9)));
-    /* les deux rangées */
-    Object.keys(APP).forEach(function (n) {
-      var o = R.app[n], a = APP[n], fini = S.fait[n];
-      o.graphe.setAttribute("class", e <= 1 ? "" : "cache");
-      o.euros.setAttribute("class", e === 2 ? "" : "cache");
-      o.aire.setAttribute("width", (S.t[n] * KX).toFixed(1));
-      txt = fini ? (n === "seche" ? "1,8 × 0,167 ≈ 0,3 kWh" : "1 × 5 = 5 kWh") : "";
-      if (o.resultat.textContent !== fin(txt)) o.resultat.textContent = fin(txt);
-      var mois = S.jours * energieJour(n) * PRIX;
-      o.barre.setAttribute("width", (260 * mois / 40).toFixed(1));
-      txt = S.jours > 0 ? fr(Math.floor(S.jours + 1e-9), 0) + " jours : " + euros(mois) : "";
-      if (o.mois.textContent !== fin(txt)) o.mois.textContent = fin(txt);
+    var e = S.etape, chambre = e <= 2, fin = R.fin;
+    var L = lignes(S); R.lignes.forEach(function (l, i) { var x = fin(L[i]); if (l.textContent !== x) l.textContent = x; });
+    R.chambre.setAttribute("class", chambre ? "" : "cache");
+    R.tv.setAttribute("class", e === 3 ? "" : "cache");
+    R.salon.setAttribute("class", e === 4 ? "" : "cache");
+    /* étape 1 */
+    Object.keys(R.plinthes).forEach(function (w) { R.plinthes[w].setAttribute("class", "plinthe" + (e === 1 && S.murs.indexOf(w) >= 0 ? "" : " cache")); });
+    R.plintheP.setAttribute("class", "plinthe" + (e === 1 && S.murs.indexOf("bas") >= 0 && !S.porte ? "" : " cache"));
+    var nc = Math.floor(S.sol * 20 + 1e-9);
+    R.carreaux.forEach(function (c, i) { c.setAttribute("class", "eau" + (e === 1 && i < nc ? "" : " cache")); });
+    R.unM2.setAttribute("class", "etiq" + (e === 1 && nc >= 1 ? "" : " cache"));
+    R.legende.setAttribute("class", e === 1 ? "" : "cache");
+    R.zones1.setAttribute("class", e === 1 ? "" : "cache");
+    /* étape 2 */
+    R.zones2.setAttribute("class", e === 2 ? "" : "cache");
+    R.cartons.setAttribute("class", e === 2 ? "" : "cache");
+    ORDRE_M.forEach(function (k) {
+      var o = R.meubles[k], vis = e === 2, pose = vis && S.meubles.indexOf(k) >= 0;
+      o.trace.setAttribute("class", "ligne tirets" + (vis && !pose ? "" : " cache"));
+      o.pose.setAttribute("class", "obj2" + (pose ? "" : " cache"));
+      o.nom.setAttribute("class", "etiq" + (vis ? "" : " cache"));
+      o.aire.setAttribute("class", "petit" + (vis ? "" : " cache"));
     });
-    R.axeH.setAttribute("class", e <= 1 ? "" : "cache");
-    R.souffle.setAttribute("class", "trait-chaud" + (S.marche === "seche" ? "" : " cache"));
-    R.ailettes.forEach(function (l) { l.setAttribute("class", S.marche === "radiateur" ? "trait-chaud" : "ligne"); });
-    txt = e <= 1 && S.fait.radiateur ? "5 kWh contre 0,3 kWh : 16 fois plus d'énergie" : e === 2 && S.jours >= JOURS ? "37,50 € contre 2,25 € : 16 fois plus cher" : "";
-    if (R.bilan1.textContent !== fin(txt)) R.bilan1.textContent = fin(txt);
-    txt = e <= 1 && S.fait.radiateur ? "alors que le radiateur est moins puissant" : "";
-    if (R.bilan2.textContent !== fin(txt)) R.bilan2.textContent = fin(txt);
-    /* les offres */
-    var xmax = e === 4 ? 400 : S.x;
-    R.ligneA.setAttribute("d", xmax > 0 ? "M " + gx(0) + " " + gy(0) + " L " + gx(xmax) + " " + gy(prixA(xmax)) : "");
-    R.ligneB.setAttribute("d", xmax > 0 ? "M " + gx(0) + " " + gy(12) + " L " + gx(xmax) + " " + gy(prixB(xmax)) : "");
-    var lx = Math.min(gx(xmax) + 6, 322);
-    R.labA.setAttribute("x", lx); R.labA.setAttribute("y", gy(prixA(xmax)) - 6);
-    R.labB.setAttribute("x", lx); R.labB.setAttribute("y", gy(prixB(xmax)) + 15);
-    R.labA.setAttribute("class", "titre-svg" + (xmax > 0 ? "" : " cache")); R.labB.setAttribute("class", "titre-svg" + (xmax > 0 ? "" : " cache"));
-    COLS.forEach(function (k, i) {
-      var vu = e === 3 && k <= S.x;
-      R.ptsA[i].setAttribute("class", "pt-a" + (vu ? "" : " cache"));
-      R.ptsB[i].setAttribute("class", "pt-b" + (vu || e === 3 && k === 0 ? "" : " cache"));
-      R.cases[i][1].textContent = vu ? fr(prixA(k), 0) : "";
-      R.cases[i][2].textContent = vu ? fr(prixB(k), 0) : "";
-    });
-    R.croix.setAttribute("class", e === 3 && S.x >= 150 || e === 4 ? "" : "cache");
-    R.tableau.setAttribute("class", e === 3 ? "" : "cache");
-    R.equation.setAttribute("class", S.x >= 150 ? "" : "cache");
-    R.loges.setAttribute("class", e === 4 ? "" : "cache");
-    R.repere.setAttribute("class", e === 4 && S.dernier ? "" : "cache");
-    if (S.dernier) {
-      var k = LOGE[S.dernier].k, ya = gy(prixA(k)), yb = gy(prixB(k));
-      R.repereL.setAttribute("d", "M " + gx(k) + " 380 V " + Math.min(ya, yb));
-      R.repA.setAttribute("cx", gx(k)); R.repA.setAttribute("cy", ya);
-      R.repB.setAttribute("cx", gx(k)); R.repB.setAttribute("cy", yb);
-    }
-    ORDRE_L.forEach(function (k) {
-      var o = R.cartes[k], vu = S.logements.indexOf(k) >= 0, L = LOGE[k], A = prixA(L.k), B = prixB(L.k);
-      o.a.textContent = vu ? fin("A : " + euros(A) + (A < B ? " ✓" : "")) : "";
-      o.b.textContent = vu ? fin("B : " + euros(B) + (B < A ? " ✓" : "")) : "";
-      o.cadre.setAttribute("class", k === S.dernier ? "obj2" : "obj");
-    });
+    R.tapis.setAttribute("class", "tapis" + (e === 2 && S.tapis === "salon" ? "" : " cache"));
+    R.tapisTxt.setAttribute("class", "etiq" + (e === 2 && S.tapis === "salon" ? "" : " cache"));
+    R.couloir.setAttribute("class", e === 2 && S.tapis === "couloir" ? "" : "cache");
+    R.battant.setAttribute("class", S.porte && e === 1 ? "terne" : "");
+    /* étape 3 */
+    R.carBas.setAttribute("class", S.bas ? "" : "cache");
+    R.carCote.setAttribute("class", S.cote ? "" : "cache");
+    R.carGrand.setAttribute("class", S.diag ? "" : "cache");
+    R.ecran.setAttribute("class", S.diag ? "terne" : "");
+    var nf = Math.floor(S.remplir + 1e-9);
+    R.cGrand.forEach(function (c, k) { c.setAttribute("class", k < Math.min(nf, 64) ? "car-a" : k >= 64 && k < nf ? "car-b" : "car-vide"); });
+    R.cBas.forEach(function (c, k) { c.setAttribute("class", k < nf ? "car-vide" : "car-a"); });
+    R.cCote.forEach(function (c, k) { c.setAttribute("class", 64 + k < nf ? "car-vide" : "car-b"); });
+    var gt = nf >= 100 ? "10 000" : "";
+    if (R.grandTxt.textContent !== fin(gt)) R.grandTxt.textContent = fin(gt);
+    R.diagTxt.textContent = S.racine ? fin("100 cm") : "?";
+    /* étape 4 */
+    R.t40.setAttribute("class", S.tele === "40" ? "" : "cache");
+    R.t55.setAttribute("class", S.tele === "55" ? "" : "cache");
+    R.loupe.setAttribute("class", S.loupe && S.tele === "55" ? "" : "cache");
   }
 
   /* ───────── les gestes ───────── */
   function action(nom, S, C) {
-    var e = S.etape;
-    if (APP[nom]) {
-      if (e !== 1) return;
-      if (S.marche) { C.conseil("Attends : il tourne encore."); return; }
-      if (nom === "radiateur" && !S.fait.seche) { C.conseil("D'abord le sèche-cheveux."); return; }
-      if (S.fait[nom]) return;
-      S.marche = nom;
-    } else if (nom === "calendrier") {
-      if (e === 2 && !S.calLance) S.calLance = true;
-    } else if (nom === "compteur") {
-      if (e !== 3) return;
-      if (S.x >= 200) { C.conseil("Le tableau s'arrête à 200 kWh."); return; }
-      S.x += 50;
-      if (S.x === 150) C.pop(gx(150), gy(45) - 40, "45 € = 45 € !", "ding");
-    } else if (LOGE[nom]) {
+    var e = S.etape, mm;
+    if ((mm = /^mur-(.+)$/.exec(nom))) {
+      if (e === 1 && S.murs.indexOf(mm[1]) < 0) S.murs.push(mm[1]);
+    } else if (nom === "porte") {
+      if (e !== 1 || S.porte) return;
+      if (S.murs.length < 4) { C.conseil("Fais d'abord le tour : touche les quatre murs."); return; }
+      S.porte = true; C.pop(PORTE[1] + 30, Y1 - 50, "− 0,80 m", "clac");
+    } else if (nom === "sol") {
+      if (e !== 1 || S.solLance) return;
+      if (!S.porte) { C.conseil("D'abord la plinthe : le tour des murs, puis la porte."); return; }
+      S.solLance = true;
+    } else if (MEUBLES[nom]) {
+      if (e === 2 && S.meubles.indexOf(nom) < 0) S.meubles.push(nom);
+    } else if (nom === "tapis" || nom === "couloir") {
+      if (e !== 2) return;
+      if (S.meubles.length < 3) { C.conseil("D'abord les trois meubles : touche leur place."); return; }
+      if (nom === "couloir" && S.tapis === "") { C.conseil("D'abord le grand tapis, celui de 2 m sur 1,50 m."); return; }
+      S.tapis = nom === "tapis" ? "salon" : "couloir";
+      if (nom === "couloir") C.pop(300, n(2.25), "ÇA DÉPASSE !", "boum");
+    } else if (nom === "bas" || nom === "cote") {
+      if (e === 3) S[nom] = true;
+    } else if (nom === "diagonale") {
+      if (e !== 3 || S.diag) return;
+      if (!S.bas || !S.cote) { C.conseil("D'abord les deux carrés : touche le bas, puis le côté de l'écran."); return; }
+      S.diag = true;
+    } else if (nom === "grand") {
+      if (e === 3 && S.remplir >= 100) S.racine = true;
+    } else if (nom === "tele40") {
+      if (e === 4) { S.tele = "40"; S.vu40 = true; }
+    } else if (nom === "tele55") {
       if (e !== 4) return;
-      S.dernier = nom;
-      if (S.logements.indexOf(nom) < 0) S.logements.push(nom);
+      if (!S.vu40) { C.conseil("D'abord notre télé : le carton « 40 pouces »."); return; }
+      S.tele = "55"; S.vu55 = true;
+    } else if (nom === "bord") {
+      if (e !== 4) return;
+      if (S.tele !== "55") { C.conseil(S.vu55 ? "Repose le 55 pouces pour regarder son bord." : "Pose d'abord le 55 pouces."); return; }
+      if (!S.loupe) { S.loupe = true; C.pop(300, 142, "1,8 cm !", "bip"); }
     }
   }
-  function logeSuivant(S) { return ORDRE_L.filter(function (k) { return S.logements.indexOf(k) < 0; })[0] || null; }
+  function murManquant(S) { var w = ["haut", "droite", "bas", "gauche"].filter(function (x) { return S.murs.indexOf(x) < 0; })[0]; return w ? "mur-" + w : null; }
+  function meubleManquant(S) { return ORDRE_M.filter(function (k) { return S.meubles.indexOf(k) < 0; })[0] || null; }
+  function centre(k) { var M = MEUBLES[k]; return [m(M.x + M.l / 2), n(M.y + M.h / 2), Math.min(30, M.h * K / 2 + 8)]; }
 
   Sim.court({
-    titre: "Combien ça coûte vraiment ?",
-    classe: "CAP · séquence 4",
-    accroche: { titre: 'Combien ça coûte<br><span class="gros">VRAIMENT ?</span>',
-      texte: "Une facture d'électricité, et chacun accuse l'appareil le plus puissant. Quatre étapes : à toi de faire tourner le compteur." },
-    scene: { viewBox: "0 0 360 536", aria: "Un compteur électrique, un sèche-cheveux et un radiateur, puis le graphique de deux offres" },
+    titre: "Est-ce que ça rentre ?",
+    classe: "CAP · séquence 3",
+    accroche: { titre: 'Est-ce que<br><span class="gros">ÇA RENTRE ?</span>',
+      texte: "Une chambre, des meubles, et une télé qu'on voudrait poser. Quatre étapes : à toi de mesurer." },
+    scene: { viewBox: "0 0 360 536", aria: "Le plan d'une chambre, puis l'écran d'une télé et ses carrés, puis un meuble télé" },
     son: true,
     etat: function () { var s = {}; base(s); return s; },
     dessiner: function (C) { R.fin = C.fin; dessiner(C); },
     pas: pas, afficher: afficher, action: action,
     cibles: {
-      seche: [44, 206, 30], radiateur: [44, 342, 30], calendrier: [205, 52, 34], compteur: [81, 54, 36],
-      studio: [66, 468, 34], coloc: [180, 468, 34], maison: [294, 468, 34]
+      "mur-haut": [176, Y0, 24], "mur-droite": [X1, (Y0 + Y1) / 2, 24], "mur-bas": [210, Y1, 24], "mur-gauche": [X0, 240, 24],
+      porte: [(PORTE[0] + PORTE[1]) / 2, Y1 - 28, 28], sol: [210, 270, 34],
+      lit: centre("lit"), bureau: centre("bureau"), armoire: centre("armoire"),
+      tapis: [98, 500, 30], couloir: [262, 500, 30],
+      bas: [183, A[1], 22], cote: [DR[0], 262, 22], diagonale: pt(37, 7).concat([22]), grand: [pt(55, 60)[0], pt(55, 60)[1], 34],
+      tele40: [100, 501, 30], tele55: [260, 501, 30], bord: [MX + 110 * CM, MY, 24]
     },
     etapes: [
-      { nom: "La puissance ne suffit pas",
+      { nom: "Le tour ou le sol",
         mettre: function (S) { base(S); },
         beats: [
-          { t: "Le compteur compte l'énergie, en kWh : puissance × durée. Allume le sèche-cheveux : 10 minutes par jour.",
-            ok: function (S) { return S.fait.seche; }, cible: function (S) { return S.marche ? null : "seche"; } },
-          { t: "1,8 kW pendant 10 min, soit 0,167 h : 0,3 kWh. Allume le radiateur : 5 heures par jour.",
-            ok: function (S) { return S.fait.radiateur; }, cible: function (S) { return S.marche ? null : "radiateur"; } },
-          { t: "1 kW pendant 5 h : 5 kWh. Le radiateur, moins puissant, consomme 16 fois plus : il tourne longtemps.", suite: "Et en euros ?" }
+          { t: "La chambre fait 4,20 m sur 3,50 m. On pose une plinthe tout autour. Touche les quatre murs, un par un.",
+            ok: function (S) { return S.murs.length === 4; }, cible: function (S) { return murManquant(S); } },
+          { t: "Le tour fait 15,40 m : c'est le périmètre, en mètres. Mais pas de plinthe devant la porte : touche-la.",
+            ok: function (S) { return S.porte; }, cible: "porte" },
+          { t: "15,40 − 0,80 = 14,60 m de plinthe. Maintenant, couvre le sol : touche-le.",
+            ok: function (S) { return S.sol >= 1; }, cible: function (S) { return S.solLance ? null : "sol"; } },
+          { t: "4,20 × 3,50 = 14,70 m² : c'est l'aire. Le tour se compte en m, le sol en m².", suite: "Et les meubles ?" }
         ] },
-      { nom: "Un mois de facture",
-        mettre: function (S) { base(S); S.fait = { seche: true, radiateur: true }; S.t = { seche: 1 / 6, radiateur: 5 }; S.kwh = 5.3; },
-        beats: [
-          { t: "Le kWh coûte 0,25 €. Un jour de radiateur : 5 × 0,25 = 1,25 €.", suite: "Et en un mois ?" },
-          { t: "Fais passer un mois : touche le calendrier.",
-            ok: function (S) { return S.jours >= JOURS; }, cible: function (S) { return S.calLance ? null : "calendrier"; } },
-          { t: "En 30 jours : 37,50 € pour le radiateur, 2,25 € pour le sèche-cheveux. C'est la durée qui décide, pas la puissance.", suite: "Et quelle offre ?" }
-        ] },
-      { nom: "Deux offres, un croisement",
+      { nom: "Ce qui reste libre",
         mettre: function (S) { base(S); },
         beats: [
-          { t: "Deux offres. À 0 kWh, A coûte 0 €, B déjà 12 € : son abonnement. Touche le compteur : + 50 kWh.",
-            ok: function (S) { return S.x >= 50; }, cible: "compteur" },
-          { t: function (S) {
-              return S.x >= 100 ? "100 kWh : A 30 €, B 34 €. L'écart fond encore. Encore + 50 kWh."
-                : "50 kWh : A 15 €, B 23 €. A rattrape B. Encore + 50 kWh."; },
-            ok: function (S) { return S.x >= 150; }, cible: "compteur" },
-          { t: "150 kWh : 45 € pour les deux ! Les deux droites se croisent. Encore + 50 kWh.",
-            ok: function (S) { return S.x >= 200; }, cible: "compteur" },
-          { t: "200 kWh : B coûte moins, 56 € contre 60 €. L'équation 0,30x = 0,22x + 12 donne x = 150.", suite: "Et pour qui ?" }
+          { t: function (S) { return "Pose les trois meubles : touche leur place. Le sol perd leur aire." + (S.meubles.length ? " Il reste " + fr(14.7 - aireMeubles(S), 2) + " m²." : ""); },
+            ok: function (S) { return S.meubles.length === 3; }, cible: function (S) { return meubleManquant(S); } },
+          { t: "Il reste 10,72 m² de libre. Le tapis de 2 m sur 1,50 m fait 3 m². Pose-le : touche son carton.",
+            ok: function (S) { return S.tapis === "salon"; }, cible: "tapis" },
+          { t: "Il rentre. Mais un tapis de couloir de 10 m sur 0,30 m fait aussi 3 m². Pose-le à la place.",
+            ok: function (S) { return S.tapis === "couloir"; }, cible: "couloir" },
+          { t: "Même aire, et il sort de la chambre ! Comparer les aires ne suffit pas : il faut aussi les longueurs.", suite: "Et la télé ?" }
         ] },
-      { nom: "Pour qui ?",
+      { nom: "La diagonale de la télé",
         mettre: function (S) { base(S); },
         beats: [
-          { t: function (S) {
-              var d = S.dernier ? LOGE[S.dernier] : null;
-              return d ? d.nom.charAt(0).toUpperCase() + d.nom.slice(1) + ", " + d.k + " kWh : " + (prixA(d.k) < prixB(d.k) ? "A" : "B") + " coûte moins. Touche les autres logements."
-                : "Trois logements, trois consommations. Touche-les un par un pour voir leurs deux factures."; },
-            ok: function (S) { return S.logements.length === 3; }, cible: function (S) { return logeSuivant(S); } },
-          { t: "Le studio prend A ; la colocation et la maison prennent B. Sous 150 kWh, A ; au-dessus, B.", suite: "Alors ?" },
-          { t: "Il n'y a pas de meilleure offre : ça dépend de ce qu'on consomme.", suite: "Le défi" }
+          { t: "L'écran mesure 80 cm sur 60 cm. Le carton, lui, donne la diagonale. Touche le bas de l'écran.",
+            ok: function (S) { return S.bas; }, cible: "bas" },
+          { t: "Un carré sur le bas : 80 × 80 = 6 400. Touche le côté de l'écran.",
+            ok: function (S) { return S.cote; }, cible: "cote" },
+          { t: "Un carré sur le côté : 60 × 60 = 3 600. Touche la diagonale.",
+            ok: function (S) { return S.remplir >= 100; }, cible: function (S) { return S.diag ? null : "diagonale"; } },
+          { t: "Les carreaux des deux petits carrés remplissent juste le grand : 6 400 + 3 600 = 10 000. Prends la racine : touche le grand carré.",
+            ok: function (S) { return S.racine; }, cible: "grand" },
+          { t: "√10 000 = 100 cm : c'est la diagonale. C'est le théorème de Pythagore.", suite: "Et en pouces ?" }
+        ] },
+      { nom: "Le 55 pouces",
+        mettre: function (S) { base(S); },
+        beats: [
+          { t: "Une télé se vend en pouces. Un pouce vaut 2,54 cm. Pose le « 40 pouces » sur le meuble : touche son carton.",
+            ok: function (S) { return S.vu40; }, cible: "tele40" },
+          { t: "100 ÷ 2,54 ≈ 39 pouces : c'est notre écran, 80 cm de large. Il rentre. Essaie le 55 pouces.",
+            ok: function (S) { return S.vu55; }, cible: "tele55" },
+          { t: "55 pouces, c'est 139,7 cm de diagonale et 111,8 cm de large. Ça a l'air de tenir… Regarde le bord : touche-le.",
+            ok: function (S) { return S.loupe; }, cible: function (S) { return S.tele === "55" ? "bord" : "tele55"; } },
+          { t: "Il dépasse de 1,8 cm. Sans calcul, personne ne l'aurait vu.", suite: "Alors, ça rentre ?" },
+          { t: "Ça dépend du modèle : le 40 pouces rentre, le 55 dépasse de 1,8 cm.", suite: "Le défi" }
         ] }
     ],
     defi: [
-      { question: "Une lampe de 0,01 kW allumée 100 h, un sèche-cheveux de 2 kW pendant 15 min. Lequel consomme le plus ?",
+      { question: "Un écran de 30 cm sur 40 cm. Combien mesure sa diagonale ?",
         choix: [
-          ["La lampe : 1 kWh contre 0,5.", "Juste. 0,01 × 100 = 1 kWh et 2 × 0,25 = 0,5 kWh. La durée compte autant que la puissance.", true],
-          ["Le sèche-cheveux : il est bien plus puissant.", "Pas encore : à l'étape 1, le radiateur, moins puissant, consommait plus. Ici, 0,5 kWh contre 1 kWh."],
-          ["Le sèche-cheveux : 2 × 15 = 30 kWh.", "Pas encore : 15 min, ce n'est pas 15 h. 15 min = 0,25 h, donc 2 × 0,25 = 0,5 kWh."]
+          ["50 cm.", "Juste. 30 × 30 + 40 × 40 = 900 + 1 600 = 2 500, et √2 500 = 50 cm.", true],
+          ["70 cm.", "Pas encore : 30 + 40, c'est faire le tour par les deux côtés. La diagonale est plus courte que leur somme."],
+          ["2 500 cm.", "Pas encore : 2 500, c'est l'aire du grand carré. Il manque la racine : 25 mètres d'écran !"]
         ] },
-      { question: "Un studio consomme 100 kWh par mois. Quelle offre lui conseiller ?",
+      { question: "Pour savoir combien de plinthe acheter, je calcule…",
         choix: [
-          ["A : 30 € contre 34 €.", "Juste. Sous 150 kWh, l'abonnement de B ne se rattrape pas.", true],
-          ["B : son kWh est moins cher.", "Pas encore : B part de 12 €. À 100 kWh, l'écart n'est pas rattrapé : 34 € contre 30 €."],
-          ["B : c'est celle de la colocation.", "Pas encore : la colocation consomme 186 kWh, au-dessus de 150. Le studio est en dessous."]
+          ["le périmètre, en m.", "Juste. La plinthe fait le tour des murs : un périmètre, en mètres, moins les portes.", true],
+          ["l'aire, en m².", "Pas encore : l'aire, c'est le sol qu'on couvre. La plinthe suit les murs."],
+          ["longueur × largeur.", "Pas encore : longueur × largeur donne l'aire, en m². Le tour, c'est 2 × (longueur + largeur)."]
         ] }
     ],
     simplifie: [
-      "Chaque appareil marche à la puissance de son étiquette, sans s'arrêter. Un vrai radiateur à thermostat se coupe et se rallume.",
-      "10 min = 0,167 h est un arrondi : avec 1/6 h exactement, 1,8 × 1/6 = 0,3 kWh tout rond.",
-      "Le temps passe beaucoup plus vite, et pas à la même vitesse pour les deux appareils : c'est l'horloge qui donne la durée.",
-      "Le compteur à disque est celui d'avant le Linky : son disque tourne d'autant plus vite que la puissance est grande.",
-      "Le prix du kWh et les deux offres sont ceux du cours. Une vraie facture ajoute des taxes, et toutes les offres ont un abonnement."
+      "La chambre, les meubles et les tapis sont des rectangles parfaits, et les murs n'ont pas d'épaisseur.",
+      "Les meubles sont placés comme sur le plan du cours ; le tapis de 3 m² y trouve juste sa place.",
+      "Les carreaux tombent juste (64 + 36 = 100) parce que l'écran est un triangle 3-4-5 agrandi. Avec d'autres côtés, les carreaux se coupent, mais les aires s'ajoutent toujours.",
+      "Les écrans sont au format des télés d'avant 2008, 80 sur 60 : la largeur vaut 0,8 fois la diagonale. Un écran plat d'aujourd'hui est plus large et moins haut.",
+      "Le meuble et la télé sont pris au millimètre près ; en vrai, on garde une marge."
     ],
     essai: "court"
   });

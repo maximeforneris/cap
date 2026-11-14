@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pourquoi la guirlande ne s'allume plus ?</title>
-<meta name="description" content="Vingt ampoules en série sur un bloc de 24 V : une seule dévissée et tout s&#x27;éteint, alors qu&#x27;en dérivation les autres tiennent. Le voltmètre lit 1,2 V par ampoule quand tout marche, puis trouve la coupable : c&#x27;est celle qui affiche toute la tension.">
+<title>Je peux tout brancher là-dessus ?</title>
+<meta name="description" content="Les watts s&#x27;écrivent sur les appareils, la limite sous la multiprise. On branche, la jauge fait le total : trois petits appareils ne pèsent rien, deux qui chauffent suffisent à dépasser 3 680 W, et une seconde multiprise ne double pas la limite.">
 <meta name="etiquette" content="Simulation · Format court">
 <meta name="stockage" content="sim-travail-v1 : l’avancement d’une simulation, réponses comprises, 30 jours au plus">
 <style>
@@ -285,6 +285,11 @@ details.modele ul{margin:8px 0 0;padding-left:1.2em;color:var(--encre2);font-siz
 .pc-badge-appel{font:inherit;font-weight:700;font-size:.85rem;min-height:40px;padding:6px 12px;border-radius:999px;cursor:pointer;
   border:2px solid var(--tiede);background:var(--carte);color:var(--encre);animation:pc-pulse 1.6s ease-in-out infinite}
 @keyframes pc-pulse{50%{box-shadow:0 0 0 5px var(--accent-doux)}}
+/* LA VIGILANCE (commun.js) : les sorties de la page en evaluation notee, lisibles du professeur qui passe */
+.pc-vigil{display:inline-flex;align-items:center;font-weight:700;font-size:.85rem;min-height:32px;padding:4px 10px;border-radius:999px;
+  border:2px solid var(--faux);color:var(--faux);background:var(--carte)}
+.pc-vigil[hidden]{display:none}
+.pc-vigil-retour{border-left-color:var(--faux);background:var(--faux-doux)}
 .pc-methode{margin:6px 0 0;font-size:.92rem;color:var(--encre2);border-left:3px solid var(--trait);padding-left:8px}
 .pc-aide-btn{color:var(--encre2)}
 .pc-aide-btn.pc-confirme{color:var(--accent);border-color:var(--accent);font-weight:700}
@@ -306,6 +311,26 @@ details.modele ul{margin:8px 0 0;padding-left:1.2em;color:var(--encre2);font-siz
 /* une colonne bornee ne grandit pas a la taille de son contenu : ce qui est large defile dans son cadre */
 .pc-avec-paillasse > *,.pc-paillasse,.pc-paillasse > *{min-width:0}
 .pc-paillasse .releve-zone{grid-template-columns:minmax(0,1fr)}
+/* LA TABLETTE COUCHEE (4 novembre 2026 : « ils sont tous sur tablettes mode paysage ») : a 1 024 px la scene
+   n'avait que 530 px, perdus entre deux cartes emboitees et une colonne de questions de 343 px. Les marges se
+   resserrent, la colonne des questions s'arrete a 320 px. « Agrandir la scene » donne a la scene toute la
+   largeur et passe les questions dessous (commun.js, AGRANDIR LA SCENE). */
+@media (min-width:821px) and (max-width:1400px){
+  .page{padding-left:10px;padding-right:10px}
+  .pc-ecran > .plan:not(.pc-sans-scene){grid-template-columns:minmax(0,1fr) minmax(270px,320px)}
+  .pc-scene{padding:10px}
+  .pc-paillasse > .carte,.pc-paillasse .plan > .carte{padding:10px}
+}
+.pc-agrandir{float:right;margin:0 0 8px 10px;min-height:38px;padding:6px 12px;font-size:.88rem}
+/* la consigne coule a cote du bouton, la scene passe dessous : a cote, avec son overflow, elle perdait 150 px */
+.pc-scene > :not(.pc-agrandir):not(.consigne){clear:both}
+.pc-agrandir[aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}
+.pc-agrandir-barre{display:flex;justify-content:flex-end;margin:0 0 8px}
+.pc-agrandir-barre .pc-agrandir{float:none;margin:0}
+.plan.pc-grand{grid-template-columns:minmax(0,1fr)!important}
+.pc-ecran > .plan.pc-grand > .pc-scene{position:static!important;max-height:none!important;overflow:visible}
+@media (max-width:820px){.pc-agrandir,.pc-agrandir-barre{display:none}}
+@media print{.pc-agrandir,.pc-agrandir-barre{display:none}}
 .pc-paillasse .releve-zone > div,.pc-paillasse table.releve{overflow-x:auto}
 /* les documents d'un sujet : fiches, consignes, annexe */
 .pc-docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
@@ -619,7 +644,7 @@ html.court-dans-page .court-ecran svg { max-height: none; }
 </style>
 <script>
 window.SIM_MODE = "td";
-window.SIM_PAGE = "cap-s2-guirlande";
+window.SIM_PAGE = "cap-s1-multiprise";
 /* Entrainement · les nombres a la francaise, dans les deux sens.
    Ecrire : virgule decimale, espace fine insecable entre les milliers, ecriture
    scientifique au-dela de dix millions ou en deca d'un millieme.
@@ -1857,6 +1882,60 @@ var Sim = (function () {
   var NOTE_COPIE = window.SIM_MODE === "note";
   var COTES = { NA: "non acquis", ECA: "en cours d'acquisition", A: "acquis" };
   var INDICES_NOTE = 3;           // les indices d'une evaluation notee, pour toute la copie
+  /* LA VIGILANCE (14 novembre 2026, « un systeme anti triche pour eviter que les eleves ne changent de page ou que
+     cela soit signale dans le doc bilan ») : en evaluation notee seulement, de « Commencer l'evaluation » au rendu.
+     EVITER, autant qu'une page le peut : le plein ecran au depart (la barre des onglets disparait ; un bouton
+     « Plein ecran » le remet), et l'ecran garde allume (Wake Lock), pour qu'une tablette qui s'eteint pendant que
+     l'eleve reflechit ne passe pas pour une sortie. SIGNALER : chaque sortie est notee, heure et duree, et ecrite
+     dans la copie chiffree, ligne « Vigilance » ; trois sortes : la page cachee (autre onglet, autre application,
+     ecran eteint : visibilitychange), la page qui perd la main plus de 3 s alors qu'elle reste a l'ecran (autre
+     fenetre, ecran partage : blur), la page fermee ou rechargee (constatee a la reprise, depuis la derniere
+     sauvegarde). Une copie en cours effacee (« Repartir de zero ») ou rendue puis remplacee laisse une trace, gardee
+     avec le travail, que la copie suivante du meme jour ecrit (ligne « Effacees »). La tete du parcours compte les
+     sorties, et un bandeau le dit a l'eleve a son retour : la regle est annoncee a l'accueil. NOTER-LES-BILANS
+     l'affiche et l'exporte ; il ne retire aucun point, c'est au professeur de juger. Ce que la page ne voit pas :
+     un deuxieme appareil, une fenetre privee ou un autre navigateur ouverts a cote, le stockage efface a la main. */
+  var SEUIL_FENETRE = 3000;
+  function pleinPossible() { var d = document.documentElement; return !!(d.requestFullscreen || d.webkitRequestFullscreen); }
+  function enPlein() { return !!(document.fullscreenElement || document.webkitFullscreenElement); }
+  function pleinEcran() {
+    var d = document.documentElement;
+    try {
+      var p = d.requestFullscreen ? d.requestFullscreen({ navigationUI: "hide" }) : d.webkitRequestFullscreen ? d.webkitRequestFullscreen() : null;
+      if (p && p.catch) p.catch(function () { /* refuse (pas de geste, navigateur) : l'evaluation continue sans */ });
+    } catch (e) { /* idem */ }
+  }
+  function quitterPleinEcran() {
+    try {
+      if (!enPlein()) return;
+      var p = document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen ? document.webkitExitFullscreen() : null;
+      if (p && p.catch) p.catch(function () {});
+    } catch (e) { /* rien */ }
+  }
+  var verrou = null, verrouVoulu = false;
+  function verrouEcran() {
+    verrouVoulu = true;
+    if (verrou || !navigator.wakeLock || document.visibilityState !== "visible") return;
+    try {
+      navigator.wakeLock.request("screen").then(function (v) {
+        verrou = v;
+        v.addEventListener("release", function () { verrou = null; });
+        if (!verrouVoulu) libererEcran();
+      }, function () { /* refuse : l'ecran s'eteindra comme d'habitude */ });
+    } catch (e) { /* idem */ }
+  }
+  function libererEcran() { verrouVoulu = false; if (verrou) { try { verrou.release(); } catch (e) { /* deja libere */ } verrou = null; } }
+  function duree(ms) {
+    if (ms < 1000) return "moins d'1 s";
+    var s = Math.round(ms / 1000);
+    if (s < 60) return s + " s";
+    var m = Math.floor(s / 60); s %= 60;
+    if (m < 60) return m + " min" + (s ? " " + deux(s) + " s" : "");
+    return Math.floor(m / 60) + " h " + deux(m % 60) + " min";
+  }
+  var SORTES = { masquee: "page cachée (autre onglet, autre application ou écran éteint)",
+    fenetre: "page à l'écran mais sans la main (autre fenêtre, écran partagé)",
+    fermee: "page fermée ou rechargée" };
   /* LA COPIE CHIFFREE (21 octobre 2026, « de preference un doc chiffre, que je dechiffrerai avec ton aide ») :
      en evaluation notee, le fichier rendu est chiffre pour le professeur. Une cle AES-256-GCM tiree pour la copie
      chiffre le texte ; la cle publique RSA-OAEP (SHA-256) ci-dessous chiffre cette cle. Seule la cle privee, HORS
@@ -1929,6 +2008,7 @@ var Sim = (function () {
     var MOT_FIN_COURT = NOTE ? (epreuve ? "Copie" : "Livrable") : "Bilan";
     var P = $(parent);
 
+    var grand = false, boutonsGrand = [];               // « Agrandir la scene », plus bas
     /* ---- deux facons d'utiliser la page : la simulation libre, ou le parcours ---- */
     var libre = o.libre ? $(o.libre) : null, barreModes = null, bLibre = null, bParcours = null;
     if (libre) {
@@ -1943,9 +2023,42 @@ var Sim = (function () {
       if (NOTE) barreModes.hidden = true;
       bLibre.addEventListener("click", function () { mode(false); });
       bParcours.addEventListener("click", function () { mode(true); });
+      /* le mode libre a aussi son « Agrandir la scene » : une barre au-dessus de CHAQUE grille a scene (une
+         par onglet, par experience ou par protocole), hors des cartes, qui partent dans la paillasse du
+         parcours sans l'emporter. Toutes les barres agissent ensemble. */
+      [].filter.call(libre.querySelectorAll(".plan"), function (x) {
+        return x.firstElementChild && x.firstElementChild.querySelector("svg") && !x.parentNode.closest(".plan");
+      }).forEach(function (x) {
+        x.parentNode.insertBefore(el("div", { classe: "pc-agrandir-barre" }, [boutonAgrandir()]), x);
+      });
     }
     P.appendChild(racine);
     if (!libre) document.body.classList.add("pc-visible");
+    /* AGRANDIR LA SCENE (4 novembre 2026 : « ils sont tous sur tablettes mode paysage » ; a 1 024 px, la
+       scene n'avait que 530 px et ses textes tombaient a 6 ou 8 px). Un bouton par partie, et un au-dessus de
+       la simulation libre : la scene prend toute la largeur, les questions passent dessous. Le choix vaut pour
+       toute la page jusqu'a ce qu'on le defasse ; il n'est pas garde. */
+    function boutonAgrandir() {
+      var b = el("button", { type: "button", classe: "bouton pc-agrandir", "aria-pressed": grand ? "true" : "false",
+        title: "La scène prend toute la largeur ; les questions passent dessous", texte: grand ? "Réduire la scène" : "Agrandir la scène" });
+      b.addEventListener("click", function () {
+        agrandir(!grand);
+        var cible = b.closest(".pc-scene") || b.parentNode;
+        if (grand && cible && cible.scrollIntoView) cible.scrollIntoView({ block: "start" });
+      });
+      boutonsGrand.push(b);
+      return b;
+    }
+    function agrandir(oui) {
+      grand = !!oui;
+      [].forEach.call(document.querySelectorAll(".pc-ecran > .plan, .pc-agrandir-barre + .plan"), function (x) {
+        x.classList.toggle("pc-grand", grand);
+      });
+      boutonsGrand.forEach(function (b) {
+        b.textContent = grand ? "Réduire la scène" : "Agrandir la scène";
+        b.setAttribute("aria-pressed", grand ? "true" : "false");
+      });
+    }
     function mode(p) {
       if (!libre) return;
       bLibre.setAttribute("aria-pressed", p ? "false" : "true");
@@ -2001,7 +2114,9 @@ var Sim = (function () {
     var niv = el("span", { classe: "pc-niveau" });
     var badge = el("button", { type: "button", classe: "pc-badge-appel", hidden: "hidden" });
     badge.addEventListener("click", function () { ouvrirProf(null); });
-    info.appendChild(badge); info.appendChild(niv); info.appendChild(score); info.appendChild(temps);
+    /* LA VIGILANCE, en evaluation notee : le compte des sorties de la page, visible du professeur qui passe */
+    var vigilBadge = el("span", { classe: "pc-vigil", hidden: "hidden" });
+    info.appendChild(badge); info.appendChild(vigilBadge); info.appendChild(niv); info.appendChild(score); info.appendChild(temps);
     /* le dossier : les documents de la partie 1, a relire depuis n'importe quelle partie, dans un panneau a gauche ;
        la calculatrice peut rester ouverte a droite en meme temps */
     var dossierFn = o.dossier === true ? o.phases[0].scene : (typeof o.dossier === "function" ? o.dossier : null), bDos = null, panDos = null;
@@ -2031,6 +2146,12 @@ var Sim = (function () {
       bCalc.addEventListener("click", function () { var c = calculatrice(); if (c) bCalc.setAttribute("aria-pressed", c.basculer() ? "true" : "false"); });
       info.appendChild(bCalc);
     }
+    var bPlein = null;                                     // revenir en plein ecran, en evaluation notee, la ou le navigateur le permet
+    if (NOTE_COPIE && pleinPossible()) {
+      bPlein = el("button", { type: "button", classe: "pc-calc pc-plein", hidden: "hidden", texte: "Plein écran" });
+      bPlein.addEventListener("click", function () { pleinEcran(); });
+      info.appendChild(bPlein);
+    }
     tete.appendChild(chemin); tete.appendChild(info);
     racine.appendChild(tete);
     /* la hauteur reelle de la tete, que la colonne de la scene garde au-dessus d'elle (elle passe sur deux lignes en tablette etroite) */
@@ -2047,7 +2168,8 @@ var Sim = (function () {
     /* le mode, dit a l'accueil : en TD, des indications et rien a rendre ; en note, ni verdict ni aide, et un fichier */
     var bandeauMode = el("p", { classe: "pc-bandeau-mode", html: NOTE
       ? "<b>Évaluation notée.</b> La page ne dit ni juste ni faux. <b>Trois indices</b> pour toute l'évaluation : « Voir l'indice » montre la méthode d'une question, jamais la valeur" + (ccf ? ", et fait perdre le bonus d'autonomie" : "") + ". « Enregistrer » garde votre réponse, " +
-        "que vous pouvez changer jusqu'à rendre votre copie. Rendre la copie produit le fichier pour le professeur et verrouille tout."
+        "que vous pouvez changer jusqu'à rendre votre copie. Rendre la copie produit le fichier pour le professeur et verrouille tout. " +
+        "<b>Restez sur cette page</b> : changer d'onglet, d'application ou de fenêtre, fermer ou recharger la page s'écrit dans votre copie, avec l'heure et la durée."
       : "<b>TD, non noté.</b> La page dit juste ou pas encore et donne la méthode quand ça coince. À la fin, un bilan à l'écran : " +
         "rien à rendre. L'évaluation notée se fait dans l'espace d'évaluation, avec la clé que donne le professeur, et d'autres valeurs." });
     if (niveaux.length > 1) {
@@ -2070,6 +2192,7 @@ var Sim = (function () {
       etat.debut = Date.now();
       niv.textContent = etat.niveau;
       document.body.classList.add("pc-en-cours");
+      if (NOTE) { pleinEcran(); verrouEcran(); majVigil(false); }
       ouvrir(0);
     });
     if (epreuve) {
@@ -2185,6 +2308,7 @@ var Sim = (function () {
       // une carte vide a gauche et ses questions serrees a droite : elles prennent la largeur.
       // Releve par l'utilisateur le 15 octobre 2026.
       if (!zone.firstChild) { zone.hidden = true; plan.classList.add("pc-sans-scene"); }
+      else { zone.insertBefore(boutonAgrandir(), zone.firstChild); plan.classList.toggle("pc-grand", grand); }
       var qs = questionsDe(i);
       etat.colonnes[i] = colQ;
       etat.fiches[i] = qs.map(function (q, j) { return q.type === "appel" ? poserAppel(colQ, q, i) : poserQuestion(colQ, q, i, j); });
@@ -2861,6 +2985,7 @@ var Sim = (function () {
         });
         recap.appendChild(t);
         if (ccf) recap.appendChild(el("p", { classe: "pc-autonomie", html: "<b>Autonomie</b> : " + autonomie().texte + "." }));
+        recap.appendChild(el("p", { classe: "pc-autonomie", html: "<b>Vigilance</b> : " + (vigil.s.length ? nSorties(vigil.s.length) + ", " + duree(horsPage()) + " hors de la page en tout" : "aucune sortie de la page") + "." }));
         recap.appendChild(el("p", { classe: "pc-score-final", html: minutes() + " min" }));
         return;
       }
@@ -2911,7 +3036,9 @@ var Sim = (function () {
     /* rendre la copie (mode note) : rejuger ce qui attendait une mesure, et tout verrouiller */
     function rendre() {
       if (!NOTE || etat.rendu) return;
+      fermerSortie();
       etat.rendu = true;
+      quitterPleinEcran(); libererEcran(); majVigil(false);
       etat.fiches.forEach(function (fs) { (fs || []).forEach(function (f) { if (f.verrouiller) f.verrouiller(); }); });
       majIndices();
       majChemin(); majTete();
@@ -2928,6 +3055,7 @@ var Sim = (function () {
           : "Bilan      : " + totalEtoiles() + " étoiles sur " + 3 * nOblig + ", en " + minutes() + " min" +
           (etoilesPlus() ? ", et " + etoilesPlus() + " de plus en partie facultative" : "")];
       if (NOTE) out.push("Indices    : " + etat.aides + " sur " + INDICES_NOTE);
+      if (NOTE) out.push.apply(out, lignesVigil(d));
       if (ccf) out.push("Autonomie  : " + autonomie().texte);
       if (u41) out.push("Grille     : BTS FED · U41", "Aides      : " + autonomie().texte);
       out.push(new Array(64).join("="), "");
@@ -2998,6 +3126,7 @@ var Sim = (function () {
       Object.keys(donnees).forEach(function (k) { if (pur(donnees[k])) d[k] = donnees[k]; });
       return { graine: GRAINE, niveau: etat.niveau, ecoule: Date.now() - etat.debut, courante: etat.courante, ouverte: etat.ouverte,
         aides: etat.aides, rendu: !!etat.rendu, exporte: etat.exporte, ident: etat.ident, donnees: d,
+        vigil: NOTE ? vigil : undefined, abandons: NOTE && abandons.length ? abandons : undefined,
         fiches: o.phases.map(function (ph, i) { return etat.fiches[i] ? etat.fiches[i].map(function (f) { return f.garde(); }) : null; }) };
     }
     function garder() {
@@ -3006,8 +3135,74 @@ var Sim = (function () {
     }
     function garderBientot() { if (!minuteur && etat.debut && !enReprise) minuteur = setTimeout(garder, 400); }
     ["click", "input", "change"].forEach(function (t) { racine.addEventListener(t, garderBientot, true); });
-    document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") garder(); });
     window.addEventListener("pagehide", garder);
+
+    /* ---- LA VIGILANCE (en-tete de ce fichier) : les sorties de la page, d'une evaluation commencee a son rendu ---- */
+    var vigil = { s: [], o: null };                        // s : les sorties closes {t, de, d} ; o : celle en cours {t, de}
+    var abandons = NOTE && travailLu && travailLu.abandons ? travailLu.abandons : [];
+    var chargeA = Date.now(), banVigil = null;
+    function surveille() { return NOTE && !!etat.debut && !etat.rendu && !enReprise; }
+    function ouvrirSortie(t) {
+      if (!surveille()) return;
+      if (vigil.o) { if (t === "masquee") vigil.o.t = "masquee"; return; }
+      vigil.o = { t: t, de: Date.now() };
+    }
+    function fermerSortie() {
+      var o = vigil.o; if (!o) return;
+      vigil.o = null;
+      var d = Date.now() - o.de;
+      if (o.t === "fenetre" && d < SEUIL_FENETRE) return;   // un clic dans la barre d'adresse, une notification : rien
+      vigil.s.push({ t: o.t, de: o.de, d: d });
+      majVigil(true); garderBientot();
+    }
+    function horsPage() { return vigil.s.reduce(function (a, x) { return a + x.d; }, 0); }
+    function nSorties(n) { return n + " sortie" + (n > 1 ? "s" : "") + " de la page"; }
+    /* la tete compte les sorties ; au retour, un bandeau le dit a l'eleve */
+    function majVigil(retour) {
+      var n = vigil.s.length;
+      vigilBadge.hidden = !NOTE || !n;
+      vigilBadge.textContent = "⚠ " + nSorties(n);
+      if (bPlein) bPlein.hidden = !surveille() || enPlein();
+      if (!retour || !n) return;
+      if (banVigil && banVigil.parentNode) banVigil.parentNode.removeChild(banVigil);
+      var der = vigil.s[n - 1], compris = el("button", { type: "button", classe: "bouton", texte: "Compris" });
+      banVigil = el("div", { classe: "pc-repris pc-vigil-retour", role: "alert" }, [
+        el("span", { html: "<b>Vous avez quitté la page</b> (" + (der.t === "fermee" ? "fermée ou rechargée, " : "") + duree(der.d) + "). " +
+          "C'est écrit dans votre copie, avec l'heure et la durée : " + nSorties(n) + " en tout." }), compris]);
+      compris.addEventListener("click", function () { if (banVigil.parentNode) banVigil.parentNode.removeChild(banVigil); });
+      tete.parentNode.insertBefore(banVigil, tete.nextSibling);
+    }
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "hidden") { ouvrirSortie("masquee"); garder(); return; }
+      if (document.hasFocus()) fermerSortie();
+      if (surveille()) verrouEcran();                      // le navigateur rend le verrou de l'ecran quand la page se cache
+    });
+    window.addEventListener("blur", function () {
+      if (document.visibilityState === "hidden") return;
+      var a = document.activeElement;
+      if (a && a.tagName === "IFRAME") return;             // un clic dans un cadre de la page n'est pas une sortie
+      ouvrirSortie("fenetre");
+    });
+    window.addEventListener("focus", fermerSortie);
+    ["pointerdown", "keydown"].forEach(function (t) {     // l'eleve agit dans la page : il est revenu, meme sans « focus »
+      document.addEventListener(t, function () { if (vigil.o && document.visibilityState === "visible") fermerSortie(); }, true);
+    });
+    ["fullscreenchange", "webkitfullscreenchange"].forEach(function (t) { document.addEventListener(t, function () { majVigil(false); }); });
+    /* les lignes de la copie : la vigilance, et les copies effacees sur cet appareil le meme jour */
+    function lignesVigil(d) {
+      var out = [], n = vigil.s.length, marge = "             ";
+      out.push("Vigilance  : " + (n ? nSorties(n) + ", " + duree(horsPage()) + " hors de la page en tout" : "aucune sortie de la page"));
+      vigil.s.forEach(function (x) { out.push(marge + heure(new Date(x.de)) + ", " + duree(x.d) + " : " + SORTES[x.t]); });
+      var jour = d.toDateString(), ab = abandons.filter(function (a) { return new Date(a.efface).toDateString() === jour; });
+      if (ab.length) {
+        out.push("Effacées   : " + ab.length + " copie" + (ab.length > 1 ? "s" : "") + " effacée" + (ab.length > 1 ? "s" : "") + " sur cet appareil le même jour, avant celle-ci");
+        ab.forEach(function (a) {
+          out.push(marge + "à " + heure(new Date(a.efface)) + ", une copie " + (a.rendu ? "rendue vers " + heure(new Date(a.dernier)) : "en cours, non rendue") +
+            " (" + (a.id ? "identifiant " + a.id + ", " : "sans identifiant, ") + a.n + " réponse" + (a.n > 1 ? "s" : "") + ", " + nSorties(a.s) + ")");
+        });
+      }
+      return out;
+    }
 
     /* reprendre : les parties deja ouvertes, dans l'ordre, comme l'eleve les a ouvertes ; puis leurs reponses */
     function reprendre(t) {
@@ -3015,6 +3210,12 @@ var Sim = (function () {
       etat.niveau = t.niveau; niv.textContent = t.niveau || "";
       etat.debut = Date.now() - (t.ecoule || 0); etat.aides = t.aides || 0;
       etat.ident = t.ident || ""; etat.exporte = !!t.exporte;
+      /* la vigilance revient avec la copie ; une copie en cours qu'on retrouve a ete fermee ou rechargee : c'est une
+         sortie, depuis le moment ou la page s'est cachee, ou a defaut depuis la derniere sauvegarde */
+      if (NOTE) {
+        vigil.s = (t.vigil && t.vigil.s) || []; vigil.o = null;
+        if (!t.rendu) { var de = t.vigil && t.vigil.o ? t.vigil.o.de : t.quand; vigil.s.push({ t: "fermee", de: de, d: Math.max(0, chargeA - de) }); }
+      }
       /* d.cfg, le tirage d'une page, revient AVANT les scenes : il ne se refait pas. Le reste revient APRES : d.regle et
          d.prepare gardent le reglage unique d'une scene (32 pages), et, restaures trop tot, ils l'auraient empeche. */
       var gardees = t.donnees || {};
@@ -3031,14 +3232,16 @@ var Sim = (function () {
       if (t.rendu) { etat.rendu = true; etat.fiches.forEach(function (fs) { (fs || []).forEach(function (f) { if (f.verrouiller) f.verrouiller(); }); }); }
       etat.fiches.forEach(function (fs, i) { if (fs) majPhase(i); });
       etat.ouverte = t.ouverte;
-      if (NOTE) majIndices();
+      if (NOTE) { majIndices(); if (!t.rendu) verrouEcran(); }
       majAppels();
       montrer(t.courante < 0 ? 0 : t.courante);
+      majVigil(false);
       enReprise = false;
       if (t.courante < nPh) {
         var compris = el("button", { type: "button", classe: "bouton", texte: "Compris" });
         var dit = el("div", { classe: "pc-repris", role: "status" }, [
-          el("span", { html: "<b>Votre travail est revenu</b> : les réponses, le temps, le même sujet. La simulation, elle, repart de zéro : si une question attend une mesure, refaites-la." }), compris]);
+          el("span", { html: "<b>Votre travail est revenu</b> : les réponses, le temps, le même sujet. La simulation, elle, repart de zéro : si une question attend une mesure, refaites-la." +
+            (NOTE ? " La page a été fermée ou rechargée : c'est écrit dans votre copie, avec l'heure et la durée." : "") }), compris]);
         compris.addEventListener("click", function () { dit.parentNode.removeChild(dit); });
         tete.parentNode.insertBefore(dit, tete.nextSibling);
       }
@@ -3062,11 +3265,18 @@ var Sim = (function () {
             ", " + ou + ", " + depuis + "." + id }),
         el("div", { classe: "rangee" }, [bReprendre, bZero])]);
       function fermerCarte() { carteReprise.parentNode.removeChild(carteReprise); carteReprise = null; }
-      bReprendre.addEventListener("click", function () { fermerCarte(); reprendre(t); });
+      bReprendre.addEventListener("click", function () { if (NOTE && !t.rendu) pleinEcran(); fermerCarte(); reprendre(t); });
       /* effacer le travail d'un eleve se confirme : c'est justement la fausse manipulation qu'on veut eviter */
       bZero.addEventListener("click", function () {
         if (!bZero.classList.contains("pc-confirme")) { bZero.classList.add("pc-confirme"); bZero.textContent = "Confirmer : tout effacer"; return; }
-        oublierTravail(); fermerCarte();
+        /* en evaluation notee, la copie effacee laisse une trace, que la copie suivante du meme jour ecrit (LA VIGILANCE) */
+        if (NOTE) {
+          var jour = new Date().toDateString();
+          abandons = abandons.filter(function (a) { return new Date(a.efface).toDateString() === jour; }).slice(-9);
+          abandons.push({ efface: Date.now(), dernier: t.quand, rendu: !!t.rendu, n: n, s: ((t.vigil && t.vigil.s) || []).length, id: t.ident || "" });
+          if (!ecrireTravail({ abandons: abandons })) oublierTravail();
+        } else oublierTravail();
+        fermerCarte();
       });
       accueil.insertBefore(carteReprise, accueil.firstChild);
     }
@@ -3079,6 +3289,7 @@ var Sim = (function () {
     if (libre) mode(NOTE || !!carteReprise || /^#(ccf|u41|parcours)$/.test(location.hash));
     /* la porte d'essai : etat interne et fichier, pour les controles */
     return window.__parcours = { etat: etat, donnees: donnees, ouvrir: ouvrir, fabriquer: fabriquer, rendre: rendre, note: NOTE, garder: garder, fiches: function () { return etat.fiches; },
+      vigilance: function () { return { sorties: vigil.s, ouverte: vigil.o, abandons: abandons }; },
       appels: appels, mode: mode, dossier: function () { if (dossierFn) basculerDossier(); return panDos; }, coter: function (f, x) { f.cote = x; f.heureCote = new Date(); f.note = x === "A"; f.afficher(); majPhase(f.phase); majAppels(); garder(); },
       choisirNiveau: function (n) { etat.niveau = n; niv.textContent = n; }, demarrer: function (n) {
         if (libre) mode(true);
@@ -3754,286 +3965,361 @@ var Sim = (function () {
 <body>
 <div class="page">
 <header class="tete">
-<div class="surtitre">Format court · CAP Électricien 1re année, séquence 2 · la guirlande</div>
-<h1>Pourquoi la guirlande ne s'allume plus ?</h1>
-<p class="chapeau">Vingt ampoules en série sur un bloc de 24 V : une seule dévissée et tout s'éteint, alors qu'en dérivation les autres tiennent. Le voltmètre lit 1,2 V par ampoule quand tout marche, puis trouve la coupable : c'est celle qui affiche toute la tension.</p>
+<div class="surtitre">Format court · CAP Électricien 1re année, séquence 1 · la multiprise</div>
+<h1>Je peux tout brancher là-dessus ?</h1>
+<p class="chapeau">Les watts s'écrivent sur les appareils, la limite sous la multiprise. On branche, la jauge fait le total : trois petits appareils ne pèsent rien, deux qui chauffent suffisent à dépasser 3 680 W, et une seconde multiprise ne double pas la limite.</p>
 </header>
+<style>
+/* LA MULTIPRISE · format court, CAP séquence 1 (28 octobre 2026). Ce qui suit n'appartient qu'à cette scène :
+   la fumée du fil qui chauffe, qui suit la chaleur par son opacité. */
+.court svg .fumee { fill: none; stroke: var(--c-chaud); stroke-width: 2; stroke-linecap: round; }
+.court[data-style="neon"] svg .fumee { filter: drop-shadow(0 0 3px rgba(255,107,74,.8)); }
+</style>
+
 <div id="court"></div>
 
 <script>
 (function () {
   "use strict";
   var fr = Sim.fr;
-  /* Les nombres du polycopié (S2, J4 à J7) : la guirlande de Sami, 20 ampoules en série sur un bloc de 24 V,
-     24 ÷ 20 = 1,2 V par ampoule (J7 d), 24 V aux bornes de la troisième et 0 V ailleurs (J7 e), 1,2 V sur
-     l'ampoule neuve (J7 f) ; série et dérivation comme la figure 5 (J4). */
-  var N = 20, U = 24, GRILLEE = 2;
-  var COLS = [78, 136, 194, 252, 310], ROWS = [160, 245, 330, 415], XD = COLS, YD = 285;
-  var VCOM = [222, 88], VV = [288, 88];                    // les deux douilles du voltmètre
-  var BORNE_M = [60, 80], BORNE_P = [110, 80];             // les bornes du bloc
+  /* Les nombres du polycopié (S1, J1 à J3) : 9, 10, 200, 1 800 et 2 200 W sur les appareils, 1 000 W pour le
+     radiateur, 3 680 W sous la multiprise ; 219, 2 019, 4 219 W (J1, activité 2), 4 000 W pour les deux qui
+     chauffent ; 209 + 1 000 + 1 800 = 3 009 W derrière deux multiprises (J2, activité 2). Aucun calcul en
+     ampères : P = U × I n'est pas au programme du CAP, les 16 A de l'étiquette sont montrés, jamais exploités. */
+  var LIMITE = 3680, ECHELLE = 8000, BX = 16, BW = 328;
+  var APP = {
+    lampe: { nom: ["lampe"], P: 9, haut: 410 },
+    chargeur: { nom: ["chargeur"], P: 10, haut: 418 },
+    console: { nom: ["console"], P: 200, haut: 452 },
+    seche: { nom: ["sèche-", "cheveux"], P: 1800, haut: 434, chauffe: true },
+    bouilloire: { nom: ["bouilloire"], P: 2200, haut: 418, chauffe: true },
+    radiateur: { nom: ["radiateur"], P: 1000, haut: 420, chauffe: true }
+  };
+  var NOMS = ["lampe", "chargeur", "console", "seche", "bouilloire", "radiateur"];
+  var PETITS = ["lampe", "chargeur", "console"];
+  var Y1 = 300, Y2 = 367;                                 // l'axe de la première et de la seconde multiprise
+  /* où est chaque appareil : [x, multiprise] ; la seconde se branche dans la 3e prise de la première (x = 212) */
+  var PLACE = {
+    simple: { lampe: [116, 1], chargeur: [164, 1], console: [212, 1], seche: [260, 1], bouilloire: [308, 1] },
+    cascade: { lampe: [116, 1], console: [164, 1], radiateur: [244, 2], seche: [288, 2], bouilloire: [332, 2] }
+  };
   var R = {};
-  /* les vingt ampoules, en serpentin : rangée 1 de gauche à droite, rangée 2 de droite à gauche… */
-  var B = [];
-  for (var r = 0; r < 4; r++) for (var c = 0; c < 5; c++) { var dir = r % 2 ? -1 : 1; B.push({ x: dir > 0 ? COLS[c] : COLS[4 - c], y: ROWS[r], dir: dir }); }
-  function entree(b) { return [b.x - 12 * b.dir, b.y]; }
-  function sortie(b) { return [b.x + 12 * b.dir, b.y]; }
-  /* les 21 bouts de fil : du + à la 1re, de chaque ampoule à la suivante, de la 20e au − */
-  var FILS = [];
-  FILS.push([BORNE_P, [110, 118], [40, 118], [40, 160], entree(B[0])]);
-  for (var k = 1; k < N; k++) {
-    var coin = { 5: [[340, 160], [340, 245]], 10: [[40, 245], [40, 330]], 15: [[340, 330], [340, 415]] }[k] || [];
-    FILS.push([sortie(B[k - 1])].concat(coin, [entree(B[k])]));
-  }
-  FILS.push([sortie(B[N - 1]), [40, 415], [16, 415], [16, 100], [60, 100], BORNE_M]);
-  function d(pts) { return pts.map(function (p, i) { return (i ? "L " : "M ") + p[0] + " " + p[1]; }).join(" "); }
-  /* le tour complet, pour le courant qui avance */
-  var TOUR = [];
-  FILS.forEach(function (f) { TOUR = TOUR.concat(f); });
-  var TOUR_D = d(TOUR);
 
-  /* ───────── la physique ───────── */
-  function coupure(S) { return S.devissee >= 0 ? S.devissee : S.grillee >= 0 && !S.remplacee ? S.grillee : -1; }
-  function ferme(S) { return S.bloc && coupure(S) < 0; }
-  function tension(S) {
-    if (S.mesure === null) return null;
-    if (!S.bloc) return 0;
-    if (S.mesure === "bloc") return U;
-    if (ferme(S)) return U / N;
-    return S.mesure === coupure(S) ? U : 0;
-  }
+  /* ───────── les totaux ───────── */
+  function place(S) { return S.cascade ? PLACE.cascade : PLACE.simple; }
+  function present(S, n) { return !!place(S)[n]; }
+  function surMp2(S, n) { return present(S, n) && place(S)[n][1] === 2; }
+  function alimente(S, n) { return present(S, n) && S.branche[n] && (!surMp2(S, n) || S.mp2); }
+  function total(S) { var t = 0; NOMS.forEach(function (n) { if (alimente(S, n)) t += APP[n].P; }); return t; }
+  function totalMp2(S) { var t = 0; NOMS.forEach(function (n) { if (surMp2(S, n) && alimente(S, n)) t += APP[n].P; }); return t; }
+  function xJauge(w) { return BX + Math.min(1, w / ECHELLE) * BW; }
+  function W(x) { return fr(x, 0) + " W"; }
   function base(S) {
-    S.vue = "serie"; S.bloc = false; S.devissee = -1; S.devD = [false, false, false, false, false];
-    S.grillee = -1; S.mesure = null; S.mesurees = []; S.trouvee = false; S.remplacee = false;
+    S.branche = { lampe: false, chargeur: false, console: false, seche: false, bouilloire: false, radiateur: false };
+    S.retournee = false; S.cascade = false; S.mp2 = false; S.chaleur = 0; S.trop = false; S.vuChaud = false;
   }
-  function prochaine(S) { for (var i = 0; i < N; i++) if (S.mesurees.indexOf(i) < 0) return i; return 0; }
+  function petitBranche(S) { for (var i = 0; i < PETITS.length; i++) if (S.branche[PETITS[i]]) return PETITS[i]; return null; }
+  function petitLibre(S) { for (var i = 0; i < PETITS.length; i++) if (!S.branche[PETITS[i]]) return PETITS[i]; return null; }
 
   /* ───────── la scène, dessinée une fois ───────── */
-  function ampoule(C, p, x, y) {
-    var o = { g: C.g(p) };
-    C.svg("rect", { x: x - 5, y: y - 18, width: 10, height: 7, rx: 1.5, "class": "obj2" }, o.g);
-    o.verre = C.svg("circle", { cx: x, cy: y, r: 12, "class": "eteint", stroke: "var(--c-encre)", "stroke-width": 1.4 }, o.g);
-    C.svg("path", { d: "M " + (x - 5) + " " + (y + 3) + " l 3 -6 l 4 6 l 4 -6", "class": "ligne", "stroke-width": 1.2 }, o.g);
-    o.croix = C.svg("path", { d: "M " + (x - 7) + " " + (y - 7) + " l 14 14 M " + (x + 7) + " " + (y - 7) + " l -14 14", "class": "trait-accent cache" }, o.g);
-    return o;
-  }
   function dessiner(C) {
     var g = C.g, t = C.t, svg = C.svg, fond = g(C.racine);
-    /* le bloc d'alimentation */
-    var zb = C.touche(g(fond), "bloc", "Le bloc d'alimentation");
-    svg("rect", { x: 40, y: 22, width: 92, height: 58, rx: 6, "class": "obj" }, zb);
-    t(zb, 80, 40, "bloc", "petit", { "text-anchor": "middle" });
-    t(zb, 80, 64, "24 V", "titre-svg", { "text-anchor": "middle", "font-size": 18 });
-    R.voyant = svg("circle", { cx: 120, cy: 34, r: 4.5, "class": "eteint", stroke: "var(--c-encre)", "stroke-width": 1 }, zb);
-    svg("rect", { x: 36, y: 18, width: 100, height: 66, "class": "zone" }, zb);
-    svg("circle", { cx: BORNE_M[0], cy: BORNE_M[1], r: 4, "class": "obj2" }, fond);
-    svg("circle", { cx: BORNE_P[0], cy: BORNE_P[1], r: 4, "class": "rouge" }, fond);
-    t(fond, 52, 95, "−", "etiq", { "text-anchor": "end" });
-    t(fond, 120, 96, "+", "etiq");
-    /* la guirlande en série */
-    R.serie = g(fond);
-    R.fils = FILS.map(function (f) { return svg("path", { d: d(f), "class": "ligne" }, R.serie); });
-    R.amp = B.map(function (b, i) {
-      var o = ampoule(C, R.serie, b.x, b.y);
-      t(R.serie, b.x, b.y + 27, String(i + 1), "petit", { "text-anchor": "middle" });
-      var z = C.touche(g(R.serie), "amp" + (i + 1), "L'ampoule n° " + (i + 1));
-      svg("rect", { x: b.x - 26, y: b.y - 30, width: 52, height: 62, "class": "zone" }, z);
-      return o;
-    });
-    R.flot = C.flot(R.serie, TOUR_D, 44);
-    R.legSerie = t(R.serie, 180, 480, "en série : un seul chemin pour le courant", "etiq", { "text-anchor": "middle" });
-    R.legende = g(R.serie, { "class": "cache" });
-    svg("path", { d: "M 70 476 H 100", "class": "trait-chaud" }, R.legende);
-    t(R.legende, 108, 480, "relié au + du bloc : 24 V", "etiq");
-    svg("path", { d: "M 70 500 H 100", "class": "trait-froid" }, R.legende);
-    t(R.legende, 108, 504, "relié au − du bloc : 0 V", "etiq");
+    /* la jauge : le total de ce qui est branché */
+    t(fond, BX, 28, "total branché :", "etiq");
+    svg("rect", { x: 104, y: 10, width: 120, height: 26, rx: 3, "class": "lcd" }, fond);
+    R.lcd = t(fond, 218, 29, "0 W", "val mono", { "text-anchor": "end", "font-size": 17, "data-r": "total" });
+    svg("rect", { x: BX, y: 46, width: BW, height: 20, rx: 4, "class": "obj2" }, fond);
+    R.jauge = svg("rect", { x: BX, y: 46, width: 0, height: 20, rx: 4, "class": "froid" }, fond);
+    t(fond, BX, 82, "0 W", "petit");
+    t(fond, BX + BW, 82, "8 000 W", "petit", { "text-anchor": "end" });
+    R.limite = g(fond, { "class": "cache" });
+    svg("path", { d: "M " + xJauge(LIMITE) + " 40 V 72", "class": "trait-accent" }, R.limite);
+    t(R.limite, xJauge(LIMITE), 84, "limite : 3 680 W", "etiq", { "text-anchor": "middle" });
+    /* l'idée fausse : deux multiprises, deux fois 3 680 W */
+    R.fantome = g(fond, { "class": "cache" });
+    svg("path", { d: "M " + xJauge(2 * LIMITE).toFixed(1) + " 40 V 72", "class": "trait-accent tirets" }, R.fantome);
+    t(R.fantome, xJauge(2 * LIMITE), 33, "7 360 W ?", "etiq", { "text-anchor": "middle" });
+    R.barre = svg("path", { d: "M 294 22 L 342 37 M 294 37 L 342 22", "class": "trait-accent cache" }, R.fantome);
 
-    /* la guirlande en dérivation : deux fils, une branche par ampoule */
-    R.deriv = g(fond, { "class": "cache" });
-    var fp = "M " + BORNE_P[0] + " " + BORNE_P[1] + " V 118 H 40 V 170 H 310", fm = "M 310 400 H 16 V 100 H 60 V 80";
-    svg("path", { d: fp, "class": "ligne" }, R.deriv);
-    svg("path", { d: fm, "class": "ligne" }, R.deriv);
-    R.flotP = C.flot(R.deriv, fp, 12); R.flotM = C.flot(R.deriv, fm, 14);
-    R.ampD = XD.map(function (x, i) {
-      svg("path", { d: "M " + x + " 170 V " + (YD - 12) + " M " + x + " " + (YD + 12) + " V 400", "class": "ligne" }, R.deriv);
-      svg("circle", { cx: x, cy: 170, r: 3, "class": "obj2" }, R.deriv);
-      svg("circle", { cx: x, cy: 400, r: 3, "class": "obj2" }, R.deriv);
-      var o = ampoule(C, R.deriv, x, YD);
-      o.flot = C.flot(R.deriv, "M " + x + " 170 V 400", 4);
-      var z = C.touche(g(R.deriv), "der" + (i + 1), "L'ampoule de la branche " + (i + 1));
-      svg("rect", { x: x - 26, y: YD - 40, width: 52, height: 80, "class": "zone" }, z);
-      return o;
+    /* le tableau, son disjoncteur, le fil dans le mur, la prise du mur */
+    svg("rect", { x: 12, y: 96, width: 50, height: 78, rx: 5, "class": "obj" }, fond);
+    t(fond, 37, 108, "tableau", "petit", { "text-anchor": "middle" });
+    svg("rect", { x: 25, y: 113, width: 24, height: 52, rx: 3, "class": "obj" }, fond);
+    svg("rect", { x: 32, y: 118, width: 10, height: 20, rx: 2, "class": "obj2" }, fond);
+    svg("rect", { x: 30, y: 119, width: 14, height: 9, rx: 2, "class": "obj" }, fond);
+    t(fond, 37, 157, "16 A", "etiq", { "text-anchor": "middle" });
+    svg("path", { d: "M 37 174 V 212", "class": "ligne tirets" }, fond);
+    svg("rect", { x: 14, y: 212, width: 46, height: 46, rx: 6, "class": "obj" }, fond);
+    svg("circle", { cx: 37, cy: 235, r: 13, "class": "obj2" }, fond);
+    svg("rect", { x: 30, y: 228, width: 14, height: 14, rx: 2, "class": "obj" }, fond);
+    t(fond, 12, 274, "prise du mur", "petit");
+    /* le fil de la multiprise : son halo de chauffe, la fumée, le thermomètre */
+    var cordon = "M 44 236 C 70 236, 70 300, 92 300";
+    R.halo = svg("path", { d: cordon, "class": "halo" }, fond);
+    svg("path", { d: cordon, "class": "ligne", "stroke-width": 4 }, fond);
+    R.fumee = g(fond);
+    [64, 76, 88].forEach(function (x, i) {
+      svg("path", { d: "M " + x + " " + (262 - i * 4) + " q -5 -6 0 -12 q 5 -6 0 -12", "class": "fumee" }, R.fumee);
     });
-    t(R.deriv, 180, 440, "en dérivation : une branche par ampoule", "etiq", { "text-anchor": "middle" });
+    R.sent = t(fond, 100, 262, "ça sent le chaud", "etiq cache", { style: "fill: var(--c-accent2)" });
+    svg("rect", { x: 19, y: 296, width: 10, height: 82, rx: 5, "class": "obj" }, fond);
+    R.mercure = svg("rect", { x: 21, y: 376, width: 6, height: 0, "class": "chaud" }, fond);
+    svg("circle", { cx: 24, cy: 386, r: 8, "class": "obj" }, fond);
+    svg("circle", { cx: 24, cy: 386, r: 5, "class": "chaud" }, fond);
+    t(fond, 24, 408, "chaleur", "petit", { "text-anchor": "middle" });
+    t(fond, 24, 419, "du fil", "petit", { "text-anchor": "middle" });
 
-    /* le voltmètre, ses deux cordons et leurs pointes */
-    svg("rect", { x: 164, y: 8, width: 182, height: 86, rx: 8, "class": "obj" }, fond);
-    t(fond, 255, 22, "voltmètre", "petit", { "text-anchor": "middle", "font-weight": 700 });
-    svg("rect", { x: 180, y: 28, width: 150, height: 44, rx: 3, "class": "lcd" }, fond);
-    R.lcd = t(fond, 322, 61, "- - -", "val mono", { "text-anchor": "end", "font-size": 26, "data-r": "volt" });
-    svg("circle", { cx: VCOM[0], cy: VCOM[1], r: 4.5, "class": "obj2" }, fond);
-    svg("circle", { cx: VV[0], cy: VV[1], r: 4.5, "class": "rouge" }, fond);
-    t(fond, 212, 91, "COM", "petit", { "text-anchor": "end" });
-    t(fond, 298, 91, "V", "petit");
-    R.cordons = g(C.racine, { "class": "cache" });
-    R.cCom = svg("path", { d: "", "class": "ligne", "stroke-width": 1.6 }, R.cordons);
-    R.cV = svg("path", { d: "", "class": "trait-accent", "stroke-width": 1.6 }, R.cordons);
-    R.pCom = svg("circle", { cx: 0, cy: 0, r: 4, "class": "obj2" }, R.cordons);
-    R.pV = svg("circle", { cx: 0, cy: 0, r: 4, "class": "rouge" }, R.cordons);
+    /* l'étiquette retournée */
+    R.etiquette = g(fond, { "class": "cache" });
+    t(R.etiquette, 247, 98, "écrit sous la multiprise :", "petit", { "text-anchor": "middle" });
+    svg("rect", { x: 160, y: 104, width: 174, height: 76, rx: 6, "class": "obj" }, R.etiquette);
+    t(R.etiquette, 247, 122, "250 V ~   ·   16 A", "etiq", { "text-anchor": "middle" });
+    t(R.etiquette, 247, 152, "3 680 W MAX", "titre-svg", { "text-anchor": "middle", "font-size": 20, style: "fill: var(--c-accent2)" });
+    t(R.etiquette, 247, 171, "pour tout ce qui est branché", "petit", { "text-anchor": "middle" });
+    svg("path", { d: "M 247 180 V 286", "class": "ligne tirets", "stroke-width": 1.2 }, R.etiquette);
+
+    /* la première multiprise ; on la retourne en la touchant */
+    var mp1 = C.touche(g(fond), "multiprise", "Retourner la multiprise pour lire son étiquette");
+    svg("rect", { x: 92, y: 288, width: 242, height: 24, rx: 5, "class": "obj" }, mp1);
+    [116, 164, 212, 260, 308].forEach(function (x) { prise(C, mp1, x, Y1); });
+    svg("rect", { x: 92, y: 278, width: 242, height: 40, "class": "zone" }, mp1);
+    R.tag1 = t(fond, 130, 283, "3 680 W max", "petit cache", { "text-anchor": "middle", "font-weight": 700 });
+
+    /* la seconde multiprise, son fil, sa fiche dans la 3e prise */
+    R.mp2 = g(C.racine, { "class": "cache" });
+    var cordon2 = "M 212 312 C 212 342, 184 367, 200 367";
+    R.halo2 = svg("path", { d: cordon2, "class": "halo" }, R.mp2);
+    R.cordon2 = svg("path", { d: "", "class": "ligne", "stroke-width": 3 }, R.mp2);
+    svg("rect", { x: 200, y: 356, width: 152, height: 22, rx: 5, "class": "obj" }, R.mp2);
+    [244, 288, 332].forEach(function (x) { prise(C, R.mp2, x, Y2); });
+    t(R.mp2, 300, 350, "3 680 W max", "petit", { "text-anchor": "middle", "font-weight": 700 });
+    var zf = C.touche(g(R.mp2), "mp2", "Brancher la seconde multiprise dans la première");
+    R.fiche2 = svg("rect", { x: 205, y: 0, width: 14, height: 12, rx: 2, "class": "obj" }, zf);
+    svg("rect", { x: 190, y: 318, width: 44, height: 40, "class": "zone" }, zf);
+    R.flot2 = C.flot(R.mp2, cordon2, 6);
+
+    /* les appareils : chacun dans un groupe qu'on déplace, sa fiche, son cordon, son étiquette */
+    R.app = {};
+    NOMS.forEach(function (n) {
+      var a = APP[n], ga = g(C.racine, { "class": "cache" }), o = { g: ga };
+      o.cordon = svg("path", { d: "", "class": "ligne", "stroke-width": 2.4 }, ga);
+      o.fiche = svg("rect", { x: -7, y: 0, width: 14, height: 12, rx: 2, "class": "obj" }, ga);
+      o.flot1 = C.flot(ga, "M 0 " + (Y1 + 6) + " V " + a.haut, 3);
+      o.flot2 = C.flot(ga, "M 0 " + (Y2 + 6) + " V " + a.haut, 2);
+      appareil(C, n, g(ga), o);
+      a.nom.forEach(function (l, i) { t(ga, 0, 506 + i * 10, l, "petit", { "text-anchor": "middle" }); });
+      t(ga, 0, 530, W(a.P), "etiq", { "text-anchor": "middle" });
+      var z = C.touche(g(ga), "app-" + n, "Brancher ou débrancher : " + a.nom.join(""));
+      svg("rect", { x: -23, y: 392, width: 46, height: 108, "class": "zone" }, z);
+      R.app[n] = o;
+    });
+  }
+  function prise(C, p, x, y) {
+    C.svg("circle", { cx: x, cy: y, r: 8, "class": "obj2" }, p);
+    C.svg("circle", { cx: x - 3, cy: y, r: 1.5, "class": "obj" }, p);
+    C.svg("circle", { cx: x + 3, cy: y, r: 1.5, "class": "obj" }, p);
+  }
+  function appareil(C, n, p, o) {
+    var svg = C.svg;
+    if (n === "lampe") {
+      svg("ellipse", { cx: 0, cy: 488, rx: 16, ry: 5, "class": "obj2" }, p);
+      svg("path", { d: "M 0 486 V 438", "class": "ligne", "stroke-width": 2.6 }, p);
+      o.lum = svg("circle", { cx: 0, cy: 434, r: 7, "class": "eteint", stroke: "var(--c-encre)", "stroke-width": 1.2 }, p);
+      svg("path", { d: "M -16 432 L -9 410 H 9 L 16 432 Z", "class": "obj" }, p);
+    } else if (n === "chargeur") {
+      svg("rect", { x: -6, y: 418, width: 12, height: 13, rx: 2, "class": "obj2" }, p);
+      svg("path", { d: "M 0 431 V 444", "class": "ligne", "stroke-width": 1.6 }, p);
+      svg("rect", { x: -11, y: 444, width: 22, height: 44, rx: 4, "class": "obj" }, p);
+      o.lum = svg("rect", { x: -8, y: 449, width: 16, height: 30, rx: 2, "class": "eteint" }, p);
+    } else if (n === "console") {
+      svg("rect", { x: -21, y: 452, width: 42, height: 26, rx: 4, "class": "obj" }, p);
+      svg("path", { d: "M -15 466 H 5", "class": "ligne", "stroke-width": 1.4 }, p);
+      o.lum = svg("circle", { cx: 13, cy: 466, r: 3.5, "class": "eteint", stroke: "var(--c-encre)", "stroke-width": 1 }, p);
+      svg("rect", { x: -14, y: 482, width: 28, height: 10, rx: 5, "class": "obj2" }, p);
+    } else if (n === "seche") {
+      svg("path", { d: "M -9 452 L -12 490 H -1 L 2 452 Z", "class": "obj2" }, p);
+      svg("circle", { cx: -4, cy: 446, r: 13, "class": "obj" }, p);
+      svg("rect", { x: 6, y: 439, width: 12, height: 14, rx: 2, "class": "obj" }, p);
+      o.chaud = [svg("rect", { x: 14, y: 441, width: 4, height: 10, "class": "obj2" }, p),
+        svg("path", { d: "M 20 442 h 2 M 20 450 h 2", "class": "trait-chaud cache" }, p)];
+    } else if (n === "bouilloire") {
+      svg("path", { d: "M -17 488 L -12 426 H 12 L 17 488 Z", "class": "obj" }, p);
+      svg("path", { d: "M 13 436 q 9 4 8 22 q -1 14 -7 18", "class": "ligne", "stroke-width": 3 }, p);
+      svg("path", { d: "M -13 440 l -8 -8 l 2 -4 l 8 5", "class": "obj" }, p);
+      svg("rect", { x: -9, y: 418, width: 18, height: 8, rx: 3, "class": "obj2" }, p);
+      o.chaud = [svg("rect", { x: -20, y: 486, width: 40, height: 7, rx: 3, "class": "obj2" }, p)];
+    } else if (n === "radiateur") {
+      svg("rect", { x: -20, y: 420, width: 40, height: 64, rx: 4, "class": "obj" }, p);
+      o.chaud = [];
+      for (var i = 0; i < 5; i++) o.chaud.push(svg("path", { d: "M " + (-13 + i * 6.5) + " 428 V 476", "class": "ligne", "stroke-width": 1.4 }, p));
+      svg("path", { d: "M -14 484 v 8 M 14 484 v 8", "class": "ligne", "stroke-width": 3 }, p);
+    }
   }
 
-  /* ───────── chaque image : la scène suit l'état ───────── */
-  function cordon(n, j, p) {
-    n.setAttribute("d", "M " + j[0] + " " + j[1] + " C " + j[0] + " " + (j[1] + 50) + ", " + p[0] + " " + (p[1] - 60) + ", " + p[0] + " " + (p[1] - 4));
+  /* ───────── chaque image : la chaleur du fil, puis la scène ───────── */
+  function pas(dt, S, C) {
+    var T = total(S);
+    if (T > LIMITE) S.chaleur = Math.min(1, S.chaleur + dt * (0.25 + (T - LIMITE) / LIMITE));
+    else S.chaleur = Math.max(0, S.chaleur - dt * 0.3);
+    if (T > LIMITE && !S.trop) { S.trop = true; C.pop(250, 142, "TROP !", "bip"); }
+    if (S.chaleur >= 0.7 && !S.vuChaud) { S.vuChaud = true; C.pop(150, 226, "ÇA CHAUFFE !", "boum"); }
+    if (T <= LIMITE && S.trop) { S.trop = false; if (S.vuChaud) C.pop(250, 142, "OUF !", "ding"); S.vuChaud = false; }
   }
   function afficher(dt, S) {
-    var serie = S.vue === "serie", on = ferme(S);
-    R.serie.setAttribute("class", serie ? "" : "cache");
-    R.deriv.setAttribute("class", serie ? "cache" : "");
-    R.voyant.setAttribute("class", S.bloc ? "allume" : "eteint");
-    /* la série */
-    R.amp.forEach(function (o, i) {
-      o.verre.setAttribute("class", on ? "allume" : "eteint");
-      o.g.setAttribute("transform", i === S.devissee ? "rotate(-24 " + B[i].x + " " + B[i].y + ") translate(0 -10)" : "");
-      o.croix.setAttribute("class", "trait-accent" + (i === S.grillee && S.trouvee && !S.remplacee ? "" : " cache"));
+    var T = total(S), trop = T > LIMITE;
+    R.lcd.textContent = W(T);
+    R.lcd.style.fill = trop && S.retournee ? "var(--c-accent2)" : "";
+    R.jauge.setAttribute("width", (xJauge(T) - BX).toFixed(1));
+    R.jauge.setAttribute("class", trop && S.retournee ? "rouge" : "froid");
+    R.limite.setAttribute("class", S.retournee ? "" : "cache");
+    R.fantome.setAttribute("class", S.cascade ? "" : "cache");
+    R.barre.setAttribute("class", "trait-accent" + (S.mp2 ? "" : " cache"));
+    R.etiquette.setAttribute("class", S.retournee && !S.cascade ? "" : "cache");
+    R.tag1.setAttribute("class", "petit" + (S.cascade ? "" : " cache"));
+    /* la chaleur du fil */
+    R.halo.style.opacity = (S.chaleur * 0.6).toFixed(2);          // la classe .halo pose opacity: 0 en CSS : l'attribut ne passerait pas
+    R.halo2.style.opacity = (totalMp2(S) > LIMITE ? S.chaleur * 0.6 : 0).toFixed(2);
+    R.fumee.setAttribute("opacity", Math.max(0, (S.chaleur - 0.4) / 0.6).toFixed(2));
+    R.sent.setAttribute("class", "etiq" + (S.chaleur > 0.5 ? "" : " cache"));
+    var h = 76 * S.chaleur; R.mercure.setAttribute("y", (376 - h).toFixed(1)); R.mercure.setAttribute("height", h.toFixed(1));
+    /* le courant dans les fils, d'autant plus vite qu'il y a de watts derrière */
+    R.flot.avancer(dt, T > 0 ? 14 + T / 60 : 0);
+    var T2 = S.mp2 ? totalMp2(S) : 0;
+    R.flot2.avancer(dt, T2 > 0 ? 14 + T2 / 60 : 0);
+    /* la seconde multiprise */
+    R.mp2.setAttribute("class", S.cascade ? "" : "cache");
+    var yF = S.mp2 ? 294 : 318;
+    R.fiche2.setAttribute("y", yF);
+    R.cordon2.setAttribute("d", "M 212 " + (yF + 12) + " C 212 342, 184 367, 200 367");
+    /* les appareils */
+    NOMS.forEach(function (n) {
+      var o = R.app[n], pl = place(S)[n];
+      o.g.setAttribute("class", pl ? "" : "cache");
+      if (!pl) return;
+      var ys = pl[1] === 2 ? Y2 : Y1, b = S.branche[n], yf = b ? ys - 6 : ys + 18, on = alimente(S, n);
+      o.g.setAttribute("transform", "translate(" + pl[0] + " 0)");
+      o.fiche.setAttribute("y", yf);
+      o.cordon.setAttribute("d", "M 0 " + (yf + 12) + " V " + APP[n].haut);
+      o.flot1.avancer(dt, on && pl[1] === 1 ? 10 + APP[n].P / 40 : 0);
+      o.flot2.avancer(dt, on && pl[1] === 2 ? 10 + APP[n].P / 40 : 0);
+      if (o.lum) o.lum.setAttribute("class", on ? "allume" : "eteint");
+      if (o.chaud) {
+        if (n === "radiateur") o.chaud.forEach(function (c) { c.setAttribute("class", on ? "trait-chaud" : "ligne"); });
+        else if (n === "seche") { o.chaud[0].setAttribute("class", on ? "chaud" : "obj2"); o.chaud[1].setAttribute("class", "trait-chaud" + (on ? "" : " cache")); }
+        else o.chaud[0].setAttribute("class", on ? "chaud" : "obj2");
+      }
     });
-    R.flot.avancer(dt, serie && on ? 46 : 0);
-    var cote = S.trouvee && !S.remplacee;
-    R.fils.forEach(function (f, k) { f.setAttribute("class", cote ? (k <= S.grillee ? "trait-chaud" : "trait-froid") : "ligne"); });
-    R.legende.setAttribute("class", cote ? "" : "cache");
-    R.legSerie.setAttribute("class", "etiq" + (cote ? " cache" : ""));
-    /* la dérivation */
-    var nAllumees = 0;
-    R.ampD.forEach(function (o, i) {
-      var allumee = S.bloc && !S.devD[i]; if (allumee) nAllumees++;
-      o.verre.setAttribute("class", allumee ? "allume" : "eteint");
-      o.g.setAttribute("transform", S.devD[i] ? "rotate(-24 " + XD[i] + " " + YD + ") translate(0 -10)" : "");
-      o.flot.avancer(dt, !serie && allumee ? 40 : 0);
-    });
-    R.flotP.avancer(dt, !serie && nAllumees ? 20 + 8 * nAllumees : 0);
-    R.flotM.avancer(dt, !serie && nAllumees ? 20 + 8 * nAllumees : 0);
-    /* le voltmètre */
-    var v = tension(S);
-    R.lcd.textContent = v === null ? "- - -" : fr(v, 1) + " V";
-    R.cordons.setAttribute("class", S.mesure === null ? "cache" : "");
-    if (S.mesure !== null) {
-      var pC, pV;
-      if (S.mesure === "bloc") { pC = BORNE_M; pV = BORNE_P; }
-      else { var b = B[S.mesure]; pV = entree(b); pC = sortie(b); }
-      cordon(R.cCom, VCOM, pC); cordon(R.cV, VV, pV);
-      R.pCom.setAttribute("cx", pC[0]); R.pCom.setAttribute("cy", pC[1]);
-      R.pV.setAttribute("cx", pV[0]); R.pV.setAttribute("cy", pV[1]);
-    }
   }
 
   /* ───────── les gestes ───────── */
+  function refus(n, S) {
+    var b = S.branche[n], e = S.etape, k = S.beat, chauffe = APP[n].chauffe;
+    if (e === 1 && chauffe && !b) return "Pas encore : d'abord les trois petits appareils.";
+    if (e === 2) {
+      if (k <= 2 && b) return k === 2 ? "Attends : regarde d'abord le fil." : "Garde-les branchés pour l'instant.";
+      if (k === 0 && n === "bouilloire" && !b) return "D'abord le sèche-cheveux.";
+      if (k === 3 && chauffe && b) return "Garde les deux qui chauffent : débranche d'abord les petits.";
+    }
+    if (e === 3) {
+      if (n === "lampe" || n === "console") return "La lampe et la console restent branchées sur la première multiprise.";
+      if (k <= 1 && n === "bouilloire" && !b) return "D'abord le radiateur et le sèche-cheveux.";
+    }
+    return "";
+  }
   function action(nom, S, C) {
-    var m, e = S.etape;
-    if (nom === "bloc") {
-      if (e === 1 || e === 2) { S.bloc = !S.bloc; return; }
-      S.mesure = "bloc";
-    } else if ((m = /^amp(\d+)$/.exec(nom))) {
-      var i = +m[1] - 1;
-      if (e === 1) {
-        if (!S.bloc) { C.conseil("Allume d'abord le bloc : touche-le."); return; }
-        if (S.devissee === i) { S.devissee = -1; return; }
-        if (S.devissee >= 0) { C.conseil("Revisse d'abord l'ampoule n° " + (S.devissee + 1) + "."); return; }
-        S.devissee = i; C.pop(194, 290, "PLUS RIEN !", "clac");
-      } else if (e === 3 || e === 4) {
-        if (e === 4 && i === S.grillee && S.trouvee && !S.remplacee) { S.remplacee = true; C.pop(194, 290, "ÇA MARCHE !", "ding"); return; }
-        if (e === 4 && S.mesure === null) { C.conseil("D'abord le bloc : est-ce lui qui ne donne plus rien ?"); return; }
-        S.mesure = i;
-        if (S.mesurees.indexOf(i) < 0) S.mesurees.push(i);
-        if (e === 4 && i === S.grillee && !S.remplacee && !S.trouvee) { S.trouvee = true; C.pop(255, 128, "24 V !", "bip"); }
-      }
-    } else if ((m = /^der(\d)$/.exec(nom))) {
-      var j = +m[1] - 1;
-      if (e !== 2) return;
-      S.devD[j] = !S.devD[j];
-      if (S.devD[j]) C.pop(194, 214, "ÇA TIENT !", "clac");
+    var m;
+    if (nom === "multiprise") {
+      if (S.etape === 1 && !S.retournee) { S.retournee = true; C.pop(247, 150, "3 680 W MAX", "ding"); }
+    } else if (nom === "mp2") {
+      if (!S.cascade) return;
+      S.mp2 = !S.mp2;
+      if (S.mp2) C.pop(300, 112, "NON !", "boum");
+    } else if ((m = /^app-(.+)$/.exec(nom))) {
+      var n = m[1]; if (!present(S, n)) return;
+      var msg = refus(n, S);
+      if (msg) { C.conseil(msg); return; }
+      S.branche[n] = !S.branche[n];
     }
   }
-  function cibleAmp(i) { return [B[i].x, B[i].y, 24]; }
+  function cibleApp(n) { return function (S) { var pl = place(S)[n]; return pl ? [pl[0], 446, 28] : null; }; }
 
   Sim.court({
-    titre: "Pourquoi la guirlande ne s'allume plus ?",
-    classe: "CAP · séquence 2",
-    accroche: { titre: 'La guirlande<br><span class="gros">NE S\'ALLUME PLUS ?</span>',
-      texte: "Une guirlande sortie du carton après un an. On la branche : rien. Quatre étapes pour trouver pourquoi." },
-    scene: { viewBox: "0 0 360 536", aria: "Un bloc de 24 V, une guirlande de vingt ampoules en série, une guirlande en dérivation et un voltmètre" },
+    titre: "Je peux tout brancher là-dessus ?",
+    classe: "CAP · séquence 1",
+    accroche: { titre: 'Je peux tout<br><span class="gros">BRANCHER ?</span>',
+      texte: "Une multiprise, une chambre, et tout ce qu'on voudrait brancher dessus. Trois étapes : à toi de brancher." },
+    scene: { viewBox: "0 0 360 536", aria: "Une multiprise branchée au mur, ses appareils et la jauge du total des watts" },
     son: true,
     etat: function () { var s = {}; base(s); return s; },
-    dessiner: dessiner, afficher: afficher, action: action,
+    dessiner: function (C) { dessiner(C); R.flot = C.flot(C.racine, "M 44 236 C 70 236, 70 300, 92 300", 8); },
+    pas: pas, afficher: afficher, action: action,
     cibles: {
-      bloc: [86, 50, 30],
-      amp1: cibleAmp(0), amp8: cibleAmp(7), amp13: cibleAmp(12),
-      prochaine: function (S) { return cibleAmp(prochaine(S)); },
-      grillee: function (S) { return cibleAmp(S.grillee); },
-      der2: [XD[1], YD, 24]
+      multiprise: [213, 300, 30], mp2: [212, 336],
+      lampe: cibleApp("lampe"), chargeur: cibleApp("chargeur"), console: cibleApp("console"),
+      seche: cibleApp("seche"), bouilloire: cibleApp("bouilloire"), radiateur: cibleApp("radiateur")
     },
     etapes: [
-      { nom: "Un seul chemin",
+      { nom: "Ce qui est écrit dessous",
         mettre: function (S) { base(S); },
         beats: [
-          { t: "La guirlande de Sami : 20 ampoules sur un bloc de 24 V. Allume le bloc : touche-le.",
-            ok: function (S) { return S.bloc; }, cible: "bloc" },
-          { t: "Toutes s'allument. Le courant n'a qu'un chemin : il traverse les 20 ampoules à la suite. Dévisse une ampoule.",
-            ok: function (S) { return S.devissee >= 0 && S.bloc; }, cible: function (S) { return S.bloc ? "amp8" : "bloc"; },
-            aide: function (S) { return S.bloc ? "" : "Le bloc est éteint : rallume-le."; } },
-          { t: "Tout s'éteint : le seul chemin est coupé. C'est un montage en série.", suite: "Et en dérivation ?" }
+          { t: "Sous une multiprise, une étiquette donne sa limite. Retourne la multiprise : touche-la.",
+            ok: function (S) { return S.retournee; }, cible: "multiprise" },
+          { t: function (S) { var T = total(S); return "3 680 W au plus, pour tout ce qui est branché. Branche la lampe, le chargeur et la console." + (T ? " Total : " + W(T) + "." : ""); },
+            ok: function (S) { return !petitLibre(S); }, cible: function (S) { return petitLibre(S); } },
+          { t: "9 + 10 + 200 = 219 W. La jauge bouge à peine : ces trois-là ne chauffent pas.", suite: "Et ceux qui chauffent ?" }
         ] },
-      { nom: "Chacune son chemin",
-        mettre: function (S) { base(S); S.vue = "derivation"; S.bloc = true; },
+      { nom: "Ceux qui chauffent",
+        mettre: function (S) { base(S); S.retournee = true; PETITS.forEach(function (n) { S.branche[n] = true; }); },
         beats: [
-          { t: "Une autre guirlande, en dérivation : chaque ampoule a sa branche. Dévisse une ampoule.",
-            ok: function (S) { return S.bloc && S.devD.some(Boolean); }, cible: function (S) { return S.bloc ? "der2" : "bloc"; },
-            aide: function (S) { return S.bloc ? "" : "Le bloc est éteint : rallume-le."; } },
-          { t: "Les autres restent allumées : le courant passe encore par leurs branches. Les prises de la maison sont en dérivation.", suite: "Et la tension ?" }
+          { t: "Les appareils qui chauffent sont les plus gourmands. Branche le sèche-cheveux : 1 800 W à lui seul.",
+            ok: function (S) { return S.branche.seche; }, cible: "seche" },
+          { t: "2 019 W : ça passe encore. Branche la bouilloire.",
+            ok: function (S) { return S.branche.bouilloire; }, cible: "bouilloire" },
+          { t: "4 219 W : 539 W de trop. Regarde le fil de la multiprise…",
+            ok: function (S) { return S.chaleur >= 0.7; } },
+          { t: "Le fil chauffe, et la multiprise n'a aucune protection. Débranche les trois petits.",
+            ok: function (S) { return !petitBranche(S); }, cible: function (S) { return petitBranche(S); } },
+          { t: "Encore 4 000 W : toujours trop ! Les deux qui chauffent suffisent. Débranche l'un des deux.",
+            ok: function (S) { return total(S) <= LIMITE; }, cible: "bouilloire" },
+          { t: function (S) { return W(total(S)) + " : ça passe. Le fil refroidit."; }, suite: "Et le disjoncteur ?" },
+          { t: "Le disjoncteur du tableau n'a pas coupé : il coupe tard, sans prévenir. Avant de brancher, je fais le total.", suite: "Et deux multiprises ?" }
         ] },
-      { nom: "La tension se partage",
-        mettre: function (S) { base(S); S.bloc = true; },
+      { nom: "Deux multiprises, le double ?",
+        mettre: function (S) { base(S); S.retournee = true; S.cascade = true; S.branche.lampe = S.branche.console = true; },
         beats: [
-          { t: "Revenons à la guirlande en série, qui marche. Pose le voltmètre aux bornes du bloc : touche le bloc.",
-            ok: function (S) { return S.mesure === "bloc"; }, cible: "bloc" },
-          { t: "24 V à la sortie du bloc. Pose maintenant le voltmètre sur une ampoule : touche-la.",
-            ok: function (S) { return typeof S.mesure === "number"; }, cible: "amp1" },
-          { t: "1,2 V sur cette ampoule. Essaie une autre ampoule.",
-            ok: function (S) { return S.mesurees.length >= 2; }, cible: "amp13" },
-          { t: "1,2 V partout. Les 20 ampoules se partagent les 24 V : 24 ÷ 20 = 1,2 V.", suite: "Et la panne ?" }
-        ] },
-      { nom: "Trouver la coupable",
-        mettre: function (S) { base(S); S.bloc = true; S.grillee = GRILLEE; },
-        beats: [
-          { t: "Un an plus tard, plus rien ne s'allume. Le bloc est-il en cause ? Mesure-le : touche-le.",
-            ok: function (S) { return S.mesure === "bloc"; }, cible: "bloc" },
-          { t: function (S) {
-              return typeof S.mesure === "number" ? "0 V sur la n° " + (S.mesure + 1) + " : plus de courant, donc rien. Essaie la suivante."
-                : "24 V : le bloc marche. La panne est dans la guirlande. Mesure les ampoules, une par une."; },
-            ok: function (S) { return S.trouvee; }, cible: "prochaine" },
-          { t: "24 V sur la n° 3 ! Toute la tension du bloc se retrouve là où c'est coupé. Remplace-la : touche-la.",
-            ok: function (S) { return S.remplacee; }, cible: "grillee" },
-          { t: "Tout se rallume, et la neuve affiche 1,2 V. L'ampoule en panne, c'est celle qui prend toute la tension.", suite: "Le défi" }
+          { t: "La seconde multiprise porte aussi 3 680 W. Ensemble, 7 360 W ? Branche-la dans la première.",
+            ok: function (S) { return S.mp2; }, cible: "mp2" },
+          { t: "Non : tout passe par le même fil, jusqu'au mur. La limite reste 3 680 W. Branche le radiateur et le sèche-cheveux.",
+            ok: function (S) { return alimente(S, "radiateur") && alimente(S, "seche"); },
+            cible: function (S) { return !S.mp2 ? "mp2" : S.branche.radiateur ? "seche" : "radiateur"; },
+            aide: function (S) { return S.mp2 ? "" : "La seconde multiprise est débranchée : rebranche-la."; } },
+          { t: "3 009 W : ça passe, de justesse. Il reste 671 W. Branche quand même la bouilloire.",
+            ok: function (S) { return alimente(S, "bouilloire"); }, cible: function (S) { return S.mp2 ? "bouilloire" : "mp2"; } },
+          { t: "5 209 W dans le fil du mur : il chauffe. Débranche la bouilloire.",
+            ok: function (S) { return total(S) <= LIMITE; }, cible: "bouilloire" },
+          { t: "Plus de prises, ce n'est pas plus de watts. Ce qui compte, c'est le total.", suite: "Le défi" }
         ] }
     ],
     defi: [
-      { question: "10 ampoules en série sur 12 V. Tout est éteint. Le voltmètre lit 12 V sur la 7e, 0 V sur les autres. Que changer ?",
+      { question: "Un radiateur de 2 kW et un sèche-cheveux de 1 800 W, sur une multiprise de 3 680 W. Ça passe ?",
         choix: [
-          ["La 7e ampoule.", "Juste. Toute la tension se retrouve là où le circuit est coupé : la 7e a lâché.", true],
-          ["Les ampoules à 0 V.", "Pas encore : à l'étape 4, les ampoules saines lisaient 0 V, parce que plus aucun courant ne passait."],
-          ["Le bloc.", "Pas encore : la 7e affiche 12 V, donc le bloc donne bien sa tension."]
+          ["Non : 2 000 + 1 800 = 3 800 W.", "Juste. 2 kW, c'est 2 000 W : le total dépasse 3 680 W de 120 W.", true],
+          ["Oui : 2 + 1 800 = 1 802 W.", "Pas encore : 2 kW, c'est 2 000 W. On convertit avant d'additionner."],
+          ["Oui : chacun est sous 3 680 W.", "Pas encore : la limite vaut pour le total. À l'étape 2, chacun passait seul, et ensemble le fil chauffait."]
         ] },
-      { question: "10 ampoules identiques en série sur 12 V, et tout marche. Combien de volts sur chacune ?",
+      { question: "Trois multiprises de 3 680 W, l'une dans l'autre. Combien de watts en tout ?",
         choix: [
-          ["1,2 V.", "Juste. En série, les ampoules se partagent la tension : 12 ÷ 10 = 1,2 V.", true],
-          ["12 V.", "Pas encore : 12 V, c'est tout le bloc. À l'étape 3, chaque ampoule n'en prenait qu'une part."],
-          ["120 V.", "Pas encore : on ne multiplie pas. Les ampoules se partagent les 12 V du bloc."]
+          ["3 680 W.", "Juste. Tout passe par le même fil, jusqu'à la prise du mur : la limite ne s'additionne pas.", true],
+          ["11 040 W.", "Pas encore : à l'étape 3, la seconde multiprise n'a rien ajouté. Le fil du mur porte tout."],
+          ["1 227 W pour chacune.", "Pas encore : la limite ne se partage pas. Une seule multiprise peut porter 3 680 W, si c'est le total."]
         ] }
     ],
     simplifie: [
-      "Les 20 ampoules sont identiques et se partagent la tension à parts égales. En vrai, une ampoule usée en prend un peu plus.",
-      "Une ampoule grillée coupe ici le circuit net. Certaines guirlandes ont, dans chaque ampoule, un petit pont qui laisse passer le courant quand elle grille : les autres restent allumées.",
-      "Le voltmètre est parfait : il mesure sans rien prendre au circuit.",
-      "Les points qui avancent montrent le courant, du + vers le −. En vrai, on ne voit rien circuler dans le fil.",
-      "Les couleurs du fil, à l'étape 4, disent seulement à quelle borne du bloc il reste relié, d'un côté ou de l'autre de la coupure."
+      "Chaque appareil prend toujours la puissance de son étiquette ; en vrai, elle varie un peu pendant qu'il marche.",
+      "La chaleur du fil est montrée sans degrés, et sa vitesse est inventée : le cours ne la chiffre pas.",
+      "Le disjoncteur du tableau ne coupe jamais ici : un peu au-dessus de sa limite, il peut mettre de longues minutes avant de couper.",
+      "Les 16 A de l'étiquette disent la même limite que les 3 680 W, dans une autre unité. On ne travaille que sur les watts.",
+      "La prise du mur partage souvent son circuit avec d'autres prises de la pièce : leurs appareils s'ajoutent aussi au total."
     ],
     essai: "court"
   });
