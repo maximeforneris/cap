@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta name="robots" content="noindex, nofollow">
+<title>Séance 2 — fluctuation et stabilisation</title>
+<link rel="stylesheet" href="../assets/kit.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/site.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/signalisation.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/vivant.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/doc.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/calculette.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/formulaire.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/impression.css?v=d30585d0">
+<script src="../assets/kit.js?v=d30585d0-1537e3" defer></script>
+<script src="../assets/site.js?v=d30585d0" defer></script>
+<script src="../assets/vivant.js?v=d30585d0" defer></script>
+<script src="../assets/plan.js?v=d30585d0" defer></script>
+<script src="../assets/doc.js?v=d30585d0" defer></script>
+<script src="../assets/nombres.js?v=d30585d0" defer></script>
+<script src="../assets/calculette.js?v=d30585d0" defer></script>
+<script src="../assets/formulaire.js?v=d30585d0" defer></script>
+<script src="../assets/formulaire-donnees.js?v=d30585d0" defer></script>
+<script src="../assets/outils-page.js?v=d30585d0" defer></script>
+
+<div class="page" data-site="cap-conso" data-page="cours/J8">
+<div class="jauge-lecture" id="jauge-lecture"><i></i></div><div class="barre-site"><a class="accueil" href="../index.html">Mathématiques et physique-chimie en CAP</a><span class="fleches"><a class="fleche" href="J7.html" rel="prev" title="Séance 1 — probabilité et fréquence" aria-label="Séance 1 — probabilité et fréquence">&lsaquo;</a><a class="fleche" href="J9.html" rel="next" title="Séance 3 — moyenne, diagrammes, décision" aria-label="Séance 3 — moyenne, diagrammes, décision">&rsaquo;</a></span><button type="button" class="lu" data-lu="cours/J8">Marquer comme lu</button></div>
+<header class="tete">
+  <span class="num" aria-hidden="true">8</span>
+  <div class="titraille">
+    <p class="sur">CAP Électricien · 1re année</p>
+    <h1>La machine<span>à hasard</span></h1>
+  </div>
+  <p class="accroche">Dix parties ne disent presque rien, dix mille disent la probabilité. La machine lance pour nous, et la fréquence finit par se poser.</p>
+  <p class="contenu">3 questions · 4 exercices · 15 items d'entraînement · 2 figures</p>
+  <p class="k-savoirs">Savoirs travaillés</p><div class="savoirs"><span class="tag">SP Statistique et probabilités</span><span class="tag">CN Calculs numériques</span><span class="tag">AU Automatismes</span></div>
+</header>
+<aside class="prerequis"><p class="chapeau-p">Avant de commencer</p><ul><li><b><a href="../conso/FICHE-31-effectifs-frequences.html">Effectifs et fréquences</a></b><span class="ou">Fiche 31 — effectifs et fréquences</span><span class="car">la fréquence des lots est leur nombre divisé par le nombre de parties.</span></li><li><b><a href="../conso/FICHE-06-arrondir.html">Arrondir au centième</a></b><span class="ou">Fiche 06 — arrondir</span><span class="car">95 ÷ 600 ne tombe pas juste, on garde deux chiffres après la virgule.</span></li></ul></aside>
+<nav class="somm"><div class="in"><a href="#la-question">La question</a><a href="#la-kermesse-sur-tablette">La kermesse, sur tablette</a><a href="#la-machine-lance-le-de">La machine lance le dé</a><a href="#je-m-entraine">Je m’entraîne</a><a href="#pour-ceux-qui-ont-fini">Pour ceux qui ont fini</a><a href="#ce-qui-reste-de-la-seance">Ce qui reste de la séance</a></div></nav>
+<h2 id="la-question">La question</h2>
+<p><strong>Un dé truqué se voit en combien de lancers ?</strong> Garde ta réponse du premier jour. Aujourd’hui, la machine lance à ta place, des milliers de fois.</p>
+<h2 id="la-kermesse-sur-tablette">La kermesse, sur tablette</h2>
+<figure>
+<img src="img/J8/ill-kermesse.png" alt="Le stand des jeux de la kermesse : la roue, le sac de billes, les deux dés." />
+<figcaption aria-hidden="true">Le stand des jeux de la kermesse : la roue, le sac de billes, les deux dés.</figcaption>
+</figure>
+<p>Sur la tablette, ouvre <a href="https://forneris.fr/maths/kermesse.html">la kermesse</a> au niveau <strong>CAP</strong>. La roue a <strong>10 secteurs</strong>, dont <strong>2 étoilés</strong> : une partie sur cinq, en moyenne, rapporte un lot. Tu joues d’abord au doigt, puis la machine joue des centaines de parties.</p>
+<div class="formule">
+<p><strong>fréquence = lots gagnés ÷ parties jouées</strong></p>
+<ul>
+<li><strong>les lots gagnés</strong><span>l’effectif</span></li>
+<li><strong>les parties jouées</strong><span>l’effectif total</span></li>
+</ul>
+<blockquote>
+<p>3 lots en 10 parties : 3 ÷ 10 = 0,3.</p>
+</blockquote>
+</div>
+<section class="serie" id="J8-s1" data-serie="J8-s1" data-savoir="SP" data-a="IXgveGB4eHZ4LjU2eGBrdGp2eDN4YAEheCx4YGp0aCd2IXgseGBqdG8ndiF4LHhganRoaSd2IXgseGBqdGttJ3YheCx4YGp0aCcHJw=="><p class="k">Série · SP</p><h4>La fréquence des lots</h4><div class="enonce">
+
+</div><ol class="items larges"><li><span class="q">2 lots en 10 parties</span></li><li><span class="q">5 lots en 10 parties</span></li><li><span class="q">23 lots en 100 parties</span></li><li><span class="q">17 lots en 100 parties</span></li><li><span class="q">1 994 lots en 10 000 parties, au centième</span></li></ol><div class="indice" hidden>Les lots gagnés divisés par les parties jouées. Sur 100 parties, on divise par 100.</div></section>
+<div class="cle">
+<p><strong>Plus on joue, plus la fréquence se rapproche de la probabilité.</strong> Sur 10 parties, elle va de 0 à 0,5 ; sur 10 000, elle se pose près de 0,2. On dit qu’elle <strong>se stabilise</strong>.</p>
+</div>
+<div class="quiz">
+<ul>
+<li>Sur 10 parties, la fréquence des lots : <strong>change beaucoup d’une série à l’autre</strong> | vaut toujours 0,2</li>
+<li>Sur 10 000 parties, elle est proche de : <strong>0,2</strong> | 0,5</li>
+<li>Après cinq parties perdues, la roue a : plus de chances de gagner | <strong>autant de chances</strong></li>
+</ul>
+</div>
+<div class="piege">
+<p><strong>« Elle a perdu cinq fois, elle va finir par gagner. »</strong> La roue n’a pas de mémoire : à chaque partie, elle repart à deux chances sur dix.</p>
+</div>
+<h2 id="la-machine-lance-le-de">La machine lance le dé</h2>
+<figure>
+<img src="img/J8/ill-machine.png" alt="Le programme sur la tablette : des lancers de dé à la chaîne." />
+<figcaption aria-hidden="true">Le programme sur la tablette : des lancers de dé à la chaîne.</figcaption>
+</figure>
+<p>Le fichier <strong><code>simulation-des.py</code></strong>, dans la console Python :</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> random <span class="im">import</span> randint</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> nombre_de_six(lancers):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    six <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(lancers):</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> randint(<span class="dv">1</span>, <span class="dv">6</span>) <span class="op">==</span> <span class="dv">6</span>:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            six <span class="op">=</span> six <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> six</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(nombre_de_six(<span class="dv">60</span>))</span></code></pre></div>
+<p>On l’exécute trois fois, puis on remplace <strong>60</strong> par <strong>6000</strong> et par <strong>60000</strong>, sans espace. <strong>Pour comparer, on ramène chaque nombre de 6 à une fréquence</strong> : on le divise par le nombre de lancers.</p>
+<section class="exo" id="J8-e1" data-exo="J8-e1" data-type="justification" data-savoir="SP" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · SP</p><h4>Ce que fait le programme</h4><div class="enonce">
+
+<p>Dire en une phrase ce que fait ce programme quand on l’exécute.</p>
+</div><div class="indice" hidden>randint(1, 6) tire un nombre au hasard de 1 à 6, comme un dé. Regarder ce qui arrive au compteur quand ce nombre vaut 6.</div><ul class="verifier" hidden><li>J’ai dit qu’il lance un dé 60 fois</li><li>J’ai dit qu’il compte les 6</li><li>J’ai dit qu’il affiche le nombre de 6 obtenus</li></ul></section>
+<section class="exo" id="J8-e2" data-exo="J8-e2" data-type="calcul" data-savoir="SP" data-a="IXgueGB4OTs2OS82eHZ4LHhganRrbXZ4LjU2eGBpdGp2eC94YHh4Jw=="><p class="k">Exercice · SP</p><h4>Soixante mille lancers</h4><div class="enonce">
+
+<p>La machine a lancé le dé <strong>60 000</strong> fois et obtenu <strong>10 092</strong> six. Quelle est la fréquence du 6, arrondie au centième ?</p>
+</div><div class="indice" hidden>Le nombre de 6 divisé par le nombre de lancers, puis deux chiffres après la virgule.</div></section>
+<h2 id="je-m-entraine">Je m’entraîne</h2>
+<section class="serie" id="J8-s2" data-serie="J8-s2" data-savoir="SP" data-a="IXgveGB4eHZ4LjU2eGBpdGp2eDN4YAEheCx4YGp0aCd2IXgseGBqdGtsJ3YheCx4YGp0a20ndiF4LHhganRrbCd2IXgseGBqdGttJwcn"><p class="k">Série · SP</p><h4>La fréquence du 6, au centième</h4><div class="enonce">
+
+</div><ol class="items"><li><span class="q">12 sur 60</span></li><li><span class="q">95 sur 600</span></li><li><span class="q">1 010 sur 6 000</span></li><li><span class="q">160 sur 1 000</span></li><li><span class="q">10 080 sur 60 000</span></li></ol><div class="indice" hidden>Le nombre de 6 divisé par le nombre de lancers, puis deux chiffres après la virgule.</div></section>
+<section class="serie" id="J8-s3" data-serie="J8-s3" data-savoir="CN" data-a="IXgveGB4eHZ4LjU2eGBrdGp2eDN4YAEheCx4YG90aid2IXgseGBoanRqJ3YheCx4YGtqanRqJ3YheCx4YG9qdGondiF4LHhga2pqanRqJwcn"><p class="k">Série · CN</p><h4>Avec un dé juste, environ combien de 6 ?</h4><div class="enonce">
+
+</div><ol class="items"><li><span class="q">30 lancers</span></li><li><span class="q">120 lancers</span></li><li><span class="q">600 lancers</span></li><li><span class="q">300 lancers</span></li><li><span class="q">6 000 lancers</span></li></ol><div class="indice" hidden>Une chance sur six : on divise le nombre de lancers par 6.</div></section>
+<h2 id="pour-ceux-qui-ont-fini">Pour ceux qui ont fini</h2>
+<section class="exo" id="J8-e3" data-exo="J8-e3" data-type="calcul" data-savoir="SP" data-a="IXgueGB4OTs2OS82eHZ4LHhganRqb3Z4LjU2eGBodGp2eC94YHh4Jw=="><p class="k">Exercice · SP</p><h4>Le dé à 20 faces</h4><div class="enonce">
+
+<p>Dans le programme, on remplace <code>randint(1, 6)</code> par <code>randint(1, 20)</code> et on lance 60 000 fois. Vers quelle fréquence du 6 va-t-on, en nombre décimal ?</p>
+</div><div class="indice" hidden>Le dé a maintenant 20 faces, et une seule porte le 6.</div></section>
+<section class="exo" id="J8-e4" data-exo="J8-e4" data-type="calcul" data-savoir="SP" data-a="IXgueGB4OTs2OS82eHZ4LHhganRpaXZ4LjU2eGBpdGp2eC94YHh4Jw=="><p class="k">Exercice · SP</p><h4>La machine truquée</h4><div class="enonce">
+
+<p>On remet <code>randint(1, 6)</code>, puis on remplace <code>== 6</code> par <code>&gt;= 5</code> : le programme compte maintenant les 5 et les 6. Vers quelle fréquence va-t-on, arrondie au centième ?</p>
+</div><div class="indice" hidden>Combien de faces sur six sont plus grandes que 5, ou égales à 5 ?</div></section>
+<h2 id="ce-qui-reste-de-la-seance">Ce qui reste de la séance</h2>
+<p><strong>Sur peu de lancers, la fréquence change d’une série à l’autre ; sur beaucoup, elle se stabilise près de la probabilité.</strong> Et un dé n’a pas de mémoire : à chaque lancer, il repart à une chance sur six.</p>
+<nav class="suite"><p class="chapeau-s">La suite</p><div class="pas-a-pas"><a class="av" href="J7.html" rel="prev"><span class="k">&lsaquo; Précédent</span><span class="t">Séance 1 — probabilité et fréquence</span></a><a class="ap" href="J9.html" rel="next"><span class="k">Suivant &rsaquo;</span><span class="t">Séance 3 — moyenne, diagrammes, décision</span></a></div></nav>
+<p class="pied">Ce site rappelle la méthode. Aucun corrigé, rien n'est noté.</p><p class="pied-site"><a class="mentions" href="../mentions-legales.html">Mentions légales</a></p>
+</div>
+

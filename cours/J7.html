@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta name="robots" content="noindex, nofollow">
+<title>Séance 1 — probabilité et fréquence</title>
+<link rel="stylesheet" href="../assets/kit.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/site.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/signalisation.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/vivant.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/doc.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/calculette.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/formulaire.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/impression.css?v=d30585d0">
+<script src="../assets/kit.js?v=d30585d0-1537e3" defer></script>
+<script src="../assets/site.js?v=d30585d0" defer></script>
+<script src="../assets/vivant.js?v=d30585d0" defer></script>
+<script src="../assets/plan.js?v=d30585d0" defer></script>
+<script src="../assets/doc.js?v=d30585d0" defer></script>
+<script src="../assets/nombres.js?v=d30585d0" defer></script>
+<script src="../assets/calculette.js?v=d30585d0" defer></script>
+<script src="../assets/formulaire.js?v=d30585d0" defer></script>
+<script src="../assets/formulaire-donnees.js?v=d30585d0" defer></script>
+<script src="../assets/outils-page.js?v=d30585d0" defer></script>
+
+<div class="page" data-site="cap-conso" data-page="cours/J7">
+<div class="jauge-lecture" id="jauge-lecture"><i></i></div><div class="barre-site"><a class="accueil" href="../index.html">Mathématiques et physique-chimie en CAP</a><span class="fleches"><a class="fleche" href="J6.html" rel="prev" title="Séance 3 — dilution et décision" aria-label="Séance 3 — dilution et décision">&lsaquo;</a><a class="fleche" href="J8.html" rel="next" title="Séance 2 — fluctuation et stabilisation" aria-label="Séance 2 — fluctuation et stabilisation">&rsaquo;</a></span><button type="button" class="lu" data-lu="cours/J7">Marquer comme lu</button></div>
+<header class="tete">
+  <span class="num" aria-hidden="true">7</span>
+  <div class="titraille">
+    <p class="sur">CAP Électricien · 1re année</p>
+    <h1>Une chance<span>sur six</span></h1>
+  </div>
+  <p class="accroche">Une chance sur six se lit sur les faces du dé. Trente lancers donnent autre chose, et ce n'est pas la même chose d'un binôme à l'autre.</p>
+  <p class="contenu">3 questions · 4 exercices · 19 items d'entraînement · 4 figures</p>
+  <p class="k-savoirs">Savoirs travaillés</p><div class="savoirs"><span class="tag">SP Statistique et probabilités</span><span class="tag">CN Calculs numériques</span><span class="tag">AU Automatismes</span></div>
+</header>
+<aside class="prerequis"><p class="chapeau-p">Avant de commencer</p><ul><li><b><a href="../conso/FICHE-04-fractions.html">Les fractions</a></b><span class="ou">Fiche 04 — fractions simples</span><span class="car">une probabilité se dit d'abord « 1 sur 6 », les issues qui gagnent sur toutes les issues.</span></li><li><b><a href="../conso/FICHE-18-pourcentages.html">Les pourcentages</a></b><span class="ou">Fiche 18 — pourcentages</span><span class="car">une fréquence se dit aussi en pour cent, et 3 sur 10 doit devenir 30 %.</span></li></ul></aside>
+<nav class="somm"><div class="in"><a href="#la-question">La question</a><a href="#les-six-faces-du-de">Les six faces du dé</a><a href="#la-carte-du-booster">La carte du booster</a><a href="#trente-lancers-a-deux">Trente lancers à deux</a><a href="#je-m-entraine">Je m’entraîne</a><a href="#pour-ceux-qui-ont-fini">Pour ceux qui ont fini</a><a href="#ce-qui-reste-de-la-seance">Ce qui reste de la séance</a></div></nav>
+<h2 id="la-question">La question</h2>
+<figure>
+<img src="img/J7/ill-petits-chevaux.png" alt="Aux petits chevaux, Sarah vient de faire un 6 ; Mehdi crie au dé truqué." />
+<figcaption aria-hidden="true">Aux petits chevaux, Sarah vient de faire un 6 ; Mehdi crie au dé truqué.</figcaption>
+</figure>
+<p><strong>Un dé truqué se voit en combien de lancers ?</strong> Écris un nombre avant de commencer : on relira ta réponse à la fin de la séquence.</p>
+<h2 id="les-six-faces-du-de">Les six faces du dé</h2>
+<figure>
+<img src="img/J7/ill-faces-de.png" alt="Les six faces d’un dé, de 1 à 6." />
+<figcaption aria-hidden="true">Les six faces d’un dé, de 1 à 6.</figcaption>
+</figure>
+<p>Lancer un dé est une <strong>expérience aléatoire</strong> : on ne sait pas d’avance ce qui sort. Les six résultats possibles sont les <strong>issues</strong>. « Faire un nombre pair » est un <strong>événement</strong> : il gagne avec les faces 2, 4 et 6.</p>
+<div class="formule">
+<p><strong>probabilité = issues qui gagnent ÷ toutes les issues</strong></p>
+<ul>
+<li><strong>les issues qui gagnent</strong><span>celles qui réalisent l’événement</span></li>
+<li><strong>toutes les issues</strong><span>6 pour un dé</span></li>
+</ul>
+<blockquote>
+<p>Faire 6 : 1 issue sur 6, soit 1/6, environ 0,17.</p>
+</blockquote>
+</div>
+<section class="serie" id="J7-s1" data-serie="J7-s1" data-savoir="SP" data-a="IXgveGB4KS8oemx4dnguNTZ4YGt0anZ4M3hgASF4LHhga3RqJ3YheCx4YGl0aid2IXgseGBodGondiF4LHhganRqJ3YheCx4YGx0aicHJw=="><p class="k">Série · SP</p><h4>Combien de chances sur 6 ?</h4><div class="enonce">
+
+</div><ol class="items"><li><span class="q">faire 3</span></li><li><span class="q">faire un nombre pair</span></li><li><span class="q">faire plus que 4</span></li><li><span class="q">faire 7</span></li><li><span class="q">faire 1, 2, 3, 4, 5 ou 6</span></li></ol><div class="indice" hidden>Un doigt sur chaque face : est-ce qu’elle gagne ? On compte celles qui gagnent. « Plus que 4 » ne compte pas le 4.</div></section>
+<div class="cle">
+<p><strong>Une probabilité est toujours entre 0 et 1.</strong> 0, c’est <strong>impossible</strong> : faire 7 avec un dé. 1, c’est <strong>certain</strong> : faire un nombre de 1 à 6.</p>
+</div>
+<div class="quiz">
+<ul>
+<li>Faire 7 avec un dé est : <strong>impossible</strong> | certain</li>
+<li>Faire un nombre de 1 à 6 est : impossible | <strong>certain</strong></li>
+<li>Une probabilité de 1,5 est : possible | <strong>impossible</strong></li>
+</ul>
+</div>
+<h2 id="la-carte-du-booster">La carte du booster</h2>
+<figure>
+<img src="img/J7/ill-booster.png" alt="Le booster d’Inès et ses dix cartes." />
+<figcaption aria-hidden="true">Le booster d’Inès et ses dix cartes.</figcaption>
+</figure>
+<p>Inès tire une carte au hasard, sans regarder. <strong>« Pas la rare » est le contraire de « la rare »</strong> : les deux probabilités font 1 à elles deux, puisque la carte tirée est forcément l’une ou l’autre.</p>
+<section class="serie" id="J7-s2" data-serie="J7-s2" data-savoir="SP" data-a="IXgveGB4eHZ4LjU2eGBrdGp2eDN4YAEheCx4YGp0ayd2IXgseGBqdGkndiF4LHhganRsJ3YheCx4YGp0YycHJw=="><p class="k">Série · SP</p><h4>La probabilité, en nombre décimal</h4><div class="enonce">
+
+</div><ol class="items larges"><li><span class="q">tirer la rare</span></li><li><span class="q">tirer une peu commune</span></li><li><span class="q">tirer une commune</span></li><li><span class="q">tirer une carte qui n’est pas la rare</span></li></ol><div class="indice" hidden>Compter sur le dessin les cartes qui conviennent, puis diviser par 10, le nombre de cartes du booster.</div></section>
+<h2 id="trente-lancers-a-deux">Trente lancers à deux</h2>
+<figure>
+<img src="img/J7/ill-lancers.png" alt="À deux : l’un lance le dé au gobelet, l’autre trace un trait par lancer." />
+<figcaption aria-hidden="true">À deux : l’un lance le dé au gobelet, l’autre trace un trait par lancer.</figcaption>
+</figure>
+<p>On trace un trait par lancer : le nombre de traits d’une face est son <strong>effectif</strong>. Le nombre de lancers, 30, est l’<strong>effectif total</strong>.</p>
+<div class="formule">
+<p><strong>fréquence = effectif ÷ effectif total</strong></p>
+<ul>
+<li><strong>l’effectif</strong><span>combien de fois la face est sortie</span></li>
+<li><strong>l’effectif total</strong><span>le nombre de lancers</span></li>
+</ul>
+<blockquote>
+<p>6 fois le 6 sur 30 lancers : 6 ÷ 30 = 0,2.</p>
+</blockquote>
+</div>
+<section class="exo" id="J7-e1" data-exo="J7-e1" data-type="calcul" data-savoir="SP" data-a="IXgueGB4OTs2OS82eHZ4LHhganRraXZ4LjU2eGBodGp2eC94YHh4Jw=="><p class="k">Exercice · SP</p><h4>La fréquence d’un binôme</h4><div class="enonce">
+
+<p>Sur 30 lancers, Léo et Nina ont eu <strong>4</strong> fois le 6. Quelle est la fréquence du 6, arrondie au centième ?</p>
+</div><div class="indice" hidden>L’effectif du 6 divisé par l’effectif total, puis deux chiffres après la virgule.</div></section>
+<div class="piege">
+<p><strong>Prendre la fréquence pour la probabilité.</strong> Un binôme trouve 0,3, le binôme voisin 0,1, avec le même genre de dé. Sur 30 lancers, la fréquence <strong>fluctue</strong> : elle change d’un essai à l’autre, autour de 1/6.</p>
+</div>
+<h2 id="je-m-entraine">Je m’entraîne</h2>
+<section class="serie" id="J7-s3" data-serie="J7-s3" data-savoir="CN" data-a="IXgveGB4eHZ4LjU2eGBrdGp2eDN4YAEheCx4YGp0aG8ndiF4LHhganRrJ3YheCx4YGp0aSd2IXgseGBqdGgndiF4LHhganRobycHJw=="><p class="k">Série · CN</p><h4>La probabilité en nombre décimal</h4><div class="enonce">
+
+</div><ol class="items"><li><span class="q">1 sur 4</span></li><li><span class="q">1 sur 10</span></li><li><span class="q">3 sur 10</span></li><li><span class="q">1 sur 5</span></li><li><span class="q">2 sur 8</span></li></ol><div class="indice" hidden>« 1 sur 4 » veut dire 1 ÷ 4.</div></section>
+<section class="serie" id="J7-s4" data-serie="J7-s4" data-savoir="CN" data-a="IXgveGB4f3h2eC41Nnhga3RqdngzeGABIXgseGBpanRqJ3YheCx4YGtqdGondiF4LHhgaG90aid2IXgseGBranRqJ3YheCx4YGtqdGonByc="><p class="k">Série · CN</p><h4>La fréquence en pourcentage</h4><div class="enonce">
+
+</div><ol class="items"><li><span class="q">3 sur 10</span></li><li><span class="q">2 sur 20</span></li><li><span class="q">10 sur 40</span></li><li><span class="q">6 sur 60</span></li><li><span class="q">30 sur 300</span></li></ol><div class="indice" hidden>Diviser le premier nombre par le second, puis multiplier par 100.</div></section>
+<h2 id="pour-ceux-qui-ont-fini">Pour ceux qui ont fini</h2>
+<section class="exo" id="J7-e2" data-exo="J7-e2" data-type="calcul" data-savoir="SP" data-a="IXgueGB4OTs2OS82eHZ4LHhganRpdnguNTZ4YGp0anZ4L3hgeHgn"><p class="k">Exercice · SP</p><h4>Le dé à 20 faces</h4><div class="enonce">
+
+<p>Un dé de jeu de rôle a 20 faces, de 1 à 20. Quelle est la probabilité de faire <strong>15 ou plus</strong>, en nombre décimal ?</p>
+</div><div class="indice" hidden>Écrire toutes les faces de 15 à 20 et les compter, sans oublier le 15. Puis diviser par le nombre de faces du dé.</div></section>
+<section class="exo" id="J7-e3" data-exo="J7-e3" data-type="calcul" data-savoir="SP" data-a="IXgueGB4OTs2OS82eHZ4LHhganRrbXZ4LjU2eGBpdGp2eC94YHh4Jw=="><p class="k">Exercice · SP</p><h4>Le double</h4><div class="enonce">
+
+<p>Avec deux dés, il y a <strong>36</strong> façons de tomber. Six d’entre elles sont des doubles : 1 et 1, 2 et 2, jusqu’à 6 et 6. Quelle est la probabilité de faire un double, arrondie au centième ?</p>
+</div><div class="indice" hidden>Les façons qui gagnent divisées par toutes les façons de tomber.</div></section>
+<section class="exo" id="J7-e4" data-exo="J7-e4" data-type="justification" data-savoir="SP" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · SP</p><h4>La sortie du cheval</h4><div class="enonce">
+
+<p>Mehdi dit : « En six lancers, je suis sûr d’avoir un 6. » A-t-il raison ? Répondre en une ou deux phrases.</p>
+</div><div class="indice" hidden>Le dé ne se souvient pas des lancers d’avant.</div><ul class="verifier" hidden><li>J’ai dit qu’il a tort</li><li>J’ai dit qu’à chaque lancer, la probabilité de faire 6 reste 1 sur 6</li><li>J’ai dit qu’on peut lancer six fois sans avoir de 6</li></ul></section>
+<h2 id="ce-qui-reste-de-la-seance">Ce qui reste de la séance</h2>
+<p><strong>Une probabilité se lit sur les issues</strong> : faire 6, c’est une chance sur six. <strong>Une fréquence se mesure en lançant</strong>, et sur 30 lancers elle change d’un binôme à l’autre : elle fluctue.</p>
+<nav class="suite"><p class="chapeau-s">La suite</p><div class="pas-a-pas"><a class="av" href="J6.html" rel="prev"><span class="k">&lsaquo; Précédent</span><span class="t">Séance 3 — dilution et décision</span></a><a class="ap" href="J8.html" rel="next"><span class="k">Suivant &rsaquo;</span><span class="t">Séance 2 — fluctuation et stabilisation</span></a></div></nav>
+<p class="pied">Ce site rappelle la méthode. Aucun corrigé, rien n'est noté.</p><p class="pied-site"><a class="mentions" href="../mentions-legales.html">Mentions légales</a></p>
+</div>
+

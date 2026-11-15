@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta name="robots" content="noindex, nofollow">
+<title>Séance 3 — moyenne, diagrammes, décision</title>
+<link rel="stylesheet" href="../assets/kit.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/site.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/signalisation.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/vivant.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/doc.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/calculette.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/formulaire.css?v=d30585d0">
+<link rel="stylesheet" href="../assets/impression.css?v=d30585d0">
+<script src="../assets/kit.js?v=d30585d0-1537e3" defer></script>
+<script src="../assets/site.js?v=d30585d0" defer></script>
+<script src="../assets/vivant.js?v=d30585d0" defer></script>
+<script src="../assets/plan.js?v=d30585d0" defer></script>
+<script src="../assets/doc.js?v=d30585d0" defer></script>
+<script src="../assets/nombres.js?v=d30585d0" defer></script>
+<script src="../assets/calculette.js?v=d30585d0" defer></script>
+<script src="../assets/formulaire.js?v=d30585d0" defer></script>
+<script src="../assets/formulaire-donnees.js?v=d30585d0" defer></script>
+<script src="../assets/outils-page.js?v=d30585d0" defer></script>
+
+<div class="page" data-site="cap-conso" data-page="cours/J9">
+<div class="jauge-lecture" id="jauge-lecture"><i></i></div><div class="barre-site"><a class="accueil" href="../index.html">Mathématiques et physique-chimie en CAP</a><span class="fleches"><a class="fleche" href="J8.html" rel="prev" title="Séance 2 — fluctuation et stabilisation" aria-label="Séance 2 — fluctuation et stabilisation">&lsaquo;</a></span><button type="button" class="lu" data-lu="cours/J9">Marquer comme lu</button></div>
+<header class="tete">
+  <span class="num" aria-hidden="true">9</span>
+  <div class="titraille">
+    <p class="sur">CAP Électricien · 1re année</p>
+    <h1>Le tournoi<span>de dés</span></h1>
+  </div>
+  <p class="accroche">Une moyenne et deux diagrammes résument une série. Et un dé truqué se démasque, à condition de lancer assez : pas en vingt lancers, mais vers soixante.</p>
+  <p class="contenu">6 questions · 6 exercices · 29 items d'entraînement · 4 figures</p>
+  <p class="k-savoirs">Savoirs travaillés</p><div class="savoirs"><span class="tag">SP Statistique et probabilités</span><span class="tag">CN Calculs numériques</span><span class="tag">AU Automatismes</span></div>
+</header>
+<aside class="prerequis"><p class="chapeau-p">Avant de commencer</p><ul><li><b><a href="../conso/FICHE-30-moyenne.html">La moyenne</a></b><span class="ou">Fiche 30 — la moyenne</span><span class="car">la somme des valeurs divisée par leur nombre, et une valeur nulle compte aussi.</span></li><li><b><a href="../conso/FICHE-31-effectifs-frequences.html">Effectifs et fréquences</a></b><span class="ou">Fiche 31 — effectifs et fréquences</span><span class="car">chaque bâton et chaque part du disque vient d'un effectif.</span></li></ul></aside>
+<nav class="somm"><div class="in"><a href="#la-question">La question</a><a href="#la-moyenne-des-rares">La moyenne des rares</a><a href="#le-camembert-de-la-collection">Le camembert de la collection</a><a href="#le-diagramme-en-batons">Le diagramme en bâtons</a><a href="#le-tournoi-de-des">Le tournoi de dés</a><a href="#je-m-entraine">Je m’entraîne</a><a href="#pour-ceux-qui-ont-fini">Pour ceux qui ont fini</a><a href="#ce-qui-reste-de-la-sequence">Ce qui reste de la séquence</a><a href="#les-cartes-brillantes">Les cartes brillantes</a></div></nav>
+<h2 id="la-question">La question</h2>
+<p><strong>Un dé truqué se voit en combien de lancers ?</strong> Recopie ta réponse du premier jour : à la fin de la séance, on la relit.</p>
+<h2 id="la-moyenne-des-rares">La moyenne des rares</h2>
+<figure>
+<img src="img/J9/ill-boosters-yanis.png" alt="Les huit boosters de Yanis, ouverts ; au-dessus de chacun, ses cartes rares." />
+<figcaption aria-hidden="true">Les huit boosters de Yanis, ouverts ; au-dessus de chacun, ses cartes rares.</figcaption>
+</figure>
+<p>Yanis a ouvert <strong>8 boosters</strong>. Pour dire combien il trouve de rares par booster, <strong>en moyenne</strong>, on additionne les rares de tous les boosters, puis on divise par le nombre de boosters.</p>
+<div class="formule">
+<p><strong>moyenne = somme des valeurs ÷ nombre de valeurs</strong></p>
+<ul>
+<li><strong>la somme</strong><span>toutes les valeurs additionnées, les 0 compris</span></li>
+<li><strong>le nombre de valeurs</strong><span>ici, le nombre de boosters</span></li>
+</ul>
+<blockquote>
+<p>2 et 4 rares : (2 + 4) ÷ 2 = 3.</p>
+</blockquote>
+</div>
+<section class="serie" id="J9-s1" data-serie="J9-s1" data-savoir="SP" data-a="IXgveGB4eHZ4LjU2eGBrdGp2eDN4YAEheCx4YGp0aid2IXgseGBodGondiF4LHhganRqJ3YheCx4YGl0aid2IXgseGBidGonByc="><p class="k">Série · SP</p><h4>Les rares de chaque booster, lus sur le dessin</h4><div class="enonce">
+
+</div><ol class="items"><li><span class="q">booster n° 2</span></li><li><span class="q">booster n° 3</span></li><li><span class="q">booster n° 5</span></li><li><span class="q">booster n° 6</span></li><li><span class="q">les 8 boosters ensemble</span></li></ol><div class="indice" hidden>Compter les cartes à étoile au-dessus de chaque booster. Un booster sans rien au-dessus compte pour 0.</div></section>
+<section class="exo" id="J9-e1" data-exo="J9-e1" data-type="calcul" data-savoir="SP" data-a="IXgueGB4OTs2OS82eHZ4LHhga3RqdnguNTZ4YGp0anZ4L3hgeHgn"><p class="k">Exercice · SP</p><h4>La moyenne de Yanis</h4><div class="enonce">
+
+<p>Combien de rares par booster, en moyenne, sur les 8 boosters de Yanis ?</p>
+</div><div class="indice" hidden>La somme de toutes les rares, divisée par le nombre de boosters, ceux sans rare compris.</div></section>
+<div class="piege">
+<p><strong>Oublier les boosters sans rare.</strong> 8 ÷ 5 = 1,6 : on a divisé par les seuls boosters qui avaient une rare. Un booster vide compte : il est l’un des huit.</p>
+</div>
+<h2 id="le-camembert-de-la-collection">Le camembert de la collection</h2>
+<figure>
+<img src="img/J9/ill-camembert.png" alt="Un disque partagé en vingt parts égales, à colorier, et sa légende." />
+<figcaption aria-hidden="true">Un disque partagé en vingt parts égales, à colorier, et sa légende.</figcaption>
+</figure>
+<p>Inès range sa collection de <strong>40 cartes</strong> : 20 communes, 10 peu communes, 8 rares et 2 brillantes. Le disque a <strong>20 parts égales</strong> : <strong>une part, c’est 2 cartes</strong>. La part de chaque sorte de carte dans le disque est sa <strong>fréquence</strong>.</p>
+<section class="serie" id="J9-s2" data-serie="J9-s2" data-savoir="SP" data-a="IXgveGB4eHZ4LjU2eGBrdGp2eDN4YAEheCx4YGp0byd2IXgseGBqdGhvJ3YheCx4YGp0aCd2IXgseGBqdGpvJwcn"><p class="k">Série · SP</p><h4>La fréquence de chaque sorte</h4><div class="enonce">
+
+</div><ol class="items"><li><span class="q">les communes, 20 sur 40</span></li><li><span class="q">les peu communes, 10 sur 40</span></li><li><span class="q">les rares, 8 sur 40</span></li><li><span class="q">les brillantes, 2 sur 40</span></li></ol><div class="indice" hidden>L’effectif de la sorte divisé par l’effectif total, 40.</div></section>
+<section class="serie" id="J9-s3" data-serie="J9-s3" data-savoir="SP" data-a="IXgveGB4eHZ4LjU2eGBrdGp2eDN4YAEheCx4YGtqdGondiF4LHhgb3RqJ3YheCx4YG50aid2IXgseGBrdGonByc="><p class="k">Série · SP</p><h4>Combien de parts à colorier, sur 20 ?</h4><div class="enonce">
+
+</div><ol class="items"><li><span class="q">les communes</span></li><li><span class="q">les peu communes</span></li><li><span class="q">les rares</span></li><li><span class="q">les brillantes</span></li></ol><div class="indice" hidden>Une part vaut 2 cartes : on divise le nombre de cartes par 2.</div></section>
+<div class="quiz">
+<ul>
+<li>Les communes prennent du disque : <strong>la moitié</strong> | le quart</li>
+<li>Les peu communes prennent du disque : la moitié | <strong>le quart</strong></li>
+<li>Toutes les parts ensemble font : <strong>le disque entier, une fréquence de 1</strong> | la moitié du disque</li>
+</ul>
+</div>
+<h2 id="le-diagramme-en-batons">Le diagramme en bâtons</h2>
+<figure>
+<img src="img/J9/ill-batons-lucas.png" alt="Les 60 lancers de Lucas : un bâton par face, à la hauteur de son effectif." />
+<figcaption aria-hidden="true">Les 60 lancers de Lucas : un bâton par face, à la hauteur de son effectif.</figcaption>
+</figure>
+<p>Chaque bâton dit <strong>combien de fois une face est sortie</strong> : on lit sa hauteur sur l’axe de gauche. Les bâtons additionnés donnent le nombre de lancers.</p>
+<section class="serie" id="J9-s4" data-serie="J9-s4" data-savoir="SP" data-a="IXgveGB4eHZ4LjU2eGBpdGp2eDN4YAEheCx4YGtodGondiF4LHhgb3RqJ3YheCx4YGxqdGondiF4LHhganRraScHJw=="><p class="k">Série · SP</p><h4>Lire le diagramme de Lucas</h4><div class="enonce">
+
+</div><ol class="items larges"><li><span class="q">la face 5 est sortie, en nombre de fois</span></li><li><span class="q">la face la plus sortie</span></li><li><span class="q">le total des bâtons</span></li><li><span class="q">la fréquence de la face 4, au centième</span></li></ol><div class="indice" hidden>Lire le haut de chaque bâton sur l’axe de gauche ; une ligne vaut 1. La fréquence est l’effectif divisé par 60.</div></section>
+<div class="quiz">
+<ul>
+<li>Les bâtons de Lucas vont de 8 à 12, autour de 10. Son dé : est truqué, le 5 sort trop | <strong>rien ne montre qu’il est truqué</strong></li>
+</ul>
+</div>
+<h2 id="le-tournoi-de-des">Le tournoi de dés</h2>
+<figure>
+<img src="img/J9/ill-des-suspects.png" alt="Les six dés du tournoi : un seul est truqué." />
+<figcaption aria-hidden="true">Les six dés du tournoi : un seul est truqué.</figcaption>
+</figure>
+<p>Chaque équipe lance son dé <strong>20 fois par manche</strong>, trois manches. Un seul dé de la classe est truqué. <strong>On accuse avec deux nombres</strong> : le nombre de 6 et le nombre de lancers. Un dé juste fait 6 environ une fois sur six, <strong>0,17</strong>.</p>
+<section class="exo" id="J9-e2" data-exo="J9-e2" data-type="calcul" data-savoir="SP" data-a="IXgueGB4OTs2OS82eHZ4LHhganRpb3Z4LjU2eGBodGp2eC94YHh4Jw=="><p class="k">Exercice · SP</p><h4>Le dé démasqué</h4><div class="enonce">
+
+<p>Après trois manches, le dé C a fait <strong>21 six sur 60 lancers</strong>. Quelle est sa fréquence du 6, au centième ?</p>
+</div><div class="indice" hidden>Le nombre de 6 divisé par le nombre de lancers.</div></section>
+<div class="cle">
+<p><strong>Un dé truqué se démasque sur un grand nombre de lancers.</strong> Après une manche, deux dés peuvent avoir 6 six sur 20 : on ne peut pas savoir. Sur 60 lancers, un dé qui reste deux fois au-dessus de 0,17 n’a plus l’excuse de la chance.</p>
+</div>
+<div class="quiz">
+<ul>
+<li>Après 20 lancers, deux dés ont 6 six chacun. On peut accuser : l’un des deux, sûrement | <strong>pas encore</strong></li>
+<li>Un dé juste, sur un grand nombre de lancers, fait 6 avec une fréquence proche de : <strong>0,17</strong> | 0,35</li>
+</ul>
+</div>
+<h2 id="je-m-entraine">Je m’entraîne</h2>
+<section class="serie" id="J9-s5" data-serie="J9-s5" data-savoir="CN" data-a="IXgveGB4eHZ4LjU2eGBrdGp2eDN4YAEheCx4YGl0aid2IXgseGBudGondiF4LHhgbnRqJ3YheCx4YGh0aid2IXgseGBob3RqJwcn"><p class="k">Série · CN</p><h4>La moyenne</h4><div class="enonce">
+
+</div><ol class="items"><li><span class="q">1, 2 et 6</span></li><li><span class="q">5, 5 et 2</span></li><li><span class="q">6, 6 et 0</span></li><li><span class="q">0, 1, 2, 3 et 4</span></li><li><span class="q">10, 20, 30 et 40</span></li></ol><div class="indice" hidden>Additionner toutes les valeurs, puis diviser par le nombre de valeurs. Un 0 est une valeur.</div></section>
+<h2 id="pour-ceux-qui-ont-fini">Pour ceux qui ont fini</h2>
+<section class="exo" id="J9-e3" data-exo="J9-e3" data-type="calcul" data-savoir="SP" data-a="IXgueGB4OTs2OS82eHZ4LHhgaXRvdnguNTZ4YGp0anZ4L3hgeHgn"><p class="k">Exercice · SP</p><h4>La moyenne d’un dé</h4><div class="enonce">
+
+<p>Hugo lance 10 fois : 3, 6, 1, 4, 4, 2, 6, 5, 3, 1. Quelle est sa moyenne ?</p>
+</div><div class="indice" hidden>La somme des dix lancers, divisée par 10.</div></section>
+<section class="exo" id="J9-e4" data-exo="J9-e4" data-type="calcul" data-savoir="SP" data-a="IXgueGB4OTs2OS82eHZ4LHhga2pqdGp2eC41NnhganRqdngveGB4Bi9oajs5eCc="><p class="k">Exercice · SP</p><h4>Le prix d’une brillante</h4><div class="enonce">
+
+<p>Un booster coûte <strong>5 €</strong>, et un booster sur <strong>20</strong> contient une brillante. Combien dépense-t-on, en moyenne, pour en avoir une ?</p>
+</div><div class="indice" hidden>Combien de boosters faut-il ouvrir, en moyenne, pour une brillante ? Puis le prix de ces boosters.</div></section>
+<section class="exo" id="J9-e5" data-exo="J9-e5" data-type="justification" data-savoir="SP" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · SP</p><h4>La moyenne qui trompe</h4><div class="enonce">
+
+<p>Trois boosters : 0, 0 et 6 rares. Un vendeur écrit « 2 rares par booster ! ». Qu’en penser ? Répondre en une ou deux phrases.</p>
+</div><div class="indice" hidden>Calculer la moyenne, puis regarder les trois boosters un par un.</div><ul class="verifier" hidden><li>J’ai calculé la moyenne et trouvé la même valeur que le vendeur</li><li>J’ai dit que deux boosters sur trois n’ont aucune rare</li><li>J’ai dit que la moyenne ne dit pas ce que contient chaque booster</li></ul></section>
+<h2 id="ce-qui-reste-de-la-sequence">Ce qui reste de la séquence</h2>
+<p><strong>Une probabilité se lit sur les issues, une fréquence se mesure, et sur beaucoup de lancers la fréquence se rapproche de la probabilité.</strong> C’est pour cela qu’un dé truqué ne se voit pas en vingt lancers, mais se trahit vers soixante.</p>
+<h1 id="exercices-bilan-de-séquence">Exercices bilan de séquence</h1>
+<p><em>Un seul problème, qui reprend toute la séquence 3. On le fait d’un bout à l’autre, comme un vrai : il n’y a pas d’indication de méthode en cours de route. À la fin, on produit son fichier de réponses.</em></p>
+<h2 id="les-cartes-brillantes">Les cartes brillantes</h2>
+<p>Un booster coûte <strong>4 €</strong>. D’après le fabricant, <strong>un booster sur 20</strong> contient une <strong>carte brillante</strong>, qui se revend <strong>30 €</strong>.</p>
+<p>Samir a ouvert <strong>20 boosters</strong> et obtenu <strong>3 brillantes</strong>. Il dit : « <em>Ça rapporte : j’ai revendu plus cher que ce que j’ai dépensé.</em> »</p>
+<blockquote>
+<p><strong>La question</strong> : « <em>Acheter des boosters pour revendre les brillantes, est-ce que ça rapporte ?</em> »</p>
+</blockquote>
+<p><strong>Lire la situation</strong></p>
+<p><strong>a)</strong> Relever le prix d’un booster, la proportion de boosters à brillante, et le prix de revente d’une brillante.</p>
+<p><strong>b)</strong> Dire ce que Samir a obtenu, et sur combien de boosters.</p>
+<p><strong>Choisir la méthode</strong></p>
+<p><strong>c)</strong> Dire comment on calcule une probabilité, et comment on en déduit le nombre de brillantes attendu sur 100 boosters.</p>
+<p><strong>d)</strong> Dire pourquoi le résultat de Samir ne suffit pas à décider.</p>
+<p><strong>Calculer</strong></p>
+<p><strong>e)</strong> Calculer la probabilité d’une brillante, en pourcentage, puis le nombre de brillantes attendu sur <strong>100 boosters</strong>.</p>
+<p><strong>f)</strong> Calculer ce que coûtent ces 100 boosters, et ce que rapportent les brillantes attendues.</p>
+<p><strong>g)</strong> Calculer la fréquence obtenue par Samir, en pourcentage, puis ce que lui ont coûté ses 20 boosters et ce que rapportent ses 3 brillantes.</p>
+<p><strong>Conclure</strong></p>
+<p><strong>h)</strong> Répondre à la question par une phrase <strong>chiffrée</strong>, et dire ce qu’on répond à Samir.</p>
+<section class="serie" id="J9-s6" data-serie="J9-s6" data-savoir="SP" data-a="IXgveGB4eHZ4LjU2eGBrdGp2eDN4YAEheCx4YG90aid2IXgseGBvdGondiF4LHhgbmpqdGondiF4LHhga29qdGondiF4LHhga290aid2IXgseGBianRqJ3YheCx4YGNqdGonByc="><p class="k">Série · SP</p><h4>Les sept calculs du bilan</h4><div class="enonce">
+
+</div><ol class="items larges"><li><span class="q">la probabilité d’une brillante, en %</span></li><li><span class="q">le nombre de brillantes attendu sur 100 boosters</span></li><li><span class="q">le prix des 100 boosters, en €</span></li><li><span class="q">ce que rapportent les brillantes attendues, en €</span></li><li><span class="q">la fréquence de brillantes chez Samir, en %</span></li><li><span class="q">ce que lui ont coûté ses 20 boosters, en €</span></li><li><span class="q">ce que rapportent ses 3 brillantes, en €</span></li></ol><div class="indice" hidden>La probabilité et la fréquence se calculent de la même façon, l’une sur ce qu’annonce le fabricant, l’autre sur ce que Samir a obtenu. Pour les montants, on multiplie un nombre de boosters ou de cartes par son prix.</div></section>
+<section class="exo" id="J9-e6" data-exo="J9-e6" data-type="justification" data-savoir="SP" data-a="IXgueGB4MC8pLjM8Mzk7LjM1NHgn"><p class="k">Exercice · SP</p><h4>La phrase de conclusion</h4><div class="enonce">
+
+<p>Répondre à la question en une phrase <strong>avec les chiffres</strong>, puis dire en une phrase ce qu’on répond à Samir.</p>
+</div><div class="indice" hidden>Deux réponses étaient demandées : la réponse chiffrée, et la réponse à Samir. La seconde s’appuie sur la fluctuation : sur 20 boosters, on attendait une seule brillante.</div><ul class="verifier" hidden><li>J’ai dit qu’à la longue, ça ne rapporte pas, et que c’est le vendeur qui gagne</li><li>J’ai comparé ce qu’on dépense et ce qu’on récupère sur 100 boosters, avec l’unité</li><li>J’ai dit que 20 boosters sont trop peu pour conclure, et que Samir a eu de la chance</li></ul></section>
+<div class="remise">
+
+</div>
+<nav class="suite"><p class="chapeau-s">La suite</p><div class="pas-a-pas"><a class="av" href="J8.html" rel="prev"><span class="k">&lsaquo; Précédent</span><span class="t">Séance 2 — fluctuation et stabilisation</span></a></div></nav>
+<p class="pied">Ce site rappelle la méthode. Aucun corrigé, rien n'est noté.</p><p class="pied-site"><a class="mentions" href="../mentions-legales.html">Mentions légales</a></p>
+</div>
+
